@@ -149,16 +149,25 @@ body{
     line-height:1.3;
 }
 
+#uhrzeit,
 #termin{
     width:100%;
     box-sizing:border-box;
     padding:14px;
-    margin:20px 0;
     border:none;
     border-radius:10px;
     background:#3b3d42;
     color:white;
     font-size:16px;
+}
+
+#uhrzeit{
+    margin:20px 0 10px 0;
+}
+
+#termin{
+    margin:0 0 20px 0;
+}
 }
 
 #speichernTermin{

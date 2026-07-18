@@ -20,3 +20,59 @@ button.addEventListener("click", () => {
     projekte.appendChild(projekt);
 
 });
+const monate = [
+    "Januar","Februar","März","April","Mai","Juni",
+    "Juli","August","September","Oktober","November","Dezember"
+];
+
+const tageContainer = document.getElementById("tage");
+const monatTitel = document.getElementById("monatTitel");
+
+let heute = new Date();
+let aktuellerMonat = heute.getMonth();
+let aktuellesJahr = heute.getFullYear();
+
+function kalenderZeichnen(){
+
+    tageContainer.innerHTML = "";
+
+    monatTitel.textContent =
+        monate[aktuellerMonat] + " " + aktuellesJahr;
+
+    const ersterTag =
+        new Date(aktuellesJahr, aktuellerMonat, 1);
+
+    const letzterTag =
+        new Date(aktuellesJahr, aktuellerMonat + 1, 0);
+
+    let start =
+        ersterTag.getDay();
+
+    if(start === 0){
+        start = 7;
+    }
+
+    for(let i=1;i<start;i++){
+
+        const leer = document.createElement("div");
+
+        tageContainer.appendChild(leer);
+
+    }
+
+    for(let tag=1; tag<=letzterTag.getDate(); tag++){
+
+        const feld = document.createElement("div");
+
+        feld.className = "tag";
+
+        feld.innerHTML =
+        "<div class='tagNummer'>" + tag + "</div>";
+
+        tageContainer.appendChild(feld);
+
+    }
+
+}
+
+kalenderZeichnen();

@@ -1010,3 +1010,154 @@ select,
     }
 
 }
+/* =========================================
+   Schichtplan
+========================================= */
+
+#seite-schichtplan .modul{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    margin-top:25px;
+
+}
+
+#mitarbeiterListe{
+
+    margin-top:20px;
+
+    margin-bottom:25px;
+
+}
+
+.mitarbeiter{
+
+    background:#3b3d42;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    margin-bottom:12px;
+
+    border-left:6px solid #2f80ed;
+
+}
+
+#schichtplanTabelle{
+
+    margin-top:25px;
+
+    overflow:auto;
+
+}
+
+#schichtplanTabelle table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:1000px;
+
+}
+
+#schichtplanTabelle th{
+
+    background:#2f80ed;
+
+    color:white;
+
+    padding:14px;
+
+    text-align:center;
+
+    position:sticky;
+
+    top:0;
+
+}
+
+#schichtplanTabelle td{
+
+    background:#3b3d42;
+
+    border:1px solid #555;
+
+    padding:12px;
+
+    text-align:center;
+
+    min-width:80px;
+
+    height:60px;
+
+}
+
+#schichtplanTabelle tbody tr:hover td{
+
+    background:#474a50;
+
+}
+
+.schicht{
+
+    border-radius:8px;
+
+    padding:6px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.schicht.frueh{
+
+    background:#27ae60;
+
+    color:white;
+
+}
+
+.schicht.spaet{
+
+    background:#f39c12;
+
+    color:white;
+
+}
+
+.schicht.nacht{
+
+    background:#2980b9;
+
+    color:white;
+
+}
+
+.schicht.frei{
+
+    background:#7f8c8d;
+
+    color:white;
+
+}
+
+.schicht.urlaub{
+
+    background:#e74c3c;
+
+    color:white;
+
+}
+
+.schicht.krank{
+
+    background:#8e44ad;
+
+    color:white;
+
+}

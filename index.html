@@ -5,9 +5,10 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>DDH Studio Enterprise 5.0</title>
+<title>DDH Studio Enterprise 6.0</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,55 +18,173 @@
 
 <div class="app">
 
+<!-- =====================================
+     Header
+===================================== -->
+
 <header>
 
-<button id="vorherigerMonat">◀</button>
+<button id="vorherigerMonat">
 
-<h1 id="monatTitel"></h1>
+◀
 
-<button id="naechsterMonat">▶</button>
+</button>
+
+<h1 id="monatTitel">
+
+DDH Studio Enterprise
+
+</h1>
+
+<button id="naechsterMonat">
+
+▶
+
+</button>
 
 </header>
 
-<!-- ========================= -->
-<!-- Dashboard -->
-<!-- ========================= -->
+<!-- =====================================
+     Navigation
+===================================== -->
 
-<section id="dashboard">
+<nav id="navigation">
 
-<h2>📊 Dashboard</h2>
+<button
+class="navButton aktiv"
+data-seite="dashboard">
+
+📊 Dashboard
+
+</button>
+
+<button
+class="navButton"
+data-seite="kalender">
+
+📅 Kalender
+
+</button>
+
+<button
+class="navButton"
+data-seite="aufgaben">
+
+✅ Aufgaben
+
+</button>
+
+<button
+class="navButton"
+data-seite="dokumente">
+
+📄 Dokumente
+
+</button>
+
+<button
+class="navButton"
+data-seite="kunden">
+
+👥 Kunden
+
+</button>
+
+<button
+class="navButton"
+data-seite="projekte">
+
+📂 Projekte
+
+</button>
+
+<button
+class="navButton"
+data-seite="einstellungen">
+
+⚙️ Einstellungen
+
+</button>
+
+</nav>
+
+<!-- =====================================
+     Dashboard
+===================================== -->
+
+<section
+id="seite-dashboard"
+class="seite aktiv">
+
+<h2>
+
+📊 Dashboard
+
+</h2>
 
 <div class="dashboardGrid">
 
 <div class="dashboardKarte">
 
-<h3>📅 Termine heute</h3>
+<h3>
 
-<p id="heuteTermine">0</p>
+📅 Termine heute
 
-</div>
+</h3>
 
-<div class="dashboardKarte">
+<p id="heuteTermine">
 
-<h3>📋 Offene Aufgaben</h3>
+0
 
-<p id="offeneTodos">0</p>
-
-</div>
-
-<div class="dashboardKarte">
-
-<h3>🔴 Hohe Priorität</h3>
-
-<p id="hohePrioritaet">0</p>
+</p>
 
 </div>
 
 <div class="dashboardKarte">
 
-<h3>✅ Erledigt</h3>
+<h3>
 
-<p id="erledigteTodos">0</p>
+📋 Offene Aufgaben
+
+</h3>
+
+<p id="offeneTodos">
+
+0
+
+</p>
+
+</div>
+
+<div class="dashboardKarte">
+
+<h3>
+
+🔴 Hohe Priorität
+
+</h3>
+
+<p id="hohePrioritaet">
+
+0
+
+</p>
+
+</div>
+
+<div class="dashboardKarte">
+
+<h3>
+
+✅ Erledigt
+
+</h3>
+
+<p id="erledigteTodos">
+
+0
+
+</p>
 
 </div>
 
@@ -73,7 +192,11 @@
 
 <div class="dashboardBereich">
 
-<h3>🔥 Nächste Aufgaben</h3>
+<h3>
+
+🔥 Nächste Aufgaben
+
+</h3>
 
 <div id="dashboardTodos">
 
@@ -84,6 +207,13 @@ Noch keine Aufgaben
 </div>
 
 </section>
+<!-- =====================================
+     Kalender
+===================================== -->
+
+<section
+id="seite-kalender"
+class="seite">
 
 <main>
 
@@ -142,11 +272,26 @@ Termin speichern
 
 <div id="terminListe"></div>
 
-<hr>
+</aside>
+
+</main>
+
+</section>
+<!-- =====================================
+     Aufgaben
+===================================== -->
+
+<section
+id="seite-aufgaben"
+class="seite">
+
+<main>
+
+<section class="aufgabenBereich">
 
 <h2>
 
-📁 To-do Projekt
+📁 Projekt auswählen
 
 </h2>
 
@@ -174,7 +319,7 @@ Termin speichern
 
 <h2>
 
-✅ To-do-Liste
+✅ Neue Aufgabe
 
 </h2>
 
@@ -185,11 +330,23 @@ placeholder="Neue Aufgabe">
 
 <select id="todoPrioritaet">
 
-<option value="hoch">🔴 Hoch</option>
+<option value="hoch">
 
-<option value="mittel">🟠 Mittel</option>
+🔴 Hoch
 
-<option value="niedrig">🟢 Niedrig</option>
+</option>
+
+<option value="mittel">
+
+🟠 Mittel
+
+</option>
+
+<option value="niedrig">
+
+🟢 Niedrig
+
+</option>
 
 </select>
 
@@ -199,11 +356,190 @@ Aufgabe hinzufügen
 
 </button>
 
-<div id="todoListe"></div>
+</section>
+
+<aside>
+
+<h2>
+
+📋 Aufgabenliste
+
+</h2>
+
+<div id="todoListe">
+
+</div>
 
 </aside>
 
 </main>
+
+</section>
+<!-- =====================================
+     Dokumente
+===================================== -->
+
+<section
+id="seite-dokumente"
+class="seite">
+
+<div class="modul">
+
+<h2>
+
+📄 Dokumente
+
+</h2>
+
+<p>
+
+Hier werden später Dokumente verwaltet.
+
+</p>
+
+<button id="neuesDokument">
+
+➕ Neues Dokument
+
+</button>
+
+<div id="dokumentListe">
+
+Noch keine Dokumente vorhanden.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+     Kunden
+===================================== -->
+
+<section
+id="seite-kunden"
+class="seite">
+
+<div class="modul">
+
+<h2>
+
+👥 Kunden
+
+</h2>
+
+<p>
+
+Die Kundenverwaltung wird hier eingebaut.
+
+</p>
+
+<button id="neuerKunde">
+
+➕ Kunde anlegen
+
+</button>
+
+<div id="kundenListe">
+
+Noch keine Kunden vorhanden.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+     Projekte
+===================================== -->
+
+<section
+id="seite-projekte"
+class="seite">
+
+<div class="modul">
+
+<h2>
+
+📂 Projekte
+
+</h2>
+
+<p>
+
+Hier werden später alle Projekte angezeigt.
+
+</p>
+
+<button id="neuesProjekt">
+
+➕ Projekt erstellen
+
+</button>
+
+<div id="projektListe">
+
+Noch keine Projekte vorhanden.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+     Einstellungen
+===================================== -->
+
+<section
+id="seite-einstellungen"
+class="seite">
+
+<div class="modul">
+
+<h2>
+
+⚙️ Einstellungen
+
+</h2>
+
+<label>
+
+<input
+type="checkbox"
+id="darkMode"
+checked>
+
+Dark Mode
+
+</label>
+
+<br><br>
+
+<label>
+
+<input
+type="checkbox"
+id="autoSpeichern"
+checked>
+
+Automatisch speichern
+
+</label>
+
+<br><br>
+
+<button id="backupErstellen">
+
+💾 Backup erstellen
+
+</button>
+
+</div>
+
+</section>
 
 </div>
 

@@ -1,7 +1,7 @@
-// ==============================
+// ======================================
 // DDH Studio Enterprise
-// Version 3.0
-// ==============================
+// app.js
+// ======================================
 
 // Monate
 const monate = [
@@ -19,64 +19,95 @@ const monate = [
   "Dezember"
 ];
 
-// HTML-Elemente
+// HTML
 const tage = document.getElementById("tage");
 const monatTitel = document.getElementById("monatTitel");
 
-const btnZurueck = document.getElementById("vorherigerMonat");
-const btnWeiter = document.getElementById("naechsterMonat");
+const btnZurueck =
+document.getElementById("vorherigerMonat");
 
-const datumTitel = document.getElementById("ausgewaehltesDatum");
+const btnWeiter =
+document.getElementById("naechsterMonat");
 
-const uhrzeit = document.getElementById("uhrzeit");
-const termin = document.getElementById("termin");
-const kategorie = document.getElementById("kategorie");
-const speichern = document.getElementById("speichern");
+const datumTitel =
+document.getElementById("ausgewaehltesDatum");
 
-const terminListe = document.getElementById("terminListe");
+const uhrzeit =
+document.getElementById("uhrzeit");
+
+const termin =
+document.getElementById("termin");
+
+const kategorie =
+document.getElementById("kategorie");
+
+// ACHTUNG:
+// In deiner index.html heißt der Button
+// "speichernTermin"
+
+const speichern =
+document.getElementById("speichernTermin");
+
+const terminListe =
+document.getElementById("terminListe");
 
 // Datum
-let heute = new Date();
 
-let aktuellerMonat = heute.getMonth();
-let aktuellesJahr = heute.getFullYear();
+const heute = new Date();
 
-let ausgewaehlterTag = heute.getDate();
+let aktuellerMonat =
+heute.getMonth();
+
+let aktuellesJahr =
+heute.getFullYear();
+
+let ausgewaehlterTag =
+heute.getDate();
 
 // Termine laden
+
 let termine =
-JSON.parse(localStorage.getItem("termine")) || [];
-// ==============================
+JSON.parse(
+localStorage.getItem("termine")
+) || [];
+
+// ======================================
 // Kalender zeichnen
-// ==============================
+// ======================================
 
 function kalenderZeichnen() {
 
     tage.innerHTML = "";
 
     const ersterTag =
-        new Date(aktuellesJahr, aktuellerMonat, 1).getDay();
+    new Date(
+        aktuellesJahr,
+        aktuellerMonat,
+        1
+    ).getDay();
 
     const tageImMonat =
-        new Date(
-            aktuellesJahr,
-            aktuellerMonat + 1,
-            0
-        ).getDate();
+    new Date(
+        aktuellesJahr,
+        aktuellerMonat + 1,
+        0
+    ).getDate();
 
     monatTitel.textContent =
-        monate[aktuellerMonat] +
-        " " +
-        aktuellesJahr;
+    monate[aktuellerMonat] +
+    " " +
+    aktuellesJahr;
 
     let start = ersterTag;
 
-    if (start === 0) start = 7;
+    if (start === 0) {
+        start = 7;
+    }
 
     for (let i = 1; i < start; i++) {
 
         const leer =
-            document.createElement("div");
+        document.createElement("div");
 
         leer.className = "leer";
 
@@ -84,19 +115,23 @@ function kalenderZeichnen() {
 
     }
 
-    for (let tag = 1; tag <= tageImMonat; tag++) {
+    for (
+        let tag = 1;
+        tag <= tageImMonat;
+        tag++
+    ) {
 
         const feld =
-            document.createElement("div");
+        document.createElement("div");
 
         feld.className = "tag";
 
         feld.textContent = tag;
 
-        if (tag === ausgewaehlterTag) {
-
+        if (
+            tag === ausgewaehlterTag
+        ) {
             feld.classList.add("aktiv");
-
         }
 
         feld.onclick = () => {
@@ -114,22 +149,24 @@ function kalenderZeichnen() {
     }
 
     datumTitel.textContent =
-        ausgewaehlterTag +
-        ". " +
-        monate[aktuellerMonat] +
-        " " +
-        aktuellesJahr;
+    ausgewaehlterTag +
+    ". " +
+    monate[aktuellerMonat] +
+    " " +
+    aktuellesJahr;
 
 }
-// ==============================
+// ======================================
 // Termin speichern
-// ==============================
+// ======================================
 
-speichern.onclick = () => {
+speichern.onclick = function () {
 
-    if (termin.value.trim() === "") return;
+    if (termin.value.trim() === "") {
+        return;
+    }
 
-    const eintrag = {
+    const neuerTermin = {
 
         jahr: aktuellesJahr,
         monat: aktuellerMonat,
@@ -143,7 +180,7 @@ speichern.onclick = () => {
 
     };
 
-    termine.push(eintrag);
+    termine.push(neuerTermin);
 
     localStorage.setItem(
         "termine",
@@ -151,96 +188,111 @@ speichern.onclick = () => {
     );
 
     termin.value = "";
-    uhrzeit.value = "";
 
     termineAnzeigen();
 
 };
 
-// ==============================
+// ======================================
 // Termine anzeigen
-// ==============================
+// ======================================
 
 function termineAnzeigen() {
 
     terminListe.innerHTML = "";
 
-    const liste = termine.filter(e =>
+    const liste = termine.filter(function (eintrag) {
 
-        e.jahr === aktuellesJahr &&
-        e.monat === aktuellerMonat &&
-        e.tag === ausgewaehlterTag
+        return (
 
-    );
+            eintrag.jahr === aktuellesJahr &&
+            eintrag.monat === aktuellerMonat &&
+            eintrag.tag === ausgewaehlterTag
 
-    liste.forEach((eintrag, index) => {
+        );
+
+    });
+
+    liste.forEach(function (eintrag) {
 
         const box =
-            document.createElement("div");
+        document.createElement("div");
 
         box.className = "termin";
+
+        // Farbe je Kategorie
 
         switch (eintrag.kategorie) {
 
             case "Privat":
                 box.style.borderLeft =
-                    "6px solid #4dabf7";
-                break;
-
-            case "Schule":
-                box.style.borderLeft =
-                    "6px solid #51cf66";
+                "6px solid #4dabf7";
                 break;
 
             case "Arbeit":
                 box.style.borderLeft =
-                    "6px solid #ff922b";
+                "6px solid #ff922b";
                 break;
 
-            case "Sport":
+            case "Familie":
                 box.style.borderLeft =
-                    "6px solid #e64980";
+                "6px solid #845ef7";
+                break;
+
+            case "Schule":
+                box.style.borderLeft =
+                "6px solid #51cf66";
+                break;
+
+            case "Urlaub":
+                box.style.borderLeft =
+                "6px solid #15aabf";
+                break;
+
+            case "Geburtstag":
+                box.style.borderLeft =
+                "6px solid #f06595";
                 break;
 
             default:
                 box.style.borderLeft =
-                    "6px solid #999";
+                "6px solid #868e96";
+
         }
 
         const info =
-            document.createElement("div");
+        document.createElement("div");
 
         info.textContent =
-            "[" +
-            eintrag.kategorie +
-            "] " +
-            eintrag.uhrzeit +
-            " - " +
-            eintrag.text;
-                    box.appendChild(info);
+        "[" +
+        eintrag.kategorie +
+        "] " +
+        eintrag.uhrzeit +
+        " - " +
+        eintrag.text;
+
+        box.appendChild(info);
 
         const buttons =
-            document.createElement("div");
-
-        buttons.className =
-            "terminButtons";
+        document.createElement("div");
 
         // Bearbeiten
+
         const bearbeiten =
-            document.createElement("button");
+        document.createElement("button");
 
         bearbeiten.textContent = "✏️";
 
-        bearbeiten.onclick = () => {
+        bearbeiten.onclick = function () {
 
             uhrzeit.value =
-                eintrag.uhrzeit;
+            eintrag.uhrzeit;
 
             termin.value =
-                eintrag.text;
+            eintrag.text;
 
             kategorie.value =
-                eintrag.kategorie;
+            eintrag.kategorie;
 
             termine.splice(
                 termine.indexOf(eintrag),
@@ -253,17 +305,17 @@ function termineAnzeigen() {
             );
 
             termineAnzeigen();
-            kalenderZeichnen();
 
         };
 
         // Löschen
+
         const loeschen =
-            document.createElement("button");
+        document.createElement("button");
 
         loeschen.textContent = "🗑️";
 
-        loeschen.onclick = () => {
+        loeschen.onclick = function () {
 
             termine.splice(
                 termine.indexOf(eintrag),
@@ -276,17 +328,11 @@ function termineAnzeigen() {
             );
 
             termineAnzeigen();
-            kalenderZeichnen();
 
         };
 
-        buttons.appendChild(
-            bearbeiten
-        );
-
-        buttons.appendChild(
-            loeschen
-        );
+        buttons.appendChild(bearbeiten);
+        buttons.appendChild(loeschen);
 
         box.appendChild(buttons);
 
@@ -295,11 +341,11 @@ function termineAnzeigen() {
     });
 
 }
-// ==============================
+// ======================================
 // Monatswechsel
-// ==============================
+// ======================================
 
-btnZurueck.onclick = () => {
+btnZurueck.onclick = function () {
 
     aktuellerMonat--;
 
@@ -317,7 +363,7 @@ btnZurueck.onclick = () => {
 
 };
 
-btnWeiter.onclick = () => {
+btnWeiter.onclick = function () {
 
     aktuellerMonat++;
 
@@ -335,46 +381,20 @@ btnWeiter.onclick = () => {
 
 };
 
-// Heute auswählen
+// ======================================
+// Aktuelle Uhrzeit einsetzen
+// ======================================
 
-function heuteAuswaehlen() {
-
-    const jetzt = new Date();
-
-    aktuellesJahr = jetzt.getFullYear();
-    aktuellerMonat = jetzt.getMonth();
-    ausgewaehlterTag = jetzt.getDate();
-
-}
-
-heuteAuswaehlen();
-// ==============================
-// DDH Studio Enterprise
-// Start
-// ==============================
-
-// Kalender und Termine laden
-kalenderZeichnen();
-termineAnzeigen();
-
-// Enter-Taste speichert Termin
-termin.addEventListener("keydown", (event) => {
-
-    if (event.key === "Enter") {
-
-        speichern.click();
-
-    }
-
-});
-
-// Kategorie nach dem Speichern zurücksetzen
-kategorie.value = "Privat";
-
-// Uhrzeit auf aktuelle Zeit setzen
 const jetzt = new Date();
 
 uhrzeit.value =
-    String(jetzt.getHours()).padStart(2, "0") +
-    ":" +
-    String(jetzt.getMinutes()).padStart(2, "0");
+String(jetzt.getHours()).padStart(2, "0") +
+":" +
+String(jetzt.getMinutes()).padStart(2, "0");
+
+// ======================================
+// Start
+// ======================================
+
+kalenderZeichnen();
+termineAnzeigen();

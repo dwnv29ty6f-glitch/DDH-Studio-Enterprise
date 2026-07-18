@@ -270,7 +270,9 @@ speichernTermin.addEventListener("click", () => {
 
     }
 
-    const text = terminInput.value.trim();
+    const zeit = uhrzeitInput.value;
+
+const text = terminInput.value.trim();
 
     if (text === "") {
 

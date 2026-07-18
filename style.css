@@ -1,7 +1,6 @@
-/* =======================================
-   DDH Studio Enterprise
-   style.css
-======================================= */
+/* =========================================
+   DDH Studio Enterprise 4.0
+========================================= */
 
 *{
     margin:0;
@@ -10,18 +9,25 @@
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    background:#202124;
-    color:white;
-}
 
-/* Gesamte App */
+    font-family:-apple-system,BlinkMacSystemFont,
+    "Segoe UI",sans-serif;
+
+    background:#202124;
+
+    color:white;
+
+}
 
 .app{
+
     min-height:100vh;
+
 }
 
-/* Kopf */
+/* ===========================
+   Kopf
+=========================== */
 
 header{
 
@@ -38,6 +44,7 @@ header{
     background:#2b2d31;
 
     border-bottom:1px solid #444;
+
 }
 
 header h1{
@@ -70,13 +77,15 @@ header button{
 
 }
 
-/* Inhalt */
+/* ===========================
+   Layout
+=========================== */
 
 main{
 
     display:grid;
 
-    grid-template-columns:2fr 360px;
+    grid-template-columns:2fr 380px;
 
     gap:25px;
 
@@ -84,7 +93,9 @@ main{
 
 }
 
-/* Kalender */
+/* ===========================
+   Kalender
+=========================== */
 
 #kalender{
 
@@ -128,7 +139,7 @@ main{
 
     min-height:110px;
 
-    padding:10px;
+    padding:12px;
 
     cursor:pointer;
 
@@ -148,12 +159,6 @@ main{
 
 }
 
-.tagHatTermin{
-
-    border:3px solid #2f80ed;
-
-}
-
 .tagNummer{
 
     font-size:22px;
@@ -161,8 +166,9 @@ main{
     font-weight:bold;
 
 }
-
-/* Rechte Seite */
+/* ===========================
+   Rechte Seite
+=========================== */
 
 aside{
 
@@ -176,11 +182,20 @@ aside{
 
 aside h2{
 
-    margin-bottom:20px;
+    margin-bottom:15px;
+
+    margin-top:20px;
 
 }
 
-input{
+aside h2:first-child{
+
+    margin-top:0;
+
+}
+
+input,
+select{
 
     width:100%;
 
@@ -200,7 +215,7 @@ input{
 
 }
 
-#speichernTermin{
+button{
 
     width:100%;
 
@@ -214,13 +229,31 @@ input{
 
     color:white;
 
-    font-size:18px;
+    font-size:17px;
 
     cursor:pointer;
 
+    transition:.2s;
+
 }
 
-/* Termine */
+button:hover{
+
+    background:#1669d8;
+
+}
+
+hr{
+
+    margin:25px 0;
+
+    border:1px solid #444;
+
+}
+
+/* ===========================
+   Termine
+=========================== */
 
 #terminListe{
 
@@ -232,9 +265,9 @@ input{
 
     background:#3b3d42;
 
-    padding:12px;
+    border-radius:12px;
 
-    border-radius:10px;
+    padding:12px;
 
     margin-bottom:12px;
 
@@ -242,11 +275,11 @@ input{
 
 .terminButtons{
 
-    margin-top:10px;
-
     display:flex;
 
     gap:10px;
+
+    margin-top:12px;
 
 }
 
@@ -254,111 +287,11 @@ input{
 
     flex:1;
 
-    padding:10px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#2f80ed;
-
-    color:white;
-
-    cursor:pointer;
-
 }
 
-/* Handy */
-
-@media(max-width:900px){
-
-    main{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-/* =======================================
-   TO-DO LISTE
-======================================= */
-
-#todoBereich{
-
-    margin-top:35px;
-
-    padding-top:25px;
-
-    border-top:2px solid #444;
-
-}
-
-#todoBereich h2{
-
-    margin-bottom:15px;
-
-}
-
-#todoText{
-
-    width:100%;
-
-    padding:14px;
-
-    margin-bottom:15px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#3b3d42;
-
-    color:white;
-
-    font-size:16px;
-
-}
-
-#todoPrioritaet{
-
-    width:100%;
-
-    padding:14px;
-
-    margin-bottom:15px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#3b3d42;
-
-    color:white;
-
-    font-size:16px;
-
-}
-
-#todoSpeichern{
-
-    width:100%;
-
-    padding:14px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#27ae60;
-
-    color:white;
-
-    font-size:18px;
-
-    cursor:pointer;
-
-}
-/* Todo-Liste */
+/* ===========================
+   To-dos
+=========================== */
 
 #todoListe{
 
@@ -370,31 +303,11 @@ input{
 
     background:#3b3d42;
 
+    border-radius:12px;
+
     padding:12px;
 
-    border-radius:10px;
-
     margin-bottom:12px;
-
-    border-left:6px solid #27ae60;
-
-}
-
-.todoText{
-
-    font-size:17px;
-
-    font-weight:bold;
-
-}
-
-.todoInfo{
-
-    margin-top:6px;
-
-    color:#bdbdbd;
-
-    font-size:14px;
 
 }
 
@@ -404,38 +317,13 @@ input{
 
     gap:10px;
 
-    margin-top:10px;
+    margin-top:12px;
 
 }
 
 .todoButtons button{
 
     flex:1;
-
-    padding:10px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#2f80ed;
-
-    color:white;
-
-    cursor:pointer;
-
-}
-/* Prioritäten */
-
-.todo.niedrig{
-
-    border-left:6px solid #27ae60;
-
-}
-
-.todo.mittel{
-
-    border-left:6px solid #f39c12;
 
 }
 
@@ -445,10 +333,50 @@ input{
 
 }
 
+.todo.mittel{
+
+    border-left:6px solid #f39c12;
+
+}
+
+.todo.niedrig{
+
+    border-left:6px solid #27ae60;
+
+}
+
 .todo.erledigt{
 
     opacity:.6;
 
     text-decoration:line-through;
+
+}
+
+/* ===========================
+   Handy
+=========================== */
+
+@media(max-width:900px){
+
+    main{
+
+        grid-template-columns:1fr;
+
+    }
+
+    header h1{
+
+        font-size:28px;
+
+        min-width:auto;
+
+    }
+
+    .tag{
+
+        min-height:90px;
+
+    }
 
 }

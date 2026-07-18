@@ -289,7 +289,10 @@ const text = terminInput.value.trim();
 
     }
 
-    termine[key].push(text);
+    termine[key].push({
+    zeit: zeit,
+    text: text
+});
 
     localStorage.setItem(
         "ddhTermine",

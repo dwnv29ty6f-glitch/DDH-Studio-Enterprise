@@ -299,7 +299,8 @@ const text = terminInput.value.trim();
         JSON.stringify(termine)
     );
 
-    terminInput.value = "";
+    uhrzeitInput.value = "";
+terminInput.value = "";
 
     kalenderZeichnen();
     termineAnzeigen();

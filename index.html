@@ -8,9 +8,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>DDH Studio Enterprise 6.0</title>
+<title>DDH Studio Enterprise 7.0</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
@@ -76,6 +77,14 @@ data-seite="aufgaben">
 
 <button
 class="navButton"
+data-seite="schichtplan">
+
+👷 Schichtplan
+
+</button>
+
+<button
+class="navButton"
 data-seite="dokumente">
 
 📄 Dokumente
@@ -115,6 +124,8 @@ data-seite="einstellungen">
 <section
 id="seite-dashboard"
 class="seite aktiv">
+
+<div class="modul">
 
 <h2>
 
@@ -200,7 +211,9 @@ class="seite aktiv">
 
 <div id="dashboardTodos">
 
-Noch keine Aufgaben
+Noch keine Aufgaben vorhanden.
+
+</div>
 
 </div>
 
@@ -270,7 +283,9 @@ Termin speichern
 
 </button>
 
-<div id="terminListe"></div>
+<div id="terminListe">
+
+</div>
 
 </aside>
 
@@ -298,19 +313,12 @@ class="seite">
 <select id="todoProjekt">
 
 <option value="Privat">🏠 Privat</option>
-
 <option value="DDH Studio">🎬 DDH Studio</option>
-
 <option value="Enterprise">🚀 Enterprise</option>
-
 <option value="Arbeit">💼 Arbeit</option>
-
 <option value="Schule">🎓 Schule</option>
-
 <option value="Familie">👨‍👩‍👧 Familie</option>
-
 <option value="Urlaub">✈️ Urlaub</option>
-
 <option value="Sonstiges">📌 Sonstiges</option>
 
 </select>
@@ -330,23 +338,9 @@ placeholder="Neue Aufgabe">
 
 <select id="todoPrioritaet">
 
-<option value="hoch">
-
-🔴 Hoch
-
-</option>
-
-<option value="mittel">
-
-🟠 Mittel
-
-</option>
-
-<option value="niedrig">
-
-🟢 Niedrig
-
-</option>
+<option value="hoch">🔴 Hoch</option>
+<option value="mittel">🟠 Mittel</option>
+<option value="niedrig">🟢 Niedrig</option>
 
 </select>
 
@@ -373,6 +367,131 @@ Aufgabe hinzufügen
 </aside>
 
 </main>
+
+</section>
+
+<!-- =====================================
+     Schichtplan
+===================================== -->
+
+<section
+id="seite-schichtplan"
+class="seite">
+
+<div class="modul">
+
+<h2>
+
+👷 Schichtplan
+
+</h2>
+
+<p>
+
+Verwalte hier Mitarbeiter und ihre Schichten.
+
+</p>
+
+<hr>
+
+<h3>
+
+👥 Mitarbeiter
+
+</h3>
+
+<input
+type="text"
+id="mitarbeiterName"
+placeholder="Mitarbeiter eingeben">
+
+<button
+id="mitarbeiterSpeichern">
+
+➕ Mitarbeiter hinzufügen
+
+</button>
+
+<div id="mitarbeiterListe">
+
+Noch keine Mitarbeiter vorhanden.
+
+</div>
+
+<hr>
+
+<h3>
+
+📅 Monatsübersicht
+
+</h3>
+
+<div id="schichtplanTabelle">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Mitarbeiter</th>
+
+<th>Mo</th>
+
+<th>Di</th>
+
+<th>Mi</th>
+
+<th>Do</th>
+
+<th>Fr</th>
+
+<th>Sa</th>
+
+<th>So</th>
+
+</tr>
+
+</thead>
+
+<tbody id="schichtplanBody">
+
+<tr>
+
+<td colspan="8">
+
+Noch keine Mitarbeiter vorhanden.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<hr>
+
+<h3>
+
+🎨 Legende
+
+</h3>
+
+<p>
+
+🟢 Früh &nbsp;
+🟠 Spät &nbsp;
+🔵 Nacht &nbsp;
+⚪ Frei &nbsp;
+🔴 Urlaub &nbsp;
+🟣 Krank
+
+</p>
+
+</div>
 
 </section>
 <!-- =====================================
@@ -431,7 +550,7 @@ class="seite">
 
 <p>
 
-Die Kundenverwaltung wird hier eingebaut.
+Hier werden später Kunden verwaltet.
 
 </p>
 
@@ -469,7 +588,7 @@ class="seite">
 
 <p>
 
-Hier werden später alle Projekte angezeigt.
+Hier werden später Projekte verwaltet.
 
 </p>
 

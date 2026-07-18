@@ -185,9 +185,10 @@ function termineAnzeigen(){
 
         const info = document.createElement("div");
         info.textContent =
-            eintrag.uhrzeit +
-            " - " +
-            eintrag.text;
+    "[" + eintrag.kategorie + "] " +
+    eintrag.uhrzeit +
+    " - " +
+    eintrag.text;
 
         const buttonLeiste =
             document.createElement("div");

@@ -60,7 +60,8 @@ document.getElementById("naechsterMonat");
 
 const datumTitel =
 document.getElementById("ausgewaehltesDatum");
-
+const uhrzeitInput =
+document.getElementById("uhrzeit");
 const terminInput =
 document.getElementById("termin");
 

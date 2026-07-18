@@ -297,9 +297,11 @@ speichern.onclick = () => {
 
     termine[ausgewaehlterTag].push({
 
-        uhrzeit:uhrzeit.value,
-        text:termin.value
+    uhrzeit: uhrzeit.value,
+    kategorie: kategorie.value,
+    text: termin.value
 
+});
     });
 
     localStorage.setItem(

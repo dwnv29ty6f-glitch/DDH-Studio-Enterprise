@@ -13,33 +13,50 @@
 
 <body>
 
+    <!-- Sidebar -->
+
     <div class="sidebar">
 
         <h2>DDH Studio</h2>
 
-        <button id="neu">Neues Projekt</button>
+        <button id="neu">
+            Neues Projekt
+        </button>
 
         <div id="projekte"></div>
 
     </div>
 
+    <!-- Hauptbereich -->
+
     <div class="main">
+
+        <!-- Kopf -->
 
         <div class="topbar">
 
-            <button id="vorherigerMonat">◀</button>
+            <button id="vorherigerMonat">
+                ◀
+            </button>
 
-            <h1 id="monatTitel">Juli 2026</h1>
+            <h1 id="monatTitel"></h1>
 
-            <button id="naechsterMonat">▶</button>
+            <button id="naechsterMonat">
+                ▶
+            </button>
 
         </div>
 
-        <div class="arbeitsbereich">
+        <!-- Inhalt -->
 
-            <div id="kalender">
+        <div class="content">
+
+            <!-- Kalender -->
+
+            <div class="kalenderBox">
 
                 <div class="wochentage">
+
                     <div>Mo</div>
                     <div>Di</div>
                     <div>Mi</div>
@@ -47,21 +64,24 @@
                     <div>Fr</div>
                     <div>Sa</div>
                     <div>So</div>
+
                 </div>
 
                 <div id="tage"></div>
 
             </div>
 
-            <div class="terminBereich">
+            <!-- Termine -->
+
+            <div class="terminBox">
 
                 <h2 id="ausgewaehltesDatum">
-                    Kein Tag ausgewählt
+                    Tag auswählen
                 </h2>
 
                 <input
-                    type="text"
                     id="termin"
+                    type="text"
                     placeholder="Termin eingeben">
 
                 <button id="speichernTermin">
@@ -79,9 +99,13 @@
     <script src="app.js"></script>
 
     <script>
+
         if ("serviceWorker" in navigator) {
+
             navigator.serviceWorker.register("sw.js");
+
         }
+
     </script>
 
 </body>

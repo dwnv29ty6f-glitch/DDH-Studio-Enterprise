@@ -38,6 +38,9 @@ document.getElementById("uhrzeit");
 const termin =
 document.getElementById("termin");
 
+const kategorie =
+document.getElementById("kategorie")
+
 const speichern =
 document.getElementById("speichernTermin");
 

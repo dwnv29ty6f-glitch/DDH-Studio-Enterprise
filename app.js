@@ -116,3 +116,55 @@ naechster.addEventListener("click", () => {
     kalenderZeichnen();
 
 });
+let ausgewaehlterTag = null;
+
+const terminInput = document.getElementById("termin");
+const speichernTermin = document.getElementById("speichernTermin");
+const terminListe = document.getElementById("terminListe");
+
+document.querySelectorAll(".tag").forEach(tag => {
+
+    tag.addEventListener("click", () => {
+
+        ausgewaehlterTag = tag.querySelector(".tagNummer").textContent;
+
+        terminListe.innerHTML = "";
+
+    });
+
+});
+
+speichernTermin.addEventListener("click", () => {
+
+    if (ausgewaehlterTag === null) {
+
+        alert("Bitte zuerst einen Tag auswählen.");
+        return;
+
+    }
+
+    if (terminInput.value.trim() === "") {
+
+        alert("Bitte einen Termin eingeben.");
+        return;
+
+    }
+
+    const eintrag = document.createElement("div");
+
+    eintrag.style.padding = "10px";
+    eintrag.style.marginTop = "10px";
+    eintrag.style.background = "#3b3d42";
+    eintrag.style.borderRadius = "8px";
+
+    eintrag.textContent =
+        ausgewaehlterTag + ". "
+        + monate[aktuellerMonat]
+        + " - "
+        + terminInput.value;
+
+    terminListe.appendChild(eintrag);
+
+    terminInput.value = "";
+
+});

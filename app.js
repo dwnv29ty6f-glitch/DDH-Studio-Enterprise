@@ -1,8 +1,9 @@
 // ===================================
 // DDH Studio Enterprise
-// Kalender Version 2.0
+// app.js - Block 1
 // ===================================
 
+// Monate
 const monate = [
     "Januar",
     "Februar",
@@ -18,31 +19,33 @@ const monate = [
     "Dezember"
 ];
 
-const tageContainer = document.getElementById("tage");
+// HTML-Elemente
+const tage = document.getElementById("tage");
 const monatTitel = document.getElementById("monatTitel");
 
-const vorherigerMonat =
+const btnZurueck =
 document.getElementById("vorherigerMonat");
 
-const naechsterMonat =
+const btnWeiter =
 document.getElementById("naechsterMonat");
 
-const ausgewaehltesDatum =
+const datumTitel =
 document.getElementById("ausgewaehltesDatum");
 
-const uhrzeit =
+const uhrzeitInput =
 document.getElementById("uhrzeit");
 
-const termin =
+const terminInput =
 document.getElementById("termin");
 
-const speichernTermin =
+const speichernButton =
 document.getElementById("speichernTermin");
 
 const terminListe =
 document.getElementById("terminListe");
 
-let heute = new Date();
+// Aktuelles Datum
+const heute = new Date();
 
 let monat =
 heute.getMonth();
@@ -50,19 +53,22 @@ heute.getMonth();
 let jahr =
 heute.getFullYear();
 
-let aktiverTag = null;
+// Ausgewählter Tag
+let ausgewaehlterTag = null;
 
+// Alle Termine
 let termine =
 JSON.parse(
-localStorage.getItem("ddh-kalender")
+localStorage.getItem("ddhKalender")
 ) || {};
 // ===================================
+// Block 2
 // Kalender zeichnen
 // ===================================
 
-function kalenderZeichnen(){
+function kalenderZeichnen() {
 
-    tageContainer.innerHTML = "";
+    tage.innerHTML = "";
 
     monatTitel.textContent =
         monate[monat] + " " + jahr;
@@ -70,23 +76,25 @@ function kalenderZeichnen(){
     let ersterTag =
         new Date(jahr, monat, 1).getDay();
 
-    if(ersterTag === 0){
+    if (ersterTag === 0) {
         ersterTag = 7;
     }
 
-    let letzterTag =
+    let tageImMonat =
         new Date(jahr, monat + 1, 0).getDate();
 
-    for(let i = 1; i < ersterTag; i++){
+    // Leere Felder vor dem 1.
+    for (let i = 1; i < ersterTag; i++) {
 
         const leer =
             document.createElement("div");
 
-        tageContainer.appendChild(leer);
+        tage.appendChild(leer);
 
     }
 
-    for(let tag = 1; tag <= letzterTag; tag++){
+    // Tage zeichnen
+    for (let tag = 1; tag <= tageImMonat; tag++) {
 
         const feld =
             document.createElement("div");
@@ -103,106 +111,99 @@ function kalenderZeichnen(){
             (monat + 1) + "-" +
             tag;
 
-        if(termine[schluessel]){
-
-            feld.classList.add(
-                "tagHatTermin"
-            );
-
+        // Tage mit Termin markieren
+        if (
+            termine[schluessel] &&
+            termine[schluessel].length > 0
+        ) {
+            feld.classList.add("tagHatTermin");
         }
 
-        feld.addEventListener(
-            "click",
-            () => {
+        // Tag anklicken
+        feld.onclick = () => {
 
-                document
-                    .querySelectorAll(".tag")
-                    .forEach(t => {
+            document
+                .querySelectorAll(".tag")
+                .forEach(t => t.classList.remove("aktiv"));
 
-                        t.classList.remove("aktiv");
+            feld.classList.add("aktiv");
 
-                    });
+            ausgewaehlterTag = schluessel;
 
-                feld.classList.add("aktiv");
-
-                aktiverTag = schluessel;
-
-                ausgewaehltesDatum.textContent =
-                    tag + ". " +
-                    monate[monat] +
-                    " " +
-                    jahr;
-
-                termineAnzeigen();
-
-            }
-        );
-
-        tageContainer.appendChild(feld);
-
-    }
-
-}
-// ===================================
-// Termine anzeigen
-// ===================================
-
-function termineAnzeigen(){
-
-    terminListe.innerHTML = "";
-
-    if(!aktiverTag){
-        return;
-    }
-
-    if(!termine[aktiverTag]){
-        return;
-    }
-
-    termine[aktiverTag].forEach((eintrag,index)=>{
-
-        const terminBox =
-            document.createElement("div");
-
-        terminBox.className = "termin";
-
-        const text =
-            document.createElement("div");
-
-        text.textContent =
-            eintrag.uhrzeit +
-            " - " +
-            eintrag.text;
-
-        const buttons =
-            document.createElement("div");
-
-        buttons.style.marginTop = "10px";
-
-        const bearbeiten =
-            document.createElement("button");
-
-        bearbeiten.textContent = "✏️";
-
-        bearbeiten.onclick = ()=>{
-
-            uhrzeit.value =
-                eintrag.uhrzeit;
-
-            termin.value =
-                eintrag.text;
-
-            termine[aktiverTag].splice(index,1);
-
-            localStorage.setItem(
-                "ddh-kalender",
-                JSON.stringify(termine)
-            );
+            datumTitel.textContent =
+                tag + ". " +
+                monate[monat] +
+                " " +
+                jahr;
 
             termineAnzeigen();
 
         };
 
+        tage.appendChild(feld);
+
+    }
+
+}
+// ===================================
+// Block 3
+// Termine
+// ===================================
+
+function termineAnzeigen() {
+
+    terminListe.innerHTML = "";
+
+    if (!ausgewaehlterTag) {
+        return;
+    }
+
+    if (!termine[ausgewaehlterTag]) {
+        return;
+    }
+
+    termine[ausgewaehlterTag].forEach((eintrag, index) => {
+
+        const box = document.createElement("div");
+        box.className = "termin";
+
+        const text = document.createElement("div");
+        text.textContent =
+            eintrag.uhrzeit + " - " + eintrag.text;
+
+        const buttonLeiste =
+            document.createElement("div");
+
+        buttonLeiste.style.marginTop = "10px";
+
+        // Bearbeiten
+        const bearbeiten =
+            document.createElement("button");
+
+        bearbeiten.textContent = "✏️";
+
+        bearbeiten.onclick = () => {
+
+            uhrzeitInput.value =
+                eintrag.uhrzeit;
+
+            terminInput.value =
+                eintrag.text;
+
+            termine[ausgewaehlterTag]
+                .splice(index, 1);
+
+            localStorage.setItem(
+                "ddhKalender",
+                JSON.stringify(termine)
+            );
+
+            termineAnzeigen();
+            kalenderZeichnen();
+
+        };
+
+        // Löschen
         const loeschen =
             document.createElement("button");
 
@@ -210,87 +211,86 @@ function termineAnzeigen(){
 
         loeschen.style.marginLeft = "10px";
 
-        loeschen.onclick = ()=>{
+        loeschen.onclick = () => {
 
-            termine[aktiverTag].splice(index,1);
+            termine[ausgewaehlterTag]
+                .splice(index, 1);
+
+            if (
+                termine[ausgewaehlterTag].length === 0
+            ) {
+                delete termine[ausgewaehlterTag];
+            }
 
             localStorage.setItem(
-                "ddh-kalender",
+                "ddhKalender",
                 JSON.stringify(termine)
             );
 
-            kalenderZeichnen();
-
             termineAnzeigen();
+            kalenderZeichnen();
 
         };
 
-        buttons.appendChild(bearbeiten);
-        buttons.appendChild(loeschen);
+        buttonLeiste.appendChild(bearbeiten);
+        buttonLeiste.appendChild(loeschen);
 
-        terminBox.appendChild(text);
-        terminBox.appendChild(buttons);
+        box.appendChild(text);
+        box.appendChild(buttonLeiste);
 
-        terminListe.appendChild(terminBox);
+        terminListe.appendChild(box);
 
     });
 
 }
-// ===================================
-// Termin speichern
-// ===================================
 
-speichernTermin.addEventListener("click", () => {
+speichernButton.onclick = () => {
 
-    if (!aktiverTag) {
+    if (!ausgewaehlterTag) {
 
         alert("Bitte zuerst einen Tag auswählen.");
-
         return;
 
     }
 
-    if (termin.value.trim() === "") {
+    if (terminInput.value.trim() === "") {
 
         alert("Bitte einen Termin eingeben.");
-
         return;
 
     }
 
-    if (!termine[aktiverTag]) {
+    if (!termine[ausgewaehlterTag]) {
 
-        termine[aktiverTag] = [];
+        termine[ausgewaehlterTag] = [];
 
     }
 
-    termine[aktiverTag].push({
+    termine[ausgewaehlterTag].push({
 
-        uhrzeit: uhrzeit.value,
-
-        text: termin.value
+        uhrzeit: uhrzeitInput.value,
+        text: terminInput.value
 
     });
 
     localStorage.setItem(
-        "ddh-kalender",
+        "ddhKalender",
         JSON.stringify(termine)
     );
 
-    uhrzeit.value = "";
-    termin.value = "";
-
-    kalenderZeichnen();
+    uhrzeitInput.value = "";
+    terminInput.value = "";
 
     termineAnzeigen();
+    kalenderZeichnen();
 
-});
-
+};
 // ===================================
-// Monat wechseln
+// Block 4
+// Navigation + Start
 // ===================================
 
-vorherigerMonat.addEventListener("click", () => {
+btnZurueck.onclick = () => {
 
     monat--;
 
@@ -301,18 +301,18 @@ vorherigerMonat.addEventListener("click", () => {
 
     }
 
-    aktiverTag = null;
+    ausgewaehlterTag = null;
 
-    ausgewaehltesDatum.textContent =
+    datumTitel.textContent =
         "Kein Tag ausgewählt";
 
     terminListe.innerHTML = "";
 
     kalenderZeichnen();
 
-});
+};
 
-naechsterMonat.addEventListener("click", () => {
+btnWeiter.onclick = () => {
 
     monat++;
 
@@ -323,19 +323,16 @@ naechsterMonat.addEventListener("click", () => {
 
     }
 
-    aktiverTag = null;
+    ausgewaehlterTag = null;
 
-    ausgewaehltesDatum.textContent =
+    datumTitel.textContent =
         "Kein Tag ausgewählt";
 
     terminListe.innerHTML = "";
 
     kalenderZeichnen();
 
-});
+};
 
-// ===================================
-// Start
-// ===================================
-
+// Kalender beim Start zeichnen
 kalenderZeichnen();

@@ -309,8 +309,9 @@ speichern.onclick = () => {
         JSON.stringify(termine)
     );
 
-    uhrzeit.value="";
-    termin.value="";
+    uhrzeit.value = "";
+kategorie.value = "Privat";
+termin.value = "";
 
     termineAnzeigen();
     kalenderZeichnen();

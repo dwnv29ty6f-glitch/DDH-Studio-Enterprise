@@ -53,3 +53,107 @@ body{
     flex:1;
     padding:30px;
 }
+.arbeitsbereich{
+    display:flex;
+    gap:30px;
+    align-items:flex-start;
+}
+
+#kalender{
+    flex:2;
+    background:#2b2d31;
+    padding:20px;
+    border-radius:12px;
+}
+
+.wochentage{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+    margin-bottom:15px;
+    font-weight:bold;
+    text-align:center;
+}
+
+#tage{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.tag{
+    background:#3b3d42;
+    border-radius:10px;
+    min-height:90px;
+    padding:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.tag:hover{
+    background:#2f80ed;
+}
+
+.tagAktiv{
+    background:#2f80ed;
+}
+
+.tagNummer{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.terminBereich{
+    flex:1;
+    background:#2b2d31;
+    padding:20px;
+    border-radius:12px;
+}
+
+.terminBereich input{
+    width:100%;
+    padding:12px;
+    margin:15px 0;
+    border:none;
+    border-radius:8px;
+    background:#40444b;
+    color:white;
+    box-sizing:border-box;
+}
+
+.terminBereich button{
+    width:100%;
+    padding:12px;
+    background:#2f80ed;
+    border:none;
+    border-radius:8px;
+    color:white;
+    cursor:pointer;
+}
+
+#terminListe{
+    margin-top:20px;
+}
+
+.terminEintrag{
+    background:#40444b;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:10px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+.topbar button{
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    background:#2f80ed;
+    color:white;
+    cursor:pointer;
+}

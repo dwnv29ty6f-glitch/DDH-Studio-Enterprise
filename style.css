@@ -358,3 +358,70 @@ input{
     cursor:pointer;
 
 }
+/* Todo-Liste */
+
+#todoListe{
+
+    margin-top:20px;
+
+}
+
+.todo{
+
+    background:#3b3d42;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    margin-bottom:12px;
+
+    border-left:6px solid #27ae60;
+
+}
+
+.todoText{
+
+    font-size:17px;
+
+    font-weight:bold;
+
+}
+
+.todoInfo{
+
+    margin-top:6px;
+
+    color:#bdbdbd;
+
+    font-size:14px;
+
+}
+
+.todoButtons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:10px;
+
+}
+
+.todoButtons button{
+
+    flex:1;
+
+    padding:10px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2f80ed;
+
+    color:white;
+
+    cursor:pointer;
+
+}

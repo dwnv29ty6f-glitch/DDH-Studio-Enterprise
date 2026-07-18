@@ -1,8 +1,8 @@
 // =====================================
-// DDH Studio Enterprise 5.0
+// DDH Studio Enterprise 6.0
 // app.js
 // Teil 1
-// Variablen & Initialisierung
+// Variablen & Navigation
 // =====================================
 
 // -------------------------
@@ -23,6 +23,16 @@ const monate = [
     "November",
     "Dezember"
 ];
+
+// -------------------------
+// Navigation
+// -------------------------
+
+const navButtons =
+document.querySelectorAll(".navButton");
+
+const seiten =
+document.querySelectorAll(".seite");
 
 // -------------------------
 // Kalender
@@ -63,7 +73,7 @@ const terminListe =
 document.getElementById("terminListe");
 
 // -------------------------
-// Projekte & To-dos
+// To-dos
 // -------------------------
 
 const todoProjekt =
@@ -117,7 +127,7 @@ let ausgewaehlterTag =
 heute.getDate();
 
 // -------------------------
-// LocalStorage
+// Daten
 // -------------------------
 
 let termine =
@@ -131,7 +141,7 @@ localStorage.getItem("ddhTodos")
 ) || [];
 
 // -------------------------
-// Hilfsfunktion
+// Speichern
 // -------------------------
 
 function speichern(){
@@ -183,50 +193,42 @@ function kalenderZeichnen(){
 
     // Leere Felder
 
-    for(let i = 1; i < ersterTag; i++){
+    for(let i=1;i<ersterTag;i++){
 
         const leer =
         document.createElement("div");
 
-        leer.className = "tag leer";
+        leer.className =
+        "tag leer";
 
         tage.appendChild(leer);
 
     }
 
-    // Tage
+    // Tage erzeugen
 
-    for(let tag = 1; tag <= tageImMonat; tag++){
+    for(let tag=1;tag<=tageImMonat;tag++){
 
         const feld =
         document.createElement("div");
 
-        feld.className = "tag";
+        feld.className =
+        "tag";
 
-        if(tag === ausgewaehlterTag){
+        if(tag===ausgewaehlterTag){
 
             feld.classList.add("aktiv");
 
         }
 
-        const nummer =
-        document.createElement("div");
-
-        nummer.className =
-        "tagNummer";
-
-        nummer.textContent = tag;
-
-        feld.appendChild(nummer);
-
-        // Hat Termine?
+        // Termin vorhanden?
 
         const hatTermin =
-        termine.some(t =>
+        termine.some(e=>
 
-            t.jahr === aktuellesJahr &&
-            t.monat === aktuellerMonat &&
-            t.tag === tag
+            e.jahr===aktuellesJahr &&
+            e.monat===aktuellerMonat &&
+            e.tag===tag
 
         );
 
@@ -237,9 +239,21 @@ function kalenderZeichnen(){
 
         }
 
+        const nummer =
+        document.createElement("div");
+
+        nummer.className =
+        "tagNummer";
+
+        nummer.textContent =
+        tag;
+
+        feld.appendChild(nummer);
+
         feld.onclick = ()=>{
 
-            ausgewaehlterTag = tag;
+            ausgewaehlterTag =
+            tag;
 
             datumTitel.textContent =
             tag +
@@ -262,23 +276,23 @@ function kalenderZeichnen(){
 
 }
 
-// ========================
+// =======================
 // Monat zurück
-// ========================
+// =======================
 
 btnZurueck.onclick = ()=>{
 
     aktuellerMonat--;
 
-    if(aktuellerMonat < 0){
+    if(aktuellerMonat<0){
 
-        aktuellerMonat = 11;
+        aktuellerMonat=11;
 
         aktuellesJahr--;
 
     }
 
-    ausgewaehlterTag = 1;
+    ausgewaehlterTag=1;
 
     kalenderZeichnen();
 
@@ -288,23 +302,23 @@ btnZurueck.onclick = ()=>{
 
 };
 
-// ========================
-// Monat vor
-// ========================
+// =======================
+// Monat weiter
+// =======================
 
 btnWeiter.onclick = ()=>{
 
     aktuellerMonat++;
 
-    if(aktuellerMonat > 11){
+    if(aktuellerMonat>11){
 
-        aktuellerMonat = 0;
+        aktuellerMonat=0;
 
         aktuellesJahr++;
 
     }
 
-    ausgewaehlterTag = 1;
+    ausgewaehlterTag=1;
 
     kalenderZeichnen();
 
@@ -322,11 +336,11 @@ function termineAnzeigen(){
 
     terminListe.innerHTML = "";
 
-    const liste = termine.filter(termin =>
+    const liste = termine.filter(e =>
 
-        termin.jahr === aktuellesJahr &&
-        termin.monat === aktuellerMonat &&
-        termin.tag === ausgewaehlterTag
+        e.jahr === aktuellesJahr &&
+        e.monat === aktuellerMonat &&
+        e.tag === ausgewaehlterTag
 
     );
 
@@ -339,12 +353,13 @@ function termineAnzeigen(){
 
     }
 
-    liste.forEach((eintrag,index)=>{
+    liste.forEach((eintrag)=>{
 
         const box =
         document.createElement("div");
 
-        box.className = "termin";
+        box.className =
+        "termin";
 
         switch(eintrag.kategorie){
 
@@ -409,7 +424,8 @@ function termineAnzeigen(){
         const bearbeiten =
         document.createElement("button");
 
-        bearbeiten.textContent = "✏️";
+        bearbeiten.textContent =
+        "✏️";
 
         bearbeiten.onclick = ()=>{
 
@@ -422,12 +438,12 @@ function termineAnzeigen(){
             kategorie.value =
             eintrag.kategorie;
 
-            const original =
+            const index =
             termine.indexOf(eintrag);
 
-            if(original > -1){
+            if(index > -1){
 
-                termine.splice(original,1);
+                termine.splice(index,1);
 
             }
 
@@ -446,16 +462,17 @@ function termineAnzeigen(){
         const loeschen =
         document.createElement("button");
 
-        loeschen.textContent = "🗑️";
+        loeschen.textContent =
+        "🗑️";
 
         loeschen.onclick = ()=>{
 
-            const original =
+            const index =
             termine.indexOf(eintrag);
 
-            if(original > -1){
+            if(index > -1){
 
-                termine.splice(original,1);
+                termine.splice(index,1);
 
             }
 
@@ -469,13 +486,21 @@ function termineAnzeigen(){
 
         };
 
-        buttons.appendChild(bearbeiten);
+        buttons.appendChild(
+            bearbeiten
+        );
 
-        buttons.appendChild(loeschen);
+        buttons.appendChild(
+            loeschen
+        );
 
-        box.appendChild(buttons);
+        box.appendChild(
+            buttons
+        );
 
-        terminListe.appendChild(box);
+        terminListe.appendChild(
+            box
+        );
 
     });
 
@@ -487,7 +512,7 @@ function termineAnzeigen(){
 
 speichernTermin.onclick = ()=>{
 
-    if(termin.value.trim() === ""){
+    if(termin.value.trim()===""){
 
         return;
 
@@ -511,7 +536,7 @@ speichernTermin.onclick = ()=>{
 
     speichern();
 
-    termin.value = "";
+    termin.value="";
 
     kalenderZeichnen();
 
@@ -522,7 +547,7 @@ speichernTermin.onclick = ()=>{
 };
 // =====================================
 // Teil 4
-// Projekte & To-do-Liste
+// Aufgaben / To-dos
 // =====================================
 
 function todosAnzeigen(){
@@ -532,13 +557,14 @@ function todosAnzeigen(){
     const projekt =
     todoProjekt.value;
 
-    const liste = todos.filter(todo =>
+    const liste =
+    todos.filter(todo=>
 
-        todo.projekt === projekt
+        todo.projekt===projekt
 
     );
 
-    if(liste.length === 0){
+    if(liste.length===0){
 
         todoListe.innerHTML =
         "<p>Keine Aufgaben vorhanden.</p>";
@@ -553,15 +579,20 @@ function todosAnzeigen(){
         document.createElement("div");
 
         box.className =
-        "todo " + todo.prioritaet;
+        "todo " +
+        todo.prioritaet;
 
         if(todo.erledigt){
 
-            box.classList.add("erledigt");
+            box.classList.add(
+                "erledigt"
+            );
 
         }
 
+        // --------------------
         // Text
+        // --------------------
 
         const text =
         document.createElement("div");
@@ -574,7 +605,9 @@ function todosAnzeigen(){
 
         box.appendChild(text);
 
-        // Info
+        // --------------------
+        // Informationen
+        // --------------------
 
         const info =
         document.createElement("div");
@@ -590,7 +623,9 @@ function todosAnzeigen(){
 
         box.appendChild(info);
 
+        // --------------------
         // Buttons
+        // --------------------
 
         const buttons =
         document.createElement("div");
@@ -598,12 +633,13 @@ function todosAnzeigen(){
         buttons.className =
         "todoButtons";
 
-        // Fertig
+        // Erledigt
 
         const fertig =
         document.createElement("button");
 
-        fertig.textContent = "✔";
+        fertig.textContent =
+        "✔";
 
         fertig.onclick = ()=>{
 
@@ -623,7 +659,8 @@ function todosAnzeigen(){
         const bearbeiten =
         document.createElement("button");
 
-        bearbeiten.textContent = "✏️";
+        bearbeiten.textContent =
+        "✏️";
 
         bearbeiten.onclick = ()=>{
 
@@ -636,12 +673,15 @@ function todosAnzeigen(){
             todoProjekt.value =
             todo.projekt;
 
-            const original =
+            const index =
             todos.indexOf(todo);
 
-            if(original > -1){
+            if(index>-1){
 
-                todos.splice(original,1);
+                todos.splice(
+                    index,
+                    1
+                );
 
             }
 
@@ -658,16 +698,20 @@ function todosAnzeigen(){
         const loeschen =
         document.createElement("button");
 
-        loeschen.textContent = "🗑️";
+        loeschen.textContent =
+        "🗑️";
 
         loeschen.onclick = ()=>{
 
-            const original =
+            const index =
             todos.indexOf(todo);
 
-            if(original > -1){
+            if(index>-1){
 
-                todos.splice(original,1);
+                todos.splice(
+                    index,
+                    1
+                );
 
             }
 
@@ -679,15 +723,25 @@ function todosAnzeigen(){
 
         };
 
-        buttons.appendChild(fertig);
+        buttons.appendChild(
+            fertig
+        );
 
-        buttons.appendChild(bearbeiten);
+        buttons.appendChild(
+            bearbeiten
+        );
 
-        buttons.appendChild(loeschen);
+        buttons.appendChild(
+            loeschen
+        );
 
-        box.appendChild(buttons);
+        box.appendChild(
+            buttons
+        );
 
-        todoListe.appendChild(box);
+        todoListe.appendChild(
+            box
+        );
 
     });
 
@@ -699,7 +753,7 @@ function todosAnzeigen(){
 
 todoSpeichern.onclick = ()=>{
 
-    if(todoText.value.trim() === ""){
+    if(todoText.value.trim()===""){
 
         return;
 
@@ -707,11 +761,14 @@ todoSpeichern.onclick = ()=>{
 
     todos.push({
 
-        projekt:todoProjekt.value,
+        projekt:
+        todoProjekt.value,
 
-        text:todoText.value,
+        text:
+        todoText.value,
 
-        prioritaet:todoPrioritaet.value,
+        prioritaet:
+        todoPrioritaet.value,
 
         erledigt:false
 
@@ -727,7 +784,9 @@ todoSpeichern.onclick = ()=>{
 
 };
 
+// =====================================
 // Projekt wechseln
+// =====================================
 
 todoProjekt.onchange = ()=>{
 
@@ -743,28 +802,28 @@ todoProjekt.onchange = ()=>{
 
 function dashboardAktualisieren(){
 
-    // ------------------------
-    // Termine heute
-    // ------------------------
+    // -------------------------
+    // Termine
+    // -------------------------
 
     const termineHeute =
-    termine.filter(termin =>
+    termine.filter(t=>
 
-        termin.jahr === aktuellesJahr &&
-        termin.monat === aktuellerMonat &&
-        termin.tag === ausgewaehlterTag
+        t.jahr===aktuellesJahr &&
+        t.monat===aktuellerMonat &&
+        t.tag===ausgewaehlterTag
 
     );
 
     heuteTermine.textContent =
     termineHeute.length;
 
-    // ------------------------
+    // -------------------------
     // Offene Aufgaben
-    // ------------------------
+    // -------------------------
 
     const offene =
-    todos.filter(todo =>
+    todos.filter(todo=>
 
         !todo.erledigt
 
@@ -773,27 +832,27 @@ function dashboardAktualisieren(){
     offeneTodos.textContent =
     offene.length;
 
-    // ------------------------
+    // -------------------------
     // Hohe Priorität
-    // ------------------------
+    // -------------------------
 
-    const hoch =
-    todos.filter(todo =>
+    const hohe =
+    todos.filter(todo=>
 
-        todo.prioritaet === "hoch" &&
+        todo.prioritaet==="hoch" &&
         !todo.erledigt
 
     );
 
     hohePrioritaet.textContent =
-    hoch.length;
+    hohe.length;
 
-    // ------------------------
+    // -------------------------
     // Erledigt
-    // ------------------------
+    // -------------------------
 
     const erledigt =
-    todos.filter(todo =>
+    todos.filter(todo=>
 
         todo.erledigt
 
@@ -802,40 +861,40 @@ function dashboardAktualisieren(){
     erledigteTodos.textContent =
     erledigt.length;
 
-    // ------------------------
-    // Dashboard-Aufgaben
-    // ------------------------
+    // -------------------------
+    // Dashboard Aufgaben
+    // -------------------------
 
     dashboardTodos.innerHTML = "";
 
     const projekt =
     todoProjekt.value;
 
-    const naechste =
-    todos.filter(todo =>
+    const liste =
+    todos.filter(todo=>
 
-        todo.projekt === projekt &&
+        todo.projekt===projekt &&
         !todo.erledigt
 
     );
 
-    if(naechste.length === 0){
+    if(liste.length===0){
 
         dashboardTodos.innerHTML =
-        "<div class='dashboardTodo'>Keine offenen Aufgaben.</div>";
+        "<div class='dashboardTodo'>Keine offenen Aufgaben</div>";
 
         return;
 
     }
 
-    naechste
+    liste
     .slice(0,5)
     .forEach(todo=>{
 
-        const eintrag =
+        const box =
         document.createElement("div");
 
-        eintrag.className =
+        box.className =
         "dashboardTodo";
 
         let icon = "🟢";
@@ -852,7 +911,7 @@ function dashboardAktualisieren(){
 
         }
 
-        eintrag.innerHTML =
+        box.innerHTML =
         "<span>" +
         icon +
         " " +
@@ -860,18 +919,101 @@ function dashboardAktualisieren(){
         "</span>";
 
         dashboardTodos.appendChild(
-            eintrag
+            box
         );
 
     });
 
 }
+
 // =====================================
-// Teil 6
-// Start & Initialisierung
+// Dokumente
 // =====================================
 
-// Datum anzeigen
+let dokumente =
+JSON.parse(
+localStorage.getItem(
+"ddhDokumente"
+)
+) || [];
+
+// =====================================
+// Kunden
+// =====================================
+
+let kunden =
+JSON.parse(
+localStorage.getItem(
+"ddhKunden"
+)
+) || [];
+
+// =====================================
+// Projekte
+// =====================================
+
+let projekte =
+JSON.parse(
+localStorage.getItem(
+"ddhProjekte"
+)
+) || [];
+// =====================================
+// Teil 6
+// Navigation + Start
+// =====================================
+
+// -------------------------
+// Navigation
+// -------------------------
+
+navButtons.forEach(button=>{
+
+    button.onclick=()=>{
+
+        navButtons.forEach(btn=>{
+
+            btn.classList.remove(
+                "aktiv"
+            );
+
+        });
+
+        seiten.forEach(seite=>{
+
+            seite.classList.remove(
+                "aktiv"
+            );
+
+        });
+
+        button.classList.add(
+            "aktiv"
+        );
+
+        const name =
+        button.dataset.seite;
+
+        const ziel =
+        document.getElementById(
+            "seite-" + name
+        );
+
+        if(ziel){
+
+            ziel.classList.add(
+                "aktiv"
+            );
+
+        }
+
+    };
+
+});
+
+// =====================================
+// Start
+// =====================================
 
 datumTitel.textContent =
 ausgewaehlterTag +
@@ -880,21 +1022,23 @@ monate[aktuellerMonat] +
 " " +
 aktuellesJahr;
 
-// Aktuelle Uhrzeit einsetzen
+// Uhrzeit
 
 const jetzt =
 new Date();
 
 uhrzeit.value =
-String(jetzt.getHours())
-.padStart(2,"0")
+String(
+    jetzt.getHours()
+).padStart(2,"0")
 +
 ":"
 +
-String(jetzt.getMinutes())
-.padStart(2,"0");
+String(
+    jetzt.getMinutes()
+).padStart(2,"0");
 
-// Alles laden
+// Daten laden
 
 kalenderZeichnen();
 
@@ -904,13 +1048,13 @@ todosAnzeigen();
 
 dashboardAktualisieren();
 
-// ==========================
-// Enter speichert Termin
-// ==========================
+// =====================================
+// Enter = Speichern
+// =====================================
 
 termin.addEventListener(
 "keydown",
-(event)=>{
+event=>{
 
     if(event.key==="Enter"){
 
@@ -918,16 +1062,11 @@ termin.addEventListener(
 
     }
 
-}
-);
-
-// ==========================
-// Enter speichert To-do
-// ==========================
+});
 
 todoText.addEventListener(
 "keydown",
-(event)=>{
+event=>{
 
     if(event.key==="Enter"){
 
@@ -935,13 +1074,11 @@ todoText.addEventListener(
 
     }
 
-}
-);
+});
 
-// ==========================
+// =====================================
 // Dashboard automatisch
-// aktualisieren
-// ==========================
+// =====================================
 
 setInterval(()=>{
 
@@ -949,21 +1086,5 @@ setInterval(()=>{
 
 },30000);
 
-// ==========================
-// Fenster aktualisiert
-// Dashboard
-// ==========================
-
-window.addEventListener(
-"focus",
-()=>{
-
-    dashboardAktualisieren();
-
-}
-);
-
 // =====================================
-// DDH Studio Enterprise 5.0
-// Ende
-// =====================================
+//

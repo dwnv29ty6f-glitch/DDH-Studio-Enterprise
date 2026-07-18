@@ -4,6 +4,8 @@
 
 // Projekte
 
+localStorage.removeItem("termine");
+
 const button = document.getElementById("neu");
 const projekte = document.getElementById("projekte");
 

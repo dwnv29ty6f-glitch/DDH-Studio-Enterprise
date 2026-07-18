@@ -64,13 +64,25 @@ function kalenderZeichnen(){
 
         const feld = document.createElement("div");
 
-        feld.className = "tag";
+feld.className = "tag";
 
-        feld.innerHTML =
-        "<div class='tagNummer'>" + tag + "</div>";
+feld.innerHTML =
+"<div class='tagNummer'>" + tag + "</div>";
 
-        tageContainer.appendChild(feld);
+feld.addEventListener("click", () => {
 
+    document.querySelectorAll(".tag").forEach(t => {
+        t.classList.remove("aktiv");
+    });
+
+    feld.classList.add("aktiv");
+
+    document.getElementById("ausgewaehltesDatum").textContent =
+        tag + ". " + monate[aktuellerMonat] + " " + aktuellesJahr;
+
+});
+
+tageContainer.appendChild(feld);
     }
 
 }

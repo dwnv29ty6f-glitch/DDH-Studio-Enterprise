@@ -1,8 +1,8 @@
 // =====================================
-// DDH Studio Enterprise 6.0
+// DDH Studio Enterprise 7.0
 // app.js
 // Teil 1
-// Variablen & Navigation
+// Variablen & Daten
 // =====================================
 
 // -------------------------
@@ -73,7 +73,7 @@ const terminListe =
 document.getElementById("terminListe");
 
 // -------------------------
-// To-dos
+// Aufgaben
 // -------------------------
 
 const todoProjekt =
@@ -111,6 +111,22 @@ const dashboardTodos =
 document.getElementById("dashboardTodos");
 
 // -------------------------
+// Schichtplan
+// -------------------------
+
+const mitarbeiterName =
+document.getElementById("mitarbeiterName");
+
+const mitarbeiterSpeichern =
+document.getElementById("mitarbeiterSpeichern");
+
+const mitarbeiterListe =
+document.getElementById("mitarbeiterListe");
+
+const schichtplanBody =
+document.getElementById("schichtplanBody");
+
+// -------------------------
 // Datum
 // -------------------------
 
@@ -126,9 +142,9 @@ heute.getFullYear();
 let ausgewaehlterTag =
 heute.getDate();
 
-// -------------------------
-// Daten
-// -------------------------
+// =====================================
+// LocalStorage
+// =====================================
 
 let termine =
 JSON.parse(
@@ -140,9 +156,36 @@ JSON.parse(
 localStorage.getItem("ddhTodos")
 ) || [];
 
-// -------------------------
+let dokumente =
+JSON.parse(
+localStorage.getItem("ddhDokumente")
+) || [];
+
+let kunden =
+JSON.parse(
+localStorage.getItem("ddhKunden")
+) || [];
+
+let projekte =
+JSON.parse(
+localStorage.getItem("ddhProjekte")
+) || [];
+
+// Neu
+
+let mitarbeiter =
+JSON.parse(
+localStorage.getItem("ddhMitarbeiter")
+) || [];
+
+let schichten =
+JSON.parse(
+localStorage.getItem("ddhSchichten")
+) || [];
+
+// =====================================
 // Speichern
-// -------------------------
+// =====================================
 
 function speichern(){
 
@@ -154,6 +197,31 @@ function speichern(){
     localStorage.setItem(
         "ddhTodos",
         JSON.stringify(todos)
+    );
+
+    localStorage.setItem(
+        "ddhDokumente",
+        JSON.stringify(dokumente)
+    );
+
+    localStorage.setItem(
+        "ddhKunden",
+        JSON.stringify(kunden)
+    );
+
+    localStorage.setItem(
+        "ddhProjekte",
+        JSON.stringify(projekte)
+    );
+
+    localStorage.setItem(
+        "ddhMitarbeiter",
+        JSON.stringify(mitarbeiter)
+    );
+
+    localStorage.setItem(
+        "ddhSchichten",
+        JSON.stringify(schichten)
     );
 
 }
@@ -205,7 +273,7 @@ function kalenderZeichnen(){
 
     }
 
-    // Tage erzeugen
+    // Kalendertage
 
     for(let tag=1;tag<=tageImMonat;tag++){
 
@@ -217,25 +285,9 @@ function kalenderZeichnen(){
 
         if(tag===ausgewaehlterTag){
 
-            feld.classList.add("aktiv");
-
-        }
-
-        // Termin vorhanden?
-
-        const hatTermin =
-        termine.some(e=>
-
-            e.jahr===aktuellesJahr &&
-            e.monat===aktuellerMonat &&
-            e.tag===tag
-
-        );
-
-        if(hatTermin){
-
-            feld.style.border =
-            "3px solid #2f80ed";
+            feld.classList.add(
+                "aktiv"
+            );
 
         }
 
@@ -248,7 +300,44 @@ function kalenderZeichnen(){
         nummer.textContent =
         tag;
 
-        feld.appendChild(nummer);
+        feld.appendChild(
+            nummer
+        );
+
+        // Termin vorhanden
+
+        const hatTermin =
+        termine.some(t=>
+
+            t.jahr===aktuellesJahr &&
+            t.monat===aktuellerMonat &&
+            t.tag===tag
+
+        );
+
+        if(hatTermin){
+
+            feld.style.border =
+            "3px solid #2f80ed";
+
+        }
+
+        // Heute markieren
+
+        if(
+
+            tag===heute.getDate() &&
+
+            aktuellerMonat===heute.getMonth() &&
+
+            aktuellesJahr===heute.getFullYear()
+
+        ){
+
+            feld.style.boxShadow =
+            "0 0 0 3px #27ae60";
+
+        }
 
         feld.onclick = ()=>{
 
@@ -270,15 +359,17 @@ function kalenderZeichnen(){
 
         };
 
-        tage.appendChild(feld);
+        tage.appendChild(
+            feld
+        );
 
     }
 
 }
 
-// =======================
+// =====================================
 // Monat zurück
-// =======================
+// =====================================
 
 btnZurueck.onclick = ()=>{
 
@@ -286,13 +377,13 @@ btnZurueck.onclick = ()=>{
 
     if(aktuellerMonat<0){
 
-        aktuellerMonat=11;
+        aktuellerMonat = 11;
 
         aktuellesJahr--;
 
     }
 
-    ausgewaehlterTag=1;
+    ausgewaehlterTag = 1;
 
     kalenderZeichnen();
 
@@ -302,9 +393,9 @@ btnZurueck.onclick = ()=>{
 
 };
 
-// =======================
+// =====================================
 // Monat weiter
-// =======================
+// =====================================
 
 btnWeiter.onclick = ()=>{
 
@@ -312,13 +403,13 @@ btnWeiter.onclick = ()=>{
 
     if(aktuellerMonat>11){
 
-        aktuellerMonat=0;
+        aktuellerMonat = 0;
 
         aktuellesJahr++;
 
     }
 
-    ausgewaehlterTag=1;
+    ausgewaehlterTag = 1;
 
     kalenderZeichnen();
 
@@ -336,15 +427,16 @@ function termineAnzeigen(){
 
     terminListe.innerHTML = "";
 
-    const liste = termine.filter(e =>
+    const liste =
+    termine.filter(e=>
 
-        e.jahr === aktuellesJahr &&
-        e.monat === aktuellerMonat &&
-        e.tag === ausgewaehlterTag
+        e.jahr===aktuellesJahr &&
+        e.monat===aktuellerMonat &&
+        e.tag===ausgewaehlterTag
 
     );
 
-    if(liste.length === 0){
+    if(liste.length===0){
 
         terminListe.innerHTML =
         "<p>Keine Termine vorhanden.</p>";
@@ -353,7 +445,7 @@ function termineAnzeigen(){
 
     }
 
-    liste.forEach((eintrag)=>{
+    liste.forEach((eintrag,index)=>{
 
         const box =
         document.createElement("div");
@@ -399,19 +491,26 @@ function termineAnzeigen(){
 
         }
 
-        const text =
+        const info =
         document.createElement("div");
 
-        text.innerHTML =
+        info.innerHTML =
+
         "<strong>" +
+
         eintrag.uhrzeit +
+
         "</strong><br>" +
+
         "[" +
+
         eintrag.kategorie +
+
         "] " +
+
         eintrag.text;
 
-        box.appendChild(text);
+        box.appendChild(info);
 
         const buttons =
         document.createElement("div");
@@ -419,7 +518,9 @@ function termineAnzeigen(){
         buttons.className =
         "terminButtons";
 
+        // --------------------
         // Bearbeiten
+        // --------------------
 
         const bearbeiten =
         document.createElement("button");
@@ -438,14 +539,7 @@ function termineAnzeigen(){
             kategorie.value =
             eintrag.kategorie;
 
-            const index =
-            termine.indexOf(eintrag);
-
-            if(index > -1){
-
-                termine.splice(index,1);
-
-            }
+            termine.splice(index,1);
 
             speichern();
 
@@ -457,7 +551,9 @@ function termineAnzeigen(){
 
         };
 
+        // --------------------
         // Löschen
+        // --------------------
 
         const loeschen =
         document.createElement("button");
@@ -467,14 +563,7 @@ function termineAnzeigen(){
 
         loeschen.onclick = ()=>{
 
-            const index =
-            termine.indexOf(eintrag);
-
-            if(index > -1){
-
-                termine.splice(index,1);
-
-            }
+            termine.splice(index,1);
 
             speichern();
 
@@ -512,7 +601,9 @@ function termineAnzeigen(){
 
 speichernTermin.onclick = ()=>{
 
-    if(termin.value.trim()===""){
+    if(
+        termin.value.trim()===""
+    ){
 
         return;
 
@@ -520,23 +611,29 @@ speichernTermin.onclick = ()=>{
 
     termine.push({
 
-        jahr:aktuellesJahr,
+        jahr:
+        aktuellesJahr,
 
-        monat:aktuellerMonat,
+        monat:
+        aktuellerMonat,
 
-        tag:ausgewaehlterTag,
+        tag:
+        ausgewaehlterTag,
 
-        uhrzeit:uhrzeit.value,
+        uhrzeit:
+        uhrzeit.value,
 
-        text:termin.value,
+        text:
+        termin.value,
 
-        kategorie:kategorie.value
+        kategorie:
+        kategorie.value
 
     });
 
     speichern();
 
-    termin.value="";
+    termin.value = "";
 
     kalenderZeichnen();
 
@@ -547,7 +644,7 @@ speichernTermin.onclick = ()=>{
 };
 // =====================================
 // Teil 4
-// Aufgaben / To-dos
+// Aufgaben
 // =====================================
 
 function todosAnzeigen(){
@@ -573,7 +670,7 @@ function todosAnzeigen(){
 
     }
 
-    liste.forEach((todo)=>{
+    liste.forEach((todo,index)=>{
 
         const box =
         document.createElement("div");
@@ -590,9 +687,9 @@ function todosAnzeigen(){
 
         }
 
-        // --------------------
-        // Text
-        // --------------------
+        // -------------------------
+        // Aufgabe
+        // -------------------------
 
         const text =
         document.createElement("div");
@@ -605,9 +702,9 @@ function todosAnzeigen(){
 
         box.appendChild(text);
 
-        // --------------------
+        // -------------------------
         // Informationen
-        // --------------------
+        // -------------------------
 
         const info =
         document.createElement("div");
@@ -616,16 +713,20 @@ function todosAnzeigen(){
         "todoInfo";
 
         info.textContent =
+
         "📁 " +
+
         todo.projekt +
+
         " • " +
+
         todo.prioritaet;
 
         box.appendChild(info);
 
-        // --------------------
+        // -------------------------
         // Buttons
-        // --------------------
+        // -------------------------
 
         const buttons =
         document.createElement("div");
@@ -673,17 +774,10 @@ function todosAnzeigen(){
             todoProjekt.value =
             todo.projekt;
 
-            const index =
-            todos.indexOf(todo);
-
-            if(index>-1){
-
-                todos.splice(
-                    index,
-                    1
-                );
-
-            }
+            todos.splice(
+                index,
+                1
+            );
 
             speichern();
 
@@ -703,17 +797,10 @@ function todosAnzeigen(){
 
         loeschen.onclick = ()=>{
 
-            const index =
-            todos.indexOf(todo);
-
-            if(index>-1){
-
-                todos.splice(
-                    index,
-                    1
-                );
-
-            }
+            todos.splice(
+                index,
+                1
+            );
 
             speichern();
 
@@ -753,7 +840,9 @@ function todosAnzeigen(){
 
 todoSpeichern.onclick = ()=>{
 
-    if(todoText.value.trim()===""){
+    if(
+        todoText.value.trim()===""
+    ){
 
         return;
 
@@ -797,170 +886,720 @@ todoProjekt.onchange = ()=>{
 };
 // =====================================
 // Teil 5
-// Dashboard
+// Mitarbeiterverwaltung
 // =====================================
 
-function dashboardAktualisieren(){
+function mitarbeiterAnzeigen(){
 
-    // -------------------------
-    // Termine
-    // -------------------------
+    mitarbeiterListe.innerHTML = "";
 
-    const termineHeute =
-    termine.filter(t=>
+    if(mitarbeiter.length===0){
 
-        t.jahr===aktuellesJahr &&
-        t.monat===aktuellerMonat &&
-        t.tag===ausgewaehlterTag
+        mitarbeiterListe.innerHTML =
+        "<p>Keine Mitarbeiter vorhanden.</p>";
 
-    );
-
-    heuteTermine.textContent =
-    termineHeute.length;
-
-    // -------------------------
-    // Offene Aufgaben
-    // -------------------------
-
-    const offene =
-    todos.filter(todo=>
-
-        !todo.erledigt
-
-    );
-
-    offeneTodos.textContent =
-    offene.length;
-
-    // -------------------------
-    // Hohe Priorität
-    // -------------------------
-
-    const hohe =
-    todos.filter(todo=>
-
-        todo.prioritaet==="hoch" &&
-        !todo.erledigt
-
-    );
-
-    hohePrioritaet.textContent =
-    hohe.length;
-
-    // -------------------------
-    // Erledigt
-    // -------------------------
-
-    const erledigt =
-    todos.filter(todo=>
-
-        todo.erledigt
-
-    );
-
-    erledigteTodos.textContent =
-    erledigt.length;
-
-    // -------------------------
-    // Dashboard Aufgaben
-    // -------------------------
-
-    dashboardTodos.innerHTML = "";
-
-    const projekt =
-    todoProjekt.value;
-
-    const liste =
-    todos.filter(todo=>
-
-        todo.projekt===projekt &&
-        !todo.erledigt
-
-    );
-
-    if(liste.length===0){
-
-        dashboardTodos.innerHTML =
-        "<div class='dashboardTodo'>Keine offenen Aufgaben</div>";
+        schichtplanZeichnen();
 
         return;
 
     }
 
-    liste
-    .slice(0,5)
-    .forEach(todo=>{
+    mitarbeiter.forEach((person,index)=>{
 
         const box =
         document.createElement("div");
 
         box.className =
-        "dashboardTodo";
+        "mitarbeiter";
 
-        let icon = "🟢";
+        const name =
+        document.createElement("strong");
 
-        if(todo.prioritaet==="mittel"){
+        name.textContent =
+        person.name;
 
-            icon="🟠";
+        box.appendChild(name);
 
-        }
+        const buttons =
+        document.createElement("div");
 
-        if(todo.prioritaet==="hoch"){
+        buttons.style.marginTop =
+        "12px";
 
-            icon="🔴";
+        buttons.style.display =
+        "flex";
 
-        }
+        buttons.style.gap =
+        "10px";
 
-        box.innerHTML =
-        "<span>" +
-        icon +
-        " " +
-        todo.text +
-        "</span>";
+        // --------------------
+        // Bearbeiten
+        // --------------------
 
-        dashboardTodos.appendChild(
+        const bearbeiten =
+        document.createElement("button");
+
+        bearbeiten.textContent =
+        "✏️";
+
+        bearbeiten.onclick = ()=>{
+
+            mitarbeiterName.value =
+            person.name;
+
+            mitarbeiter.splice(
+                index,
+                1
+            );
+
+            speichern();
+
+            mitarbeiterAnzeigen();
+
+        };
+
+        // --------------------
+        // Löschen
+        // --------------------
+
+        const loeschen =
+        document.createElement("button");
+
+        loeschen.textContent =
+        "🗑️";
+
+        loeschen.onclick = ()=>{
+
+            mitarbeiter.splice(
+                index,
+                1
+            );
+
+            speichern();
+
+            mitarbeiterAnzeigen();
+
+        };
+
+        buttons.appendChild(
+            bearbeiten
+        );
+
+        buttons.appendChild(
+            loeschen
+        );
+
+        box.appendChild(
+            buttons
+        );
+
+        mitarbeiterListe.appendChild(
             box
         );
 
     });
 
+    schichtplanZeichnen();
+
 }
 
 // =====================================
-// Dokumente
+// Mitarbeiter speichern
 // =====================================
 
-let dokumente =
-JSON.parse(
-localStorage.getItem(
-"ddhDokumente"
-)
-) || [];
+mitarbeiterSpeichern.onclick = ()=>{
 
-// =====================================
-// Kunden
-// =====================================
+    if(
+        mitarbeiterName.value.trim()===""
+    ){
 
-let kunden =
-JSON.parse(
-localStorage.getItem(
-"ddhKunden"
-)
-) || [];
+        return;
 
-// =====================================
-// Projekte
-// =====================================
+    }
 
-let projekte =
-JSON.parse(
-localStorage.getItem(
-"ddhProjekte"
-)
-) || [];
+    mitarbeiter.push({
+
+        name:
+        mitarbeiterName.value
+
+    });
+
+    speichern();
+
+    mitarbeiterName.value =
+    "";
+
+    mitarbeiterAnzeigen();
+
+};
 // =====================================
 // Teil 6
-// Navigation + Start
+// Schichtplan
+// =====================================
+
+function schichtplanZeichnen(){
+
+    schichtplanBody.innerHTML = "";
+
+    if(mitarbeiter.length===0){
+
+        schichtplanBody.innerHTML =
+
+        "<tr><td colspan='32'>Keine Mitarbeiter vorhanden.</td></tr>";
+
+        return;
+
+    }
+
+    const tageImMonat =
+    new Date(
+
+        aktuellesJahr,
+
+        aktuellerMonat + 1,
+
+        0
+
+    ).getDate();
+
+    mitarbeiter.forEach(person=>{
+
+        const zeile =
+        document.createElement("tr");
+
+        // -----------------------
+        // Mitarbeiter
+        // -----------------------
+
+        const name =
+        document.createElement("td");
+
+        name.textContent =
+        person.name;
+
+        zeile.appendChild(name);
+
+        // -----------------------
+        // Tage
+        // -----------------------
+
+        for(
+
+            let tag=1;
+
+            tag<=tageImMonat;
+
+            tag++
+
+        ){
+
+            const feld =
+            document.createElement("td");
+
+            const eintrag =
+            schichten.find(s=>
+
+                s.name===person.name &&
+
+                s.tag===tag &&
+
+                s.monat===aktuellerMonat &&
+
+                s.jahr===aktuellesJahr
+
+            );
+
+            if(eintrag){
+
+                const box =
+                document.createElement("div");
+
+                box.className =
+                "schicht " +
+                eintrag.typ;
+
+                box.textContent =
+                eintrag.typ.charAt(0)
+                .toUpperCase();
+
+                feld.appendChild(box);
+
+            }
+
+            feld.onclick = ()=>{
+
+                schichtBearbeiten(
+
+                    person.name,
+
+                    tag
+
+                );
+
+            };
+
+            zeile.appendChild(feld);
+
+        }
+
+        schichtplanBody.appendChild(
+            zeile
+        );
+
+    });
+
+}
+// =====================================
+// Teil 7
+// Schicht bearbeiten
+// =====================================
+
+function schichtBearbeiten(name,tag){
+
+    const auswahl = prompt(
+
+`Schicht auswählen
+
+F = Früh
+S = Spät
+N = Nacht
+R = Frei
+U = Urlaub
+K = Krank`
+
+    );
+
+    if(auswahl===null){
+
+        return;
+
+    }
+
+    let typ = "";
+
+    switch(auswahl.toUpperCase()){
+
+        case "F":
+            typ = "frueh";
+            break;
+
+        case "S":
+            typ = "spaet";
+            break;
+
+        case "N":
+            typ = "nacht";
+            break;
+
+        case "R":
+            typ = "frei";
+            break;
+
+        case "U":
+            typ = "urlaub";
+            break;
+
+        case "K":
+            typ = "krank";
+            break;
+
+        default:
+            return;
+
+    }
+
+    const vorhanden =
+    schichten.find(s=>
+
+        s.name===name &&
+
+        s.tag===tag &&
+
+        s.monat===aktuellerMonat &&
+
+        s.jahr===aktuellesJahr
+
+    );
+
+    if(vorhanden){
+
+        vorhanden.typ = typ;
+
+    }else{
+
+        schichten.push({
+
+            name:name,
+
+            tag:tag,
+
+            monat:aktuellerMonat,
+
+            jahr:aktuellesJahr,
+
+            typ:typ
+
+        });
+
+    }
+
+    speichern();
+
+    schichtplanZeichnen();
+
+}
+// =====================================
+// Teil 8
+// Schicht speichern
+// =====================================
+
+function schichtBearbeiten(name,tag){
+
+    let typ = prompt(
+
+`Schicht
+
+F = Früh
+S = Spät
+N = Nacht
+R = Frei
+U = Urlaub
+K = Krank`
+
+    );
+
+    if(typ===null){
+
+        return;
+
+    }
+
+    typ = typ.toUpperCase();
+
+    let schichtTyp = "";
+    let beginn = "";
+    let ende = "";
+
+    switch(typ){
+
+        case "F":
+
+            schichtTyp = "frueh";
+
+            beginn = "06:00";
+
+            ende = "14:00";
+
+            break;
+
+        case "S":
+
+            schichtTyp = "spaet";
+
+            beginn = "14:00";
+
+            ende = "22:00";
+
+            break;
+
+        case "N":
+
+            schichtTyp = "nacht";
+
+            beginn = "22:00";
+
+            ende = "06:00";
+
+            break;
+
+        case "R":
+
+            schichtTyp = "frei";
+
+            break;
+
+        case "U":
+
+            schichtTyp = "urlaub";
+
+            break;
+
+        case "K":
+
+            schichtTyp = "krank";
+
+            break;
+
+        default:
+
+            return;
+
+    }
+
+    const bereich = prompt(
+
+        "Bereich",
+
+        "Produktion"
+
+    ) || "";
+
+    const notiz = prompt(
+
+        "Notiz",
+
+        ""
+
+    ) || "";
+
+    const vorhanden =
+    schichten.find(s=>
+
+        s.name===name &&
+
+        s.tag===tag &&
+
+        s.monat===aktuellerMonat &&
+
+        s.jahr===aktuellesJahr
+
+    );
+
+    if(vorhanden){
+
+        vorhanden.typ = schichtTyp;
+
+        vorhanden.beginn = beginn;
+
+        vorhanden.ende = ende;
+
+        vorhanden.bereich = bereich;
+
+        vorhanden.notiz = notiz;
+
+    }else{
+
+        schichten.push({
+
+            name:name,
+
+            tag:tag,
+
+            monat:aktuellerMonat,
+
+            jahr:aktuellesJahr,
+
+            typ:schichtTyp,
+
+            beginn:beginn,
+
+            ende:ende,
+
+            bereich:bereich,
+
+            notiz:notiz
+
+        });
+
+    }
+
+    speichern();
+
+    schichtplanZeichnen();
+
+}
+
+// =====================================
+// Schicht löschen
+// =====================================
+
+function schichtLoeschen(name,tag){
+
+    const index =
+    schichten.findIndex(s=>
+
+        s.name===name &&
+
+        s.tag===tag &&
+
+        s.monat===aktuellerMonat &&
+
+        s.jahr===aktuellesJahr
+
+    );
+
+    if(index>-1){
+
+        schichten.splice(index,1);
+
+        speichern();
+
+        schichtplanZeichnen();
+
+    }
+
+}
+// =====================================
+// Teil 9
+// Schichtplan Anzeige
+// =====================================
+
+function schichtplanAktualisieren(){
+
+    schichtplanBody.innerHTML = "";
+
+    if(mitarbeiter.length===0){
+
+        schichtplanBody.innerHTML =
+        "<tr><td colspan='32'>Keine Mitarbeiter vorhanden.</td></tr>";
+
+        return;
+
+    }
+
+    const tageImMonat =
+    new Date(
+        aktuellesJahr,
+        aktuellerMonat+1,
+        0
+    ).getDate();
+
+    mitarbeiter.forEach(person=>{
+
+        const zeile =
+        document.createElement("tr");
+
+        const name =
+        document.createElement("td");
+
+        name.textContent =
+        person.name;
+
+        zeile.appendChild(name);
+
+        for(let tag=1;tag<=tageImMonat;tag++){
+
+            const feld =
+            document.createElement("td");
+
+            const schicht =
+            schichten.find(s=>
+
+                s.name===person.name &&
+
+                s.tag===tag &&
+
+                s.monat===aktuellerMonat &&
+
+                s.jahr===aktuellesJahr
+
+            );
+
+            if(schicht){
+
+                const box =
+                document.createElement("div");
+
+                box.className =
+                "schicht " +
+                schicht.typ;
+
+                switch(schicht.typ){
+
+                    case "frueh":
+                        box.textContent="F";
+                        break;
+
+                    case "spaet":
+                        box.textContent="S";
+                        break;
+
+                    case "nacht":
+                        box.textContent="N";
+                        break;
+
+                    case "frei":
+                        box.textContent="-";
+                        break;
+
+                    case "urlaub":
+                        box.textContent="U";
+                        break;
+
+                    case "krank":
+                        box.textContent="K";
+                        break;
+
+                }
+
+                box.title =
+
+                person.name +
+
+                "\nTag: " + tag +
+
+                "\nSchicht: " +
+
+                schicht.typ +
+
+                "\nBeginn: " +
+
+                (schicht.beginn || "-") +
+
+                "\nEnde: " +
+
+                (schicht.ende || "-") +
+
+                "\nBereich: " +
+
+                (schicht.bereich || "-") +
+
+                "\nNotiz: " +
+
+                (schicht.notiz || "-");
+
+                feld.appendChild(box);
+
+            }
+
+            feld.onclick = ()=>{
+
+                schichtBearbeiten(
+                    person.name,
+                    tag
+                );
+
+            };
+
+            feld.ondblclick = ()=>{
+
+                if(confirm(
+                    "Schicht löschen?"
+                )){
+
+                    schichtLoeschen(
+                        person.name,
+                        tag
+                    );
+
+                }
+
+            };
+
+            zeile.appendChild(feld);
+
+        }
+
+        schichtplanBody.appendChild(
+            zeile
+        );
+
+    });
+
+}
+// =====================================
+// Teil 10
+// Start & Initialisierung
 // =====================================
 
 // -------------------------
@@ -994,14 +1633,14 @@ navButtons.forEach(button=>{
         const name =
         button.dataset.seite;
 
-        const ziel =
+        const seite =
         document.getElementById(
             "seite-" + name
         );
 
-        if(ziel){
+        if(seite){
 
-            ziel.classList.add(
+            seite.classList.add(
                 "aktiv"
             );
 
@@ -1011,34 +1650,48 @@ navButtons.forEach(button=>{
 
 });
 
-// =====================================
-// Start
-// =====================================
+// -------------------------
+// Startdatum
+// -------------------------
 
 datumTitel.textContent =
+
 ausgewaehlterTag +
+
 ". " +
+
 monate[aktuellerMonat] +
+
 " " +
+
 aktuellesJahr;
 
-// Uhrzeit
+// -------------------------
+// Aktuelle Uhrzeit
+// -------------------------
 
 const jetzt =
 new Date();
 
 uhrzeit.value =
+
 String(
     jetzt.getHours()
 ).padStart(2,"0")
+
 +
+
 ":"
+
 +
+
 String(
     jetzt.getMinutes()
 ).padStart(2,"0");
 
-// Daten laden
+// -------------------------
+// Alles laden
+// -------------------------
 
 kalenderZeichnen();
 
@@ -1048,9 +1701,13 @@ todosAnzeigen();
 
 dashboardAktualisieren();
 
-// =====================================
-// Enter = Speichern
-// =====================================
+mitarbeiterAnzeigen();
+
+schichtplanZeichnen();
+
+// -------------------------
+// Enter = Termin
+// -------------------------
 
 termin.addEventListener(
 "keydown",
@@ -1064,6 +1721,10 @@ event=>{
 
 });
 
+// -------------------------
+// Enter = Aufgabe
+// -------------------------
+
 todoText.addEventListener(
 "keydown",
 event=>{
@@ -1076,9 +1737,25 @@ event=>{
 
 });
 
-// =====================================
-// Dashboard automatisch
-// =====================================
+// -------------------------
+// Enter = Mitarbeiter
+// -------------------------
+
+mitarbeiterName.addEventListener(
+"keydown",
+event=>{
+
+    if(event.key==="Enter"){
+
+        mitarbeiterSpeichern.click();
+
+    }
+
+});
+
+// -------------------------
+// Dashboard aktualisieren
+// -------------------------
 
 setInterval(()=>{
 
@@ -1086,5 +1763,29 @@ setInterval(()=>{
 
 },30000);
 
+// -------------------------
+// Fenster aktiv
+// -------------------------
+
+window.addEventListener(
+"focus",
+()=>{
+
+    dashboardAktualisieren();
+
+    kalenderZeichnen();
+
+    termineAnzeigen();
+
+    todosAnzeigen();
+
+    mitarbeiterAnzeigen();
+
+    schichtplanZeichnen();
+
+});
+
 // =====================================
-//
+// DDH Studio Enterprise 7.0
+// Ende
+// =====================================

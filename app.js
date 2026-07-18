@@ -76,31 +76,3 @@ function kalenderZeichnen(){
 }
 
 kalenderZeichnen();
-const vorher = document.getElementById("vorher");
-const naechster = document.getElementById("naechster");
-
-vorher.addEventListener("click", () => {
-
-    aktuellerMonat--;
-
-    if (aktuellerMonat < 0) {
-        aktuellerMonat = 11;
-        aktuellesJahr--;
-    }
-
-    kalenderZeichnen();
-
-});
-
-naechster.addEventListener("click", () => {
-
-    aktuellerMonat++;
-
-    if (aktuellerMonat > 11) {
-        aktuellerMonat = 0;
-        aktuellesJahr++;
-    }
-
-    kalenderZeichnen();
-
-});

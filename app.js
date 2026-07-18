@@ -1,7 +1,6 @@
 // =====================================
-// DDH Studio Enterprise 4.0
-// Block 1
-// Variablen & Daten
+// DDH Studio Enterprise 4.1
+// Teil 1
 // =====================================
 
 // Monate
@@ -37,6 +36,7 @@ const datumTitel =
 document.getElementById("ausgewaehltesDatum");
 
 // Termine
+
 const uhrzeit =
 document.getElementById("uhrzeit");
 
@@ -52,7 +52,13 @@ document.getElementById("speichernTermin");
 const terminListe =
 document.getElementById("terminListe");
 
-// To-dos
+// ======================
+// To-do
+// ======================
+
+const todoProjekt =
+document.getElementById("todoProjekt");
+
 const todoText =
 document.getElementById("todoText");
 
@@ -65,9 +71,12 @@ document.getElementById("todoSpeichern");
 const todoListe =
 document.getElementById("todoListe");
 
+// ======================
 // Datum
+// ======================
 
-const heute = new Date();
+const heute =
+new Date();
 
 let aktuellerMonat =
 heute.getMonth();
@@ -78,7 +87,9 @@ heute.getFullYear();
 let ausgewaehlterTag =
 heute.getDate();
 
+// ======================
 // Daten
+// ======================
 
 let termine =
 JSON.parse(
@@ -89,85 +100,85 @@ let todos =
 JSON.parse(
 localStorage.getItem("ddhTodos")
 ) || [];
+
 // =====================================
-// Block 2
-// Kalender zeichnen
+// Kalender
 // =====================================
 
-function kalenderZeichnen() {
+function kalenderZeichnen(){
 
-    tage.innerHTML = "";
+    tage.innerHTML="";
 
-    monatTitel.textContent =
-        monate[aktuellerMonat] +
-        " " +
-        aktuellesJahr;
+    monatTitel.textContent=
+    monate[aktuellerMonat] +
+    " " +
+    aktuellesJahr;
 
-    let ersterTag =
-        new Date(
-            aktuellesJahr,
-            aktuellerMonat,
-            1
-        ).getDay();
+    let ersterTag=
+    new Date(
+        aktuellesJahr,
+        aktuellerMonat,
+        1
+    ).getDay();
 
-    if (ersterTag === 0) {
-        ersterTag = 7;
+    if(ersterTag===0){
+
+        ersterTag=7;
+
     }
 
-    const tageImMonat =
-        new Date(
-            aktuellesJahr,
-            aktuellerMonat + 1,
-            0
-        ).getDate();
+    const tageImMonat=
+    new Date(
+        aktuellesJahr,
+        aktuellerMonat+1,
+        0
+    ).getDate();
 
-    // Leere Felder
-    for (let i = 1; i < ersterTag; i++) {
+    for(let i=1;i<ersterTag;i++){
 
-        const leer =
-            document.createElement("div");
+        const leer=
+        document.createElement("div");
 
-        leer.className = "tag leer";
+        leer.className="tag leer";
 
         tage.appendChild(leer);
 
     }
 
-    // Tage erzeugen
-    for (let tag = 1; tag <= tageImMonat; tag++) {
+    for(let tag=1;tag<=tageImMonat;tag++){
 
-        const feld =
-            document.createElement("div");
+        const feld=
+        document.createElement("div");
 
-        feld.className = "tag";
+        feld.className="tag";
 
-        if (tag === ausgewaehlterTag) {
+        if(tag===ausgewaehlterTag){
 
             feld.classList.add("aktiv");
 
         }
 
-        const nummer =
-            document.createElement("div");
+        const nummer=
+        document.createElement("div");
 
-        nummer.className = "tagNummer";
+        nummer.className="tagNummer";
 
-        nummer.textContent = tag;
+        nummer.textContent=tag;
 
         feld.appendChild(nummer);
 
-        feld.onclick = () => {
+        feld.onclick=()=>{
 
-            ausgewaehlterTag = tag;
+            ausgewaehlterTag=tag;
 
             kalenderZeichnen();
 
-            datumTitel.textContent =
-                tag +
-                ". " +
-                monate[aktuellerMonat] +
-                " " +
-                aktuellesJahr;
+            datumTitel.textContent=
+            tag +
+            ". " +
+            monate[aktuellerMonat] +
+            " " +
+            aktuellesJahr;
 
             termineAnzeigen();
 
@@ -181,18 +192,19 @@ function kalenderZeichnen() {
 
 // Monat zurück
 
-btnZurueck.onclick = () => {
+btnZurueck.onclick=()=>{
 
     aktuellerMonat--;
 
-    if (aktuellerMonat < 0) {
+    if(aktuellerMonat<0){
 
-        aktuellerMonat = 11;
+        aktuellerMonat=11;
+
         aktuellesJahr--;
 
     }
 
-    ausgewaehlterTag = 1;
+    ausgewaehlterTag=1;
 
     kalenderZeichnen();
 
@@ -200,20 +212,21 @@ btnZurueck.onclick = () => {
 
 };
 
-// Monat vor
+// Monat weiter
 
-btnWeiter.onclick = () => {
+btnWeiter.onclick=()=>{
 
     aktuellerMonat++;
 
-    if (aktuellerMonat > 11) {
+    if(aktuellerMonat>11){
 
-        aktuellerMonat = 0;
+        aktuellerMonat=0;
+
         aktuellesJahr++;
 
     }
 
-    ausgewaehlterTag = 1;
+    ausgewaehlterTag=1;
 
     kalenderZeichnen();
 
@@ -221,70 +234,40 @@ btnWeiter.onclick = () => {
 
 };
 // =====================================
-// Block 3
-// Termine
+// DDH Studio Enterprise 4.1
+// Teil 2
+// Termine + Projekte + To-dos
 // =====================================
 
-function termineAnzeigen() {
+// --------------------
+// Termine
+// --------------------
 
-    terminListe.innerHTML = "";
+function termineAnzeigen(){
 
-    const liste = termine.filter(e =>
+    terminListe.innerHTML="";
 
-        e.jahr === aktuellesJahr &&
-        e.monat === aktuellerMonat &&
-        e.tag === ausgewaehlterTag
+    const liste=termine.filter(e=>
+
+        e.jahr===aktuellesJahr &&
+        e.monat===aktuellerMonat &&
+        e.tag===ausgewaehlterTag
 
     );
 
-    liste.forEach((eintrag) => {
+    liste.forEach(e=>{
 
-        const box =
-            document.createElement("div");
+        const box=document.createElement("div");
 
-        box.className = "termin";
+        box.className="termin";
 
-        switch (eintrag.kategorie) {
+        const info=document.createElement("div");
 
-            case "Arbeit":
-                box.style.borderLeft =
-                    "6px solid #ff922b";
-                break;
+        info.innerHTML=
+        "<strong>"+e.uhrzeit+"</strong><br>"+
+        "["+e.kategorie+"] "+e.text;
 
-            case "Privat":
-                box.style.borderLeft =
-                    "6px solid #4dabf7";
-                break;
-
-            case "Schule":
-                box.style.borderLeft =
-                    "6px solid #51cf66";
-                break;
-
-            case "Familie":
-                box.style.borderLeft =
-                    "6px solid #845ef7";
-                break;
-
-            default:
-                box.style.borderLeft =
-                    "6px solid #868e96";
-
-        }
-
-        const text =
-            document.createElement("div");
-
-        text.innerHTML =
-            "<b>" +
-            eintrag.uhrzeit +
-            "</b><br>" +
-            "[" +
-            eintrag.kategorie +
-            "] " +
-            eintrag.text;
-
-        box.appendChild(text);
+        box.appendChild(info);
 
         terminListe.appendChild(box);
 
@@ -292,59 +275,59 @@ function termineAnzeigen() {
 
 }
 
-speichernTermin.onclick = () => {
+speichernTermin.onclick=()=>{
 
-    if (termin.value.trim() === "") {
-
-        return;
-
-    }
+    if(termin.value.trim()==="") return;
 
     termine.push({
 
-        jahr: aktuellesJahr,
-        monat: aktuellerMonat,
-        tag: ausgewaehlterTag,
+        jahr:aktuellesJahr,
+        monat:aktuellerMonat,
+        tag:ausgewaehlterTag,
 
-        uhrzeit: uhrzeit.value,
+        uhrzeit:uhrzeit.value,
 
-        text: termin.value,
+        text:termin.value,
 
-        kategorie: kategorie.value
+        kategorie:kategorie.value
 
     });
 
     localStorage.setItem(
-
         "ddhTermine",
-
         JSON.stringify(termine)
-
     );
 
-    termin.value = "";
+    termin.value="";
 
     termineAnzeigen();
 
-    kalenderZeichnen();
-
 };
-// =====================================
-// Block 4
-// To-do-Liste + Start
-// =====================================
+
+// --------------------
+// To-dos
+// --------------------
 
 function todosAnzeigen(){
 
-    todoListe.innerHTML = "";
+    todoListe.innerHTML="";
 
-    todos.forEach((todo,index)=>{
+    const projekt=
+    todoProjekt.value;
 
-        const box =
+    const liste=todos.filter(todo=>
+
+        todo.projekt===projekt
+
+    );
+
+    liste.forEach((todo,index)=>{
+
+        const box=
         document.createElement("div");
 
-        box.className =
-        "todo " + todo.prioritaet;
+        box.className=
+        "todo "+todo.prioritaet;
 
         if(todo.erledigt){
 
@@ -352,46 +335,42 @@ function todosAnzeigen(){
 
         }
 
-        const text =
+        const text=
         document.createElement("div");
 
-        text.className =
-        "todoText";
+        text.className="todoText";
 
-        text.textContent =
-        todo.text;
+        text.textContent=todo.text;
 
         box.appendChild(text);
 
-        const info =
+        const info=
         document.createElement("div");
 
-        info.className =
-        "todoInfo";
+        info.className="todoInfo";
 
-        info.textContent =
-        "Priorität: " +
+        info.textContent=
+        "📁 "+
+        todo.projekt+
+        " • "+
         todo.prioritaet;
 
         box.appendChild(info);
 
-        const buttons =
+        const buttons=
         document.createElement("div");
 
-        buttons.className =
+        buttons.className=
         "todoButtons";
 
-        // Erledigt
-
-        const fertig =
+        const fertig=
         document.createElement("button");
 
-        fertig.textContent = "✔";
+        fertig.textContent="✔";
 
-        fertig.onclick = ()=>{
+        fertig.onclick=()=>{
 
-            todo.erledigt =
-            !todo.erledigt;
+            todo.erledigt=!todo.erledigt;
 
             localStorage.setItem(
                 "ddhTodos",
@@ -402,22 +381,26 @@ function todosAnzeigen(){
 
         };
 
-        // Bearbeiten
-
-        const bearbeiten =
+        const bearbeiten=
         document.createElement("button");
 
-        bearbeiten.textContent = "✏️";
+        bearbeiten.textContent="✏️";
 
-        bearbeiten.onclick = ()=>{
+        bearbeiten.onclick=()=>{
 
-            todoText.value =
+            todoText.value=
             todo.text;
 
-            todoPrioritaet.value =
+            todoPrioritaet.value=
             todo.prioritaet;
 
-            todos.splice(index,1);
+            todoProjekt.value=
+            todo.projekt;
+
+            todos.splice(
+                todos.indexOf(todo),
+                1
+            );
 
             localStorage.setItem(
                 "ddhTodos",
@@ -428,16 +411,17 @@ function todosAnzeigen(){
 
         };
 
-        // Löschen
-
-        const loeschen =
+        const loeschen=
         document.createElement("button");
 
-        loeschen.textContent = "🗑️";
+        loeschen.textContent="🗑️";
 
-        loeschen.onclick = ()=>{
+        loeschen.onclick=()=>{
 
-            todos.splice(index,1);
+            todos.splice(
+                todos.indexOf(todo),
+                1
+            );
 
             localStorage.setItem(
                 "ddhTodos",
@@ -460,15 +444,13 @@ function todosAnzeigen(){
 
 }
 
-todoSpeichern.onclick = ()=>{
+todoSpeichern.onclick=()=>{
 
-    if(todoText.value.trim()===""){
-
-        return;
-
-    }
+    if(todoText.value.trim()==="") return;
 
     todos.push({
+
+        projekt:todoProjekt.value,
 
         text:todoText.value,
 
@@ -479,11 +461,8 @@ todoSpeichern.onclick = ()=>{
     });
 
     localStorage.setItem(
-
         "ddhTodos",
-
         JSON.stringify(todos)
-
     );
 
     todoText.value="";
@@ -492,13 +471,21 @@ todoSpeichern.onclick = ()=>{
 
 };
 
-// Start
+todoProjekt.onchange=()=>{
 
-datumTitel.textContent =
-ausgewaehlterTag +
-". " +
-monate[aktuellerMonat] +
-" " +
+    todosAnzeigen();
+
+};
+
+// --------------------
+// Start
+// --------------------
+
+datumTitel.textContent=
+ausgewaehlterTag+
+". "+
+monate[aktuellerMonat]+
+" "+
 aktuellesJahr;
 
 kalenderZeichnen();
@@ -507,11 +494,9 @@ termineAnzeigen();
 
 todosAnzeigen();
 
-const jetzt = new Date();
+const jetzt=new Date();
 
-uhrzeit.value =
-String(jetzt.getHours()).padStart(2,"0")
-+
-":"
-+
+uhrzeit.value=
+String(jetzt.getHours()).padStart(2,"0")+
+":"+
 String(jetzt.getMinutes()).padStart(2,"0");

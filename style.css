@@ -1,5 +1,5 @@
 /* =========================================
-   DDH Studio Enterprise 4.0
+   DDH Studio Enterprise 5.0
 ========================================= */
 
 *{
@@ -11,11 +11,11 @@
 body{
 
     font-family:-apple-system,BlinkMacSystemFont,
-    "Segoe UI",sans-serif;
+    "Segoe UI",Arial,sans-serif;
 
     background:#202124;
 
-    color:white;
+    color:#ffffff;
 
 }
 
@@ -25,9 +25,9 @@ body{
 
 }
 
-/* ===========================
+/* =========================================
    Kopf
-=========================== */
+========================================= */
 
 header{
 
@@ -44,6 +44,12 @@ header{
     background:#2b2d31;
 
     border-bottom:1px solid #444;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
 
 }
 
@@ -75,11 +81,135 @@ header button{
 
     cursor:pointer;
 
+    transition:.2s;
+
 }
 
-/* ===========================
+header button:hover{
+
+    background:#1669d8;
+
+}
+
+/* =========================================
+   Dashboard
+========================================= */
+
+#dashboard{
+
+    margin:25px;
+
+    margin-bottom:0;
+
+    background:#2b2d31;
+
+    border-radius:20px;
+
+    padding:25px;
+
+}
+
+#dashboard h2{
+
+    font-size:28px;
+
+    margin-bottom:20px;
+
+}
+
+.dashboardGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:18px;
+
+}
+
+.dashboardKarte{
+
+    background:#3b3d42;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    text-align:center;
+
+    border:1px solid #444;
+
+    transition:.2s;
+
+}
+
+.dashboardKarte:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.dashboardKarte h3{
+
+    font-size:16px;
+
+    color:#cfcfcf;
+
+    margin-bottom:12px;
+
+}
+
+.dashboardKarte p{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#2f80ed;
+
+}
+
+.dashboardBereich{
+
+    margin-top:25px;
+
+    background:#3b3d42;
+
+    border-radius:18px;
+
+    padding:20px;
+
+}
+
+.dashboardBereich h3{
+
+    margin-bottom:15px;
+
+}
+
+#dashboardTodos{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.dashboardTodo{
+
+    background:#2b2d31;
+
+    border-radius:12px;
+
+    padding:14px;
+
+}
+
+/* =========================================
    Layout
-=========================== */
+========================================= */
 
 main{
 
@@ -93,9 +223,9 @@ main{
 
 }
 
-/* ===========================
+/* =========================================
    Kalender
-=========================== */
+========================================= */
 
 #kalender{
 
@@ -117,6 +247,8 @@ main{
 
     font-weight:bold;
 
+    font-size:18px;
+
     margin-bottom:20px;
 
 }
@@ -135,9 +267,9 @@ main{
 
     background:#3b3d42;
 
-    border-radius:14px;
+    border-radius:15px;
 
-    min-height:110px;
+    min-height:115px;
 
     padding:12px;
 
@@ -166,9 +298,9 @@ main{
     font-weight:bold;
 
 }
-/* ===========================
-   Rechte Seite
-=========================== */
+/* =========================================
+   Rechte Seitenleiste
+========================================= */
 
 aside{
 
@@ -182,9 +314,9 @@ aside{
 
 aside h2{
 
-    margin-bottom:15px;
-
     margin-top:20px;
+
+    margin-bottom:15px;
 
 }
 
@@ -205,13 +337,22 @@ select{
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
     background:#3b3d42;
 
-    color:white;
+    color:#ffffff;
 
     font-size:16px;
+
+    outline:none;
+
+}
+
+input:focus,
+select:focus{
+
+    border:2px solid #2f80ed;
 
 }
 
@@ -223,7 +364,7 @@ button{
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
     background:#2f80ed;
 
@@ -251,9 +392,9 @@ hr{
 
 }
 
-/* ===========================
+/* =========================================
    Termine
-=========================== */
+========================================= */
 
 #terminListe{
 
@@ -265,33 +406,19 @@ hr{
 
     background:#3b3d42;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    padding:12px;
+    padding:14px;
 
-    margin-bottom:12px;
+    margin-bottom:14px;
 
-}
-
-.terminButtons{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:12px;
+    border-left:6px solid #2f80ed;
 
 }
 
-.terminButtons button{
-
-    flex:1;
-
-}
-
-/* ===========================
-   To-dos
-=========================== */
+/* =========================================
+   To-do-Liste
+========================================= */
 
 #todoListe{
 
@@ -303,11 +430,29 @@ hr{
 
     background:#3b3d42;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    padding:12px;
+    padding:14px;
 
-    margin-bottom:12px;
+    margin-bottom:14px;
+
+}
+
+.todoText{
+
+    font-size:17px;
+
+    font-weight:bold;
+
+}
+
+.todoInfo{
+
+    margin-top:8px;
+
+    color:#cfcfcf;
+
+    font-size:14px;
 
 }
 
@@ -317,7 +462,7 @@ hr{
 
     gap:10px;
 
-    margin-top:12px;
+    margin-top:15px;
 
 }
 
@@ -325,7 +470,13 @@ hr{
 
     flex:1;
 
+    padding:10px;
+
+    font-size:15px;
+
 }
+
+/* Prioritäten */
 
 .todo.hoch{
 
@@ -353,11 +504,65 @@ hr{
 
 }
 
-/* ===========================
-   Handy
-=========================== */
+/* Dashboard-Aufgaben */
 
-@media(max-width:900px){
+.dashboardTodo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.dashboardTodo span{
+
+    font-size:15px;
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#2b2d31;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#555;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#777;
+
+}
+
+/* =========================================
+   Handy
+========================================= */
+
+@media(max-width:1000px){
+
+    .dashboardGrid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
 
     main{
 
@@ -365,17 +570,71 @@ hr{
 
     }
 
+}
+
+@media(max-width:700px){
+
+    header{
+
+        gap:12px;
+
+        height:75px;
+
+    }
+
     header h1{
 
-        font-size:28px;
+        font-size:24px;
 
         min-width:auto;
 
     }
 
+    header button{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:22px;
+
+    }
+
+    #dashboard{
+
+        margin:15px;
+
+        padding:18px;
+
+    }
+
+    .dashboardGrid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    main{
+
+        padding:15px;
+
+    }
+
     .tag{
 
-        min-height:90px;
+        min-height:85px;
+
+    }
+
+    .wochentage{
+
+        font-size:15px;
+
+    }
+
+    .todoButtons{
+
+        flex-direction:column;
 
     }
 

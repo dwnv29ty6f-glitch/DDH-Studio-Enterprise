@@ -1,3 +1,9 @@
+// ==========================
+// DDH Studio Enterprise
+// ==========================
+
+// Projekte
+
 const button = document.getElementById("neu");
 const projekte = document.getElementById("projekte");
 
@@ -20,87 +26,214 @@ button.addEventListener("click", () => {
     projekte.appendChild(projekt);
 
 });
+
+// ==========================
+// Kalender
+// ==========================
+
 const monate = [
-    "Januar","Februar","März","April","Mai","Juni",
-    "Juli","August","September","Oktober","November","Dezember"
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember"
 ];
 
-const tageContainer = document.getElementById("tage");
-const monatTitel = document.getElementById("monatTitel");
+const tageContainer =
+document.getElementById("tage");
+
+const monatTitel =
+document.getElementById("monatTitel");
+
+const vorher =
+document.getElementById("vorherigerMonat");
+
+const naechster =
+document.getElementById("naechsterMonat");
+
+const datumTitel =
+document.getElementById("ausgewaehltesDatum");
+
+const terminInput =
+document.getElementById("termin");
+
+const speichernTermin =
+document.getElementById("speichernTermin");
+
+const terminListe =
+document.getElementById("terminListe");
 
 let heute = new Date();
-let aktuellerMonat = heute.getMonth();
-let aktuellesJahr = heute.getFullYear();
+
+let aktuellerMonat =
+heute.getMonth();
+
+let aktuellesJahr =
+heute.getFullYear();
+
+let ausgewaehlterTag = null;
+
+let termine =
+JSON.parse(
+localStorage.getItem("ddhTermine")
+) || {};
+// ==========================
+// Funktionen
+// ==========================
+
+function schluessel(tag){
+
+    return aktuellesJahr + "-" +
+           aktuellerMonat + "-" +
+           tag;
+
+}
+
+function termineAnzeigen(){
+
+    terminListe.innerHTML = "";
+
+    if(ausgewaehlterTag === null){
+        return;
+    }
+
+    const key = schluessel(ausgewaehlterTag);
+
+    if(!termine[key]){
+        return;
+    }
+
+    termine[key].forEach((text) => {
+
+        const eintrag =
+        document.createElement("div");
+
+        eintrag.className =
+        "terminEintrag";
+
+        eintrag.textContent =
+        text;
+
+        terminListe.appendChild(
+            eintrag
+        );
+
+    });
+
+}
 
 function kalenderZeichnen(){
 
     tageContainer.innerHTML = "";
 
     monatTitel.textContent =
-        monate[aktuellerMonat] + " " + aktuellesJahr;
+    monate[aktuellerMonat] +
+    " " +
+    aktuellesJahr;
 
-    const ersterTag =
-        new Date(aktuellesJahr, aktuellerMonat, 1);
+    let ersterTag =
+    new Date(
+        aktuellesJahr,
+        aktuellerMonat,
+        1
+    ).getDay();
 
-    const letzterTag =
-        new Date(aktuellesJahr, aktuellerMonat + 1, 0);
-
-    let start =
-        ersterTag.getDay();
-
-    if(start === 0){
-        start = 7;
+    if(ersterTag === 0){
+        ersterTag = 7;
     }
 
-    for(let i=1;i<start;i++){
+    const letzterTag =
+    new Date(
+        aktuellesJahr,
+        aktuellerMonat + 1,
+        0
+    ).getDate();
 
-        const leer = document.createElement("div");
+    for(let i=1;i<ersterTag;i++){
+
+        const leer =
+        document.createElement("div");
 
         tageContainer.appendChild(leer);
 
     }
+        for(let tag = 1; tag <= letzterTag; tag++){
 
-    for(let tag=1; tag<=letzterTag.getDate(); tag++){
+        const feld =
+        document.createElement("div");
 
-        const feld = document.createElement("div");
+        feld.className = "tag";
 
-feld.className = "tag";
+        const key = schluessel(tag);
 
-feld.innerHTML =
-"<div class='tagNummer'>" + tag + "</div>";
+        if(termine[key]){
+            feld.classList.add("tagHatTermin");
+        }
 
-feld.addEventListener("click", () => {
+        feld.innerHTML =
+        "<div class='tagNummer'>" +
+        tag +
+        "</div>";
 
-    document.querySelectorAll(".tag").forEach(t => {
-        t.classList.remove("aktiv");
-    });
+        feld.addEventListener("click", () => {
 
-    feld.classList.add("aktiv");
+            document
+            .querySelectorAll(".tag")
+            .forEach((t) => {
 
-    document.getElementById("ausgewaehltesDatum").textContent =
-        tag + ". " + monate[aktuellerMonat] + " " + aktuellesJahr;
+                t.classList.remove("aktiv");
 
-});
+            });
 
-tageContainer.appendChild(feld);
+            feld.classList.add("aktiv");
+
+            ausgewaehlterTag = tag;
+
+            datumTitel.textContent =
+            tag +
+            ". " +
+            monate[aktuellerMonat] +
+            " " +
+            aktuellesJahr;
+
+            termineAnzeigen();
+
+        });
+
+        tageContainer.appendChild(feld);
+
     }
 
 }
 
 kalenderZeichnen();
-const vorher = document.getElementById("vorherigerMonat");
-const naechster = document.getElementById("naechsterMonat");
+// ==========================
+// Navigation
+// ==========================
 
 vorher.addEventListener("click", () => {
 
     aktuellerMonat--;
 
     if (aktuellerMonat < 0) {
+
         aktuellerMonat = 11;
         aktuellesJahr--;
+
     }
 
+    ausgewaehlterTag = null;
+    datumTitel.textContent = "Tag auswählen";
+
     kalenderZeichnen();
+    termineAnzeigen();
 
 });
 
@@ -109,30 +242,23 @@ naechster.addEventListener("click", () => {
     aktuellerMonat++;
 
     if (aktuellerMonat > 11) {
+
         aktuellerMonat = 0;
         aktuellesJahr++;
+
     }
 
+    ausgewaehlterTag = null;
+    datumTitel.textContent = "Tag auswählen";
+
     kalenderZeichnen();
+    termineAnzeigen();
 
 });
-let ausgewaehlterTag = null;
 
-const terminInput = document.getElementById("termin");
-const speichernTermin = document.getElementById("speichernTermin");
-const terminListe = document.getElementById("terminListe");
-
-document.querySelectorAll(".tag").forEach(tag => {
-
-    tag.addEventListener("click", () => {
-
-        ausgewaehlterTag = tag.querySelector(".tagNummer").textContent;
-
-        terminListe.innerHTML = "";
-
-    });
-
-});
+// ==========================
+// Termin speichern
+// ==========================
 
 speichernTermin.addEventListener("click", () => {
 
@@ -143,28 +269,33 @@ speichernTermin.addEventListener("click", () => {
 
     }
 
-    if (terminInput.value.trim() === "") {
+    const text = terminInput.value.trim();
+
+    if (text === "") {
 
         alert("Bitte einen Termin eingeben.");
         return;
 
     }
 
-    const eintrag = document.createElement("div");
+    const key = schluessel(ausgewaehlterTag);
 
-    eintrag.style.padding = "10px";
-    eintrag.style.marginTop = "10px";
-    eintrag.style.background = "#3b3d42";
-    eintrag.style.borderRadius = "8px";
+    if (!termine[key]) {
 
-    eintrag.textContent =
-        ausgewaehlterTag + ". "
-        + monate[aktuellerMonat]
-        + " - "
-        + terminInput.value;
+        termine[key] = [];
 
-    terminListe.appendChild(eintrag);
+    }
+
+    termine[key].push(text);
+
+    localStorage.setItem(
+        "ddhTermine",
+        JSON.stringify(termine)
+    );
 
     terminInput.value = "";
+
+    kalenderZeichnen();
+    termineAnzeigen();
 
 });

@@ -1,7 +1,7 @@
-// =======================================
+// ===================================
 // DDH Studio Enterprise
-// app.js - Block 1
-// =======================================
+// Block 1
+// ===================================
 
 // Monate
 const monate = [
@@ -19,9 +19,12 @@ const monate = [
     "Dezember"
 ];
 
-// HTML
-const tage = document.getElementById("tage");
-const monatTitel = document.getElementById("monatTitel");
+// HTML-Elemente
+const tage =
+document.getElementById("tage");
+
+const monatTitel =
+document.getElementById("monatTitel");
 
 const btnZurueck =
 document.getElementById("vorherigerMonat");
@@ -35,11 +38,11 @@ document.getElementById("ausgewaehltesDatum");
 const uhrzeit =
 document.getElementById("uhrzeit");
 
+const kategorie =
+document.getElementById("kategorie");
+
 const termin =
 document.getElementById("termin");
-
-const kategorie =
-document.getElementById("kategorie")
 
 const speichern =
 document.getElementById("speichernTermin");
@@ -47,58 +50,48 @@ document.getElementById("speichernTermin");
 const terminListe =
 document.getElementById("terminListe");
 
-// Datum
-
+// Aktuelles Datum
 const heute = new Date();
 
-let aktuellerMonat =
+let monat =
 heute.getMonth();
 
-let aktuellesJahr =
+let jahr =
 heute.getFullYear();
 
-let ausgewaehlterTag = null;
+// Gewählter Tag
+let ausgewaehlterTag =
+null;
 
-// Termine
-
+// Alle Termine laden
 let termine =
 JSON.parse(
 localStorage.getItem("ddhKalender")
 ) || {};
-// =======================================
+// ===================================
 // Block 2
 // Kalender zeichnen
-// =======================================
+// ===================================
 
-function kalenderZeichnen(){
+function kalenderZeichnen() {
 
     tage.innerHTML = "";
 
     monatTitel.textContent =
-        monate[aktuellerMonat] +
-        " " +
-        aktuellesJahr;
+        monate[monat] + " " + jahr;
 
     let ersterTag =
-        new Date(
-            aktuellesJahr,
-            aktuellerMonat,
-            1
-        ).getDay();
+        new Date(jahr, monat, 1).getDay();
 
-    if(ersterTag === 0){
+    if (ersterTag === 0) {
         ersterTag = 7;
     }
 
     const tageImMonat =
-        new Date(
-            aktuellesJahr,
-            aktuellerMonat + 1,
-            0
-        ).getDate();
+        new Date(jahr, monat + 1, 0).getDate();
 
     // Leere Felder
-    for(let i = 1; i < ersterTag; i++){
+    for (let i = 1; i < ersterTag; i++) {
 
         const leer =
             document.createElement("div");
@@ -107,32 +100,35 @@ function kalenderZeichnen(){
 
     }
 
-    // Tage
-    for(let tag = 1; tag <= tageImMonat; tag++){
+    // Tage erzeugen
+    for (let tag = 1; tag <= tageImMonat; tag++) {
 
         const feld =
             document.createElement("div");
 
         feld.className = "tag";
 
-        const schluessel =
-            aktuellesJahr +
-            "-" +
-            (aktuellerMonat + 1) +
-            "-" +
-            tag;
-
-        if(
-            termine[schluessel] &&
-            termine[schluessel].length > 0
-        ){
-            feld.classList.add("tagHatTermin");
-        }
-
         feld.innerHTML =
             "<div class='tagNummer'>" +
             tag +
             "</div>";
+
+        const schluessel =
+            jahr + "-" +
+            (monat + 1) + "-" +
+            tag;
+
+        // Tag mit Termin markieren
+        if (
+            termine[schluessel] &&
+            termine[schluessel].length > 0
+        ) {
+
+            feld.classList.add(
+                "tagHatTermin"
+            );
+
+        }
 
         feld.onclick = () => {
 
@@ -148,11 +144,10 @@ function kalenderZeichnen(){
                 schluessel;
 
             datumTitel.textContent =
-                tag +
-                ". " +
-                monate[aktuellerMonat] +
+                tag + ". " +
+                monate[monat] +
                 " " +
-                aktuellesJahr;
+                jahr;
 
             termineAnzeigen();
 
@@ -163,55 +158,65 @@ function kalenderZeichnen(){
     }
 
 }
-// =======================================
+// ===================================
 // Block 3
-// Termine anzeigen
-// =======================================
+// Termine anzeigen + speichern
+// ===================================
 
-function termineAnzeigen(){
+function termineAnzeigen() {
 
     terminListe.innerHTML = "";
 
-    if(!ausgewaehlterTag){
-        return;
-    }
+    if (!ausgewaehlterTag) return;
 
-    const liste = termine[ausgewaehlterTag] || [];
+    if (!termine[ausgewaehlterTag]) return;
 
-    liste.forEach((eintrag,index)=>{
+    termine[ausgewaehlterTag].forEach((eintrag, index) => {
 
-        const box = document.createElement("div");
+        const box =
+            document.createElement("div");
+
         box.className = "termin";
 
-        const info = document.createElement("div");
+        const info =
+            document.createElement("div");
+
         info.textContent =
-    "[" + eintrag.kategorie + "] " +
-    eintrag.uhrzeit +
-    " - " +
-    eintrag.text;
+            "[" +
+            eintrag.kategorie +
+            "] " +
+            eintrag.uhrzeit +
+            " - " +
+            eintrag.text;
+
+        box.appendChild(info);
 
         const buttonLeiste =
             document.createElement("div");
-        buttonLeiste.className =
-            "terminButtons";
+
+        buttonLeiste.style.display = "flex";
+        buttonLeiste.style.gap = "10px";
+        buttonLeiste.style.marginTop = "12px";
 
         // Bearbeiten
-
         const bearbeiten =
             document.createElement("button");
 
-        bearbeiten.type = "button";
         bearbeiten.textContent = "✏️";
 
-        bearbeiten.onclick = ()=>{
+        bearbeiten.onclick = () => {
 
             uhrzeit.value =
                 eintrag.uhrzeit;
 
+            kategorie.value =
+                eintrag.kategorie;
+
             termin.value =
                 eintrag.text;
 
-            liste.splice(index,1);
+            termine[ausgewaehlterTag]
+                .splice(index, 1);
 
             localStorage.setItem(
                 "ddhKalender",
@@ -224,20 +229,24 @@ function termineAnzeigen(){
         };
 
         // Löschen
-
         const loeschen =
             document.createElement("button");
 
-        loeschen.type = "button";
         loeschen.textContent = "🗑️";
 
-        loeschen.onclick = ()=>{
+        loeschen.onclick = () => {
 
-            liste.splice(index,1);
+            termine[ausgewaehlterTag]
+                .splice(index, 1);
 
-            if(liste.length===0){
+            if (
+                termine[ausgewaehlterTag]
+                .length === 0
+            ) {
 
-                delete termine[ausgewaehlterTag];
+                delete termine[
+                    ausgewaehlterTag
+                ];
 
             }
 
@@ -259,7 +268,6 @@ function termineAnzeigen(){
             loeschen
         );
 
-        box.appendChild(info);
         box.appendChild(buttonLeiste);
 
         terminListe.appendChild(box);
@@ -267,42 +275,47 @@ function termineAnzeigen(){
     });
 
 }
-// =======================================
-// Block 4
-// Speichern + Navigation + Start
-// =======================================
 
+// Termin speichern
 speichern.onclick = () => {
 
-    if(!ausgewaehlterTag){
+    if (!ausgewaehlterTag) {
 
-        alert("Bitte zuerst einen Tag auswählen.");
-
-        return;
-
-    }
-
-    if(termin.value.trim()===""){
-
-        alert("Bitte einen Termin eingeben.");
+        alert(
+            "Bitte zuerst einen Tag auswählen."
+        );
 
         return;
 
     }
 
-    if(!termine[ausgewaehlterTag]){
+    if (termin.value.trim() === "") {
 
-        termine[ausgewaehlterTag]=[];
+        alert(
+            "Bitte einen Termin eingeben."
+        );
+
+        return;
+
+    }
+
+    if (!termine[ausgewaehlterTag]) {
+
+        termine[ausgewaehlterTag] = [];
 
     }
 
     termine[ausgewaehlterTag].push({
 
-    uhrzeit: uhrzeit.value,
-    kategorie: kategorie.value,
-    text: termin.value
+        uhrzeit:
+            uhrzeit.value,
 
-});
+        kategorie:
+            kategorie.value,
+
+        text:
+            termin.value
+
     });
 
     localStorage.setItem(
@@ -311,56 +324,63 @@ speichern.onclick = () => {
     );
 
     uhrzeit.value = "";
-kategorie.value = "Privat";
-termin.value = "";
+    kategorie.value = "Privat";
+    termin.value = "";
 
     termineAnzeigen();
     kalenderZeichnen();
 
 };
+// ===================================
+// Block 4
+// Navigation + Start
+// ===================================
 
-btnZurueck.onclick = ()=>{
+// Monat zurück
+btnZurueck.onclick = () => {
 
-    aktuellerMonat--;
+    monat--;
 
-    if(aktuellerMonat<0){
+    if (monat < 0) {
 
-        aktuellerMonat=11;
-        aktuellesJahr--;
+        monat = 11;
+        jahr--;
 
     }
 
-    ausgewaehlterTag=null;
+    ausgewaehlterTag = null;
 
-    datumTitel.textContent="Tag auswählen";
+    datumTitel.textContent =
+        "Tag auswählen";
 
-    terminListe.innerHTML="";
+    terminListe.innerHTML = "";
 
     kalenderZeichnen();
 
 };
 
-btnWeiter.onclick = ()=>{
+// Monat vor
+btnWeiter.onclick = () => {
 
-    aktuellerMonat++;
+    monat++;
 
-    if(aktuellerMonat>11){
+    if (monat > 11) {
 
-        aktuellerMonat=0;
-        aktuellesJahr++;
+        monat = 0;
+        jahr++;
 
     }
 
-    ausgewaehlterTag=null;
+    ausgewaehlterTag = null;
 
-    datumTitel.textContent="Tag auswählen";
+    datumTitel.textContent =
+        "Tag auswählen";
 
-    terminListe.innerHTML="";
+    terminListe.innerHTML = "";
 
     kalenderZeichnen();
 
 };
 
-// Start
-
+// Kalender starten
 kalenderZeichnen();

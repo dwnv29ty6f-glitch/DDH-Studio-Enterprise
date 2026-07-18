@@ -1,5 +1,6 @@
 /* =========================================
-   DDH Studio Enterprise 5.0
+   DDH Studio Enterprise 6.0
+   style.css
 ========================================= */
 
 *{
@@ -26,7 +27,7 @@ body{
 }
 
 /* =========================================
-   Kopf
+   Header
 ========================================= */
 
 header{
@@ -49,17 +50,19 @@ header{
 
     top:0;
 
-    z-index:100;
+    z-index:1000;
 
 }
 
 header h1{
 
-    min-width:260px;
+    min-width:320px;
 
     text-align:center;
 
-    font-size:38px;
+    font-size:34px;
+
+    font-weight:bold;
 
 }
 
@@ -81,7 +84,7 @@ header button{
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
 
 }
 
@@ -89,17 +92,129 @@ header button:hover{
 
     background:#1669d8;
 
+    transform:scale(1.05);
+
 }
 
 /* =========================================
-   Dashboard
+   Navigation
 ========================================= */
 
-#dashboard{
+#navigation{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    padding:18px;
+
+    background:#2b2d31;
+
+    border-bottom:1px solid #444;
+
+}
+
+.navButton{
+
+    width:auto;
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#3b3d42;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:16px;
+
+}
+
+.navButton:hover{
+
+    background:#4a4d55;
+
+}
+
+.navButton.aktiv{
+
+    background:#2f80ed;
+
+}
+
+/* =========================================
+   Seiten
+========================================= */
+
+.seite{
+
+    display:none;
+
+    animation:einblenden .25s ease;
+
+}
+
+.seite.aktiv{
+
+    display:block;
+
+}
+
+@keyframes einblenden{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =========================================
+   Layout
+========================================= */
+
+main{
+
+    display:grid;
+
+    grid-template-columns:2fr 380px;
+
+    gap:25px;
+
+    padding:25px;
+
+}
+
+/* =========================================
+   Module
+========================================= */
+
+.modul{
 
     margin:25px;
-
-    margin-bottom:0;
 
     background:#2b2d31;
 
@@ -109,11 +224,26 @@ header button:hover{
 
 }
 
-#dashboard h2{
-
-    font-size:28px;
+.modul h2{
 
     margin-bottom:20px;
+
+}
+
+.modul p{
+
+    color:#cccccc;
+
+    line-height:1.6;
+
+}
+/* =========================================
+   Dashboard
+========================================= */
+
+#seite-dashboard{
+
+    padding:25px;
 
 }
 
@@ -123,37 +253,37 @@ header button:hover{
 
     grid-template-columns:repeat(4,1fr);
 
-    gap:18px;
+    gap:20px;
 
 }
 
 .dashboardKarte{
 
-    background:#3b3d42;
+    background:#2b2d31;
 
     border-radius:18px;
 
     padding:22px;
 
-    text-align:center;
-
     border:1px solid #444;
 
-    transition:.2s;
+    transition:.25s;
+
+    text-align:center;
 
 }
 
 .dashboardKarte:hover{
 
-    transform:translateY(-3px);
+    transform:translateY(-4px);
 
 }
 
 .dashboardKarte h3{
 
-    font-size:16px;
+    font-size:17px;
 
-    color:#cfcfcf;
+    color:#d0d0d0;
 
     margin-bottom:12px;
 
@@ -173,7 +303,7 @@ header button:hover{
 
     margin-top:25px;
 
-    background:#3b3d42;
+    background:#2b2d31;
 
     border-radius:18px;
 
@@ -199,27 +329,11 @@ header button:hover{
 
 .dashboardTodo{
 
-    background:#2b2d31;
+    background:#3b3d42;
 
     border-radius:12px;
 
     padding:14px;
-
-}
-
-/* =========================================
-   Layout
-========================================= */
-
-main{
-
-    display:grid;
-
-    grid-template-columns:2fr 380px;
-
-    gap:25px;
-
-    padding:25px;
 
 }
 
@@ -245,9 +359,9 @@ main{
 
     text-align:center;
 
-    font-weight:bold;
-
     font-size:18px;
+
+    font-weight:bold;
 
     margin-bottom:20px;
 
@@ -275,7 +389,7 @@ main{
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
 
 }
 
@@ -298,8 +412,9 @@ main{
     font-weight:bold;
 
 }
+
 /* =========================================
-   Rechte Seitenleiste
+   Seitenleiste
 ========================================= */
 
 aside{
@@ -314,9 +429,9 @@ aside{
 
 aside h2{
 
-    margin-top:20px;
+    margin-bottom:18px;
 
-    margin-bottom:15px;
+    margin-top:18px;
 
 }
 
@@ -341,16 +456,16 @@ select{
 
     background:#3b3d42;
 
-    color:#ffffff;
+    color:white;
 
     font-size:16px;
-
-    outline:none;
 
 }
 
 input:focus,
 select:focus{
+
+    outline:none;
 
     border:2px solid #2f80ed;
 
@@ -370,11 +485,11 @@ button{
 
     color:white;
 
-    font-size:17px;
+    font-size:16px;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
 
 }
 
@@ -391,34 +506,19 @@ hr{
     border:1px solid #444;
 
 }
-
 /* =========================================
-   Termine
+   Aufgaben
 ========================================= */
 
-#terminListe{
+.aufgabenBereich{
 
-    margin-top:20px;
+    background:#2b2d31;
 
-}
+    border-radius:20px;
 
-.termin{
-
-    background:#3b3d42;
-
-    border-radius:14px;
-
-    padding:14px;
-
-    margin-bottom:14px;
-
-    border-left:6px solid #2f80ed;
+    padding:20px;
 
 }
-
-/* =========================================
-   To-do-Liste
-========================================= */
 
 #todoListe{
 
@@ -435,6 +535,14 @@ hr{
     padding:14px;
 
     margin-bottom:14px;
+
+    transition:.25s;
+
+}
+
+.todo:hover{
+
+    transform:translateY(-2px);
 
 }
 
@@ -476,8 +584,6 @@ hr{
 
 }
 
-/* Prioritäten */
-
 .todo.hoch{
 
     border-left:6px solid #e74c3c;
@@ -504,7 +610,180 @@ hr{
 
 }
 
-/* Dashboard-Aufgaben */
+/* =========================================
+   Dokumente
+========================================= */
+
+#seite-dokumente .modul{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    margin-top:25px;
+
+}
+
+#dokumentListe{
+
+    margin-top:25px;
+
+}
+
+.dokument{
+
+    background:#3b3d42;
+
+    border-radius:15px;
+
+    padding:16px;
+
+    margin-bottom:15px;
+
+    border-left:6px solid #2f80ed;
+
+}
+
+/* =========================================
+   Kunden
+========================================= */
+
+#seite-kunden .modul{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    margin-top:25px;
+
+}
+
+#kundenListe{
+
+    margin-top:25px;
+
+}
+
+.kunde{
+
+    background:#3b3d42;
+
+    border-radius:15px;
+
+    padding:16px;
+
+    margin-bottom:15px;
+
+    border-left:6px solid #27ae60;
+
+}
+
+/* =========================================
+   Projekte
+========================================= */
+
+#seite-projekte .modul{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    margin-top:25px;
+
+}
+
+#projektListe{
+
+    margin-top:25px;
+
+}
+
+.projekt{
+
+    background:#3b3d42;
+
+    border-radius:15px;
+
+    padding:16px;
+
+    margin-bottom:15px;
+
+    border-left:6px solid #f39c12;
+
+}
+
+/* =========================================
+   Karten
+========================================= */
+
+.karte{
+
+    background:#3b3d42;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    border:1px solid #444;
+
+}
+
+.karte h3{
+
+    margin-bottom:12px;
+
+}
+
+.karte p{
+
+    color:#d0d0d0;
+
+    line-height:1.6;
+
+}
+/* =========================================
+   Einstellungen
+========================================= */
+
+#seite-einstellungen .modul{
+
+    max-width:900px;
+
+    margin:auto;
+
+    margin-top:25px;
+
+}
+
+#seite-einstellungen label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:18px;
+
+    font-size:17px;
+
+}
+
+#seite-einstellungen input[type="checkbox"]{
+
+    width:22px;
+
+    height:22px;
+
+    margin:0;
+
+}
+
+/* =========================================
+   Dashboard-Aufgaben
+========================================= */
 
 .dashboardTodo{
 
@@ -514,7 +793,13 @@ hr{
 
     align-items:center;
 
-    gap:10px;
+    gap:12px;
+
+    background:#2b2d31;
+
+    border-radius:12px;
+
+    padding:14px;
 
 }
 
@@ -524,11 +809,15 @@ hr{
 
 }
 
-/* Scrollbar */
+/* =========================================
+   Scrollbar
+========================================= */
 
 ::-webkit-scrollbar{
 
     width:10px;
+
+    height:10px;
 
 }
 
@@ -553,10 +842,40 @@ hr{
 }
 
 /* =========================================
-   Handy
+   Kleine Animationen
 ========================================= */
 
-@media(max-width:1000px){
+button,
+input,
+select,
+.todo,
+.termin,
+.dashboardKarte,
+.karte,
+.dokument,
+.kunde,
+.projekt{
+
+    transition:all .25s ease;
+
+}
+
+.todo:hover,
+.termin:hover,
+.karte:hover,
+.dokument:hover,
+.kunde:hover,
+.projekt:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media(max-width:1100px){
 
     .dashboardGrid{
 
@@ -572,19 +891,21 @@ hr{
 
 }
 
-@media(max-width:700px){
+@media(max-width:800px){
 
     header{
 
-        gap:12px;
+        height:auto;
 
-        height:75px;
+        padding:15px;
+
+        flex-wrap:wrap;
 
     }
 
     header h1{
 
-        font-size:24px;
+        font-size:26px;
 
         min-width:auto;
 
@@ -600,11 +921,23 @@ hr{
 
     }
 
-    #dashboard{
+    #navigation{
 
-        margin:15px;
+        justify-content:flex-start;
 
-        padding:18px;
+        overflow-x:auto;
+
+        flex-wrap:nowrap;
+
+        padding:12px;
+
+    }
+
+    .navButton{
+
+        white-space:nowrap;
+
+        flex:0 0 auto;
 
     }
 
@@ -620,21 +953,59 @@ hr{
 
     }
 
-    .tag{
-
-        min-height:85px;
-
-    }
-
     .wochentage{
 
         font-size:15px;
 
     }
 
+    .tag{
+
+        min-height:85px;
+
+    }
+
     .todoButtons{
 
         flex-direction:column;
+
+    }
+
+}
+
+@media(max-width:500px){
+
+    .modul{
+
+        margin:15px;
+
+        padding:18px;
+
+    }
+
+    .dashboardKarte{
+
+        padding:18px;
+
+    }
+
+    .dashboardKarte p{
+
+        font-size:28px;
+
+    }
+
+    .tag{
+
+        min-height:70px;
+
+        padding:8px;
+
+    }
+
+    .tagNummer{
+
+        font-size:18px;
 
     }
 

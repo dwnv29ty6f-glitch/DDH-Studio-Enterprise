@@ -2,81 +2,82 @@
 <html lang="de">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>DDH Studio Enterprise</title>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
+
 </head>
 
 <body>
 
-    <div class="main">
+<div class="app">
 
-        <header class="topbar">
+    <header>
 
-            <button id="vorherigerMonat">◀</button>
+        <button id="vorherigerMonat">◀</button>
 
-            <h1 id="monatTitel"></h1>
+        <h1 id="monatTitel"></h1>
 
-            <button id="naechsterMonat">▶</button>
+        <button id="naechsterMonat">▶</button>
 
-        </header>
+    </header>
 
-        <div class="content">
+    <main>
 
-            <section class="kalenderBereich">
+        <section id="kalender">
 
-                <div class="wochentage">
-                    <div>Mo</div>
-                    <div>Di</div>
-                    <div>Mi</div>
-                    <div>Do</div>
-                    <div>Fr</div>
-                    <div>Sa</div>
-                    <div>So</div>
-                </div>
+            <div class="wochentage">
 
-                <div id="tage"></div>
+                <div>Mo</div>
+                <div>Di</div>
+                <div>Mi</div>
+                <div>Do</div>
+                <div>Fr</div>
+                <div>Sa</div>
+                <div>So</div>
 
-            </section>
+            </div>
 
-            <aside class="terminBereich">
+            <div id="tage"></div>
 
-                <h2 id="ausgewaehltesDatum">
-                    Kein Tag ausgewählt
-                </h2>
+        </section>
 
-                <input
-                    type="time"
-                    id="uhrzeit">
+        <aside>
 
-                <input
-                    type="text"
-                    id="termin"
-                    placeholder="Termin eingeben">
+            <h2 id="ausgewaehltesDatum">
+                Tag auswählen
+            </h2>
 
-                <button id="speichernTermin">
-                    Termin speichern
-                </button>
+            <input
+                id="uhrzeit"
+                type="time">
 
-                <div id="terminListe"></div>
+            <input
+                id="termin"
+                type="text"
+                placeholder="Termin">
 
-            </aside>
+            <button id="speichernTermin">
 
-        </div>
+                Termin speichern
 
-    </div>
+            </button>
 
-    <script src="app.js"></script>
+            <div id="terminListe"></div>
 
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("sw.js");
-        }
-    </script>
+        </aside>
+
+    </main>
+
+</div>
+
+<script src="app.js"></script>
 
 </body>
 

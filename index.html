@@ -3,14 +3,14 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-  <title>DDH Studio Enterprise TEST</title>
+<title>DDH Studio Enterprise 4.0</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -18,74 +18,113 @@
 
 <div class="app">
 
-    <header>
+<header>
 
-        <button id="vorherigerMonat">◀</button>
+<button id="vorherigerMonat">◀</button>
 
-        <h1 id="monatTitel"></h1>
+<h1 id="monatTitel"></h1>
 
-        <button id="naechsterMonat">▶</button>
+<button id="naechsterMonat">▶</button>
 
-    </header>
+</header>
 
-    <main>
+<main>
 
-        <section id="kalender">
+<section id="kalender">
 
-            <div class="wochentage">
+<div class="wochentage">
 
-                <div>Mo</div>
-                <div>Di</div>
-                <div>Mi</div>
-                <div>Do</div>
-                <div>Fr</div>
-                <div>Sa</div>
-                <div>So</div>
+<div>Mo</div>
+<div>Di</div>
+<div>Mi</div>
+<div>Do</div>
+<div>Fr</div>
+<div>Sa</div>
+<div>So</div>
 
-            </div>
+</div>
 
-            <div id="tage"></div>
+<div id="tage"></div>
 
-        </section>
+</section>
 
-        <aside>
+<aside>
 
-            <h2 id="ausgewaehltesDatum">
-                Tag auswählen
-            </h2>
+<h2 id="ausgewaehltesDatum">
 
-            <input
-                id="uhrzeit"
-                type="time">
+Tag auswählen
 
-            <select id="kategorie">
+</h2>
 
-    <option value="Privat">🏠 Privat</option>
-    <option value="Arbeit">💼 Arbeit</option>
-    <option value="Familie">👨‍👩‍👧 Familie</option>
-    <option value="Schule">🎓 Schule</option>
-    <option value="Urlaub">✈️ Urlaub</option>
-    <option value="Geburtstag">🎂 Geburtstag</option>
-    <option value="Sonstiges">📌 Sonstiges</option>
+<input
+type="time"
+id="uhrzeit">
+
+<select id="kategorie">
+
+<option value="Privat">🏠 Privat</option>
+<option value="Arbeit">💼 Arbeit</option>
+<option value="Familie">👨‍👩‍👧 Familie</option>
+<option value="Schule">🎓 Schule</option>
+<option value="Urlaub">✈️ Urlaub</option>
+<option value="Geburtstag">🎂 Geburtstag</option>
+<option value="Sonstiges">📌 Sonstiges</option>
 
 </select>
 
 <input
-    type="text"
-    id="termin"
-    placeholder="Termin">
+type="text"
+id="termin"
+placeholder="Termin eingeben">
 
-            <button id="speichernTermin">
+<button id="speichernTermin">
 
-                Termin speichern
+Termin speichern
 
-            </button>
+</button>
 
-            <div id="terminListe"></div>
+<div id="terminListe"></div>
 
-        </aside>
+<hr>
 
-    </main>
+<h2>
+
+✅ To-do-Liste
+
+</h2>
+
+<input
+type="text"
+id="todoText"
+placeholder="Neue Aufgabe">
+
+<select id="todoPrioritaet">
+
+<option value="hoch">
+🔴 Hoch
+</option>
+
+<option value="mittel">
+🟠 Mittel
+</option>
+
+<option value="niedrig">
+🟢 Niedrig
+</option>
+
+</select>
+
+<button id="todoSpeichern">
+
+Aufgabe hinzufügen
+
+</button>
+
+<div id="todoListe"></div>
+
+</aside>
+
+</main>
 
 </div>
 

@@ -13,50 +13,23 @@
 
 <body>
 
-    <!-- Sidebar -->
-
-    <div class="sidebar">
-
-        <h2>DDH Studio</h2>
-
-        <button id="neu">
-            Neues Projekt
-        </button>
-
-        <div id="projekte"></div>
-
-    </div>
-
-    <!-- Hauptbereich -->
-
     <div class="main">
 
-        <!-- Kopf -->
+        <header class="topbar">
 
-        <div class="topbar">
-
-            <button id="vorherigerMonat">
-                ◀
-            </button>
+            <button id="vorherigerMonat">◀</button>
 
             <h1 id="monatTitel"></h1>
 
-            <button id="naechsterMonat">
-                ▶
-            </button>
+            <button id="naechsterMonat">▶</button>
 
-        </div>
-
-        <!-- Inhalt -->
+        </header>
 
         <div class="content">
 
-            <!-- Kalender -->
-
-            <div class="kalenderBox">
+            <section class="kalenderBereich">
 
                 <div class="wochentage">
-
                     <div>Mo</div>
                     <div>Di</div>
                     <div>Mi</div>
@@ -64,36 +37,34 @@
                     <div>Fr</div>
                     <div>Sa</div>
                     <div>So</div>
-
                 </div>
 
                 <div id="tage"></div>
 
-            </div>
+            </section>
 
-            <!-- Termine -->
-
-            <div class="terminBox">
+            <aside class="terminBereich">
 
                 <h2 id="ausgewaehltesDatum">
-                    Tag auswählen
+                    Kein Tag ausgewählt
                 </h2>
 
-               <input
-    type="time"
-    id="uhrzeit">
+                <input
+                    type="time"
+                    id="uhrzeit">
 
-<input
-    type="text"
-    id="termin"
-    placeholder="Termin eingeben">
+                <input
+                    type="text"
+                    id="termin"
+                    placeholder="Termin eingeben">
+
                 <button id="speichernTermin">
                     Termin speichern
                 </button>
 
                 <div id="terminListe"></div>
 
-            </div>
+            </aside>
 
         </div>
 
@@ -102,13 +73,9 @@
     <script src="app.js"></script>
 
     <script>
-
         if ("serviceWorker" in navigator) {
-
             navigator.serviceWorker.register("sw.js");
-
         }
-
     </script>
 
 </body>

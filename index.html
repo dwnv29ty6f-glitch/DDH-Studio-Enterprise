@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DDH Studio Enterprise 4.0</title>
+<title>DDH Studio Enterprise 5.0</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -26,6 +26,64 @@
 <button id="naechsterMonat">▶</button>
 
 </header>
+
+<!-- ========================= -->
+<!-- Dashboard -->
+<!-- ========================= -->
+
+<section id="dashboard">
+
+<h2>📊 Dashboard</h2>
+
+<div class="dashboardGrid">
+
+<div class="dashboardKarte">
+
+<h3>📅 Termine heute</h3>
+
+<p id="heuteTermine">0</p>
+
+</div>
+
+<div class="dashboardKarte">
+
+<h3>📋 Offene Aufgaben</h3>
+
+<p id="offeneTodos">0</p>
+
+</div>
+
+<div class="dashboardKarte">
+
+<h3>🔴 Hohe Priorität</h3>
+
+<p id="hohePrioritaet">0</p>
+
+</div>
+
+<div class="dashboardKarte">
+
+<h3>✅ Erledigt</h3>
+
+<p id="erledigteTodos">0</p>
+
+</div>
+
+</div>
+
+<div class="dashboardBereich">
+
+<h3>🔥 Nächste Aufgaben</h3>
+
+<div id="dashboardTodos">
+
+Noch keine Aufgaben
+
+</div>
+
+</div>
+
+</section>
 
 <main>
 
@@ -50,7 +108,9 @@
 <aside>
 
 <h2 id="ausgewaehltesDatum">
+
 Tag auswählen
+
 </h2>
 
 <input
@@ -125,17 +185,11 @@ placeholder="Neue Aufgabe">
 
 <select id="todoPrioritaet">
 
-<option value="hoch">
-🔴 Hoch
-</option>
+<option value="hoch">🔴 Hoch</option>
 
-<option value="mittel">
-🟠 Mittel
-</option>
+<option value="mittel">🟠 Mittel</option>
 
-<option value="niedrig">
-🟢 Niedrig
-</option>
+<option value="niedrig">🟢 Niedrig</option>
 
 </select>
 

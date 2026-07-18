@@ -1,60 +1,89 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DDH Studio 2.0</title>
+    <title>DDH Studio Enterprise</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
 
-<div class="sidebar">
-    <h2>DDH Studio</h2>
+    <div class="sidebar">
 
-    <button id="neu">
-        Neues Projekt
-    </button>
+        <h2>DDH Studio</h2>
 
-    <div id="projekte"></div>
-</div>
+        <button id="neu">Neues Projekt</button>
 
-<div class="main">
-    <div class="kalender">
-    <h2>📅 Kalender</h2>
+        <div id="projekte"></div>
 
-    <input type="date" id="datum">
-    <input type="text" id="termin" placeholder="Termin eingeben">
-
-    <button id="speichernTermin">
-        Termin speichern
-    </button>
-
-    <ul id="terminListe"></ul>
-</div>
-
-    <div class="topbar">
-        <h1>DDH Studio 2.0</h1>
     </div>
 
-    <div class="arbeitsbereich">
-        <h2>Willkommen</h2>
+    <div class="main">
 
-        <p>
-            Erstelle links dein erstes Projekt.
-        </p>
+        <div class="topbar">
+
+            <button id="vorherigerMonat">◀</button>
+
+            <h1 id="monatTitel">Juli 2026</h1>
+
+            <button id="naechsterMonat">▶</button>
+
+        </div>
+
+        <div class="arbeitsbereich">
+
+            <div id="kalender">
+
+                <div class="wochentage">
+                    <div>Mo</div>
+                    <div>Di</div>
+                    <div>Mi</div>
+                    <div>Do</div>
+                    <div>Fr</div>
+                    <div>Sa</div>
+                    <div>So</div>
+                </div>
+
+                <div id="tage"></div>
+
+            </div>
+
+            <div class="terminBereich">
+
+                <h2 id="ausgewaehltesDatum">
+                    Kein Tag ausgewählt
+                </h2>
+
+                <input
+                    type="text"
+                    id="termin"
+                    placeholder="Termin eingeben">
+
+                <button id="speichernTermin">
+                    Termin speichern
+                </button>
+
+                <div id="terminListe"></div>
+
+            </div>
+
+        </div>
+
     </div>
 
-</div>
+    <script src="app.js"></script>
 
-<script src="app.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js');
-}
-</script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js");
+        }
+    </script>
+
 </body>
+
 </html>

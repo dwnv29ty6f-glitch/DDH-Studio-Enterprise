@@ -1,106 +1,89 @@
-// ===================================
+// ==============================
 // DDH Studio Enterprise
-// Block 1
-// ===================================
+// Version 3.0
+// ==============================
 
 // Monate
 const monate = [
-    "Januar",
-    "Februar",
-    "März",
-    "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "Dezember"
+  "Januar",
+  "Februar",
+  "März",
+  "April",
+  "Mai",
+  "Juni",
+  "Juli",
+  "August",
+  "September",
+  "Oktober",
+  "November",
+  "Dezember"
 ];
 
 // HTML-Elemente
-const tage =
-document.getElementById("tage");
+const tage = document.getElementById("tage");
+const monatTitel = document.getElementById("monatTitel");
 
-const monatTitel =
-document.getElementById("monatTitel");
+const btnZurueck = document.getElementById("vorherigerMonat");
+const btnWeiter = document.getElementById("naechsterMonat");
 
-const btnZurueck =
-document.getElementById("vorherigerMonat");
+const datumTitel = document.getElementById("ausgewaehltesDatum");
 
-const btnWeiter =
-document.getElementById("naechsterMonat");
+const uhrzeit = document.getElementById("uhrzeit");
+const termin = document.getElementById("termin");
+const kategorie = document.getElementById("kategorie");
+const speichern = document.getElementById("speichern");
 
-const datumTitel =
-document.getElementById("ausgewaehltesDatum");
+const terminListe = document.getElementById("terminListe");
 
-const uhrzeit =
-document.getElementById("uhrzeit");
+// Datum
+let heute = new Date();
 
-const kategorie =
-document.getElementById("kategorie");
+let aktuellerMonat = heute.getMonth();
+let aktuellesJahr = heute.getFullYear();
 
-const termin =
-document.getElementById("termin");
+let ausgewaehlterTag = heute.getDate();
 
-const speichern =
-document.getElementById("speichernTermin");
-
-const terminListe =
-document.getElementById("terminListe");
-
-// Aktuelles Datum
-const heute = new Date();
-
-let monat =
-heute.getMonth();
-
-let jahr =
-heute.getFullYear();
-
-// Gewählter Tag
-let ausgewaehlterTag =
-null;
-
-// Alle Termine laden
+// Termine laden
 let termine =
-JSON.parse(
-localStorage.getItem("ddhKalender")
-) || {};
-// ===================================
-// Block 2
+JSON.parse(localStorage.getItem("termine")) || [];
+// ==============================
 // Kalender zeichnen
-// ===================================
+// ==============================
 
 function kalenderZeichnen() {
 
     tage.innerHTML = "";
 
-    monatTitel.textContent =
-        monate[monat] + " " + jahr;
-
-    let ersterTag =
-        new Date(jahr, monat, 1).getDay();
-
-    if (ersterTag === 0) {
-        ersterTag = 7;
-    }
+    const ersterTag =
+        new Date(aktuellesJahr, aktuellerMonat, 1).getDay();
 
     const tageImMonat =
-        new Date(jahr, monat + 1, 0).getDate();
+        new Date(
+            aktuellesJahr,
+            aktuellerMonat + 1,
+            0
+        ).getDate();
 
-    // Leere Felder
-    for (let i = 1; i < ersterTag; i++) {
+    monatTitel.textContent =
+        monate[aktuellerMonat] +
+        " " +
+        aktuellesJahr;
+
+    let start = ersterTag;
+
+    if (start === 0) start = 7;
+
+    for (let i = 1; i < start; i++) {
 
         const leer =
             document.createElement("div");
+
+        leer.className = "leer";
 
         tage.appendChild(leer);
 
     }
 
-    // Tage erzeugen
     for (let tag = 1; tag <= tageImMonat; tag++) {
 
         const feld =
@@ -108,46 +91,19 @@ function kalenderZeichnen() {
 
         feld.className = "tag";
 
-        feld.innerHTML =
-            "<div class='tagNummer'>" +
-            tag +
-            "</div>";
+        feld.textContent = tag;
 
-        const schluessel =
-            jahr + "-" +
-            (monat + 1) + "-" +
-            tag;
+        if (tag === ausgewaehlterTag) {
 
-        // Tag mit Termin markieren
-        if (
-            termine[schluessel] &&
-            termine[schluessel].length > 0
-        ) {
-
-            feld.classList.add(
-                "tagHatTermin"
-            );
+            feld.classList.add("aktiv");
 
         }
 
         feld.onclick = () => {
 
-            document
-                .querySelectorAll(".tag")
-                .forEach(t =>
-                    t.classList.remove("aktiv")
-                );
+            ausgewaehlterTag = tag;
 
-            feld.classList.add("aktiv");
-
-            ausgewaehlterTag =
-                schluessel;
-
-            datumTitel.textContent =
-                tag + ". " +
-                monate[monat] +
-                " " +
-                jahr;
+            kalenderZeichnen();
 
             termineAnzeigen();
 
@@ -157,26 +113,99 @@ function kalenderZeichnen() {
 
     }
 
+    datumTitel.textContent =
+        ausgewaehlterTag +
+        ". " +
+        monate[aktuellerMonat] +
+        " " +
+        aktuellesJahr;
+
 }
-// ===================================
-// Block 3
-// Termine anzeigen + speichern
-// ===================================
+// ==============================
+// Termin speichern
+// ==============================
+
+speichern.onclick = () => {
+
+    if (termin.value.trim() === "") return;
+
+    const eintrag = {
+
+        jahr: aktuellesJahr,
+        monat: aktuellerMonat,
+        tag: ausgewaehlterTag,
+
+        uhrzeit: uhrzeit.value,
+
+        text: termin.value,
+
+        kategorie: kategorie.value
+
+    };
+
+    termine.push(eintrag);
+
+    localStorage.setItem(
+        "termine",
+        JSON.stringify(termine)
+    );
+
+    termin.value = "";
+    uhrzeit.value = "";
+
+    termineAnzeigen();
+
+};
+
+// ==============================
+// Termine anzeigen
+// ==============================
 
 function termineAnzeigen() {
 
     terminListe.innerHTML = "";
 
-    if (!ausgewaehlterTag) return;
+    const liste = termine.filter(e =>
 
-    if (!termine[ausgewaehlterTag]) return;
+        e.jahr === aktuellesJahr &&
+        e.monat === aktuellerMonat &&
+        e.tag === ausgewaehlterTag
 
-    termine[ausgewaehlterTag].forEach((eintrag, index) => {
+    );
+
+    liste.forEach((eintrag, index) => {
 
         const box =
             document.createElement("div");
 
         box.className = "termin";
+
+        switch (eintrag.kategorie) {
+
+            case "Privat":
+                box.style.borderLeft =
+                    "6px solid #4dabf7";
+                break;
+
+            case "Schule":
+                box.style.borderLeft =
+                    "6px solid #51cf66";
+                break;
+
+            case "Arbeit":
+                box.style.borderLeft =
+                    "6px solid #ff922b";
+                break;
+
+            case "Sport":
+                box.style.borderLeft =
+                    "6px solid #e64980";
+                break;
+
+            default:
+                box.style.borderLeft =
+                    "6px solid #999";
+        }
 
         const info =
             document.createElement("div");
@@ -188,15 +217,13 @@ function termineAnzeigen() {
             eintrag.uhrzeit +
             " - " +
             eintrag.text;
+                    box.appendChild(info);
 
-        box.appendChild(info);
-
-        const buttonLeiste =
+        const buttons =
             document.createElement("div");
 
-        buttonLeiste.style.display = "flex";
-        buttonLeiste.style.gap = "10px";
-        buttonLeiste.style.marginTop = "12px";
+        buttons.className =
+            "terminButtons";
 
         // Bearbeiten
         const bearbeiten =
@@ -209,17 +236,19 @@ function termineAnzeigen() {
             uhrzeit.value =
                 eintrag.uhrzeit;
 
-            kategorie.value =
-                eintrag.kategorie;
-
             termin.value =
                 eintrag.text;
 
-            termine[ausgewaehlterTag]
-                .splice(index, 1);
+            kategorie.value =
+                eintrag.kategorie;
+
+            termine.splice(
+                termine.indexOf(eintrag),
+                1
+            );
 
             localStorage.setItem(
-                "ddhKalender",
+                "termine",
                 JSON.stringify(termine)
             );
 
@@ -236,22 +265,13 @@ function termineAnzeigen() {
 
         loeschen.onclick = () => {
 
-            termine[ausgewaehlterTag]
-                .splice(index, 1);
-
-            if (
-                termine[ausgewaehlterTag]
-                .length === 0
-            ) {
-
-                delete termine[
-                    ausgewaehlterTag
-                ];
-
-            }
+            termine.splice(
+                termine.indexOf(eintrag),
+                1
+            );
 
             localStorage.setItem(
-                "ddhKalender",
+                "termine",
                 JSON.stringify(termine)
             );
 
@@ -260,127 +280,101 @@ function termineAnzeigen() {
 
         };
 
-        buttonLeiste.appendChild(
+        buttons.appendChild(
             bearbeiten
         );
 
-        buttonLeiste.appendChild(
+        buttons.appendChild(
             loeschen
         );
 
-        box.appendChild(buttonLeiste);
+        box.appendChild(buttons);
 
         terminListe.appendChild(box);
 
     });
 
 }
+// ==============================
+// Monatswechsel
+// ==============================
 
-// Termin speichern
-speichern.onclick = () => {
-
-    if (!ausgewaehlterTag) {
-
-        alert(
-            "Bitte zuerst einen Tag auswählen."
-        );
-
-        return;
-
-    }
-
-    if (termin.value.trim() === "") {
-
-        alert(
-            "Bitte einen Termin eingeben."
-        );
-
-        return;
-
-    }
-
-    if (!termine[ausgewaehlterTag]) {
-
-        termine[ausgewaehlterTag] = [];
-
-    }
-
-    termine[ausgewaehlterTag].push({
-
-        uhrzeit:
-            uhrzeit.value,
-
-        kategorie:
-            kategorie.value,
-
-        text:
-            termin.value
-
-    });
-
-    localStorage.setItem(
-        "ddhKalender",
-        JSON.stringify(termine)
-    );
-
-    uhrzeit.value = "";
-    kategorie.value = "Privat";
-    termin.value = "";
-
-    termineAnzeigen();
-    kalenderZeichnen();
-
-};
-// ===================================
-// Block 4
-// Navigation + Start
-// ===================================
-
-// Monat zurück
 btnZurueck.onclick = () => {
 
-    monat--;
+    aktuellerMonat--;
 
-    if (monat < 0) {
+    if (aktuellerMonat < 0) {
 
-        monat = 11;
-        jahr--;
+        aktuellerMonat = 11;
+        aktuellesJahr--;
 
     }
 
-    ausgewaehlterTag = null;
-
-    datumTitel.textContent =
-        "Tag auswählen";
-
-    terminListe.innerHTML = "";
+    ausgewaehlterTag = 1;
 
     kalenderZeichnen();
+    termineAnzeigen();
 
 };
 
-// Monat vor
 btnWeiter.onclick = () => {
 
-    monat++;
+    aktuellerMonat++;
 
-    if (monat > 11) {
+    if (aktuellerMonat > 11) {
 
-        monat = 0;
-        jahr++;
+        aktuellerMonat = 0;
+        aktuellesJahr++;
 
     }
 
-    ausgewaehlterTag = null;
-
-    datumTitel.textContent =
-        "Tag auswählen";
-
-    terminListe.innerHTML = "";
+    ausgewaehlterTag = 1;
 
     kalenderZeichnen();
+    termineAnzeigen();
 
 };
 
-// Kalender starten
+// Heute auswählen
+
+function heuteAuswaehlen() {
+
+    const jetzt = new Date();
+
+    aktuellesJahr = jetzt.getFullYear();
+    aktuellerMonat = jetzt.getMonth();
+    ausgewaehlterTag = jetzt.getDate();
+
+}
+
+heuteAuswaehlen();
+// ==============================
+// DDH Studio Enterprise
+// Start
+// ==============================
+
+// Kalender und Termine laden
 kalenderZeichnen();
+termineAnzeigen();
+
+// Enter-Taste speichert Termin
+termin.addEventListener("keydown", (event) => {
+
+    if (event.key === "Enter") {
+
+        speichern.click();
+
+    }
+
+});
+
+// Kategorie nach dem Speichern zurücksetzen
+kategorie.value = "Privat";
+
+// Uhrzeit auf aktuelle Zeit setzen
+const jetzt = new Date();
+
+uhrzeit.value =
+    String(jetzt.getHours()).padStart(2, "0") +
+    ":" +
+    String(jetzt.getMinutes()).padStart(2, "0");

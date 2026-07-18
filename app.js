@@ -20,22 +20,3 @@ button.addEventListener("click", () => {
     projekte.appendChild(projekt);
 
 });
-const datum = document.getElementById("datum");
-const termin = document.getElementById("termin");
-const speichernTermin = document.getElementById("speichernTermin");
-const terminListe = document.getElementById("terminListe");
-
-speichernTermin.addEventListener("click", () => {
-    if (datum.value === "" || termin.value === "") {
-        alert("Bitte Datum und Termin eingeben!");
-        return;
-    }
-
-    const eintrag = document.createElement("li");
-    eintrag.textContent = datum.value + " – " + termin.value;
-
-    terminListe.appendChild(eintrag);
-
-    datum.value = "";
-    termin.value = "";
-});

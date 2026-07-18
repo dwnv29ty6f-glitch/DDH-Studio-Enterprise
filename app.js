@@ -120,8 +120,7 @@ function termineAnzeigen(){
         "terminEintrag";
 
         eintrag.textContent =
-        text;
-
+text.zeit + " – " + text.text;
         terminListe.appendChild(
             eintrag
         );

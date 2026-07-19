@@ -1937,7 +1937,7 @@ tageListe.forEach(t=>{
             dashboardAktualisieren();
 markierteTage = [];
 
-markierterMitarbeiter = [];
+markierterMitarbeiter = "";
             schliessen();
 
         };

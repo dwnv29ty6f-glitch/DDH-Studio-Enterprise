@@ -14,16 +14,6 @@ document.querySelectorAll(".seite");
 // Seite anzeigen
 
 function seiteAnzeigen(name){
-// Alle Seiten ausblenden
-
-seiten.forEach(seite=>{
-
-    seite.classList.remove(
-        "aktiv"
-    );
-
-});
-function seiteAnzeigen(name){
 
     // Alle Seiten ausblenden
 
@@ -35,7 +25,17 @@ function seiteAnzeigen(name){
 
     });
 
-    // Gewünschte Seite suchen
+    // Alle Buttons zurücksetzen
+
+    navButtons.forEach(button=>{
+
+        button.classList.remove(
+            "aktiv"
+        );
+
+    });
+
+    // Gewünschte Seite anzeigen
 
     const ziel =
     document.getElementById(
@@ -45,6 +45,25 @@ function seiteAnzeigen(name){
     if(ziel){
 
         ziel.classList.add(
+            "aktiv"
+        );
+
+    }
+
+    // Passenden Button markieren
+
+    const button =
+    document.querySelector(
+
+        '.navButton[data-seite="' +
+        name +
+        '"]'
+
+    );
+
+    if(button){
+
+        button.classList.add(
             "aktiv"
         );
 
@@ -65,7 +84,10 @@ navButtons.forEach(button=>{
             button.dataset.seite;
 
             seiteAnzeigen(name);
-
+localStorage.setItem(
+    "ddhSeite",
+    name
+);
         }
 
     );
@@ -75,6 +97,22 @@ navButtons.forEach(button=>{
 // Startseite
 // =====================================
 
-seiteAnzeigen("dashboard");
+const letzteSeite =
+localStorage.getItem(
+    "ddhSeite"
+);
+
+if(letzteSeite){
+
+    seiteAnzeigen(
+        letzteSeite
+    );
+
+}else{
+
+    seiteAnzeigen(
+        "dashboard"
+    );
 
 }
+

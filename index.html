@@ -24,7 +24,6 @@ href="style.css">
 <body>
 
 <div class="app">
-
 <!-- =====================================
 Header
 ===================================== -->
@@ -44,13 +43,15 @@ id="vorherigerMonat">
 
 <div class="headerMitte">
 
-<h1 id="monatTitel">
+<h1
+id="monatTitel">
 
 DDH Studio Enterprise
 
 </h1>
 
-<p id="headerUntertitel">
+<p
+id="headerUntertitel">
 
 Unternehmensverwaltung
 
@@ -70,13 +71,11 @@ id="naechsterMonat">
 </div>
 
 </header>
-
 <!-- =====================================
 Navigation
 ===================================== -->
 
-<nav
-id="navigation">
+<nav id="navigation">
 
 <button
 class="navButton aktiv"
@@ -138,7 +137,11 @@ data-seite="projekte">
 class="navButton"
 data-seite="einstellungen">
 
-⚙️
+⚙️ Einstellungen
+
+</button>
+
+</nav>
 <!-- =====================================
 Dashboard
 ===================================== -->
@@ -165,7 +168,8 @@ class="seite aktiv">
 
 </h3>
 
-<p id="heuteTermine">
+<p
+id="heuteTermine">
 
 0
 
@@ -181,7 +185,8 @@ class="seite aktiv">
 
 </h3>
 
-<p id="offeneTodos">
+<p
+id="offeneTodos">
 
 0
 
@@ -197,7 +202,8 @@ class="seite aktiv">
 
 </h3>
 
-<p id="hohePrioritaet">
+<p
+id="hohePrioritaet">
 
 0
 
@@ -213,7 +219,8 @@ class="seite aktiv">
 
 </h3>
 
-<p id="erledigteTodos">
+<p
+id="erledigteTodos">
 
 0
 
@@ -234,7 +241,7 @@ class="seite aktiv">
 <div
 id="dashboardTodos">
 
-Noch keine Aufgaben vorhanden.
+Keine Aufgaben vorhanden.
 
 </div>
 
@@ -251,7 +258,7 @@ Noch keine Aufgaben vorhanden.
 <div
 id="dashboardSchichten">
 
-Noch keine Schichten vorhanden.
+Keine Schichten vorhanden.
 
 </div>
 
@@ -314,31 +321,45 @@ id="uhrzeit">
 id="kategorie">
 
 <option value="Privat">
+
 🏠 Privat
+
 </option>
 
 <option value="Arbeit">
+
 💼 Arbeit
+
 </option>
 
 <option value="Familie">
+
 👨‍👩‍👧 Familie
+
 </option>
 
 <option value="Schule">
+
 🎓 Schule
+
 </option>
 
 <option value="Urlaub">
+
 ✈️ Urlaub
+
 </option>
 
 <option value="Geburtstag">
+
 🎂 Geburtstag
+
 </option>
 
 <option value="Sonstiges">
+
 📌 Sonstiges
+
 </option>
 
 </select>
@@ -351,7 +372,7 @@ placeholder="Termin eingeben">
 <button
 id="speichernTermin">
 
-Termin speichern
+💾 Termin speichern
 
 </button>
 
@@ -393,35 +414,51 @@ Projekt
 id="todoProjekt">
 
 <option value="Privat">
+
 🏠 Privat
+
 </option>
 
 <option value="DDH Studio">
+
 🎬 DDH Studio
+
 </option>
 
 <option value="Enterprise">
+
 🚀 Enterprise
+
 </option>
 
 <option value="Arbeit">
+
 💼 Arbeit
+
 </option>
 
 <option value="Schule">
+
 🎓 Schule
+
 </option>
 
 <option value="Familie">
+
 👨‍👩‍👧 Familie
+
 </option>
 
 <option value="Urlaub">
+
 ✈️ Urlaub
+
 </option>
 
 <option value="Sonstiges">
+
 📌 Sonstiges
+
 </option>
 
 </select>
@@ -435,7 +472,7 @@ Aufgabe
 <input
 type="text"
 id="todoText"
-placeholder="Neue Aufgabe">
+placeholder="Neue Aufgabe eingeben">
 
 <label>
 
@@ -447,15 +484,21 @@ Priorität
 id="todoPrioritaet">
 
 <option value="hoch">
+
 🔴 Hoch
+
 </option>
 
 <option value="mittel">
+
 🟠 Mittel
+
 </option>
 
 <option value="niedrig">
+
 🟢 Niedrig
+
 </option>
 
 </select>
@@ -480,6 +523,8 @@ id="todoSpeichern">
 <div
 id="todoListe">
 
+Keine Aufgaben vorhanden.
+
 </div>
 
 </div>
@@ -495,7 +540,7 @@ Schichtplan
 id="seite-schichtplan"
 class="seite">
 
-<div class="schichtLayout">
+<div class="modul">
 
 <div class="schichtKopf">
 
@@ -532,6 +577,8 @@ id="schichtNaechsterMonat">
 
 </div>
 
+<hr>
+
 <div class="mitarbeiterBereich">
 
 <input
@@ -552,6 +599,8 @@ id="mitarbeiterSpeichern">
 id="mitarbeiterListe">
 
 </div>
+
+<hr>
 
 <div class="schichtPlan">
 
@@ -582,11 +631,22 @@ id="schichtplanBody">
 
 </div>
 
+<hr>
+
+<h3>
+
+🎨 Legende
+
+</h3>
+
 <div class="schichtLegende">
 
 <div class="legende">
 
-<span class="farbe frueh"></span>
+<span
+class="farbe frueh">
+
+</span>
 
 Früh
 
@@ -594,7 +654,10 @@ Früh
 
 <div class="legende">
 
-<span class="farbe spaet"></span>
+<span
+class="farbe spaet">
+
+</span>
 
 Spät
 
@@ -602,7 +665,10 @@ Spät
 
 <div class="legende">
 
-<span class="farbe nacht"></span>
+<span
+class="farbe nacht">
+
+</span>
 
 Nacht
 
@@ -610,7 +676,10 @@ Nacht
 
 <div class="legende">
 
-<span class="farbe frei"></span>
+<span
+class="farbe frei">
+
+</span>
 
 Frei
 
@@ -618,7 +687,10 @@ Frei
 
 <div class="legende">
 
-<span class="farbe urlaub"></span>
+<span
+class="farbe urlaub">
+
+</span>
 
 Urlaub
 
@@ -626,7 +698,10 @@ Urlaub
 
 <div class="legende">
 
-<span class="farbe krank"></span>
+<span
+class="farbe krank">
+
+</span>
 
 Krank
 
@@ -656,7 +731,7 @@ class="seite">
 <button
 id="neuesDokument">
 
-➕ Dokument hochladen
+➕ Dokument hinzufügen
 
 </button>
 
@@ -790,13 +865,7 @@ id="backupErstellen">
 </div>
 
 </section>
-
 </div>
-
-<script
-src="navigation.js">
-
-</script>
 
 <script
 src="app.js">

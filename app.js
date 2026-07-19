@@ -373,7 +373,32 @@ function schichtName(typ){
     return SCHICHTEN[typ].name;
 
 }
+// ==========================================
+// Schichtstunden
+// ==========================================
 
+function schichtStunden(typ){
+
+    switch(typ){
+
+        case "frueh":
+            return 8;
+
+        case "spaet":
+            return 8;
+
+        case "nacht":
+            return 10;
+
+        case "frei":
+        case "urlaub":
+        case "krank":
+        default:
+            return 0;
+
+    }
+
+}
 // ==========================================
 // Schicht suchen
 // ==========================================

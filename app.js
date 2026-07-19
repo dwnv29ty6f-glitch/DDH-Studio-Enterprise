@@ -1630,12 +1630,46 @@ function schichtplanZeichnen(){
         document.createElement("tr");
 
         const tdName =
-        document.createElement("td");
+document.createElement("td");
 
-        tdName.textContent =
-        person.name;
+// Monatsstunden berechnen
 
-        tr.appendChild(tdName);
+const stunden =
+schichten
+.filter(s=>
+
+    s.name===person.name &&
+
+    s.monat===aktuellerMonat &&
+
+    s.jahr===aktuellesJahr
+
+)
+.reduce(
+
+    (summe,s)=>
+
+    summe +
+
+    schichtStunden(s.typ),
+
+    0
+
+);
+
+tdName.innerHTML =
+
+"<strong>" +
+
+person.name +
+
+"</strong><br>" +
+
+stunden +
+
+" Std.";
+
+tr.appendChild(tdName);
 
         // --------------------------
         // Schichtzellen

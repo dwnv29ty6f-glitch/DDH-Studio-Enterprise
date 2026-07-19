@@ -1745,7 +1745,7 @@ function schichtplanZeichnen(){
 });
 
 tr.appendChild(td);
-            );
+            
 
         }
 

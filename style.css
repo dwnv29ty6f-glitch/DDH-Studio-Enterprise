@@ -1282,3 +1282,79 @@ textarea:focus{
     background:#555;
 
 }
+/* =========================================
+   Schicht Dialog
+========================================= */
+
+.schichtDialog{
+
+    position:fixed;
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,.6);
+
+    z-index:9999;
+
+}
+
+.schichtDialog.aktiv{
+
+    display:flex;
+
+}
+
+.schichtFenster{
+
+    width:90%;
+    max-width:420px;
+
+    background:var(--panel);
+
+    border-radius:20px;
+
+    padding:25px;
+
+}
+
+.schichtAuswahlGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+    margin:20px 0;
+
+}
+
+.schichtAuswahl{
+
+    padding:18px;
+
+    font-size:16px;
+
+}
+
+#schichtLoeschen{
+
+    width:100%;
+
+    margin-bottom:12px;
+
+    background:#e74c3c;
+
+}
+
+#schichtAbbrechen{
+
+    width:100%;
+
+    background:#555;
+
+}

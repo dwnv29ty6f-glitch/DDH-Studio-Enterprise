@@ -1432,10 +1432,9 @@ function mitarbeiterAnzeigen(){
         const bearbeiten =
         document.createElement("button");
 
-        bearbeiten.textContent =
-        "✏️";
+        bearbeiten.textContent = "✏️";
 
-        bearbeiten.onclick=()=>{
+        bearbeiten.onclick = ()=>{
 
             dom.mitarbeiterName.value =
             person.name;
@@ -1456,35 +1455,23 @@ function mitarbeiterAnzeigen(){
         const loeschen =
         document.createElement("button");
 
-        loeschen.textContent =
-        "🗑️";
+        loeschen.textContent = "🗑️";
 
-        loeschen.onclick=()=>{
+        loeschen.onclick = ()=>{
 
             if(!confirm(
-
                 person.name +
-
                 " wirklich löschen?"
-
             )){
-
                 return;
-
             }
-
-            // Mitarbeiter entfernen
 
             mitarbeiter =
             mitarbeiter.filter(m=>m!==person);
 
-            // Schichten entfernen
-
             schichten =
             schichten.filter(s=>
-
                 s.name!==person.name
-
             );
 
             speichern();
@@ -1497,21 +1484,12 @@ function mitarbeiterAnzeigen(){
 
         };
 
-        buttons.appendChild(
-            bearbeiten
-        );
+        buttons.appendChild(bearbeiten);
+        buttons.appendChild(loeschen);
 
-        buttons.appendChild(
-            loeschen
-        );
+        karte.appendChild(buttons);
 
-        karte.appendChild(
-            buttons
-        );
-
-        dom.mitarbeiterListe.appendChild(
-            karte
-        );
+        dom.mitarbeiterListe.appendChild(karte);
 
     });
 
@@ -1521,31 +1499,21 @@ function mitarbeiterAnzeigen(){
 // Mitarbeiter speichern
 // ==========================================
 
-dom.mitarbeiterSpeichern.onclick=()=>{
+dom.mitarbeiterSpeichern.onclick = ()=>{
 
     const name =
     dom.mitarbeiterName.value.trim();
 
     if(name===""){
-
         return;
-
     }
 
     if(
-
-        mitarbeiter.some(m=>
-
-            m.name===name
-
-        )
-
+        mitarbeiter.some(m=>m.name===name)
     ){
 
         alert(
-
             "Mitarbeiter existiert bereits."
-
         );
 
         return;
@@ -1587,7 +1555,6 @@ dom.mitarbeiterName.addEventListener(
     }
 
 );
-
 // ==========================================
 // Schichtplan zeichnen
 // ==========================================
@@ -1609,36 +1576,22 @@ function schichtplanZeichnen(){
 
     const tage =
     tageImMonat(
-
         aktuellerMonat,
-
         aktuellesJahr
-
     );
 
     // --------------------------
     // Kopfzeile
     // --------------------------
 
-    for(
-
-        let tag=1;
-
-        tag<=tage;
-
-        tag++
-
-    ){
+    for(let tag=1; tag<=tage; tag++){
 
         const th =
         document.createElement("th");
 
-        th.textContent =
-        tag;
+        th.textContent = tag;
 
-        dom.schichtHeader.appendChild(
-            th
-        );
+        dom.schichtHeader.appendChild(th);
 
     }
 
@@ -1659,19 +1612,11 @@ function schichtplanZeichnen(){
 
         tr.appendChild(tdName);
 
-// --------------------------
-// Schichtzellen
-// --------------------------
+        // --------------------------
+        // Schichtzellen
+        // --------------------------
 
-        for(
-
-            let tag=1;
-
-            tag<=tage;
-
-            tag++
-
-        ){
+        for(let tag=1; tag<=tage; tag++){
 
             const td =
             document.createElement("td");
@@ -1681,11 +1626,8 @@ function schichtplanZeichnen(){
 
             const eintrag =
             schichtSuchen(
-
                 person.name,
-
                 tag
-
             );
 
             if(eintrag){
@@ -1695,63 +1637,85 @@ function schichtplanZeichnen(){
 
                 box.className =
                 "schicht " +
-
                 eintrag.typ;
 
                 box.textContent =
                 schichtKurz(
-
                     eintrag.typ
-
                 );
 
-                td.appendChild(
-                    box
-                );
+                td.appendChild(box);
+
+            }
+
+            // Bereits markiert?
+
+            if(
+                markierterMitarbeiter===person.name &&
+                markierteTage.includes(tag)
+            ){
+
+                td.classList.add("markiert");
 
             }
 
             td.addEventListener("click",()=>{
 
-    if(markierterMitarbeiter!==person.name){
+                // anderer Mitarbeiter
 
-        markierterMitarbeiter=person.name;
-        markierteTage=[];
+                if(
+                    markierterMitarbeiter!==person.name
+                ){
 
-        document
-        .querySelectorAll(".schichtZelle")
-        .forEach(z=>z.classList.remove("markiert"));
+                    markierterMitarbeiter =
+                    person.name;
 
-    }
+                    markierteTage = [];
 
-    if(markierteTage.includes(tag)){
+                    document
+                    .querySelectorAll(
+                        ".schichtZelle.markiert"
+                    )
+                    .forEach(z=>
+                        z.classList.remove(
+                            "markiert"
+                        )
+                    );
 
-        schichtBearbeiten(person.name,tag);
+                }
 
-        return;
+                // Bereits markiert?
 
-    }
+                if(
+                    markierteTage.includes(tag)
+                ){
 
-    markierteTage.push(tag);
+                    // Dialog öffnen
 
-    td.classList.add("markiert");
+                    schichtBearbeiten(
+                        person.name,
+                        tag
+                    );
 
-    if(markierteTage.length===1){
+                    return;
 
-        schichtBearbeiten(person.name,tag);
+                }
 
-    }
+                // Tag markieren
 
-});
+                markierteTage.push(tag);
 
-tr.appendChild(td);
-            
+                td.classList.add(
+                    "markiert"
+                );
+
+            });
+
+            tr.appendChild(td);
 
         }
 
-        dom.schichtBody.appendChild(
-            tr
-        );
+        dom.schichtBody.appendChild(tr);
 
     });
 
@@ -1763,14 +1727,13 @@ tr.appendChild(td);
 
 if(dom.schichtVorher){
 
-    dom.schichtVorher.onclick=()=>{
+    dom.schichtVorher.onclick = ()=>{
 
         aktuellerMonat--;
 
         if(aktuellerMonat<0){
 
-            aktuellerMonat=11;
-
+            aktuellerMonat = 11;
             aktuellesJahr--;
 
         }
@@ -1793,14 +1756,13 @@ if(dom.schichtVorher){
 
 if(dom.schichtWeiter){
 
-    dom.schichtWeiter.onclick=()=>{
+    dom.schichtWeiter.onclick = ()=>{
 
         aktuellerMonat++;
 
         if(aktuellerMonat>11){
 
-            aktuellerMonat=0;
-
+            aktuellerMonat = 0;
             aktuellesJahr++;
 
         }

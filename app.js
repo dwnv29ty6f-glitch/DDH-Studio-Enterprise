@@ -1637,7 +1637,9 @@ function schichtplanZeichnen(){
 document.createElement("td");
 
 // Monatsstunden berechnen
-
+let frueh = 0;
+let spaet = 0;
+let nacht = 0;
 const stunden =
 schichten
 .filter(s=>
@@ -1651,11 +1653,16 @@ schichten
 )
 .reduce(
 
-    (summe,s)=>
+   (summe,s)=>{
 
-    summe +
+    if(s.typ==="frueh") frueh++;
+    if(s.typ==="spaet") spaet++;
+    if(s.typ==="nacht") nacht++;
 
-    schichtStunden(s.typ),
+    return summe +
+    schichtStunden(s.typ);
+
+}
 
     0
 

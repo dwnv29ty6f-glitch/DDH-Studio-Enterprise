@@ -1661,7 +1661,23 @@ schichten
 
 );
 
-const reststunden = SOLLSTUNDEN - stunden;
+let info;
+
+if(stunden > SOLLSTUNDEN){
+
+    info =
+    "+" +
+    (stunden - SOLLSTUNDEN) +
+    " Überstunden";
+
+}else{
+
+    info =
+    "Rest: " +
+    (SOLLSTUNDEN - stunden) +
+    " Std.";
+
+}
 
 tdName.innerHTML =
 
@@ -1669,9 +1685,13 @@ tdName.innerHTML =
 person.name +
 "</strong><br>" +
 
-"🕒 " + stunden + " / " + SOLLSTUNDEN + " Std.<br>" +
+"🕒 " +
+stunden +
+" / " +
+SOLLSTUNDEN +
+" Std.<br>" +
 
-"Rest: " + reststunden + " Std.";
+info;
 tr.appendChild(tdName);
 
         // --------------------------

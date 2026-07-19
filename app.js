@@ -1886,30 +1886,49 @@ function schichtBearbeiten(name,tag){
             const typ =
             button.dataset.schicht;
 
-            const vorhanden =
-            schichtSuchen(name,tag);
+            const tageListe =
 
-            if(vorhanden){
+markierteTage.length>0
 
-                vorhanden.typ = typ;
+?
 
-            }else{
+markierteTage
 
-                schichten.push({
+:
 
-                    name:name,
+[tag];
 
-                    tag:tag,
+tageListe.forEach(t=>{
 
-                    monat:aktuellerMonat,
+    const vorhanden =
+    schichtSuchen(
+        name,
+        t
+    );
 
-                    jahr:aktuellesJahr,
+    if(vorhanden){
 
-                    typ:typ
+        vorhanden.typ = typ;
 
-                });
+    }else{
 
-            }
+        schichten.push({
+
+            name:name,
+
+            tag:t,
+
+            monat:aktuellerMonat,
+
+            jahr:aktuellesJahr,
+
+            typ:typ
+
+        });
+
+    }
+
+});
 
             speichern();
 

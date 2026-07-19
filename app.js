@@ -1806,140 +1806,106 @@ if(dom.schichtWeiter){
 
 function schichtBearbeiten(name,tag){
 
-    const eingabe = prompt(
+    const dialog =
+    document.getElementById("schichtDialog");
 
-`Schicht auswählen
+    const titel =
+    document.getElementById("schichtDialogTitel");
 
-F = Früh
-S = Spät
-N = Nacht
-R = Frei
-U = Urlaub
-K = Krank
-L = Löschen`
+    const loeschen =
+    document.getElementById("schichtLoeschen");
 
-    );
+    const abbrechen =
+    document.getElementById("schichtAbbrechen");
 
-    if(eingabe===null){
+    titel.textContent =
+    name + " • Tag " + tag;
 
-        return;
+    dialog.classList.add("aktiv");
+
+    function schliessen(){
+
+        dialog.classList.remove("aktiv");
 
     }
 
-    const wert =
-    eingabe.trim().toUpperCase();
+    // Buttons zurücksetzen
 
-    // --------------------------
-    // Löschen
-    // --------------------------
+    document
+    .querySelectorAll(".schichtAuswahl")
+    .forEach(button=>{
 
-    if(wert==="L"){
+        button.onclick=()=>{
 
-        schichtLoeschen(
+            const typ =
+            button.dataset.schicht;
 
-            name,
+            const vorhanden =
+            schichtSuchen(name,tag);
 
-            tag
+            if(vorhanden){
 
-        );
+                vorhanden.typ = typ;
+
+            }else{
+
+                schichten.push({
+
+                    name:name,
+
+                    tag:tag,
+
+                    monat:aktuellerMonat,
+
+                    jahr:aktuellesJahr,
+
+                    typ:typ
+
+                });
+
+            }
+
+            speichern();
+
+            schichtplanZeichnen();
+
+            dashboardAktualisieren();
+
+            schliessen();
+
+        };
+
+    });
+
+    loeschen.onclick=()=>{
+
+        schichtLoeschen(name,tag);
 
         schichtplanZeichnen();
 
         dashboardAktualisieren();
 
-        return;
+        schliessen();
 
-    }
+    };
 
-    let typ = "";
+    abbrechen.onclick=()=>{
 
-    switch(wert){
+        schliessen();
 
-        case "F":
+    };
 
-            typ="frueh";
+    dialog.onclick=(event)=>{
 
-            break;
+        if(event.target===dialog){
 
-        case "S":
+            schliessen();
 
-            typ="spaet";
+        }
 
-            break;
+    };
 
-        case "N":
-
-            typ="nacht";
-
-            break;
-
-        case "R":
-
-            typ="frei";
-
-            break;
-
-        case "U":
-
-            typ="urlaub";
-
-            break;
-
-        case "K":
-
-            typ="krank";
-
-            break;
-
-        default:
-
-            alert(
-
-                "Ungültige Eingabe."
-
-            );
-
-            return;
-
-    }
-
-    const vorhanden =
-    schichtSuchen(
-
-        name,
-
-        tag
-
-    );
-
-    if(vorhanden){
-
-        vorhanden.typ = typ;
-
-    }else{
-
-        schichten.push({
-
-            name:name,
-
-            tag:tag,
-
-            monat:aktuellerMonat,
-
-            jahr:aktuellesJahr,
-
-            typ:typ
-
-        });
-
-    }
-
-    speichern();
-
-    schichtplanZeichnen();
-
-    dashboardAktualisieren();
-
+}
 }
 // ==========================================
 // DDH Studio Enterprise 9.0

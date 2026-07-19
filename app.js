@@ -1,15 +1,17 @@
-// =====================================
-// DDH Studio Enterprise 8.0
+// ==========================================
+// DDH Studio Enterprise 9.0
 // app.js
 // Teil 1
-// Grunddaten
-// =====================================
+// Grundsystem
+// ==========================================
 
-// -------------------------
-// Monate
-// -------------------------
+"use strict";
 
-const monate = [
+// ==========================================
+// Konstanten
+// ==========================================
+
+const MONATE = [
     "Januar",
     "Februar",
     "März",
@@ -24,9 +26,41 @@ const monate = [
     "Dezember"
 ];
 
-// -------------------------
-// Heutiges Datum
-// -------------------------
+const SCHICHTEN = {
+    frueh: {
+        kurz: "F",
+        name: "Früh"
+    },
+
+    spaet: {
+        kurz: "S",
+        name: "Spät"
+    },
+
+    nacht: {
+        kurz: "N",
+        name: "Nacht"
+    },
+
+    frei: {
+        kurz: "-",
+        name: "Frei"
+    },
+
+    urlaub: {
+        kurz: "U",
+        name: "Urlaub"
+    },
+
+    krank: {
+        kurz: "K",
+        name: "Krank"
+    }
+};
+
+// ==========================================
+// Datum
+// ==========================================
 
 const heute = new Date();
 
@@ -34,147 +68,167 @@ let aktuellerMonat = heute.getMonth();
 let aktuellesJahr = heute.getFullYear();
 let ausgewaehlterTag = heute.getDate();
 
-// -------------------------
-// Navigation
-// -------------------------
+// ==========================================
+// DOM Elemente
+// ==========================================
 
-const navButtons =
-document.querySelectorAll(".navButton");
+const dom = {
 
-const seiten =
-document.querySelectorAll(".seite");
+    // Navigation
 
-// -------------------------
-// Kalender
-// -------------------------
+    navButtons:
+    document.querySelectorAll(".navButton"),
 
-const tage =
-document.getElementById("tage");
+    seiten:
+    document.querySelectorAll(".seite"),
 
-const monatTitel =
-document.getElementById("monatTitel");
+    // Kalender
 
-const datumTitel =
-document.getElementById("ausgewaehltesDatum");
+    tage:
+    document.getElementById("tage"),
 
-const btnZurueck =
-document.getElementById("vorherigerMonat");
+    monatTitel:
+    document.getElementById("monatTitel"),
 
-const btnWeiter =
-document.getElementById("naechsterMonat");
+    datumTitel:
+    document.getElementById("ausgewaehltesDatum"),
 
-// -------------------------
-// Termine
-// -------------------------
+    btnVorher:
+    document.getElementById("vorherigerMonat"),
 
-const uhrzeit =
-document.getElementById("uhrzeit");
+    btnWeiter:
+    document.getElementById("naechsterMonat"),
 
-const kategorie =
-document.getElementById("kategorie");
+    // Termine
 
-const termin =
-document.getElementById("termin");
+    uhrzeit:
+    document.getElementById("uhrzeit"),
 
-const speichernTermin =
-document.getElementById("speichernTermin");
+    kategorie:
+    document.getElementById("kategorie"),
 
-const terminListe =
-document.getElementById("terminListe");
+    termin:
+    document.getElementById("termin"),
 
-// -------------------------
-// Aufgaben
-// -------------------------
+    speichernTermin:
+    document.getElementById("speichernTermin"),
 
-const todoProjekt =
-document.getElementById("todoProjekt");
+    terminListe:
+    document.getElementById("terminListe"),
 
-const todoText =
-document.getElementById("todoText");
+    // Aufgaben
 
-const todoPrioritaet =
-document.getElementById("todoPrioritaet");
+    todoProjekt:
+    document.getElementById("todoProjekt"),
 
-const todoSpeichern =
-document.getElementById("todoSpeichern");
+    todoText:
+    document.getElementById("todoText"),
 
-const todoListe =
-document.getElementById("todoListe");
+    todoPrioritaet:
+    document.getElementById("todoPrioritaet"),
 
-// -------------------------
-// Dashboard
-// -------------------------
+    todoSpeichern:
+    document.getElementById("todoSpeichern"),
 
-const heuteTermine =
-document.getElementById("heuteTermine");
+    todoListe:
+    document.getElementById("todoListe"),
 
-const offeneTodos =
-document.getElementById("offeneTodos");
+    // Dashboard
 
-const hohePrioritaet =
-document.getElementById("hohePrioritaet");
+    heuteTermine:
+    document.getElementById("heuteTermine"),
 
-const erledigteTodos =
-document.getElementById("erledigteTodos");
+    offeneTodos:
+    document.getElementById("offeneTodos"),
 
-const dashboardTodos =
-document.getElementById("dashboardTodos");
+    hohePrioritaet:
+    document.getElementById("hohePrioritaet"),
 
-const dashboardSchichten =
-document.getElementById("dashboardSchichten");
+    erledigteTodos:
+    document.getElementById("erledigteTodos"),
 
-// -------------------------
-// Schichtplan
-// -------------------------
+    dashboardTodos:
+    document.getElementById("dashboardTodos"),
 
-const mitarbeiterName =
-document.getElementById("mitarbeiterName");
+    dashboardSchichten:
+    document.getElementById("dashboardSchichten"),
 
-const mitarbeiterSpeichern =
-document.getElementById("mitarbeiterSpeichern");
+    // Schichtplan
 
-const mitarbeiterListe =
-document.getElementById("mitarbeiterListe");
+    mitarbeiterName:
+    document.getElementById("mitarbeiterName"),
 
-const schichtHeader =
-document.getElementById("schichtHeader");
+    mitarbeiterSpeichern:
+    document.getElementById("mitarbeiterSpeichern"),
 
-const schichtplanBody =
-document.getElementById("schichtplanBody");
+    mitarbeiterListe:
+    document.getElementById("mitarbeiterListe"),
 
-// -------------------------
-// Daten laden
-// -------------------------
+    schichtHeader:
+    document.getElementById("schichtHeader"),
+
+    schichtBody:
+    document.getElementById("schichtplanBody"),
+
+    schichtMonat:
+    document.getElementById("schichtMonat"),
+
+    schichtVorher:
+    document.getElementById("schichtVorherigerMonat"),
+
+    schichtWeiter:
+    document.getElementById("schichtNaechsterMonat")
+
+};
+
+// ==========================================
+// Daten
+// ==========================================
 
 let termine =
-JSON.parse(localStorage.getItem("ddhTermine")) || [];
+JSON.parse(
+localStorage.getItem("ddhTermine")
+) || [];
 
 let todos =
-JSON.parse(localStorage.getItem("ddhTodos")) || [];
+JSON.parse(
+localStorage.getItem("ddhTodos")
+) || [];
 
 let mitarbeiter =
-JSON.parse(localStorage.getItem("ddhMitarbeiter")) || [];
+JSON.parse(
+localStorage.getItem("ddhMitarbeiter")
+) || [];
 
 let schichten =
-JSON.parse(localStorage.getItem("ddhSchichten")) || [];
+JSON.parse(
+localStorage.getItem("ddhSchichten")
+) || [];
 
 let dokumente =
-JSON.parse(localStorage.getItem("ddhDokumente")) || [];
+JSON.parse(
+localStorage.getItem("ddhDokumente")
+) || [];
 
 let kunden =
-JSON.parse(localStorage.getItem("ddhKunden")) || [];
+JSON.parse(
+localStorage.getItem("ddhKunden")
+) || [];
 
 let projekte =
-JSON.parse(localStorage.getItem("ddhProjekte")) || [];
-// =====================================
-// DDH Studio Enterprise 8.0
+JSON.parse(
+localStorage.getItem("ddhProjekte")
+) || [];
+// ==========================================
+// DDH Studio Enterprise 9.0
+// app.js
 // Teil 2
-// Speichern & Navigation
-// =====================================
+// Hilfsfunktionen & Speicher
+// ==========================================
 
-// -------------------------
+// ==========================================
 // Daten speichern
-// -------------------------
+// ==========================================
 
 function speichern(){
 
@@ -215,9 +269,9 @@ function speichern(){
 
 }
 
-// -------------------------
+// ==========================================
 // Datum formatieren
-// -------------------------
+// ==========================================
 
 function datumText(tag,monat,jahr){
 
@@ -227,7 +281,7 @@ function datumText(tag,monat,jahr){
 
         ". " +
 
-        monate[monat] +
+        MONATE[monat] +
 
         " " +
 
@@ -237,42 +291,160 @@ function datumText(tag,monat,jahr){
 
 }
 
-// -------------------------
-// Seite anzeigen
-// -------------------------
+// ==========================================
+// Tage im Monat
+// ==========================================
+
+function tageImMonat(monat,jahr){
+
+    return new Date(
+
+        jahr,
+
+        monat + 1,
+
+        0
+
+    ).getDate();
+
+}
+
+// ==========================================
+// Wochentag erster Monatstag
+// Montag = 1
+// ==========================================
+
+function ersterWochentag(monat,jahr){
+
+    let tag = new Date(
+
+        jahr,
+
+        monat,
+
+        1
+
+    ).getDay();
+
+    if(tag===0){
+
+        tag=7;
+
+    }
+
+    return tag;
+
+}
+
+// ==========================================
+// Schichttext
+// ==========================================
+
+function schichtKurz(typ){
+
+    if(!SCHICHTEN[typ]){
+
+        return "";
+
+    }
+
+    return SCHICHTEN[typ].kurz;
+
+}
+
+// ==========================================
+// Schichtname
+// ==========================================
+
+function schichtName(typ){
+
+    if(!SCHICHTEN[typ]){
+
+        return "";
+
+    }
+
+    return SCHICHTEN[typ].name;
+
+}
+
+// ==========================================
+// Schicht suchen
+// ==========================================
+
+function schichtSuchen(name,tag){
+
+    return schichten.find(s=>
+
+        s.name===name &&
+
+        s.tag===tag &&
+
+        s.monat===aktuellerMonat &&
+
+        s.jahr===aktuellesJahr
+
+    );
+
+}
+
+// ==========================================
+// Schicht löschen
+// ==========================================
+
+function schichtLoeschen(name,tag){
+
+    schichten = schichten.filter(s=>
+
+        !(
+
+            s.name===name &&
+
+            s.tag===tag &&
+
+            s.monat===aktuellerMonat &&
+
+            s.jahr===aktuellesJahr
+
+        )
+
+    );
+
+    speichern();
+
+}
+
+// ==========================================
+// Navigation
+// ==========================================
 
 function seiteAnzeigen(name){
 
-    seiten.forEach(seite=>{
+    dom.seiten.forEach(seite=>{
 
-        seite.classList.remove(
-            "aktiv"
-        );
+        seite.classList.remove("aktiv");
 
     });
 
-    navButtons.forEach(button=>{
+    dom.navButtons.forEach(button=>{
 
-        button.classList.remove(
-            "aktiv"
-        );
+        button.classList.remove("aktiv");
 
     });
 
     const ziel = document.getElementById(
+
         "seite-" + name
+
     );
 
     if(ziel){
 
-        ziel.classList.add(
-            "aktiv"
-        );
+        ziel.classList.add("aktiv");
 
     }
 
-    const button =
-    document.querySelector(
+    const button = document.querySelector(
 
         '.navButton[data-seite="' +
 
@@ -284,56 +456,63 @@ function seiteAnzeigen(name){
 
     if(button){
 
-        button.classList.add(
-            "aktiv"
-        );
+        button.classList.add("aktiv");
 
     }
 
     localStorage.setItem(
+
         "ddhSeite",
+
         name
+
     );
 
 }
 
-// -------------------------
+// ==========================================
 // Navigation starten
-// -------------------------
+// ==========================================
 
-navButtons.forEach(button=>{
+dom.navButtons.forEach(button=>{
 
     button.addEventListener(
+
         "click",
+
         ()=>{
 
             seiteAnzeigen(
+
                 button.dataset.seite
+
             );
 
         }
+
     );
 
 });
-// =====================================
-// DDH Studio Enterprise 8.0
+// ==========================================
+// DDH Studio Enterprise 9.0
+// app.js
 // Teil 3
 // Kalender
-// =====================================
+// ==========================================
 
 function kalenderZeichnen(){
 
-    tage.innerHTML = "";
+    dom.tage.innerHTML = "";
 
-    monatTitel.textContent =
+    dom.monatTitel.textContent =
 
-        monate[aktuellerMonat] +
+        MONATE[aktuellerMonat] +
 
         " " +
 
         aktuellesJahr;
 
-    datumTitel.textContent =
+    dom.datumTitel.textContent =
 
         datumText(
 
@@ -345,27 +524,35 @@ function kalenderZeichnen(){
 
         );
 
-    let ersterTag =
-    new Date(
-        aktuellesJahr,
+    const ersterTag =
+    ersterWochentag(
+
         aktuellerMonat,
-        1
-    ).getDay();
 
-    if(ersterTag===0){
+        aktuellesJahr
 
-        ersterTag=7;
+    );
 
-    }
+    const anzahlTage =
+    tageImMonat(
 
-    const tageImMonat =
-    new Date(
-        aktuellesJahr,
-        aktuellerMonat+1,
-        0
-    ).getDate();
+        aktuellerMonat,
 
-    for(let i=1;i<ersterTag;i++){
+        aktuellesJahr
+
+    );
+
+    // Leere Felder
+
+    for(
+
+        let i=1;
+
+        i<ersterTag;
+
+        i++
+
+    ){
 
         const leer =
         document.createElement("div");
@@ -373,11 +560,21 @@ function kalenderZeichnen(){
         leer.className =
         "tag leer";
 
-        tage.appendChild(leer);
+        dom.tage.appendChild(leer);
 
     }
 
-    for(let tag=1;tag<=tageImMonat;tag++){
+    // Kalendertage
+
+    for(
+
+        let tag=1;
+
+        tag<=anzahlTage;
+
+        tag++
+
+    ){
 
         const feld =
         document.createElement("div");
@@ -393,6 +590,8 @@ function kalenderZeichnen(){
 
         }
 
+        // Tagesnummer
+
         const nummer =
         document.createElement("div");
 
@@ -406,7 +605,9 @@ function kalenderZeichnen(){
             nummer
         );
 
-        const anzahl =
+        // Termine zählen
+
+        const anzahlTermine =
         termine.filter(t=>
 
             t.tag===tag &&
@@ -417,19 +618,16 @@ function kalenderZeichnen(){
 
         ).length;
 
-        if(anzahl>0){
+        if(anzahlTermine>0){
 
             const badge =
-            document.createElement("small");
+            document.createElement("div");
+
+            badge.className =
+            "tagBadge";
 
             badge.textContent =
-            anzahl + " Termin";
-
-            if(anzahl>1){
-
-                badge.textContent += "e";
-
-            }
+            anzahlTermine;
 
             feld.appendChild(
                 badge
@@ -437,18 +635,26 @@ function kalenderZeichnen(){
 
         }
 
-        feld.onclick=()=>{
+        feld.addEventListener(
 
-            ausgewaehlterTag =
-            tag;
+            "click",
 
-            kalenderZeichnen();
+            ()=>{
 
-            termineAnzeigen();
+                ausgewaehlterTag =
+                tag;
 
-        };
+                kalenderZeichnen();
 
-        tage.appendChild(
+                termineAnzeigen();
+
+                dashboardAktualisieren();
+
+            }
+
+        );
+
+        dom.tage.appendChild(
             feld
         );
 
@@ -456,11 +662,11 @@ function kalenderZeichnen(){
 
 }
 
-// =====================================
-// Monat wechseln
-// =====================================
+// ==========================================
+// Kalender Monat zurück
+// ==========================================
 
-btnZurueck.onclick=()=>{
+dom.btnVorher.onclick = ()=>{
 
     aktuellerMonat--;
 
@@ -478,11 +684,15 @@ btnZurueck.onclick=()=>{
 
     termineAnzeigen();
 
-    schichtplanZeichnen();
+    dashboardAktualisieren();
 
 };
 
-btnWeiter.onclick=()=>{
+// ==========================================
+// Kalender Monat weiter
+// ==========================================
+
+dom.btnWeiter.onclick = ()=>{
 
     aktuellerMonat++;
 
@@ -500,39 +710,53 @@ btnWeiter.onclick=()=>{
 
     termineAnzeigen();
 
-    schichtplanZeichnen();
+    dashboardAktualisieren();
 
 };
-// =====================================
-// DDH Studio Enterprise 8.0
+// ==========================================
+// DDH Studio Enterprise 9.0
+// app.js
 // Teil 4
 // Termine
-// =====================================
+// ==========================================
+
+// ==========================================
+// Termine eines Tages anzeigen
+// ==========================================
 
 function termineAnzeigen(){
 
-    terminListe.innerHTML = "";
+    dom.terminListe.innerHTML = "";
 
-    const liste = termine.filter(t =>
+    const liste = termine
+        .filter(t=>
 
-        t.jahr === aktuellesJahr &&
-        t.monat === aktuellerMonat &&
-        t.tag === ausgewaehlterTag
+            t.tag===ausgewaehlterTag &&
 
-    );
+            t.monat===aktuellerMonat &&
+
+            t.jahr===aktuellesJahr
+
+        )
+        .sort((a,b)=>
+
+            (a.uhrzeit || "").localeCompare(
+
+                b.uhrzeit || ""
+
+            )
+
+        );
 
     if(liste.length===0){
 
-        terminListe.innerHTML =
+        dom.terminListe.innerHTML =
+
         "<p>Keine Termine vorhanden.</p>";
 
         return;
 
     }
-
-    liste.sort((a,b)=>
-        a.uhrzeit.localeCompare(b.uhrzeit)
-    );
 
     liste.forEach(eintrag=>{
 
@@ -542,21 +766,37 @@ function termineAnzeigen(){
         box.className =
         "termin";
 
-        box.innerHTML =
+        // -------------------------
+        // Inhalt
+        // -------------------------
 
-        "<strong>" +
+        const info =
+        document.createElement("div");
 
-        (eintrag.uhrzeit || "--:--") +
+        info.className =
+        "terminInfo";
 
-        "</strong><br>" +
+        info.innerHTML =
 
-        "[" +
+            "<strong>" +
 
-        eintrag.kategorie +
+            (eintrag.uhrzeit || "--:--") +
 
-        "] " +
+            "</strong><br>" +
 
-        eintrag.text;
+            "[" +
+
+            eintrag.kategorie +
+
+            "] " +
+
+            eintrag.text;
+
+        box.appendChild(info);
+
+        // -------------------------
+        // Buttons
+        // -------------------------
 
         const buttons =
         document.createElement("div");
@@ -572,15 +812,15 @@ function termineAnzeigen(){
         bearbeiten.textContent =
         "✏️";
 
-        bearbeiten.onclick=()=>{
+        bearbeiten.onclick = ()=>{
 
-            uhrzeit.value =
+            dom.uhrzeit.value =
             eintrag.uhrzeit;
 
-            kategorie.value =
+            dom.kategorie.value =
             eintrag.kategorie;
 
-            termin.value =
+            dom.termin.value =
             eintrag.text;
 
             termine =
@@ -592,6 +832,8 @@ function termineAnzeigen(){
 
             termineAnzeigen();
 
+            dashboardAktualisieren();
+
         };
 
         // Löschen
@@ -602,10 +844,12 @@ function termineAnzeigen(){
         loeschen.textContent =
         "🗑️";
 
-        loeschen.onclick=()=>{
+        loeschen.onclick = ()=>{
 
             if(!confirm(
-                "Termin löschen?"
+
+                "Termin wirklich löschen?"
+
             )){
 
                 return;
@@ -621,6 +865,8 @@ function termineAnzeigen(){
 
             termineAnzeigen();
 
+            dashboardAktualisieren();
+
         };
 
         buttons.appendChild(
@@ -635,7 +881,7 @@ function termineAnzeigen(){
             buttons
         );
 
-        terminListe.appendChild(
+        dom.terminListe.appendChild(
             box
         );
 
@@ -643,15 +889,16 @@ function termineAnzeigen(){
 
 }
 
-// =====================================
+// ==========================================
 // Termin speichern
-// =====================================
+// ==========================================
 
-speichernTermin.onclick=()=>{
+dom.speichernTermin.onclick = ()=>{
 
-    if(
-        termin.value.trim()===""
-    ){
+    const text =
+    dom.termin.value.trim();
+
+    if(text===""){
 
         return;
 
@@ -669,54 +916,62 @@ speichernTermin.onclick=()=>{
         ausgewaehlterTag,
 
         uhrzeit:
-        uhrzeit.value,
+        dom.uhrzeit.value,
 
         kategorie:
-        kategorie.value,
+        dom.kategorie.value,
 
         text:
-        termin.value.trim()
+        text
 
     });
 
     speichern();
 
-    termin.value="";
+    dom.termin.value = "";
 
     kalenderZeichnen();
 
     termineAnzeigen();
 
+    dashboardAktualisieren();
+
 };
 
+// ==========================================
 // Enter = Termin speichern
+// ==========================================
 
-termin.addEventListener(
-"keydown",
-event=>{
+dom.termin.addEventListener(
 
-    if(event.key==="Enter"){
+    "keydown",
 
-        speichernTermin.click();
+    event=>{
+
+        if(event.key==="Enter"){
+
+            dom.speichernTermin.click();
+
+        }
 
     }
 
-});
-// =====================================
-// DDH Studio Enterprise 8.0
+);
+// ==========================================
+// DDH Studio Enterprise 9.0
+// app.js
 // Teil 5
 // Aufgaben
-// =====================================
+// ==========================================
 
 function todosAnzeigen(){
 
-    todoListe.innerHTML = "";
+    dom.todoListe.innerHTML = "";
 
     const projekt =
-    todoProjekt.value;
+    dom.todoProjekt.value;
 
-    const liste =
-    todos.filter(todo=>
+    const liste = todos.filter(todo=>
 
         todo.projekt===projekt
 
@@ -724,7 +979,7 @@ function todosAnzeigen(){
 
     if(liste.length===0){
 
-        todoListe.innerHTML =
+        dom.todoListe.innerHTML =
         "<p>Keine Aufgaben vorhanden.</p>";
 
         return;
@@ -748,16 +1003,24 @@ function todosAnzeigen(){
 
         }
 
-        const text =
+        // -------------------------
+        // Titel
+        // -------------------------
+
+        const titel =
         document.createElement("div");
 
-        text.className =
+        titel.className =
         "todoText";
 
-        text.textContent =
+        titel.textContent =
         todo.text;
 
-        box.appendChild(text);
+        box.appendChild(titel);
+
+        // -------------------------
+        // Informationen
+        // -------------------------
 
         const info =
         document.createElement("div");
@@ -776,6 +1039,10 @@ function todosAnzeigen(){
         todo.prioritaet;
 
         box.appendChild(info);
+
+        // -------------------------
+        // Buttons
+        // -------------------------
 
         const buttons =
         document.createElement("div");
@@ -814,13 +1081,13 @@ function todosAnzeigen(){
 
         bearbeiten.onclick=()=>{
 
-            todoText.value =
+            dom.todoText.value =
             todo.text;
 
-            todoPrioritaet.value =
+            dom.todoPrioritaet.value =
             todo.prioritaet;
 
-            todoProjekt.value =
+            dom.todoProjekt.value =
             todo.projekt;
 
             todos =
@@ -829,6 +1096,8 @@ function todosAnzeigen(){
             speichern();
 
             todosAnzeigen();
+
+            dashboardAktualisieren();
 
         };
 
@@ -843,7 +1112,9 @@ function todosAnzeigen(){
         loeschen.onclick=()=>{
 
             if(!confirm(
-                "Aufgabe löschen?"
+
+                "Aufgabe wirklich löschen?"
+
             )){
 
                 return;
@@ -867,21 +1138,22 @@ function todosAnzeigen(){
 
         box.appendChild(buttons);
 
-        todoListe.appendChild(box);
+        dom.todoListe.appendChild(box);
 
     });
 
 }
 
-// =====================================
+// ==========================================
 // Aufgabe speichern
-// =====================================
+// ==========================================
 
-todoSpeichern.onclick=()=>{
+dom.todoSpeichern.onclick=()=>{
 
-    if(
-        todoText.value.trim()===""
-    ){
+    const text =
+    dom.todoText.value.trim();
+
+    if(text===""){
 
         return;
 
@@ -890,13 +1162,13 @@ todoSpeichern.onclick=()=>{
     todos.push({
 
         projekt:
-        todoProjekt.value,
+        dom.todoProjekt.value,
 
         text:
-        todoText.value.trim(),
+        text,
 
         prioritaet:
-        todoPrioritaet.value,
+        dom.todoPrioritaet.value,
 
         erledigt:false
 
@@ -904,7 +1176,7 @@ todoSpeichern.onclick=()=>{
 
     speichern();
 
-    todoText.value="";
+    dom.todoText.value="";
 
     todosAnzeigen();
 
@@ -912,114 +1184,129 @@ todoSpeichern.onclick=()=>{
 
 };
 
+// ==========================================
 // Projekt wechseln
+// ==========================================
 
-todoProjekt.onchange=()=>{
+dom.todoProjekt.onchange=()=>{
 
     todosAnzeigen();
 
 };
 
+// ==========================================
 // Enter = Aufgabe speichern
+// ==========================================
 
-todoText.addEventListener(
-"keydown",
-event=>{
+dom.todoText.addEventListener(
 
-    if(event.key==="Enter"){
+    "keydown",
 
-        todoSpeichern.click();
+    event=>{
+
+        if(event.key==="Enter"){
+
+            dom.todoSpeichern.click();
+
+        }
 
     }
 
-});
-// =====================================
-// DDH Studio Enterprise 8.0
+);
+// ==========================================
+// DDH Studio Enterprise 9.0
+// app.js
 // Teil 6
 // Dashboard
-// =====================================
+// ==========================================
 
 function dashboardAktualisieren(){
 
-    // -------------------------
+    // ======================================
     // Termine heute
-    // -------------------------
+    // ======================================
 
-    const heuteListe = termine.filter(t=>
+    const termineHeute = termine.filter(t=>
 
         t.tag===ausgewaehlterTag &&
+
         t.monat===aktuellerMonat &&
+
         t.jahr===aktuellesJahr
 
     );
 
-    heuteTermine.textContent =
-    heuteListe.length;
+    dom.heuteTermine.textContent =
+    termineHeute.length;
 
-    // -------------------------
+    // ======================================
     // Aufgaben
-    // -------------------------
+    // ======================================
 
-    const offen =
+    const offene =
     todos.filter(t=>!t.erledigt);
 
-    const erledigt =
+    const erledigte =
     todos.filter(t=>t.erledigt);
 
-    const hoch =
+    const hohe =
     todos.filter(t=>
 
         !t.erledigt &&
+
         t.prioritaet==="hoch"
 
     );
 
-    offeneTodos.textContent =
-    offen.length;
+    dom.offeneTodos.textContent =
+    offene.length;
 
-    erledigteTodos.textContent =
-    erledigt.length;
+    dom.erledigteTodos.textContent =
+    erledigte.length;
 
-    hohePrioritaet.textContent =
-    hoch.length;
+    dom.hohePrioritaet.textContent =
+    hohe.length;
 
-    // -------------------------
+    // ======================================
     // Nächste Aufgaben
-    // -------------------------
+    // ======================================
 
-    dashboardTodos.innerHTML="";
+    dom.dashboardTodos.innerHTML = "";
 
-    if(offen.length===0){
+    if(offene.length===0){
 
-        dashboardTodos.innerHTML=
-
+        dom.dashboardTodos.innerHTML =
         "<p>Keine offenen Aufgaben.</p>";
 
     }else{
 
-        offen.slice(0,5).forEach(todo=>{
+        offene
+        .slice(0,5)
+        .forEach(todo=>{
 
-            const box=
+            const box =
             document.createElement("div");
 
-            box.className=
+            box.className =
             "dashboardTodo";
 
-            box.innerHTML=
+            box.innerHTML =
 
-            "<strong>"+
+                "<strong>" +
 
-            todo.text+
+                todo.text +
 
-            "</strong><br>"+
+                "</strong><br>" +
 
-            "📁 "+todo.projekt+
+                "📁 " +
 
-            " • "+
+                todo.projekt +
 
-            todo.prioritaet;
+                " • " +
 
-            dashboardTodos.appendChild(
+                todo.prioritaet;
+
+            dom.dashboardTodos.appendChild(
                 box
             );
 
@@ -1027,14 +1314,13 @@ function dashboardAktualisieren(){
 
     }
 
-    // -------------------------
+    // ======================================
     // Mitarbeiter im Dienst
-    // -------------------------
+    // ======================================
 
-    dashboardSchichten.innerHTML="";
+    dom.dashboardSchichten.innerHTML = "";
 
-    const heuteSchichten=
-
+    const heuteSchichten =
     schichten.filter(s=>
 
         s.tag===ausgewaehlterTag &&
@@ -1047,58 +1333,58 @@ function dashboardAktualisieren(){
 
     if(heuteSchichten.length===0){
 
-        dashboardSchichten.innerHTML=
-
+        dom.dashboardSchichten.innerHTML =
         "<p>Keine Schichten vorhanden.</p>";
 
-    }else{
-
-        heuteSchichten.forEach(s=>{
-
-            const box=
-            document.createElement("div");
-
-            box.className=
-            "dashboardTodo";
-
-            box.innerHTML=
-
-            "<strong>"+
-
-            s.name+
-
-            "</strong><br>"+
-
-            "Schicht: "+
-
-            s.typ;
-
-            dashboardSchichten.appendChild(
-                box
-            );
-
-        });
+        return;
 
     }
 
+    heuteSchichten.forEach(eintrag=>{
+
+        const box =
+        document.createElement("div");
+
+        box.className =
+        "dashboardTodo";
+
+        box.innerHTML =
+
+            "<strong>" +
+
+            eintrag.name +
+
+            "</strong><br>" +
+
+            schichtName(
+                eintrag.typ
+            );
+
+        dom.dashboardSchichten.appendChild(
+            box
+        );
+
+    });
+
 }
-// =====================================
-// DDH Studio Enterprise 8.0
+// ==========================================
+// DDH Studio Enterprise 9.0
+// app.js
 // Teil 7
 // Mitarbeiter & Schichtplan
-// =====================================
+// ==========================================
 
-// -------------------------
+// ==========================================
 // Mitarbeiter anzeigen
-// -------------------------
+// ==========================================
 
 function mitarbeiterAnzeigen(){
 
-    mitarbeiterListe.innerHTML="";
+    dom.mitarbeiterListe.innerHTML = "";
 
     if(mitarbeiter.length===0){
 
-        mitarbeiterListe.innerHTML=
+        dom.mitarbeiterListe.innerHTML =
         "<p>Noch keine Mitarbeiter vorhanden.</p>";
 
         return;
@@ -1107,27 +1393,132 @@ function mitarbeiterAnzeigen(){
 
     mitarbeiter.forEach(person=>{
 
-        const box=
+        const karte =
         document.createElement("div");
 
-        box.className="mitarbeiter";
+        karte.className =
+        "mitarbeiter";
 
-        box.textContent=person.name;
+        // --------------------------
+        // Name
+        // --------------------------
 
-        mitarbeiterListe.appendChild(box);
+        const name =
+        document.createElement("strong");
+
+        name.textContent =
+        person.name;
+
+        karte.appendChild(name);
+
+        // --------------------------
+        // Buttons
+        // --------------------------
+
+        const buttons =
+        document.createElement("div");
+
+        buttons.className =
+        "mitarbeiterButtons";
+
+        // Bearbeiten
+
+        const bearbeiten =
+        document.createElement("button");
+
+        bearbeiten.textContent =
+        "✏️";
+
+        bearbeiten.onclick=()=>{
+
+            dom.mitarbeiterName.value =
+            person.name;
+
+            mitarbeiter =
+            mitarbeiter.filter(m=>m!==person);
+
+            speichern();
+
+            mitarbeiterAnzeigen();
+
+            schichtplanZeichnen();
+
+        };
+
+        // Löschen
+
+        const loeschen =
+        document.createElement("button");
+
+        loeschen.textContent =
+        "🗑️";
+
+        loeschen.onclick=()=>{
+
+            if(!confirm(
+
+                person.name +
+
+                " wirklich löschen?"
+
+            )){
+
+                return;
+
+            }
+
+            // Mitarbeiter entfernen
+
+            mitarbeiter =
+            mitarbeiter.filter(m=>m!==person);
+
+            // Schichten entfernen
+
+            schichten =
+            schichten.filter(s=>
+
+                s.name!==person.name
+
+            );
+
+            speichern();
+
+            mitarbeiterAnzeigen();
+
+            schichtplanZeichnen();
+
+            dashboardAktualisieren();
+
+        };
+
+        buttons.appendChild(
+            bearbeiten
+        );
+
+        buttons.appendChild(
+            loeschen
+        );
+
+        karte.appendChild(
+            buttons
+        );
+
+        dom.mitarbeiterListe.appendChild(
+            karte
+        );
 
     });
 
 }
 
-// -------------------------
+// ==========================================
 // Mitarbeiter speichern
-// -------------------------
+// ==========================================
 
-mitarbeiterSpeichern.onclick=()=>{
+dom.mitarbeiterSpeichern.onclick=()=>{
 
-    const name=
-    mitarbeiterName.value.trim();
+    const name =
+    dom.mitarbeiterName.value.trim();
 
     if(name===""){
 
@@ -1145,7 +1536,11 @@ mitarbeiterSpeichern.onclick=()=>{
 
     ){
 
-        alert("Mitarbeiter existiert bereits.");
+        alert(
+
+            "Mitarbeiter existiert bereits."
+
+        );
 
         return;
 
@@ -1159,7 +1554,7 @@ mitarbeiterSpeichern.onclick=()=>{
 
     speichern();
 
-    mitarbeiterName.value="";
+    dom.mitarbeiterName.value="";
 
     mitarbeiterAnzeigen();
 
@@ -1167,210 +1562,247 @@ mitarbeiterSpeichern.onclick=()=>{
 
 };
 
-// -------------------------
-// Enter = Mitarbeiter
-// -------------------------
+// ==========================================
+// Enter = Mitarbeiter speichern
+// ==========================================
 
-mitarbeiterName.addEventListener(
+dom.mitarbeiterName.addEventListener(
 
-"keydown",
+    "keydown",
 
-event=>{
+    event=>{
 
-    if(event.key==="Enter"){
+        if(event.key==="Enter"){
 
-        mitarbeiterSpeichern.click();
+            dom.mitarbeiterSpeichern.click();
+
+        }
 
     }
 
-});
+);
 
-// -------------------------
+// ==========================================
 // Schichtplan zeichnen
-// -------------------------
+// ==========================================
 
 function schichtplanZeichnen(){
 
-    schichtHeader.innerHTML=
-
+    dom.schichtHeader.innerHTML =
     "<th>Mitarbeiter</th>";
 
-    schichtplanBody.innerHTML="";
+    dom.schichtBody.innerHTML = "";
 
-    document.getElementById(
+    dom.schichtMonat.textContent =
 
-        "schichtMonat"
+        MONATE[aktuellerMonat] +
 
-    ).textContent=
+        " " +
 
-    monate[aktuellerMonat]
+        aktuellesJahr;
 
-    +" "+
+    const tage =
+    tageImMonat(
 
-    aktuellesJahr;
+        aktuellerMonat,
 
-    const tageImMonat=
+        aktuellesJahr
 
-    new Date(
+    );
 
-        aktuellesJahr,
-
-        aktuellerMonat+1,
-
-        0
-
-    ).getDate();
-
-    // Tage erzeugen
+    // --------------------------
+    // Kopfzeile
+    // --------------------------
 
     for(
 
         let tag=1;
 
-        tag<=tageImMonat;
+        tag<=tage;
 
         tag++
 
     ){
 
-        const th=
-
+        const th =
         document.createElement("th");
 
-        th.textContent=tag;
+        th.textContent =
+        tag;
 
-        schichtHeader.appendChild(th);
+        dom.schichtHeader.appendChild(
+            th
+        );
 
     }
 
+    // --------------------------
     // Mitarbeiter
+    // --------------------------
 
     mitarbeiter.forEach(person=>{
 
-        const tr=
-
+        const tr =
         document.createElement("tr");
 
-        const name=
-
+        const tdName =
         document.createElement("td");
 
-        name.textContent=
-
+        tdName.textContent =
         person.name;
 
-        tr.appendChild(name);
+        tr.appendChild(
+            tdName
+        );
+                // --------------------------
+        // Schichtzellen
+        // --------------------------
 
         for(
 
             let tag=1;
 
-            tag<=tageImMonat;
+            tag<=tage;
 
             tag++
 
         ){
 
-            const td=
-
+            const td =
             document.createElement("td");
 
-            const eintrag=
+            td.className =
+            "schichtZelle";
 
-            schichten.find(s=>
+            const eintrag =
+            schichtSuchen(
 
-                s.name===person.name &&
+                person.name,
 
-                s.tag===tag &&
-
-                s.monat===aktuellerMonat &&
-
-                s.jahr===aktuellesJahr
+                tag
 
             );
 
             if(eintrag){
 
-                const box=
-
+                const box =
                 document.createElement("div");
 
-                box.className=
-
-                "schicht "+
+                box.className =
+                "schicht " +
 
                 eintrag.typ;
 
-                switch(eintrag.typ){
+                box.textContent =
+                schichtKurz(
 
-                    case "frueh":
-
-                        box.textContent="F";
-
-                        break;
-
-                    case "spaet":
-
-                        box.textContent="S";
-
-                        break;
-
-                    case "nacht":
-
-                        box.textContent="N";
-
-                        break;
-
-                    case "frei":
-
-                        box.textContent="-";
-
-                        break;
-
-                    case "urlaub":
-
-                        box.textContent="U";
-
-                        break;
-
-                    case "krank":
-
-                        box.textContent="K";
-
-                        break;
-
-                }
-
-                td.appendChild(box);
-
-            }
-
-            td.onclick=()=>{
-
-                schichtBearbeiten(
-
-                    person.name,
-
-                    tag
+                    eintrag.typ
 
                 );
 
-            };
+                td.appendChild(
+                    box
+                );
 
-            tr.appendChild(td);
+            }
+
+            td.addEventListener(
+
+                "click",
+
+                ()=>{
+
+                    schichtBearbeiten(
+
+                        person.name,
+
+                        tag
+
+                    );
+
+                }
+
+            );
+
+            tr.appendChild(
+                td
+            );
 
         }
 
-        schichtplanBody.appendChild(tr);
+        dom.schichtBody.appendChild(
+            tr
+        );
 
     });
 
 }
-// =====================================
-// DDH Studio Enterprise 8.0
-// Teil 8
+
+// ==========================================
+// Schichtmonat zurück
+// ==========================================
+
+if(dom.schichtVorher){
+
+    dom.schichtVorher.onclick=()=>{
+
+        aktuellerMonat--;
+
+        if(aktuellerMonat<0){
+
+            aktuellerMonat=11;
+
+            aktuellesJahr--;
+
+        }
+
+        kalenderZeichnen();
+
+        termineAnzeigen();
+
+        schichtplanZeichnen();
+
+        dashboardAktualisieren();
+
+    };
+
+}
+
+// ==========================================
+// Schichtmonat weiter
+// ==========================================
+
+if(dom.schichtWeiter){
+
+    dom.schichtWeiter.onclick=()=>{
+
+        aktuellerMonat++;
+
+        if(aktuellerMonat>11){
+
+            aktuellerMonat=0;
+
+            aktuellesJahr++;
+
+        }
+
+        kalenderZeichnen();
+
+        termineAnzeigen();
+
+        schichtplanZeichnen();
+
+        dashboardAktualisieren();
+
+    };
+
+}
+// ==========================================
+// DDH Studio Enterprise 9.0
+// app.js
+// Teil 9
 // Schichten bearbeiten
-// =====================================
+// ==========================================
 
 function schichtBearbeiten(name,tag){
 
@@ -1395,31 +1827,21 @@ L = Löschen`
     }
 
     const wert =
-    eingabe.toUpperCase();
+    eingabe.trim().toUpperCase();
 
-    // -------------------------
-    // Schicht löschen
-    // -------------------------
+    // --------------------------
+    // Löschen
+    // --------------------------
 
     if(wert==="L"){
 
-        schichten = schichten.filter(s=>
+        schichtLoeschen(
 
-            !(
+            name,
 
-                s.name===name &&
-
-                s.tag===tag &&
-
-                s.monat===aktuellerMonat &&
-
-                s.jahr===aktuellesJahr
-
-            )
+            tag
 
         );
-
-        speichern();
 
         schichtplanZeichnen();
 
@@ -1429,58 +1851,70 @@ L = Löschen`
 
     }
 
-    let typ="";
+    let typ = "";
 
     switch(wert){
 
         case "F":
+
             typ="frueh";
+
             break;
 
         case "S":
+
             typ="spaet";
+
             break;
 
         case "N":
+
             typ="nacht";
+
             break;
 
         case "R":
+
             typ="frei";
+
             break;
 
         case "U":
+
             typ="urlaub";
+
             break;
 
         case "K":
+
             typ="krank";
+
             break;
 
         default:
 
-            alert("Ungültige Eingabe");
+            alert(
+
+                "Ungültige Eingabe."
+
+            );
 
             return;
 
     }
 
     const vorhanden =
-    schichten.find(s=>
+    schichtSuchen(
 
-        s.name===name &&
+        name,
 
-        s.tag===tag &&
-
-        s.monat===aktuellerMonat &&
-
-        s.jahr===aktuellesJahr
+        tag
 
     );
 
     if(vorhanden){
 
-        vorhanden.typ=typ;
+        vorhanden.typ = typ;
 
     }else{
 
@@ -1507,108 +1941,42 @@ L = Löschen`
     dashboardAktualisieren();
 
 }
+// ==========================================
+// DDH Studio Enterprise 9.0
+// app.js
+// Teil 10
+// Initialisierung
+// ==========================================
 
-// =====================================
-// Monat wechseln (Schichtplan)
-// =====================================
-
-const schichtVorherigerMonat =
-document.getElementById(
-    "schichtVorherigerMonat"
-);
-
-const schichtNaechsterMonat =
-document.getElementById(
-    "schichtNaechsterMonat"
-);
-
-if(schichtVorherigerMonat){
-
-    schichtVorherigerMonat.onclick=()=>{
-
-        aktuellerMonat--;
-
-        if(aktuellerMonat<0){
-
-            aktuellerMonat=11;
-
-            aktuellesJahr--;
-
-        }
-
-        kalenderZeichnen();
-
-        termineAnzeigen();
-
-        schichtplanZeichnen();
-
-        dashboardAktualisieren();
-
-    };
-
-}
-
-if(schichtNaechsterMonat){
-
-    schichtNaechsterMonat.onclick=()=>{
-
-        aktuellerMonat++;
-
-        if(aktuellerMonat>11){
-
-            aktuellerMonat=0;
-
-            aktuellesJahr++;
-
-        }
-
-        kalenderZeichnen();
-
-        termineAnzeigen();
-
-        schichtplanZeichnen();
-
-        dashboardAktualisieren();
-
-    };
-
-}
-// =====================================
-// DDH Studio Enterprise 8.0
-// Teil 9
-// Start
-// =====================================
-
-// Datum anzeigen
-
-datumTitel.textContent =
-datumText(
-    ausgewaehlterTag,
-    aktuellerMonat,
-    aktuellesJahr
-);
-
+// --------------------------
 // Aktuelle Uhrzeit
+// --------------------------
 
 const jetzt = new Date();
 
-uhrzeit.value =
+if(dom.uhrzeit){
 
-String(
-    jetzt.getHours()
-).padStart(2,"0")
+    dom.uhrzeit.value =
 
-+
+        String(
+            jetzt.getHours()
+        ).padStart(2,"0")
 
-":"
+        +
 
-+
+        ":"
 
-String(
-    jetzt.getMinutes()
-).padStart(2,"0");
+        +
 
+        String(
+            jetzt.getMinutes()
+        ).padStart(2,"0");
+
+}
+
+// --------------------------
 // Daten laden
+// --------------------------
 
 kalenderZeichnen();
 
@@ -1622,7 +1990,9 @@ schichtplanZeichnen();
 
 dashboardAktualisieren();
 
+// --------------------------
 // Letzte Seite öffnen
+// --------------------------
 
 const letzteSeite =
 localStorage.getItem(
@@ -1643,6 +2013,13 @@ if(letzteSeite){
 
 }
 
-// =====================================
-// Ende
-// =====================================
+// ==========================================
+// DDH Studio Enterprise 9.0
+// Bereit
+// ==========================================
+
+console.log(
+
+    "DDH Studio Enterprise 9.0 gestartet."
+
+);

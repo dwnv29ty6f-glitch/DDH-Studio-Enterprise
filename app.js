@@ -1714,21 +1714,61 @@ function schichtplanZeichnen(){
 
             td.addEventListener(
 
-                "click",
+    "click",
 
-                ()=>{
+    ()=>{
 
-                    schichtBearbeiten(
+        if(
 
-                        person.name,
+            markierterMitarbeiter!==person.name
 
-                        tag
+        ){
 
-                    );
+            markierterMitarbeiter =
+            person.name;
 
-                }
+            markierteTage = [];
+
+        }
+
+        if(
+
+            markierteTage.includes(tag)
+
+        ){
+
+            markierteTage =
+            markierteTage.filter(t=>t!==tag);
+
+            td.classList.remove(
+                "markiert"
+            );
+
+        }else{
+
+            markierteTage.push(tag);
+
+            td.classList.add(
+                "markiert"
+            );
+
+        }
+
+        if(markierteTage.length===1){
+
+            schichtBearbeiten(
+
+                person.name,
+
+                tag
 
             );
+
+        }
+
+    }
+
+);
 
             tr.appendChild(
                 td

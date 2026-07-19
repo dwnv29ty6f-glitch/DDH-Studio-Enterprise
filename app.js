@@ -1712,37 +1712,32 @@ function schichtplanZeichnen(){
 
             }
 
-            td.addEventListener(
+            td.addEventListener("click",()=>{
 
-    "click",
+    if(markierterMitarbeiter!==person.name){
 
-    ()=>{
+        markierterMitarbeiter=person.name;
+        markierteTage=[];
 
-        if(
+        document
+        .querySelectorAll(".schichtZelle")
+        .forEach(z=>z.classList.remove("markiert"));
 
-            markierterMitarbeiter!==person.name
+    }
 
-        ){
+    if(markierteTage.includes(tag)){
 
-            markierterMitarbeiter =
-            person.name;
+        schichtBearbeiten(person.name,tag);
 
-            markierteTage = [];
+        return;
 
-        }
+    }
 
-        if(
+    markierteTage.push(tag);
 
-            markierteTage.includes(tag)
+    td.classList.add("markiert");
 
-        ){
-
-            markierteTage =
-            markierteTage.filter(t=>t!==tag);
-
-            td.classList.remove(
-                "markiert"
-            );
+});
 
         }else{
 

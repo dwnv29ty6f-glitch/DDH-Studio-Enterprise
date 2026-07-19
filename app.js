@@ -1659,7 +1659,6 @@ function schichtplanZeichnen(){
 
         tr.appendChild(
             tdName
-        );
                 // --------------------------
         // Schichtzellen
         // --------------------------

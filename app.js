@@ -67,7 +67,13 @@ const heute = new Date();
 let aktuellerMonat = heute.getMonth();
 let aktuellesJahr = heute.getFullYear();
 let ausgewaehlterTag = heute.getDate();
+// ==========================================
+// Mehrfachauswahl Schichtplan
+// ==========================================
 
+let markierteTage = [];
+
+let markierterMitarbeiter = "";
 // ==========================================
 // DOM Elemente
 // ==========================================

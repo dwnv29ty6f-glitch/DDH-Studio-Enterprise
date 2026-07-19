@@ -5,12 +5,18 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
+<meta
+name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>DDH Studio Enterprise 7.0</title>
+<title>
 
-<link rel="stylesheet"
+DDH Studio Enterprise 8.0
+
+</title>
+
+<link
+rel="stylesheet"
 href="style.css">
 
 </head>
@@ -20,16 +26,23 @@ href="style.css">
 <div class="app">
 
 <!-- =====================================
-     Header
+Header
 ===================================== -->
 
-<header>
+<header class="hauptHeader">
 
-<button id="vorherigerMonat">
+<div class="headerLinks">
+
+<button
+id="vorherigerMonat">
 
 ◀
 
 </button>
+
+</div>
+
+<div class="headerMitte">
 
 <h1 id="monatTitel">
 
@@ -37,19 +50,33 @@ DDH Studio Enterprise
 
 </h1>
 
-<button id="naechsterMonat">
+<p id="headerUntertitel">
+
+Unternehmensverwaltung
+
+</p>
+
+</div>
+
+<div class="headerRechts">
+
+<button
+id="naechsterMonat">
 
 ▶
 
 </button>
 
+</div>
+
 </header>
 
 <!-- =====================================
-     Navigation
+Navigation
 ===================================== -->
 
-<nav id="navigation">
+<nav
+id="navigation">
 
 <button
 class="navButton aktiv"
@@ -111,14 +138,9 @@ data-seite="projekte">
 class="navButton"
 data-seite="einstellungen">
 
-⚙️ Einstellungen
-
-</button>
-
-</nav>
-
+⚙️
 <!-- =====================================
-     Dashboard
+Dashboard
 ===================================== -->
 
 <section
@@ -187,7 +209,7 @@ class="seite aktiv">
 
 <h3>
 
-✅ Erledigt
+✅ Erledigte Aufgaben
 
 </h3>
 
@@ -209,9 +231,27 @@ class="seite aktiv">
 
 </h3>
 
-<div id="dashboardTodos">
+<div
+id="dashboardTodos">
 
 Noch keine Aufgaben vorhanden.
+
+</div>
+
+</div>
+
+<div class="dashboardBereich">
+
+<h3>
+
+👷 Mitarbeiter im Dienst
+
+</h3>
+
+<div
+id="dashboardSchichten">
+
+Noch keine Schichten vorhanden.
 
 </div>
 
@@ -221,16 +261,22 @@ Noch keine Aufgaben vorhanden.
 
 </section>
 <!-- =====================================
-     Kalender
+Kalender
 ===================================== -->
 
 <section
 id="seite-kalender"
 class="seite">
 
-<main>
+<div class="kalenderLayout">
 
-<section id="kalender">
+<div class="kalenderLinks">
+
+<h2>
+
+📅 Kalender
+
+</h2>
 
 <div class="wochentage">
 
@@ -244,13 +290,17 @@ class="seite">
 
 </div>
 
-<div id="tage"></div>
+<div
+id="tage">
 
-</section>
+</div>
 
-<aside>
+</div>
 
-<h2 id="ausgewaehltesDatum">
+<div class="kalenderRechts">
+
+<h2
+id="ausgewaehltesDatum">
 
 Tag auswählen
 
@@ -260,15 +310,36 @@ Tag auswählen
 type="time"
 id="uhrzeit">
 
-<select id="kategorie">
+<select
+id="kategorie">
 
-<option value="Privat">🏠 Privat</option>
-<option value="Arbeit">💼 Arbeit</option>
-<option value="Familie">👨‍👩‍👧 Familie</option>
-<option value="Schule">🎓 Schule</option>
-<option value="Urlaub">✈️ Urlaub</option>
-<option value="Geburtstag">🎂 Geburtstag</option>
-<option value="Sonstiges">📌 Sonstiges</option>
+<option value="Privat">
+🏠 Privat
+</option>
+
+<option value="Arbeit">
+💼 Arbeit
+</option>
+
+<option value="Familie">
+👨‍👩‍👧 Familie
+</option>
+
+<option value="Schule">
+🎓 Schule
+</option>
+
+<option value="Urlaub">
+✈️ Urlaub
+</option>
+
+<option value="Geburtstag">
+🎂 Geburtstag
+</option>
+
+<option value="Sonstiges">
+📌 Sonstiges
+</option>
 
 </select>
 
@@ -277,82 +348,128 @@ type="text"
 id="termin"
 placeholder="Termin eingeben">
 
-<button id="speichernTermin">
+<button
+id="speichernTermin">
 
 Termin speichern
 
 </button>
 
-<div id="terminListe">
+<div
+id="terminListe">
 
 </div>
 
-</aside>
+</div>
 
-</main>
+</div>
 
 </section>
 <!-- =====================================
-     Aufgaben
+Aufgaben
 ===================================== -->
 
 <section
 id="seite-aufgaben"
 class="seite">
 
-<main>
+<div class="aufgabenLayout">
 
-<section class="aufgabenBereich">
+<div class="aufgabenLinks">
 
 <h2>
 
-📁 Projekt auswählen
+✅ Aufgaben
 
 </h2>
 
-<select id="todoProjekt">
+<label>
 
-<option value="Privat">🏠 Privat</option>
-<option value="DDH Studio">🎬 DDH Studio</option>
-<option value="Enterprise">🚀 Enterprise</option>
-<option value="Arbeit">💼 Arbeit</option>
-<option value="Schule">🎓 Schule</option>
-<option value="Familie">👨‍👩‍👧 Familie</option>
-<option value="Urlaub">✈️ Urlaub</option>
-<option value="Sonstiges">📌 Sonstiges</option>
+Projekt
+
+</label>
+
+<select
+id="todoProjekt">
+
+<option value="Privat">
+🏠 Privat
+</option>
+
+<option value="DDH Studio">
+🎬 DDH Studio
+</option>
+
+<option value="Enterprise">
+🚀 Enterprise
+</option>
+
+<option value="Arbeit">
+💼 Arbeit
+</option>
+
+<option value="Schule">
+🎓 Schule
+</option>
+
+<option value="Familie">
+👨‍👩‍👧 Familie
+</option>
+
+<option value="Urlaub">
+✈️ Urlaub
+</option>
+
+<option value="Sonstiges">
+📌 Sonstiges
+</option>
 
 </select>
 
-<hr>
+<label>
 
-<h2>
+Aufgabe
 
-✅ Neue Aufgabe
-
-</h2>
+</label>
 
 <input
 type="text"
 id="todoText"
 placeholder="Neue Aufgabe">
 
-<select id="todoPrioritaet">
+<label>
 
-<option value="hoch">🔴 Hoch</option>
-<option value="mittel">🟠 Mittel</option>
-<option value="niedrig">🟢 Niedrig</option>
+Priorität
+
+</label>
+
+<select
+id="todoPrioritaet">
+
+<option value="hoch">
+🔴 Hoch
+</option>
+
+<option value="mittel">
+🟠 Mittel
+</option>
+
+<option value="niedrig">
+🟢 Niedrig
+</option>
 
 </select>
 
-<button id="todoSpeichern">
+<button
+id="todoSpeichern">
 
-Aufgabe hinzufügen
+➕ Aufgabe speichern
 
 </button>
 
-</section>
+</div>
 
-<aside>
+<div class="aufgabenRechts">
 
 <h2>
 
@@ -360,45 +477,62 @@ Aufgabe hinzufügen
 
 </h2>
 
-<div id="todoListe">
+<div
+id="todoListe">
 
 </div>
 
-</aside>
+</div>
 
-</main>
+</div>
 
 </section>
-
 <!-- =====================================
-     Schichtplan
+Schichtplan
 ===================================== -->
 
 <section
 id="seite-schichtplan"
 class="seite">
 
-<div class="modul">
+<div class="schichtLayout">
+
+<div class="schichtKopf">
 
 <h2>
 
-👷 Schichtplan
+👷 DDH Schichtplan
 
 </h2>
 
-<p>
+<div class="schichtNavigation">
 
-Verwalte hier Mitarbeiter und ihre Schichten.
+<button
+id="schichtVorherigerMonat">
 
-</p>
+◀
 
-<hr>
+</button>
 
-<h3>
+<h3
+id="schichtMonat">
 
-👥 Mitarbeiter
+Januar 2026
 
 </h3>
+
+<button
+id="schichtNaechsterMonat">
+
+▶
+
+</button>
+
+</div>
+
+</div>
+
+<div class="mitarbeiterBereich">
 
 <input
 type="text"
@@ -412,59 +546,35 @@ id="mitarbeiterSpeichern">
 
 </button>
 
-<div id="mitarbeiterListe">
+</div>
 
-Noch keine Mitarbeiter vorhanden.
+<div
+id="mitarbeiterListe">
 
 </div>
 
-<hr>
+<div class="schichtPlan">
 
-<h3>
-
-📅 Monatsübersicht
-
-</h3>
-
-<div id="schichtplanTabelle">
-
-<table>
+<table
+id="schichtTabelle">
 
 <thead>
 
-<tr>
+<tr
+id="schichtHeader">
 
-<th>Mitarbeiter</th>
+<th>
 
-<th>Mo</th>
+Mitarbeiter
 
-<th>Di</th>
-
-<th>Mi</th>
-
-<th>Do</th>
-
-<th>Fr</th>
-
-<th>Sa</th>
-
-<th>So</th>
+</th>
 
 </tr>
 
 </thead>
 
-<tbody id="schichtplanBody">
-
-<tr>
-
-<td colspan="8">
-
-Noch keine Mitarbeiter vorhanden.
-
-</td>
-
-</tr>
+<tbody
+id="schichtplanBody">
 
 </tbody>
 
@@ -472,30 +582,63 @@ Noch keine Mitarbeiter vorhanden.
 
 </div>
 
-<hr>
+<div class="schichtLegende">
 
-<h3>
+<div class="legende">
 
-🎨 Legende
+<span class="farbe frueh"></span>
 
-</h3>
+Früh
 
-<p>
+</div>
 
-🟢 Früh &nbsp;
-🟠 Spät &nbsp;
-🔵 Nacht &nbsp;
-⚪ Frei &nbsp;
-🔴 Urlaub &nbsp;
-🟣 Krank
+<div class="legende">
 
-</p>
+<span class="farbe spaet"></span>
+
+Spät
+
+</div>
+
+<div class="legende">
+
+<span class="farbe nacht"></span>
+
+Nacht
+
+</div>
+
+<div class="legende">
+
+<span class="farbe frei"></span>
+
+Frei
+
+</div>
+
+<div class="legende">
+
+<span class="farbe urlaub"></span>
+
+Urlaub
+
+</div>
+
+<div class="legende">
+
+<span class="farbe krank"></span>
+
+Krank
+
+</div>
+
+</div>
 
 </div>
 
 </section>
 <!-- =====================================
-     Dokumente
+Dokumente
 ===================================== -->
 
 <section
@@ -510,19 +653,15 @@ class="seite">
 
 </h2>
 
-<p>
+<button
+id="neuesDokument">
 
-Hier werden später Dokumente verwaltet.
-
-</p>
-
-<button id="neuesDokument">
-
-➕ Neues Dokument
+➕ Dokument hochladen
 
 </button>
 
-<div id="dokumentListe">
+<div
+id="dokumentListe">
 
 Noch keine Dokumente vorhanden.
 
@@ -533,7 +672,7 @@ Noch keine Dokumente vorhanden.
 </section>
 
 <!-- =====================================
-     Kunden
+Kunden
 ===================================== -->
 
 <section
@@ -548,19 +687,15 @@ class="seite">
 
 </h2>
 
-<p>
+<button
+id="neuerKunde">
 
-Hier werden später Kunden verwaltet.
-
-</p>
-
-<button id="neuerKunde">
-
-➕ Kunde anlegen
+➕ Kunde hinzufügen
 
 </button>
 
-<div id="kundenListe">
+<div
+id="kundenListe">
 
 Noch keine Kunden vorhanden.
 
@@ -571,7 +706,7 @@ Noch keine Kunden vorhanden.
 </section>
 
 <!-- =====================================
-     Projekte
+Projekte
 ===================================== -->
 
 <section
@@ -586,19 +721,15 @@ class="seite">
 
 </h2>
 
-<p>
-
-Hier werden später Projekte verwaltet.
-
-</p>
-
-<button id="neuesProjekt">
+<button
+id="neuesProjekt">
 
 ➕ Projekt erstellen
 
 </button>
 
-<div id="projektListe">
+<div
+id="projektListe">
 
 Noch keine Projekte vorhanden.
 
@@ -607,9 +738,8 @@ Noch keine Projekte vorhanden.
 </div>
 
 </section>
-
 <!-- =====================================
-     Einstellungen
+Einstellungen
 ===================================== -->
 
 <section
@@ -650,7 +780,8 @@ Automatisch speichern
 
 <br><br>
 
-<button id="backupErstellen">
+<button
+id="backupErstellen">
 
 💾 Backup erstellen
 
@@ -662,8 +793,15 @@ Automatisch speichern
 
 </div>
 
-<script src="navigation.js"></script>
-<script src="app.js"></script>
+<script
+src="navigation.js">
+
+</script>
+
+<script
+src="app.js">
+
+</script>
 
 </body>
 

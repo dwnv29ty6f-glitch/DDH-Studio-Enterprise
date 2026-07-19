@@ -1657,11 +1657,11 @@ function schichtplanZeichnen(){
         tdName.textContent =
         person.name;
 
-        tr.appendChild(
-            tdName
-                // --------------------------
-        // Schichtzellen
-        // --------------------------
+        tr.appendChild(tdName);
+
+// --------------------------
+// Schichtzellen
+// --------------------------
 
         for(
 

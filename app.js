@@ -1906,7 +1906,7 @@ function schichtBearbeiten(name,tag){
     };
 
 }
-}
+
 // ==========================================
 // DDH Studio Enterprise 9.0
 // app.js

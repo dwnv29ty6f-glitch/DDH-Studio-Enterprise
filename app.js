@@ -1661,18 +1661,17 @@ schichten
 
 );
 
+const reststunden = SOLLSTUNDEN - stunden;
+
 tdName.innerHTML =
 
 "<strong>" +
-
 person.name +
-
 "</strong><br>" +
 
-stunden +
+"🕒 " + stunden + " / " + SOLLSTUNDEN + " Std.<br>" +
 
-" Std.";
-
+"Rest: " + reststunden + " Std.";
 tr.appendChild(tdName);
 
         // --------------------------

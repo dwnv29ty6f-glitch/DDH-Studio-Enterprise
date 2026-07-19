@@ -1800,88 +1800,107 @@ function schichtBearbeiten(name,tag){
     document.getElementById("schichtAbbrechen");
 
     titel.textContent =
-    name + " • Tag " + tag;
+    name + " • Tage: " +
+    markierteTage.join(", ");
 
     dialog.classList.add("aktiv");
 
-    function schliessen(){
+    function auswahlZuruecksetzen(){
 
-        dialog.classList.remove("aktiv");
+        markierteTage = [];
+        markierterMitarbeiter = "";
 
-    }
+        document
+        .querySelectorAll(".schichtZelle.markiert")
+        .forEach(z=>{
 
-    // Buttons zurücksetzen
-
-    document
-    .querySelectorAll(".schichtAuswahl")
-    .forEach(button=>{
-
-        button.onclick=()=>{
-
-            const typ =
-            button.dataset.schicht;
-
-            const tageListe =
-
-markierteTage.length>0
-
-?
-
-markierteTage
-
-:
-
-[tag];
-
-tageListe.forEach(t=>{
-
-    const vorhanden =
-    schichtSuchen(
-        name,
-        t
-    );
-
-    if(vorhanden){
-
-        vorhanden.typ = typ;
-
-    }else{
-
-        schichten.push({
-
-            name:name,
-
-            tag:t,
-
-            monat:aktuellerMonat,
-
-            jahr:aktuellesJahr,
-
-            typ:typ
+            z.classList.remove("markiert");
 
         });
 
     }
 
-});
+    function schliessen(){
+
+        dialog.classList.remove("aktiv");
+
+        auswahlZuruecksetzen();
+
+    }
+
+    // ----------------------------------
+    // Schichtbuttons
+    // ----------------------------------
+
+    document
+    .querySelectorAll(".schichtAuswahl")
+    .forEach(button=>{
+
+        button.onclick = ()=>{
+
+            const typ =
+            button.dataset.schicht;
+
+            markierteTage.forEach(t=>{
+
+                const vorhanden =
+                schichtSuchen(
+                    name,
+                    t
+                );
+
+                if(vorhanden){
+
+                    vorhanden.typ = typ;
+
+                }else{
+
+                    schichten.push({
+
+                        name:name,
+
+                        tag:t,
+
+                        monat:aktuellerMonat,
+
+                        jahr:aktuellesJahr,
+
+                        typ:typ
+
+                    });
+
+                }
+
+            });
 
             speichern();
 
             schichtplanZeichnen();
 
             dashboardAktualisieren();
-markierteTage = [];
 
-markierterMitarbeiter = "";
             schliessen();
 
         };
 
     });
 
-    loeschen.onclick=()=>{
+    // ----------------------------------
+    // Löschen
+    // ----------------------------------
 
-        schichtLoeschen(name,tag);
+    loeschen.onclick = ()=>{
+
+        markierteTage.forEach(t=>{
+
+            schichtLoeschen(
+                name,
+                t
+            );
+
+        });
+
+        speichern();
 
         schichtplanZeichnen();
 
@@ -1891,13 +1910,21 @@ markierterMitarbeiter = "";
 
     };
 
-    abbrechen.onclick=()=>{
+    // ----------------------------------
+    // Abbrechen
+    // ----------------------------------
+
+    abbrechen.onclick = ()=>{
 
         schliessen();
 
     };
 
-    dialog.onclick=(event)=>{
+    // ----------------------------------
+    // Klick außerhalb
+    // ----------------------------------
+
+    dialog.onclick = event=>{
 
         if(event.target===dialog){
 
@@ -1908,7 +1935,6 @@ markierterMitarbeiter = "";
     };
 
 }
-
 // ==========================================
 // DDH Studio Enterprise 9.0
 // app.js

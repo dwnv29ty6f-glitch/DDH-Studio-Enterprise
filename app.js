@@ -1737,36 +1737,15 @@ function schichtplanZeichnen(){
 
     td.classList.add("markiert");
 
-});
+    if(markierteTage.length===1){
 
-        }else{
-
-            markierteTage.push(tag);
-
-            td.classList.add(
-                "markiert"
-            );
-
-        }
-
-        if(markierteTage.length===1){
-
-            schichtBearbeiten(
-
-                person.name,
-
-                tag
-
-            );
-
-        }
+        schichtBearbeiten(person.name,tag);
 
     }
 
-);
+});
 
-            tr.appendChild(
-                td
+tr.appendChild(td);
             );
 
         }

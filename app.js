@@ -1995,7 +1995,44 @@ mitarbeiterAnzeigen();
 schichtplanZeichnen();
 
 dashboardAktualisieren();
+const btnSchichtBearbeiten =
+document.getElementById(
+    "schichtBearbeitenButton"
+);
 
+if(btnSchichtBearbeiten){
+
+    btnSchichtBearbeiten.onclick = ()=>{
+
+        if(markierterMitarbeiter===""){
+
+            alert(
+                "Bitte zuerst einen Mitarbeiter auswählen."
+            );
+
+            return;
+        }
+
+        if(markierteTage.length===0){
+
+            alert(
+                "Bitte zuerst Tage markieren."
+            );
+
+            return;
+        }
+
+        schichtBearbeiten(
+
+            markierterMitarbeiter,
+
+            markierteTage[0]
+
+        );
+
+    };
+
+}
 // --------------------------
 // Letzte Seite öffnen
 // --------------------------

@@ -1935,7 +1935,9 @@ tageListe.forEach(t=>{
             schichtplanZeichnen();
 
             dashboardAktualisieren();
+markierteTage = [];
 
+markierterMitarbeiter = [];
             schliessen();
 
         };

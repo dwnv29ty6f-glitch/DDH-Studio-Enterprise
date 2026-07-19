@@ -1662,7 +1662,7 @@ schichten
     return summe +
     schichtStunden(s.typ);
 
-}
+},
 
     0
 

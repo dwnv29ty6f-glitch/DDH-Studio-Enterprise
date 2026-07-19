@@ -1159,3 +1159,126 @@ textarea:focus{
     }
 
 }
+/* =========================================
+   Schicht Dialog
+========================================= */
+
+.schichtDialog{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:5000;
+
+}
+
+.schichtDialog.aktiv{
+
+    display:flex;
+
+}
+
+.schichtFenster{
+
+    width:520px;
+
+    max-width:95%;
+
+    background:var(--panel);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+}
+
+.schichtFenster h2{
+
+    margin-bottom:20px;
+
+    text-align:center;
+
+}
+
+.schichtAuswahlGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+}
+
+.schichtAuswahl{
+
+    height:60px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.schichtAuswahl.frueh{
+
+    background:#27ae60;
+
+}
+
+.schichtAuswahl.spaet{
+
+    background:#f39c12;
+
+}
+
+.schichtAuswahl.nacht{
+
+    background:#2980b9;
+
+}
+
+.schichtAuswahl.frei{
+
+    background:#7f8c8d;
+
+}
+
+.schichtAuswahl.urlaub{
+
+    background:#e74c3c;
+
+}
+
+.schichtAuswahl.krank{
+
+    background:#8e44ad;
+
+}
+
+#schichtLoeschen{
+
+    margin-top:20px;
+
+    background:#c0392b;
+
+}
+
+#schichtAbbrechen{
+
+    margin-top:12px;
+
+    background:#555;
+
+}

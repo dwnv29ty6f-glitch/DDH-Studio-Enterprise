@@ -2244,6 +2244,50 @@ mitarbeiter.forEach(person=>{
     html += "</tr>";
 
 });
+const fenster = window.open("", "_blank");
+
+fenster.document.write(`
+<html>
+<head>
+<title>Dienstplan</title>
+<style>
+body{
+font-family:Arial;
+padding:20px;
+}
+
+h1{
+text-align:center;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #000;
+padding:5px;
+text-align:center;
+}
+
+th{
+background:#eeeeee;
+}
+</style>
+</head>
+<body>
+
+<h1>Dienstplan ${MONATE[aktuellerMonat]} ${aktuellesJahr}</h1>
+
+${html}
+
+</body>
+</html>
+`);
+
+fenster.document.close();
+fenster.print();
 }
 
 const btnArbeitszeit =

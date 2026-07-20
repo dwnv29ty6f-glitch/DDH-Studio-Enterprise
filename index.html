@@ -21,44 +21,57 @@
         </nav>
 
         <section id="seite-dashboard" class="seite aktiv"><div class="modul"><div id="heuteTermine">0</div></div></section>
-        <section id="seite-kalender" class="seite"><div class="modul"><div id="tage"></div><div id="terminListe"></div></div></section>
-        <section id="seite-schichtplan" class="seite"><div class="modul"><table id="schichtTabelle"><tbody id="schichtplanBody"></tbody></table></div></section>
-    </div>
-
-    <!-- Formular zum Bearbeiten -->
-<section id="seite-bearbeiten" class="seite">
-    <div class="modul">
-        <h2>Mitarbeiter verwalten</h2>
-        <input type="text" id="editName" placeholder="Name">
-        <input type="text" id="editRolle" placeholder="Rolle">
         
-        <div style="display: flex; gap: 10px;">
-            <button id="saveMitarbeiterBtn" style="flex:2;">Speichern</button>
-            <button id="deleteMitarbeiterBtn" style="flex:1; background:#e74c3c;">Löschen</button>
-        </div>
-        <button id="cancelMitarbeiterBtn" style="width:100%; margin-top:10px; background:#555;">Abbrechen</button>
-    </div>
-</section>
+        <section id="seite-kalender" class="seite"><div class="modul"><div id="tage"></div><div id="terminListe"></div></div></section>
+        
+        <section id="seite-schichtplan" class="seite">
+            <div class="modul">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding: 10px; color: #888;">Mitarbeiter</th>
+                            <th style="text-align: center; padding: 10px; color: #888;">Schicht</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schichtplanBody"></tbody>
+                </table>
+                <div style="padding: 20px;">
+                    <button id="addMitarbeiterBtn" style="width: 100%;">+ Neuen Mitarbeiter hinzufügen</button>
+                </div>
+            </div>
+        </section>
 
-<!-- Hinzufügen-Button außerhalb des Formulars, damit er immer erreichbar ist -->
-<div style="padding: 20px;">
-    <button id="addMitarbeiterBtn" style="width: 100%;">+ Neuen Mitarbeiter hinzufügen</button>
-</div>
-</section>
-<div id="schichtDialog" class="schichtDialog">
-    <div class="schichtFenster">
-        <h2>Schicht auswählen</h2>
-        <div class="schichtAuswahlGrid">
-            <button class="schichtAuswahl frueh" data-schicht="Frühschicht">Früh</button>
-            <button class="schichtAuswahl spaet" data-schicht="Spätschicht">Spät</button>
-            <button class="schichtAuswahl nacht" data-schicht="Nachtschicht">Nacht</button>
-            <button class="schichtAuswahl frei" data-schicht="Frei">Frei</button>
-        </div>
-        <button id="schichtLoeschen">Schicht löschen</button>
-        <button id="schichtAbbrechen">Abbrechen</button>
+        <!-- Formular zum Bearbeiten -->
+        <section id="seite-bearbeiten" class="seite">
+            <div class="modul">
+                <h2>Mitarbeiter verwalten</h2>
+                <input type="text" id="editName" placeholder="Name">
+                <input type="text" id="editRolle" placeholder="Rolle">
+                <div style="display: flex; gap: 10px;">
+                    <button id="saveMitarbeiterBtn" style="flex:2;">Speichern</button>
+                    <button id="deleteMitarbeiterBtn" style="flex:1; background:#e74c3c;">Löschen</button>
+                </div>
+                <button id="cancelMitarbeiterBtn" style="width:100%; margin-top:10px; background:#555;">Abbrechen</button>
+            </div>
+        </section>
     </div>
-</div>
-    <!-- Scripte laden -->
+
+    <!-- Dialoge (liegen außerhalb der .app, damit sie immer über allem liegen) -->
+    <div id="schichtDialog" class="schichtDialog">
+        <div class="schichtFenster">
+            <h2>Schicht auswählen</h2>
+            <div class="schichtAuswahlGrid">
+                <button class="schichtAuswahl frueh" data-schicht="Früh">Früh</button>
+                <button class="schichtAuswahl spaet" data-schicht="Spät">Spät</button>
+                <button class="schichtAuswahl nacht" data-schicht="Nacht">Nacht</button>
+                <button class="schichtAuswahl frei" data-schicht="Frei">Frei</button>
+            </div>
+            <button id="schichtLoeschen" style="background:#e74c3c; width:100%; margin-top:10px;">Schicht löschen</button>
+            <button id="schichtAbbrechen" style="width:100%; margin-top:10px;">Abbrechen</button>
+        </div>
+    </div>
+
+    <!-- Scripte -->
     <script src="js/dom.js" defer></script>
     <script src="js/daten.js" defer></script>
     <script src="js/config.js" defer></script>
@@ -74,5 +87,4 @@
     <script src="js/funktionen.js" defer></script>
     <script src="js/start.js" defer></script>
 </body>
-</html>
 </html>

@@ -1,3 +1,11 @@
+// Beim Laden prüfen, ob gespeicherte Daten existieren
+const gespeicherteMitarbeiter = localStorage.getItem("mitarbeiterDaten");
+if (gespeicherteMitarbeiter) {
+    // Wir überschreiben das globale 'mitarbeiter'-Array mit den gespeicherten Daten
+    const geladeneDaten = JSON.parse(gespeicherteMitarbeiter);
+    mitarbeiter.length = 0; // Bestehendes Array leeren
+    geladeneDaten.forEach(m => mitarbeiter.push(m));
+}
 // Globale Variable, um uns zu merken, welchen Mitarbeiter wir gerade bearbeiten
 let aktuellBearbeiteteId = null;
 

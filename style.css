@@ -1381,3 +1381,7 @@ textarea:focus{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+#schichtTabelle {
+    display: table;
+    width: 100%;
+}

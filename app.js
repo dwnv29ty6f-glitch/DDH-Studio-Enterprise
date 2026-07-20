@@ -2140,7 +2140,206 @@ console.log(
 
 );
 
+// ==========================================
+// Dienstplan drucken
+// ==========================================
 
+const btnDienstplan =
+document.getElementById("druckDienstplan");
+
+if(btnDienstplan){
+
+    btnDienstplan.onclick = ()=>{
+
+        const tage =
+        tageImMonat(
+            aktuellerMonat,
+            aktuellesJahr
+        );
+
+        let html = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Dienstplan</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+h1{
+text-align:center;
+margin-bottom:5px;
+}
+
+h2{
+text-align:center;
+margin-top:0;
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:12px;
+}
+
+th,
+td{
+border:1px solid #000;
+padding:4px;
+text-align:center;
+}
+
+th{
+background:#e8e8e8;
+}
+
+.name{
+text-align:left;
+font-weight:bold;
+white-space:nowrap;
+}
+
+.info{
+font-size:11px;
+font-weight:normal;
+}
+
+@media print{
+
+body{
+margin:0;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>DDH Studio Enterprise</h1>
+
+<h2>${MONATE[aktuellerMonat]} ${aktuellesJahr}</h2>
+
+<table>
+
+<tr>
+
+<th>Mitarbeiter</th>
+`;
+
+        for(let tag=1;tag<=tage;tag++){
+
+            html += `<th>${tag}</th>`;
+
+        }
+
+        html += `</tr>`;
+
+        mitarbeiter.forEach(person=>{
+
+            let stunden = 0;
+
+            schichten.forEach(s=>{
+
+                if(
+                    s.name===person.name &&
+                    s.monat===aktuellerMonat &&
+                    s.jahr===aktuellesJahr
+                ){
+
+                    stunden +=
+                    schichtStunden(s.typ);
+
+                }
+
+            });
+
+            let differenz =
+            stunden - SOLLSTUNDEN;
+
+            html += `
+<tr>
+
+<td class="name">
+
+${person.name}
+
+<div class="info">
+
+${stunden}/${SOLLSTUNDEN} Std.
+
+(${differenz>=0?"+":""}${differenz})
+
+</div>
+
+</td>
+`;
+
+            for(let tag=1;tag<=tage;tag++){
+
+                const eintrag =
+                schichtSuchen(
+                    person.name,
+                    tag
+                );
+
+                html += "<td>";
+
+                if(eintrag){
+
+                    html +=
+                    schichtKurz(
+                        eintrag.typ
+                    );
+
+                }else{
+
+                    html += "-";
+
+                }
+
+                html += "</td>";
+
+            }
+
+            html += "</tr>";
+
+        });
+
+        html += `
+</table>
+
+</body>
+
+</html>
+`;
+
+        const fenster =
+        window.open(
+            "",
+            "_blank"
+        );
+
+        fenster.document.write(html);
+
+        fenster.document.close();
+
+        fenster.focus();
+
+        fenster.print();
+
+    };
+
+}
     
 
 const btnArbeitszeit =

@@ -2218,9 +2218,26 @@ mitarbeiter.forEach(person=>{
     summe + schichtStunden(s.typ),
 0);
 
-html += "<td><b>" + person.name + "</b><br>" +
-stunden + " / " + SOLLSTUNDEN + " Std.</td>";
+let info;
 
+if(stunden > SOLLSTUNDEN){
+
+    info = "+" + (stunden - SOLLSTUNDEN) + " Std.";
+
+}else if(stunden < SOLLSTUNDEN){
+
+    info = "-" + (SOLLSTUNDEN - stunden) + " Std.";
+
+}else{
+
+    info = "0 Std.";
+
+}
+
+html += "<td><b>" + person.name + "</b><br>" +
+stunden + " / " + SOLLSTUNDEN + " Std.<br>" +
+info +
+"</td>";
     for(let tag=1;tag<=tage;tag++){
 
         const eintrag =

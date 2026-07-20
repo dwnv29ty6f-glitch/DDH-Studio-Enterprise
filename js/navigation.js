@@ -1,60 +1,17 @@
-"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+    const navButtons = document.querySelectorAll(".navButton");
+    const seiten = document.querySelectorAll(".seite");
 
-// ===============================
-// Seite anzeigen
-// ===============================
+    navButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            // Aktiven Status der Buttons wechseln
+            navButtons.forEach(b => b.classList.remove("aktiv"));
+            btn.classList.add("aktiv");
 
-function seiteAnzeigen(name) {
-
-    dom.seiten.forEach(seite => {
-
-        seite.classList.remove("aktiv");
-
+            // Seiten umschalten
+            seiten.forEach(s => s.classList.remove("aktiv"));
+            const zielSeite = document.getElementById("seite-" + btn.dataset.seite);
+            if (zielSeite) zielSeite.classList.add("aktiv");
+        });
     });
-
-    dom.navButtons.forEach(button => {
-
-        button.classList.remove("aktiv");
-
-    });
-
-    const ziel = document.getElementById("seite-" + name);
-
-    if (ziel) {
-
-        ziel.classList.add("aktiv");
-
-    }
-
-    const button = document.querySelector(
-        '.navButton[data-seite="' + name + '"]'
-    );
-
-    if (button) {
-
-        button.classList.add("aktiv");
-
-    }
-
-    localStorage.setItem(
-        "ddhSeite",
-        name
-    );
-
-}
-
-// ===============================
-// Navigation starten
-// ===============================
-
-dom.navButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        seiteAnzeigen(
-            button.dataset.seite
-        );
-
-    });
-
 });

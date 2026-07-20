@@ -45,6 +45,19 @@
     <button id="addMitarbeiterBtn" style="width: 100%;">+ Neuen Mitarbeiter hinzufügen</button>
 </div>
 </section>
+<div id="schichtDialog" class="schichtDialog">
+    <div class="schichtFenster">
+        <h2>Schicht auswählen</h2>
+        <div class="schichtAuswahlGrid">
+            <button class="schichtAuswahl frueh" data-schicht="Frühschicht">Früh</button>
+            <button class="schichtAuswahl spaet" data-schicht="Spätschicht">Spät</button>
+            <button class="schichtAuswahl nacht" data-schicht="Nachtschicht">Nacht</button>
+            <button class="schichtAuswahl frei" data-schicht="Frei">Frei</button>
+        </div>
+        <button id="schichtLoeschen">Schicht löschen</button>
+        <button id="schichtAbbrechen">Abbrechen</button>
+    </div>
+</div>
     <!-- Scripte laden -->
     <script src="js/dom.js" defer></script>
     <script src="js/daten.js" defer></script>

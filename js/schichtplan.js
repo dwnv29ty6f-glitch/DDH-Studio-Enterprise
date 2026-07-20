@@ -1,14 +1,9 @@
 // Daten laden
 const gespeicherteMitarbeiter = localStorage.getItem("mitarbeiterDaten");
-if (gespeicherteMitarbeiter) {
-    mitarbeiter.length = 0;
-    JSON.parse(gespeicherteMitarbeiter).forEach(m => mitarbeiter.push(m));
-}
+let mitarbeiter = gespeicherteMitarbeiter ? JSON.parse(gespeicherteMitarbeiter) : [];
 
 const gespeicherteSchichten = localStorage.getItem("schichtenDaten");
-if (gespeicherteSchichten) {
-    schichten = JSON.parse(gespeicherteSchichten);
-}
+let schichten = gespeicherteSchichten ? JSON.parse(gespeicherteSchichten) : [];
 
 let aktuellBearbeiteteId = null;
 let aktiveMitarbeiterId = null;
@@ -16,41 +11,46 @@ let aktivesDatum = null;
 
 function schichtplanLaden() {
     const body = document.getElementById("schichtplanBody");
-    if (!body) return;
+    const header = document.getElementById("schichtplanHeader");
+    if (!body || !header) return;
     
+    // Header mit Tagen 1-31 füllen
+    header.innerHTML = '<th style="padding: 10px; color: #888; background:#222; position:sticky; left:0;">Mitarbeiter</th>';
+    for(let d=1; d<=31; d++) {
+        header.innerHTML += `<th style="padding: 5px; font-size: 0.7em; color: #555;">${d}</th>`;
+    }
+
     body.innerHTML = ""; 
-    
-    // Wir erstellen 31 Tage für den Monat Juli 2026
-    const tageImMonat = 31;
 
     mitarbeiter.forEach(ma => {
         const row = document.createElement("tr");
-        
-        // Name & Rolle
         let html = `<td style="padding: 10px; border: 1px solid #333; position: sticky; left:0; background:#222;">
                         <strong onclick="bearbeiteMitarbeiter(${ma.id})" style="color: #0078d4;">${ma.name}</strong>
                     </td>`;
         
-        // Tage generieren
-        for (let d = 1; d <= tageImMonat; d++) {
+        for (let d = 1; d <= 31; d++) {
             const datumStr = `2026-07-${d.toString().padStart(2, '0')}`;
-            const schicht = getSchichtFuerTag(ma.id, datumStr);
+            const eintrag = schichten.find(s => s.mitarbeiterId === ma.id && s.datum === datumStr);
+            const symbol = eintrag ? ({"Frühschicht":"F","Spätschicht":"S","Nachtschicht":"N","Frei":"Fr"}[eintrag.schicht] || "?") : "";
+            
             html += `<td onclick="oeffneSchichtDialog(${ma.id}, '${datumStr}')" 
-                         style="border: 1px solid #333; text-align:center; min-width: 40px; cursor:pointer; font-size: 0.7em;">
-                        ${schicht || "-"}
+                         style="border: 1px solid #333; text-align:center; min-width: 30px; cursor:pointer; font-size: 0.8em; color:white;">
+                        ${symbol}
                     </td>`;
         }
-        
         row.innerHTML = html;
         body.appendChild(row);
     });
 }
 
-function getSchichtFuerTag(maId, datum) {
-    const eintrag = schichten.find(s => s.mitarbeiterId === maId && s.datum === datum);
-    // Abkürzungen wie in professionellen Tools: F, S, N, Fr
-    const map = {"Frühschicht": "F", "Spätschicht": "S", "Nachtschicht": "N", "Frei": "Fr"};
-    return eintrag ? (map[eintrag.schicht] || eintrag.schicht[0]) : "";
+function bearbeiteMitarbeiter(id) {
+    const ma = mitarbeiter.find(m => m.id === id);
+    if (!ma) return;
+    aktuellBearbeiteteId = id;
+    document.getElementById("editName").value = ma.name;
+    document.getElementById("editRolle").value = ma.rolle;
+    document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
+    document.getElementById("seite-bearbeiten").classList.add('aktiv');
 }
 
 function oeffneSchichtDialog(maId, datum) {

@@ -1670,35 +1670,22 @@ schichten
 
 let info;
 
+let info;
+
 if(stunden > SOLLSTUNDEN){
 
-    info =
-    "+" +
-    (stunden - SOLLSTUNDEN) +
-    " Überstunden";
+    info = "+" + (stunden - SOLLSTUNDEN) + " Std.";
 
 }else{
 
-    info =
-    "Rest: " +
-    (SOLLSTUNDEN - stunden) +
-    " Std.";
+    info = "-" + (SOLLSTUNDEN - stunden) + " Std.";
 
 }
 
-tdName.innerHTML =
-
-"<strong>" +
-person.name +
-"</strong><br>" +
-
-"🕒 " +
-stunden +
-" / " +
-SOLLSTUNDEN +
-" Std.<br>" +
-
-info;
+html += "<td><b>" + person.name + "</b><br>" +
+stunden + " / " + SOLLSTUNDEN + " Std.<br>" +
+info +
+"</td>";
 tr.appendChild(tdName);
 
         // --------------------------

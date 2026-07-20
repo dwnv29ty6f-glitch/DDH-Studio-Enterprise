@@ -40,6 +40,7 @@ function oeffneSchichtDialog(maId) {
 function bearbeiteMitarbeiter(id) {
     aktuellBearbeiteteId = id;
     const ma = mitarbeiter.find(m => m.id === id);
+    if (!ma) return;
     document.getElementById("editName").value = ma.name;
     document.getElementById("editRolle").value = ma.rolle;
     document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
@@ -91,4 +92,5 @@ document.getElementById("addMitarbeiterBtn")?.addEventListener("click", () => {
     schichtplanLaden();
 });
 
+// Initialer Aufruf beim Laden
 schichtplanLaden();

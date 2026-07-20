@@ -2141,81 +2141,104 @@ console.log(
 );
 
 // ==========================================
-// Dienstplan drucken
+// Druckfunktion
 // ==========================================
 
-const btnDienstplan =
-document.getElementById("druckDienstplan");
+function druckSeite(titel, html){
 
-if(btnDienstplan){
+    const fenster = window.open("", "_blank");
 
-    btnDienstplan.onclick = ()=>{
+    if(!fenster){
 
-        const tage =
-        tageImMonat(
-            aktuellerMonat,
-            aktuellesJahr
+        alert(
+            "Der Browser blockiert das Druckfenster. Bitte Popups erlauben."
         );
 
-        let html = `
+        return false;
+
+    }
+
+    fenster.document.open();
+
+    fenster.document.write(`
+
 <!DOCTYPE html>
-<html>
+
+<html lang="de">
+
 <head>
+
 <meta charset="UTF-8">
 
-<title>Dienstplan</title>
+<title>${titel}</title>
 
 <style>
 
 body{
+
 font-family:Arial,sans-serif;
 padding:20px;
+background:#fff;
+color:#000;
+
 }
 
-h1{
-text-align:center;
-margin-bottom:5px;
-}
+h1,h2{
 
-h2{
 text-align:center;
-margin-top:0;
-margin-bottom:20px;
+
 }
 
 table{
+
 width:100%;
 border-collapse:collapse;
-font-size:12px;
+margin-top:20px;
+
 }
 
 th,
 td{
+
 border:1px solid #000;
-padding:4px;
+padding:6px;
 text-align:center;
+
 }
 
 th{
+
 background:#e8e8e8;
+
 }
 
 .name{
+
 text-align:left;
 font-weight:bold;
-white-space:nowrap;
+
 }
 
 .info{
-font-size:11px;
-font-weight:normal;
+
+font-size:12px;
+
 }
 
-@media print{
+.unterschrift{
 
-body{
-margin:0;
+margin-top:80px;
+display:flex;
+justify-content:space-between;
+
 }
+
+.linie{
+
+width:250px;
+border-top:1px solid #000;
+text-align:center;
+padding-top:5px;
 
 }
 
@@ -2225,113 +2248,17 @@ margin:0;
 
 <body>
 
-<h1>DDH Studio Enterprise</h1>
-
-<h2>${MONATE[aktuellerMonat]} ${aktuellesJahr}</h2>
-
-<table>
-
-<tr>
-
-<th>Mitarbeiter</th>
-`;
-
-        for(let tag=1;tag<=tage;tag++){
-
-            html += `<th>${tag}</th>`;
-
-        }
-
-        html += `</tr>`;
-
-        mitarbeiter.forEach(person=>{
-
-            let stunden = 0;
-
-            schichten.forEach(s=>{
-
-                if(
-                    s.name===person.name &&
-                    s.monat===aktuellerMonat &&
-                    s.jahr===aktuellesJahr
-                ){
-
-                    stunden +=
-                    schichtStunden(s.typ);
-
-                }
-
-            });
-
-            let differenz =
-            stunden - SOLLSTUNDEN;
-
-            html += `
-<tr>
-
-<td class="name">
-
-${person.name}
-
-<div class="info">
-
-${stunden}/${SOLLSTUNDEN} Std.
-
-(${differenz>=0?"+":""}${differenz})
-
-</div>
-
-</td>
-`;
-
-            for(let tag=1;tag<=tage;tag++){
-
-                const eintrag =
-                schichtSuchen(
-                    person.name,
-                    tag
-                );
-
-                html += "<td>";
-
-                if(eintrag){
-
-                    html +=
-                    schichtKurz(
-                        eintrag.typ
-                    );
-
-                }else{
-
-                    html += "-";
-
-                }
-
-                html += "</td>";
-
-            }
-
-            html += "</tr>";
-
-        });
-
-        html += `
-</table>
+${html}
 
 </body>
 
 </html>
-`;
-alert("Fenster wird geöffnet...");
-        const fenster =
-        window.open(
-            "",
-            "_blank"
-        );
 
-        fenster.document.write(html);
+`);
 
-        fenster.document.close();
+    fenster.document.close();
+
+    fenster.onload = ()=>{
 
         fenster.focus();
 
@@ -2339,10 +2266,9 @@ alert("Fenster wird geöffnet...");
 
     };
 
+    return true;
+
 }
-
-    
-
 // ==========================================
 // Arbeitszeitnachweis drucken
 // ==========================================

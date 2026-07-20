@@ -1365,3 +1365,19 @@ textarea:focus{
     outline-offset:-3px;
 
 }
+/* Ergänzung für den Schichtplan */
+#schichtTabelle {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    color: white;
+    margin-top: 10px;
+}
+
+#schichtTabelle td {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

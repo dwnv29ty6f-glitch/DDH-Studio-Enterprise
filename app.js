@@ -2208,7 +2208,42 @@ if(btnDienstplan){
     }
 
     html += "</tr>";
+mitarbeiter.forEach(person=>{
 
+    html += "<tr>";
+
+    html += "<td><b>"+person.name+"</b></td>";
+
+    for(let tag=1;tag<=tage;tag++){
+
+        const eintrag =
+        schichten.find(s=>
+
+            s.name===person.name &&
+
+            s.tag===tag &&
+
+            s.monat===aktuellerMonat &&
+
+            s.jahr===aktuellesJahr
+
+        );
+
+        html += "<td>";
+
+        if(eintrag){
+
+            html += schichtKurz(eintrag.typ);
+
+        }
+
+        html += "</td>";
+
+    }
+
+    html += "</tr>";
+
+});
 }
 
 const btnArbeitszeit =

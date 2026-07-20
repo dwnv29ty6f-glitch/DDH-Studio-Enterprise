@@ -2322,7 +2322,7 @@ ${stunden}/${SOLLSTUNDEN} Std.
 
 </html>
 `;
-
+alert("Fenster wird geöffnet...");
         const fenster =
         window.open(
             "",
@@ -2340,6 +2340,14 @@ ${stunden}/${SOLLSTUNDEN} Std.
     };
 
 }
+const fenster = window.open("", "_blank");
+
+if(!fenster){
+    alert("window.open fehlgeschlagen");
+    return;
+}
+
+alert("Fenster geöffnet");
     
 
 // ==========================================

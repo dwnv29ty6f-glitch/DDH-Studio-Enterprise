@@ -2340,6 +2340,15 @@ alert("Fenster wird geöffnet...");
     };
 
 }
+
+    
+
+// ==========================================
+// Arbeitszeitnachweis drucken
+// ==========================================
+
+alert("Fenster wird geöffnet...");
+
 const fenster = window.open("", "_blank");
 
 if(!fenster){
@@ -2348,26 +2357,12 @@ if(!fenster){
 }
 
 alert("Fenster geöffnet");
-    
 
-// ==========================================
-// Arbeitszeitnachweis drucken
-// ==========================================
+fenster.document.write(html);
+fenster.document.close();
 
-const btnArbeitszeit =
-document.getElementById("druckArbeitszeit");
-
-if(btnArbeitszeit){
-
-    btnArbeitszeit.onclick = ()=>{
-
-        if(mitarbeiter.length===0){
-
-            alert("Keine Mitarbeiter vorhanden.");
-
-            return;
-
-        }
+fenster.focus();
+fenster.print();
 
         let name = prompt(
             "Für welchen Mitarbeiter?\n\n" +

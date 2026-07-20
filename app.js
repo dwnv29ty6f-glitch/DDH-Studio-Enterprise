@@ -2143,3 +2143,28 @@ console.log(
     "DDH Studio Enterprise 9.0 gestartet."
 
 );
+const btnDienstplan =
+document.getElementById("druckDienstplan");
+
+if(btnDienstplan){
+
+    btnDienstplan.onclick = ()=>{
+
+        alert("Dienstplan-Druck funktioniert.");
+
+    };
+
+}
+
+const btnArbeitszeit =
+document.getElementById("druckArbeitszeit");
+
+if(btnArbeitszeit){
+
+    btnArbeitszeit.onclick = ()=>{
+
+        alert("Arbeitszeitnachweis funktioniert.");
+
+    };
+
+}

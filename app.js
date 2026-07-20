@@ -2572,13 +2572,3 @@ Arbeitgeber
     };
 
 }
-
-if(btnArbeitszeit){
-
-    btnArbeitszeit.onclick = ()=>{
-
-        alert("Arbeitszeitnachweis funktioniert.");
-
-    };
-
-}

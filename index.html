@@ -3,27 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDH Studio Enterprise 9.0</title>
-    <style>
-        /* CSS hier einfügen - ich habe die wichtigsten Styles für den Start beigefügt */
-        body { font-family: sans-serif; background: #1d1f23; color: white; margin: 0; }
-        .seite { display: none; padding: 25px; }
-        .seite.aktiv { display: block; }
-        .modul { background: #2a2d33; padding: 20px; border-radius: 20px; }
-        nav { display: flex; gap: 10px; background: #2a2d33; padding: 15px; }
-        .navButton { background: #343840; border: none; color: white; padding: 10px; cursor: pointer; }
-        .navButton.aktiv { background: #2f80ed; }
-        #tage { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-        .tag { background: #343840; padding: 10px; min-height: 80px; }
-        #schichtDialog { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
-        #schichtDialog.aktiv { display: flex; }
-    </style>
+    <title>DDH Studio Enterprise</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="app">
         <header class="hauptHeader">
-            <div class="headerMitte"><h1 id="monatTitel">DDH Studio Enterprise</h1></div>
+            <div class="headerLinks"><button id="vorherigerMonat">◀</button></div>
+            <div class="headerMitte"><h1>DDH Studio</h1><p id="headerUntertitel">Enterprise 9.0</p></div>
+            <div class="headerRechts"><button id="naechsterMonat">▶</button></div>
         </header>
 
         <nav id="navigation">
@@ -32,47 +20,21 @@
             <button class="navButton" data-seite="schichtplan">👷 Schichtplan</button>
         </nav>
 
-        <section id="seite-dashboard" class="seite aktiv">
-            <div class="modul"><h2>Dashboard</h2></div>
-        </section>
-
-        <section id="seite-kalender" class="seite">
-            <div class="modul">
-                <h2>Kalender</h2>
-                <div id="tage"></div>
-            </div>
-        </section>
-
-        <section id="seite-schichtplan" class="seite">
-            <div class="modul">
-                <h2>Schichtplan</h2>
-                <table id="schichtTabelle"><thead id="schichtHeader"></thead><tbody id="schichtplanBody"></tbody></table>
-            </div>
-        </section>
+        <section id="seite-dashboard" class="seite aktiv"><div class="modul"><div id="heuteTermine">0</div></div></section>
+        <section id="seite-kalender" class="seite"><div class="modul"><div id="tage"></div><div id="terminListe"></div></div></section>
+        <section id="seite-schichtplan" class="seite"><div class="modul"><table id="schichtTabelle"><tbody id="schichtplanBody"></tbody></table></div></section>
     </div>
 
-    <!-- Schicht Dialog -->
-    <div id="schichtDialog" class="schichtDialog">
-        <div class="schichtFenster">
-            <h2 id="schichtDialogTitel">Schicht auswählen</h2>
-            <button id="schichtAbbrechen">Schließen</button>
-        </div>
-    </div>
-
-    <script>
-        // DOM-Elemente definieren, damit die Funktionen nicht mehr abstürzen
-        const dom = {
-            tage: document.getElementById("tage"),
-            monatTitel: document.getElementById("monatTitel"),
-            schichtHeader: document.getElementById("schichtHeader"),
-            schichtBody: document.getElementById("schichtplanBody"),
-            schichtDialog: document.getElementById("schichtDialog"),
-            seiten: document.querySelectorAll(".seite"),
-            navButtons: document.querySelectorAll(".navButton")
-        };
-
-        // Hier kommen später deine JS-Logik-Funktionen rein
-        console.log("DDH Studio Enterprise 9.0 Grundgerüst geladen.");
-    </script>
+    <!-- Scripte mit 'defer' laden -->
+    <script src="js/grundsystem.js" defer></script>
+    <script src="js/speicher.js" defer></script>
+    <script src="js/kalender.js" defer></script>
+    <script src="js/termine.js" defer></script>
+    <script src="js/aufgaben.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
+    <script src="js/mitarbeiter.js" defer></script>
+    <script src="js/schichtplan.js" defer></script>
+    <script src="js/druck.js" defer></script>
+    <script src="js/start.js" defer></script>
 </body>
 </html>

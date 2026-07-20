@@ -1682,12 +1682,21 @@ if(stunden > SOLLSTUNDEN){
 
 }
 
-html += "<td><b>" + person.name + "</b><br>" +
-stunden + " / " + SOLLSTUNDEN + " Std.<br>" +
-info +
-"</td>";
-tr.appendChild(tdName);
+tdName.innerHTML =
 
+"<strong>" +
+person.name +
+"</strong><br>" +
+
+"🕒 " +
+stunden +
+" / " +
+SOLLSTUNDEN +
+" Std.<br>" +
+
+info;
+
+tr.appendChild(tdName);
         // --------------------------
         // Schichtzellen
         // --------------------------

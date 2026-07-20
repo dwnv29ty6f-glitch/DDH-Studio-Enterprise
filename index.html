@@ -28,12 +28,22 @@
     <!-- Formular zum Bearbeiten -->
 <section id="seite-bearbeiten" class="seite">
     <div class="modul">
-        <h2>Mitarbeiter bearbeiten</h2>
+        <h2>Mitarbeiter verwalten</h2>
         <input type="text" id="editName" placeholder="Name">
         <input type="text" id="editRolle" placeholder="Rolle">
-        <button id="saveMitarbeiterBtn">Speichern</button>
-        <button id="cancelMitarbeiterBtn">Abbrechen</button>
+        
+        <div style="display: flex; gap: 10px;">
+            <button id="saveMitarbeiterBtn" style="flex:2;">Speichern</button>
+            <button id="deleteMitarbeiterBtn" style="flex:1; background:#e74c3c;">Löschen</button>
+        </div>
+        <button id="cancelMitarbeiterBtn" style="width:100%; margin-top:10px; background:#555;">Abbrechen</button>
     </div>
+</section>
+
+<!-- Hinzufügen-Button außerhalb des Formulars, damit er immer erreichbar ist -->
+<div style="padding: 20px;">
+    <button id="addMitarbeiterBtn" style="width: 100%;">+ Neuen Mitarbeiter hinzufügen</button>
+</div>
 </section>
     <!-- Scripte laden -->
     <script src="js/dom.js" defer></script>

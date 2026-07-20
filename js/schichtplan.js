@@ -48,17 +48,16 @@ function getSchichtFuerHeute(maId) {
 document.getElementById("saveMitarbeiterBtn").addEventListener("click", () => {
     if (aktuellBearbeiteteId === null) return;
 
-    // Finde den Mitarbeiter in der Liste und aktualisiere ihn
     const ma = mitarbeiter.find(m => m.id === aktuellBearbeiteteId);
     if (ma) {
         ma.name = document.getElementById("editName").value;
         ma.rolle = document.getElementById("editRolle").value;
+        
+        // HIER: Daten im Browser-Speicher sichern
+        localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
     }
 
-    // Tabelle neu laden, um die Änderungen anzuzeigen
     schichtplanLaden();
-
-    // Zurück zum Schichtplan springen
     document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
     document.getElementById("seite-schichtplan").classList.add('aktiv');
 });

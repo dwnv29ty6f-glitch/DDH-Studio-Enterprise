@@ -2233,10 +2233,13 @@ mitarbeiter.forEach(person=>{
 
         if(eintrag){
 
-            html += schichtKurz(eintrag.typ);
+    html += "<b>" + schichtKurz(eintrag.typ) + "</b>";
 
-        }
+}else{
 
+    html += "-";
+
+}
         html += "</td>";
 
     }

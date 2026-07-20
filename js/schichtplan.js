@@ -44,5 +44,29 @@ function getSchichtFuerHeute(maId) {
     const schichtEintrag = schichten.find(s => s.mitarbeiterId === maId && s.datum === heute);
     return schichtEintrag ? schichtEintrag.schicht : "Keine Schicht";
 }
+// Speichern-Logik
+document.getElementById("saveMitarbeiterBtn").addEventListener("click", () => {
+    if (aktuellBearbeiteteId === null) return;
+
+    // Finde den Mitarbeiter in der Liste und aktualisiere ihn
+    const ma = mitarbeiter.find(m => m.id === aktuellBearbeiteteId);
+    if (ma) {
+        ma.name = document.getElementById("editName").value;
+        ma.rolle = document.getElementById("editRolle").value;
+    }
+
+    // Tabelle neu laden, um die Änderungen anzuzeigen
+    schichtplanLaden();
+
+    // Zurück zum Schichtplan springen
+    document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
+    document.getElementById("seite-schichtplan").classList.add('aktiv');
+});
+
+// Abbrechen-Logik
+document.getElementById("cancelMitarbeiterBtn").addEventListener("click", () => {
+    document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
+    document.getElementById("seite-schichtplan").classList.add('aktiv');
+});
 
 schichtplanLaden();

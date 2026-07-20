@@ -2288,6 +2288,9 @@ ${html}
 
 fenster.document.close();
 fenster.print();
+
+    };
+    
 }
 
 const btnArbeitszeit =

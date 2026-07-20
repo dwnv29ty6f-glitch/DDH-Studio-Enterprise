@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDH Studio Enterprise</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Damit der Schichtplan horizontal scrollbar bleibt */
-        .schichtplan-wrapper { overflow-x: auto; display: block; width: 100%; }
-        table { border-collapse: collapse; width: 100%; }
-    </style>
 </head>
 <body>
     <div class="app">
@@ -25,19 +20,20 @@
             <button class="navButton" data-seite="schichtplan">👷 Schichtplan</button>
         </nav>
 
-        <section id="seite-dashboard" class="seite aktiv"><div class="modul"><div id="heuteTermine">0</div></div></section>
+        <!-- DASHBOARD -->
+        <section id="seite-dashboard" class="seite aktiv">
+            <div class="modul"><div id="heuteTermine">0</div></div>
+        </section>
         
-        <section id="seite-kalender" class="seite"><div class="modul"><div id="tage"></div><div id="terminListe"></div></div></section>
+        <!-- KALENDER -->
+        <section id="seite-kalender" class="seite">
+            <div class="modul"><div id="tage"></div><div id="terminListe"></div></div>
+        </section>
         
+        <!-- SCHICHTPLAN -->
         <section id="seite-schichtplan" class="seite">
-            <div class="modul schichtplan-wrapper">
-                <table>
-                    <thead>
-                        <tr id="schichtplanHeader">
-                            <th style="padding: 10px; color: #888;">Mitarbeiter</th>
-                            <!-- Tage werden hier dynamisch eingefügt -->
-                        </tr>
-                    </thead>
+            <div class="modul">
+                <table style="width: 100%; border-collapse: collapse;">
                     <tbody id="schichtplanBody"></tbody>
                 </table>
                 <div style="padding: 20px;">
@@ -46,7 +42,7 @@
             </div>
         </section>
 
-        <!-- Formular zum Bearbeiten -->
+        <!-- BEARBEITEN -->
         <section id="seite-bearbeiten" class="seite">
             <div class="modul">
                 <h2>Mitarbeiter verwalten</h2>
@@ -61,14 +57,14 @@
         </section>
     </div>
 
-    <!-- Schicht-Dialog -->
+    <!-- SCHICHT-DIALOG -->
     <div id="schichtDialog" class="schichtDialog">
         <div class="schichtFenster">
             <h2>Schicht auswählen</h2>
             <div class="schichtAuswahlGrid">
-                <button class="schichtAuswahl" data-schicht="Frühschicht">Früh</button>
-                <button class="schichtAuswahl" data-schicht="Spätschicht">Spät</button>
-                <button class="schichtAuswahl" data-schicht="Nachtschicht">Nacht</button>
+                <button class="schichtAuswahl" data-schicht="Früh">Früh</button>
+                <button class="schichtAuswahl" data-schicht="Spät">Spät</button>
+                <button class="schichtAuswahl" data-schicht="Nacht">Nacht</button>
                 <button class="schichtAuswahl" data-schicht="Frei">Frei</button>
             </div>
             <button id="schichtLoeschen" style="background:#e74c3c; width:100%; margin-top:10px;">Schicht löschen</button>
@@ -76,7 +72,7 @@
         </div>
     </div>
 
-    <!-- Scripte -->
+    <!-- SCRIPTE -->
     <script src="js/dom.js" defer></script>
     <script src="js/daten.js" defer></script>
     <script src="js/config.js" defer></script>

@@ -5,17 +5,19 @@ function schichtplanLaden() {
     body.innerHTML = ""; 
 
     mitarbeiter.forEach(ma => {
+        const schicht = getSchichtFuerHeute(ma.id);
         const row = document.createElement("tr");
+        
+        // Wir setzen die Spalten explizit als HTML-Elemente
         row.innerHTML = `
-            <td style="color: white; padding: 10px;">${ma.name}</td>
-            <td style="color: #0078d4; font-weight: bold; padding: 10px;">${getSchichtFuerHeute(ma.id)}</td>
+            <td style="color: white; padding: 15px; border-bottom: 1px solid #444;">${ma.name}</td>
+            <td style="color: #0078d4; font-weight: bold; padding: 15px; border-bottom: 1px solid #444;">${schicht}</td>
         `;
         body.appendChild(row);
     });
 }
 
 function getSchichtFuerHeute(maId) {
-    // Heute ist der 20.07.2026
     const heute = "2026-07-20";
     const schichtEintrag = schichten.find(s => s.mitarbeiterId === maId && s.datum === heute);
     return schichtEintrag ? schichtEintrag.schicht : "Keine";

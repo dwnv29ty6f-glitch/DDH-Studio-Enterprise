@@ -1385,3 +1385,29 @@ textarea:focus{
     display: table;
     width: 100%;
 }
+/* Styling für das Bearbeiten-Formular */
+#seite-bearbeiten .modul {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+#seite-bearbeiten input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #333;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+}
+
+#seite-bearbeiten button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

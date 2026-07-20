@@ -2347,39 +2347,45 @@ alert("Fenster wird geöffnet...");
 // Arbeitszeitnachweis drucken
 // ==========================================
 
-alert("Fenster wird geöffnet...");
+const btnArbeitszeit =
+document.getElementById("druckArbeitszeit");
 
-const fenster = window.open("", "_blank");
+if(btnArbeitszeit){
 
-if(!fenster){
-    alert("window.open fehlgeschlagen");
-    return;
-}
+    btnArbeitszeit.onclick = ()=>{
 
-alert("Fenster geöffnet");
+        if(mitarbeiter.length===0){
 
-fenster.document.write(html);
-fenster.document.close();
+            alert("Keine Mitarbeiter vorhanden.");
+            return;
 
-fenster.focus();
-fenster.print();
+        }
 
         let name = prompt(
+
             "Für welchen Mitarbeiter?\n\n" +
+
             mitarbeiter.map(m=>m.name).join("\n")
+
         );
 
-        if(!name){
+        if(name===null){
             return;
         }
 
-        const person =
-        mitarbeiter.find(m=>m.name===name);
+        name = name.trim();
+
+        const person = mitarbeiter.find(m=>
+
+            m.name.trim().toLowerCase()===
+
+            name.toLowerCase()
+
+        );
 
         if(!person){
 
             alert("Mitarbeiter nicht gefunden.");
-
             return;
 
         }
@@ -2485,43 +2491,32 @@ padding-top:5px;
                 tag
             );
 
-            let typ = "-";
-            let std = 0;
+            let typ="-";
+            let std=0;
 
             if(eintrag){
 
-                typ =
-                schichtName(
-                    eintrag.typ
-                );
-
-                std =
-                schichtStunden(
-                    eintrag.typ
-                );
+                typ=schichtName(eintrag.typ);
+                std=schichtStunden(eintrag.typ);
 
             }
 
-            stunden += std;
+            stunden+=std;
 
-            html += `
+            html+=`
 <tr>
-
 <td>${tag}</td>
-
 <td>${typ}</td>
-
 <td>${std}</td>
-
 </tr>
 `;
 
         }
 
-        const diff =
-        stunden - SOLLSTUNDEN;
+        const diff = stunden - SOLLSTUNDEN;
 
-        html += `
+        html+=`
+
 </table>
 
 <div class="info">
@@ -2540,37 +2535,38 @@ ${diff>=0?"+":""}${diff} Std.
 <div class="unterschrift">
 
 <div class="linie">
-
 Mitarbeiter
-
 </div>
 
 <div class="linie">
-
 Arbeitgeber
-
 </div>
 
 </div>
 
 </body>
-
 </html>
 `;
 
-        const fenster =
-        window.open(
-            "",
-            "_blank"
-        );
+        const fenster = window.open("", "_blank");
 
+        if(!fenster){
+
+            alert("Popup wurde blockiert.");
+            return;
+
+        }
+
+        fenster.document.open();
         fenster.document.write(html);
-
         fenster.document.close();
 
-        fenster.focus();
+        setTimeout(()=>{
 
-        fenster.print();
+            fenster.focus();
+            fenster.print();
+
+        },300);
 
     };
 

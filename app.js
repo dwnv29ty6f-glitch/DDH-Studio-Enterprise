@@ -2139,24 +2139,7 @@ console.log(
     "DDH Studio Enterprise 9.0 gestartet."
 
 );
-const btnDienstplan =
-document.getElementById("druckDienstplan");
 
-if(btnDienstplan){
-
-    btnDienstplan.onclick = ()=>{
-
-    let html = `
-    <html>
-    <head>
-    <title>Dienstplan</title>
-
-    <style>
-
-    body{
-        font-family:Arial;
-        margin:20px;
-    }
 
     table{
         width:100%;

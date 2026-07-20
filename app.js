@@ -2150,9 +2150,64 @@ if(btnDienstplan){
 
     btnDienstplan.onclick = ()=>{
 
-        alert("Dienstplan-Druck funktioniert.");
+    let html = `
+    <html>
+    <head>
+    <title>Dienstplan</title>
 
-    };
+    <style>
+
+    body{
+        font-family:Arial;
+        margin:20px;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        font-size:12px;
+    }
+
+    th,td{
+        border:1px solid #000;
+        padding:4px;
+        text-align:center;
+    }
+
+    th{
+        background:#eee;
+    }
+
+    </style>
+
+    </head>
+
+    <body>
+
+    <h2>DDH Studio Enterprise</h2>
+
+    <h3>Dienstplan ` + MONATE[aktuellerMonat] + ` ` + aktuellesJahr + `</h3>
+
+    <table>
+
+    <tr>
+
+    <th>Mitarbeiter</th>
+    `;
+
+    const tage =
+    tageImMonat(
+        aktuellerMonat,
+        aktuellesJahr
+    );
+
+    for(let tag=1;tag<=tage;tag++){
+
+        html += "<th>"+tag+"</th>";
+
+    }
+
+    html += "</tr>";
 
 }
 

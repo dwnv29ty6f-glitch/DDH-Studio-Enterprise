@@ -1,40 +1,9 @@
-"use strict";
-
-// ==========================================
-// App starten
-// ==========================================
-
-kalenderZeichnen();
-
-termineAnzeigen();
-
-todosAnzeigen();
-
-mitarbeiterAnzeigen();
-
-schichtplanZeichnen();
-
-dashboardAktualisieren();
-// ==========================================
-// Letzte geöffnete Seite
-// ==========================================
-
-const letzteSeite =
-localStorage.getItem("ddhSeite");
-
-if(letzteSeite){
-
-    seiteAnzeigen(letzteSeite);
-
-}else{
-
-    seiteAnzeigen("dashboard");
-
-}
-// ==========================================
-// App gestartet
-// ==========================================
-
-console.log(
-    "DDH Studio Enterprise 9.0 gestartet."
-);
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DDH Studio Enterprise wird initialisiert...");
+    
+    // Module initialisieren
+    if (typeof dashboardAktualisieren === "function") dashboardAktualisieren();
+    
+    // Hier kannst du später weitere Initialisierungen hinzufügen, 
+    // z.B. kalenderZeichnen();
+});

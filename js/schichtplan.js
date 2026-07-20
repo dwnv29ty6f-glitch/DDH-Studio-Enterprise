@@ -1,104 +1,81 @@
-// Variablen global definieren
-window.mitarbeiter = window.mitarbeiter || [];
-window.schichten = window.schichten || [];
+// Globale Daten
+let mitarbeiter = JSON.parse(localStorage.getItem("mitarbeiterDaten")) || [{id:1, name:"Doreen"}, {id:2, name:"Nivin"}];
+let schichten = JSON.parse(localStorage.getItem("schichtenDaten")) || [];
 
-// Daten aus dem Speicher laden
-const gespeicherteMitarbeiter = localStorage.getItem("mitarbeiterDaten");
-if (gespeicherteMitarbeiter) {
-    window.mitarbeiter = JSON.parse(gespeicherteMitarbeiter);
-}
-
-const gespeicherteSchichten = localStorage.getItem("schichtenDaten");
-if (gespeicherteSchichten) {
-    window.schichten = JSON.parse(gespeicherteSchichten);
-}
-
+// Variablen für Popup
+let aktuellerMaId = null;
+let aktuellerTag = null;
 let aktuellBearbeiteteId = null;
-let aktiveMitarbeiterId = null;
 
 function schichtplanLaden() {
     const body = document.getElementById("schichtplanBody");
     if (!body) return;
-    
-    body.innerHTML = ""; 
+    body.innerHTML = "";
 
-    window.mitarbeiter.forEach(ma => {
-        const eintrag = window.schichten.find(s => s.mitarbeiterId === ma.id);
-        const schichtText = eintrag ? eintrag.schicht : "Schicht wählen...";
-        
+    mitarbeiter.forEach(ma => {
         const row = document.createElement("tr");
-        row.innerHTML = `
-            <td style="padding: 15px; border-bottom: 1px solid #444;">
-                <strong onclick="bearbeiteMitarbeiter(${ma.id})" style="color: #0078d4; cursor:pointer;">${ma.name}</strong><br>
-                <span style="font-size: 0.8em; color: #888;">${ma.rolle}</span>
-            </td>
-            <td onclick="oeffneSchichtDialog(${ma.id})" style="padding: 15px; border-bottom: 1px solid #444; color: #fff; text-align: right; cursor:pointer;">
-                ${schichtText}
-            </td>
-        `;
+        // Mitarbeiter-Name klickbar für Bearbeitung
+        let rowHtml = `<td style="padding:10px; border:1px solid #444; color:white;">
+                        <strong onclick="bearbeiteMitarbeiter(${ma.id})" style="color:#0078d4; cursor:pointer;">${ma.name}</strong>
+                       </td>`;
+        
+        // 7 Tage der Woche
+        for(let i=0; i<7; i++) {
+            const schicht = schichten.find(s => s.maId === ma.id && s.tag === i)?.dienst || "+";
+            rowHtml += `<td onclick="oeffneDialog(${ma.id}, ${i})" style="border:1px solid #444; text-align:center; cursor:pointer; color:#0078d4;">${schicht}</td>`;
+        }
+        row.innerHTML = rowHtml;
         body.appendChild(row);
     });
 }
 
-function oeffneSchichtDialog(maId) {
-    aktiveMitarbeiterId = maId;
-    document.getElementById("schichtDialog").classList.add("aktiv");
+// Dialog-Funktionen für Schicht
+function oeffneDialog(maId, tag) {
+    aktuellerMaId = maId;
+    aktuellerTag = tag;
+    document.getElementById("schichtDialog").style.display = "flex";
 }
 
+function schliesseDialog() {
+    document.getElementById("schichtDialog").style.display = "none";
+}
+
+function setzeSchicht(dienst) {
+    schichten = schichten.filter(s => !(s.maId === aktuellerMaId && s.tag === aktuellerTag));
+    schichten.push({maId: aktuellerMaId, tag: aktuellerTag, dienst: dienst});
+    localStorage.setItem("schichtenDaten", JSON.stringify(schichten));
+    schichtplanLaden();
+    schliesseDialog();
+}
+
+// Mitarbeiter-Funktionen (Bearbeiten/Hinzufügen)
 function bearbeiteMitarbeiter(id) {
     aktuellBearbeiteteId = id;
-    const ma = window.mitarbeiter.find(m => m.id === id);
-    if (!ma) return;
+    const ma = mitarbeiter.find(m => m.id === id);
     document.getElementById("editName").value = ma.name;
     document.getElementById("editRolle").value = ma.rolle;
     document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
     document.getElementById("seite-bearbeiten").classList.add('aktiv');
 }
 
-// Dialog Logik
-document.querySelectorAll(".schichtAuswahl").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        const schicht = e.target.getAttribute("data-schicht");
-        let eintr = window.schichten.find(s => s.mitarbeiterId === aktiveMitarbeiterId);
-        if (eintr) eintr.schicht = schicht;
-        else window.schichten.push({ mitarbeiterId: aktiveMitarbeiterId, schicht: schicht });
-        
-        localStorage.setItem("schichtenDaten", JSON.stringify(window.schichten));
-        document.getElementById("schichtDialog").classList.remove("aktiv");
-        schichtplanLaden();
-    });
-});
-
-document.getElementById("schichtLoeschen")?.addEventListener("click", () => {
-    window.schichten = window.schichten.filter(s => s.mitarbeiterId !== aktiveMitarbeiterId);
-    localStorage.setItem("schichtenDaten", JSON.stringify(window.schichten));
-    document.getElementById("schichtDialog").classList.remove("aktiv");
+document.getElementById("addMitarbeiterBtn")?.addEventListener("click", () => {
+    const neueId = mitarbeiter.length > 0 ? Math.max(...mitarbeiter.map(m => m.id)) + 1 : 1;
+    mitarbeiter.push({ id: neueId, name: "Neuer Mitarbeiter", rolle: "Rolle" });
+    localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
     schichtplanLaden();
 });
 
-document.getElementById("schichtAbbrechen")?.addEventListener("click", () => {
-    document.getElementById("schichtDialog").classList.remove("aktiv");
-});
-
-// Basis-Funktionen
 document.getElementById("saveMitarbeiterBtn")?.addEventListener("click", () => {
-    const ma = window.mitarbeiter.find(m => m.id === aktuellBearbeiteteId);
+    const ma = mitarbeiter.find(m => m.id === aktuellBearbeiteteId);
     if (ma) {
         ma.name = document.getElementById("editName").value;
         ma.rolle = document.getElementById("editRolle").value;
-        localStorage.setItem("mitarbeiterDaten", JSON.stringify(window.mitarbeiter));
+        localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
     }
     schichtplanLaden();
     document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
     document.getElementById("seite-schichtplan").classList.add('aktiv');
 });
 
-document.getElementById("addMitarbeiterBtn")?.addEventListener("click", () => {
-    const neueId = window.mitarbeiter.length > 0 ? Math.max(...window.mitarbeiter.map(m => m.id)) + 1 : 1;
-    window.mitarbeiter.push({ id: neueId, name: "Neuer Mitarbeiter", rolle: "Rolle" });
-    localStorage.setItem("mitarbeiterDaten", JSON.stringify(window.mitarbeiter));
-    schichtplanLaden();
-});
-
-// Initialer Aufruf
+// Initialer Start
 schichtplanLaden();

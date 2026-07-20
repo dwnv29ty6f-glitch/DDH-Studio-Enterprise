@@ -2212,7 +2212,18 @@ mitarbeiter.forEach(person=>{
 
     html += "<tr>";
 
-    html += "<td><b>"+person.name+"</b></td>";
+    let stunden = schichten
+.filter(s=>
+    s.name===person.name &&
+    s.monat===aktuellerMonat &&
+    s.jahr===aktuellesJahr
+)
+.reduce((summe,s)=>
+    summe + schichtStunden(s.typ),
+0);
+
+html += "<td><b>" + person.name + "</b><br>" +
+stunden + " / " + SOLLSTUNDEN + " Std.</td>";
 
     for(let tag=1;tag<=tage;tag++){
 

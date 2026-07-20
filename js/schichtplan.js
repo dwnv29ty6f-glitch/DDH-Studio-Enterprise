@@ -1,4 +1,4 @@
-// Beim Start Daten laden
+// Daten laden
 const gespeicherteMitarbeiter = localStorage.getItem("mitarbeiterDaten");
 if (gespeicherteMitarbeiter) {
     mitarbeiter.length = 0;
@@ -19,38 +19,38 @@ function schichtplanLaden() {
     if (!body) return;
     
     body.innerHTML = ""; 
+    
+    // Wir erstellen 31 Tage für den Monat Juli 2026
+    const tageImMonat = 31;
 
     mitarbeiter.forEach(ma => {
-        const heute = "2026-07-20";
-        const schicht = getSchichtFuerHeute(ma.id, heute);
         const row = document.createElement("tr");
         
-        row.innerHTML = `
-            <td style="padding: 15px; border-bottom: 1px solid #444;">
-                <strong onclick="bearbeiteMitarbeiter(${ma.id})" style="color: #0078d4;">${ma.name}</strong><br>
-                <span style="font-size: 0.8em; color: #888;">${ma.rolle}</span>
-            </td>
-            <td onclick="oeffneSchichtDialog(${ma.id}, '${heute}')" style="text-align:center; color: #0078d4; font-weight: bold; border-bottom: 1px solid #444; cursor:pointer;">
-                ${schicht || "+"}
-            </td>
-        `;
+        // Name & Rolle
+        let html = `<td style="padding: 10px; border: 1px solid #333; position: sticky; left:0; background:#222;">
+                        <strong onclick="bearbeiteMitarbeiter(${ma.id})" style="color: #0078d4;">${ma.name}</strong>
+                    </td>`;
+        
+        // Tage generieren
+        for (let d = 1; d <= tageImMonat; d++) {
+            const datumStr = `2026-07-${d.toString().padStart(2, '0')}`;
+            const schicht = getSchichtFuerTag(ma.id, datumStr);
+            html += `<td onclick="oeffneSchichtDialog(${ma.id}, '${datumStr}')" 
+                         style="border: 1px solid #333; text-align:center; min-width: 40px; cursor:pointer; font-size: 0.7em;">
+                        ${schicht || "-"}
+                    </td>`;
+        }
+        
+        row.innerHTML = html;
         body.appendChild(row);
     });
 }
 
-function getSchichtFuerHeute(maId, datum) {
+function getSchichtFuerTag(maId, datum) {
     const eintrag = schichten.find(s => s.mitarbeiterId === maId && s.datum === datum);
-    return eintrag ? eintrag.schicht : "";
-}
-
-function bearbeiteMitarbeiter(id) {
-    const ma = mitarbeiter.find(m => m.id === id);
-    if (!ma) return;
-    aktuellBearbeiteteId = id;
-    document.getElementById("editName").value = ma.name;
-    document.getElementById("editRolle").value = ma.rolle;
-    document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
-    document.getElementById("seite-bearbeiten").classList.add('aktiv');
+    // Abkürzungen wie in professionellen Tools: F, S, N, Fr
+    const map = {"Frühschicht": "F", "Spätschicht": "S", "Nachtschicht": "N", "Frei": "Fr"};
+    return eintrag ? (map[eintrag.schicht] || eintrag.schicht[0]) : "";
 }
 
 function oeffneSchichtDialog(maId, datum) {
@@ -59,7 +59,7 @@ function oeffneSchichtDialog(maId, datum) {
     document.getElementById("schichtDialog").classList.add("aktiv");
 }
 
-// Button Events
+// Event-Listener
 document.getElementById("saveMitarbeiterBtn")?.addEventListener("click", () => {
     const ma = mitarbeiter.find(m => m.id === aktuellBearbeiteteId);
     if (ma) {
@@ -77,21 +77,6 @@ document.getElementById("addMitarbeiterBtn")?.addEventListener("click", () => {
     mitarbeiter.push({ id: neueId, name: "Neuer Mitarbeiter", rolle: "Rolle" });
     localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
     schichtplanLaden();
-});
-
-document.getElementById("deleteMitarbeiterBtn")?.addEventListener("click", () => {
-    const idx = mitarbeiter.findIndex(m => m.id === aktuellBearbeiteteId);
-    if (idx > -1) {
-        mitarbeiter.splice(idx, 1);
-        localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
-        schichtplanLaden();
-        document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
-        document.getElementById("seite-schichtplan").classList.add('aktiv');
-    }
-});
-
-document.getElementById("schichtAbbrechen")?.addEventListener("click", () => {
-    document.getElementById("schichtDialog").classList.remove("aktiv");
 });
 
 document.querySelectorAll(".schichtAuswahl").forEach(btn => {

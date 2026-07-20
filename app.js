@@ -2288,11 +2288,8 @@ if(btnArbeitszeit){
         }
 
         let name = prompt(
-
             "Für welchen Mitarbeiter?\n\n" +
-
             mitarbeiter.map(m=>m.name).join("\n")
-
         );
 
         if(name===null){
@@ -2301,12 +2298,8 @@ if(btnArbeitszeit){
 
         name = name.trim();
 
-        const person = mitarbeiter.find(m=>
-
-            m.name.trim().toLowerCase()===
-
-            name.toLowerCase()
-
+        const person = mitarbeiter.find(m =>
+            m.name.toLowerCase() === name.toLowerCase()
         );
 
         if(!person){
@@ -2316,100 +2309,31 @@ if(btnArbeitszeit){
 
         }
 
-        const tage =
-        tageImMonat(
+        let html = `
+<h1>Arbeitszeitnachweis</h1>
+
+<h2>${person.name}</h2>
+
+<p>
+${MONATE[aktuellerMonat]} ${aktuellesJahr}
+</p>
+
+<table border="1" cellspacing="0" cellpadding="5">
+
+<tr>
+<th>Tag</th>
+<th>Schicht</th>
+<th>Stunden</th>
+</tr>
+`;
+
+        let stunden = 0;
+        const tage = tageImMonat(
             aktuellerMonat,
             aktuellesJahr
         );
 
-        let stunden = 0;
-
-        let html = `
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-
-<title>Arbeitszeitnachweis</title>
-
-<style>
-
-body{
-font-family:Arial,sans-serif;
-padding:25px;
-}
-
-h1,h2{
-text-align:center;
-margin:0;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-th,td{
-border:1px solid #000;
-padding:6px;
-text-align:center;
-}
-
-th{
-background:#e5e5e5;
-}
-
-.info{
-margin-top:20px;
-font-size:18px;
-}
-
-.unterschrift{
-margin-top:80px;
-display:flex;
-justify-content:space-between;
-}
-
-.linie{
-width:250px;
-border-top:1px solid #000;
-text-align:center;
-padding-top:5px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<h1>DDH Studio Enterprise</h1>
-
-<h2>Arbeitszeitnachweis</h2>
-
-<div class="info">
-
-<b>Mitarbeiter:</b> ${person.name}<br>
-
-<b>Monat:</b> ${MONATE[aktuellerMonat]} ${aktuellesJahr}
-
-</div>
-
-<table>
-
-<tr>
-
-<th>Tag</th>
-
-<th>Schicht</th>
-
-<th>Stunden</th>
-
-</tr>
-`;
-
-        for(let tag=1;tag<=tage;tag++){
+        for(let tag=1; tag<=tage; tag++){
 
             const eintrag =
             schichtSuchen(
@@ -2417,19 +2341,19 @@ padding-top:5px;
                 tag
             );
 
-            let typ="-";
-            let std=0;
+            let typ = "-";
+            let std = 0;
 
             if(eintrag){
 
-                typ=schichtName(eintrag.typ);
-                std=schichtStunden(eintrag.typ);
+                typ = schichtName(eintrag.typ);
+                std = schichtStunden(eintrag.typ);
 
             }
 
-            stunden+=std;
+            stunden += std;
 
-            html+=`
+            html += `
 <tr>
 <td>${tag}</td>
 <td>${typ}</td>
@@ -2439,39 +2363,13 @@ padding-top:5px;
 
         }
 
-        const diff = stunden - SOLLSTUNDEN;
-
-        html+=`
-
+        html += `
 </table>
 
-<div class="info">
-
-<b>Gearbeitete Stunden:</b>
-${stunden}<br>
-
-<b>Sollstunden:</b>
-${SOLLSTUNDEN}<br>
-
-<b>Differenz:</b>
-${diff>=0?"+":""}${diff} Std.
-
-</div>
-
-<div class="unterschrift">
-
-<div class="linie">
-Mitarbeiter
-</div>
-
-<div class="linie">
-Arbeitgeber
-</div>
-
-</div>
-
-</body>
-</html>
+<h3>
+Gesamtstunden:
+${stunden}
+</h3>
 `;
 
         const fenster = window.open("", "_blank");
@@ -2483,16 +2381,45 @@ Arbeitgeber
 
         }
 
-        fenster.document.open();
-        fenster.document.write(html);
+        fenster.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Arbeitszeitnachweis</title>
+<style>
+body{
+font-family:Arial,sans-serif;
+padding:20px;
+}
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+th,td{
+border:1px solid #000;
+padding:6px;
+text-align:center;
+}
+</style>
+</head>
+<body>
+
+${html}
+
+</body>
+</html>
+`);
+
         fenster.document.close();
 
-        setTimeout(()=>{
+        fenster.onload = ()=>{
 
             fenster.focus();
             fenster.print();
 
-        },300);
+        };
 
     };
 

@@ -76,4 +76,26 @@ document.getElementById("cancelMitarbeiterBtn").addEventListener("click", () => 
     document.getElementById("seite-schichtplan").classList.add('aktiv');
 });
 
+// NEU: Mitarbeiter hinzufügen
+document.getElementById("addMitarbeiterBtn").addEventListener("click", () => {
+    const neueId = mitarbeiter.length > 0 ? Math.max(...mitarbeiter.map(m => m.id)) + 1 : 1;
+    const neuerMA = { id: neueId, name: "Neuer Mitarbeiter", rolle: "Rolle" };
+    mitarbeiter.push(neuerMA);
+    localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
+    schichtplanLaden();
+});
+
+// ERWEITERT: Löschen-Funktion
+document.getElementById("deleteMitarbeiterBtn").addEventListener("click", () => {
+    const index = mitarbeiter.findIndex(m => m.id === aktuellBearbeiteteId);
+    if (index > -1) {
+        mitarbeiter.splice(index, 1);
+        localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
+        schichtplanLaden();
+        
+        // Zurück zur Liste
+        document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
+        document.getElementById("seite-schichtplan").classList.add('aktiv');
+    }
+});
 schichtplanLaden();

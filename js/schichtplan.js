@@ -1,4 +1,4 @@
-// Beim Start prüfen, ob gespeicherte Mitarbeiter existieren
+// Beim Start prüfen, ob gespeicherte Daten existieren
 const gespeicherteMitarbeiter = localStorage.getItem("mitarbeiterDaten");
 if (gespeicherteMitarbeiter) {
     const geladeneDaten = JSON.parse(gespeicherteMitarbeiter);
@@ -6,13 +6,12 @@ if (gespeicherteMitarbeiter) {
     geladeneDaten.forEach(m => mitarbeiter.push(m));
 }
 
-// Beim Start prüfen, ob gespeicherte Schichten existieren
 const gespeicherteSchichten = localStorage.getItem("schichtenDaten");
 if (gespeicherteSchichten) {
     schichten = JSON.parse(gespeicherteSchichten);
 }
 
-// Globale Variable, um uns zu merken, welchen Mitarbeiter wir gerade bearbeiten
+// Globale Variablen
 let aktuellBearbeiteteId = null;
 let aktiveMitarbeiterId = null;
 let aktivesDatum = null;
@@ -25,17 +24,18 @@ function schichtplanLaden() {
     body.innerHTML = ""; 
 
     mitarbeiter.forEach(ma => {
-        const heute = "2026-07-20"; // Beispiel-Datum
+        const heute = "2026-07-20"; 
         const schicht = getSchichtFuerHeute(ma.id, heute);
         const row = document.createElement("tr");
         
+        // Hier bauen wir die Tabellenzeile mit Name, Rolle und Schicht
         row.innerHTML = `
-            <td style="color: white; padding: 15px; border-bottom: 1px solid #444;">
+            <td style="padding: 15px; border-bottom: 1px solid #444;">
                 <strong onclick="bearbeiteMitarbeiter(${ma.id})" style="cursor:pointer; color: #0078d4; text-decoration: underline;">${ma.name}</strong><br>
                 <span style="font-size: 0.85em; color: #888;">${ma.rolle}</span>
             </td>
-            <td onclick="oeffneSchichtDialog(${ma.id}, '${heute}')" style="cursor:pointer; text-align:center; color: #aaa;">
-                ${schicht}
+            <td onclick="oeffneSchichtDialog(${ma.id}, '${heute}')" style="cursor:pointer; text-align:center; color: #fff; border-bottom: 1px solid #444;">
+                ${schicht || "Tippen..."}
             </td>
         `;
         body.appendChild(row);
@@ -44,21 +44,18 @@ function schichtplanLaden() {
 
 function getSchichtFuerHeute(maId, datum) {
     const schichtEintrag = schichten.find(s => s.mitarbeiterId === maId && s.datum === datum);
-    return schichtEintrag ? schichtEintrag.schicht : "Keine Schicht";
+    return schichtEintrag ? schichtEintrag.schicht : "";
 }
 
-// Mitarbeiter bearbeiten (Öffnet das Formular)
+// Mitarbeiter bearbeiten
 function bearbeiteMitarbeiter(id) {
     const ma = mitarbeiter.find(m => m.id === id);
     if (!ma) return;
-
     aktuellBearbeiteteId = id;
-
     document.getElementById("editName").value = ma.name;
     document.getElementById("editRolle").value = ma.rolle;
     
-    const alleSeiten = document.querySelectorAll('.seite');
-    alleSeiten.forEach(s => s.classList.remove('aktiv'));
+    document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
     document.getElementById("seite-bearbeiten").classList.add('aktiv');
 }
 
@@ -70,105 +67,73 @@ function oeffneSchichtDialog(maId, datum) {
     if (dialog) dialog.classList.add("aktiv");
 }
 
-// --- EVENT LISTENER & BUTTONS ---
+// --- EVENT LISTENER ---
 
-// Speichern-Logik (Mitarbeiter)
-const saveBtn = document.getElementById("saveMitarbeiterBtn");
-if (saveBtn) {
-    saveBtn.addEventListener("click", () => {
-        if (aktuellBearbeiteteId === null) return;
+document.getElementById("saveMitarbeiterBtn")?.addEventListener("click", () => {
+    if (aktuellBearbeiteteId === null) return;
+    const ma = mitarbeiter.find(m => m.id === aktuellBearbeiteteId);
+    if (ma) {
+        ma.name = document.getElementById("editName").value;
+        ma.rolle = document.getElementById("editRolle").value;
+        localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
+    }
+    schichtplanLaden();
+    document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
+    document.getElementById("seite-schichtplan").classList.add('aktiv');
+});
 
-        const ma = mitarbeiter.find(m => m.id === aktuellBearbeiteteId);
-        if (ma) {
-            ma.name = document.getElementById("editName").value;
-            ma.rolle = document.getElementById("editRolle").value;
-            localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
-        }
+document.getElementById("cancelMitarbeiterBtn")?.addEventListener("click", () => {
+    document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
+    document.getElementById("seite-schichtplan").classList.add('aktiv');
+});
 
-        schichtplanLaden();
-        document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
-        document.getElementById("seite-schichtplan").classList.add('aktiv');
-    });
-}
+document.getElementById("addMitarbeiterBtn")?.addEventListener("click", () => {
+    const neueId = mitarbeiter.length > 0 ? Math.max(...mitarbeiter.map(m => m.id)) + 1 : 1;
+    mitarbeiter.push({ id: neueId, name: "Neuer Mitarbeiter", rolle: "Rolle" });
+    localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
+    schichtplanLaden();
+});
 
-// Abbrechen-Logik (Mitarbeiter)
-const cancelBtn = document.getElementById("cancelMitarbeiterBtn");
-if (cancelBtn) {
-    cancelBtn.addEventListener("click", () => {
-        document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
-        document.getElementById("seite-schichtplan").classList.add('aktiv');
-    });
-}
-
-// Mitarbeiter hinzufügen
-const addBtn = document.getElementById("addMitarbeiterBtn");
-if (addBtn) {
-    addBtn.addEventListener("click", () => {
-        const neueId = mitarbeiter.length > 0 ? Math.max(...mitarbeiter.map(m => m.id)) + 1 : 1;
-        const neuerMA = { id: neueId, name: "Neuer Mitarbeiter", rolle: "Rolle" };
-        mitarbeiter.push(neuerMA);
+document.getElementById("deleteMitarbeiterBtn")?.addEventListener("click", () => {
+    const index = mitarbeiter.findIndex(m => m.id === aktuellBearbeiteteId);
+    if (index > -1) {
+        mitarbeiter.splice(index, 1);
         localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
         schichtplanLaden();
-    });
-}
+        document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
+        document.getElementById("seite-schichtplan").classList.add('aktiv');
+    }
+});
 
-// Mitarbeiter löschen
-const deleteBtn = document.getElementById("deleteMitarbeiterBtn");
-if (deleteBtn) {
-    deleteBtn.addEventListener("click", () => {
-        const index = mitarbeiter.findIndex(m => m.id === aktuellBearbeiteteId);
-        if (index > -1) {
-            mitarbeiter.splice(index, 1);
-            localStorage.setItem("mitarbeiterDaten", JSON.stringify(mitarbeiter));
-            schichtplanLaden();
-            
-            document.querySelectorAll('.seite').forEach(s => s.classList.remove('aktiv'));
-            document.getElementById("seite-schichtplan").classList.add('aktiv');
-        }
-    });
-}
+// Schicht-Dialog Logik
+document.getElementById("schichtAbbrechen")?.addEventListener("click", () => {
+    document.getElementById("schichtDialog").classList.remove("aktiv");
+});
 
-// Schicht-Dialog abbrechen
-const schichtAbbrechen = document.getElementById("schichtAbbrechen");
-if (schichtAbbrechen) {
-    schichtAbbrechen.addEventListener("click", () => {
-        document.getElementById("schichtDialog").classList.remove("aktiv");
-    });
-}
-
-// Schicht auswählen und speichern
 document.querySelectorAll(".schichtAuswahl").forEach(btn => {
     btn.addEventListener("click", (e) => {
         const neueSchicht = e.target.getAttribute("data-schicht");
-        
         let eintrag = schichten.find(s => s.mitarbeiterId === aktiveMitarbeiterId && s.datum === aktivesDatum);
-        
         if (eintrag) {
             eintrag.schicht = neueSchicht;
         } else {
             schichten.push({ mitarbeiterId: aktiveMitarbeiterId, datum: aktivesDatum, schicht: neueSchicht });
         }
-
         localStorage.setItem("schichtenDaten", JSON.stringify(schichten));
         document.getElementById("schichtDialog").classList.remove("aktiv");
         schichtplanLaden();
     });
 });
 
-// Schicht löschen
-const schichtLoeschen = document.getElementById("schichtLoeschen");
-if (schichtLoeschen) {
-    schichtLoeschen.addEventListener("click", () => {
-        const index = schichten.findIndex(s => s.mitarbeiterId === aktiveMitarbeiterId && s.datum === aktivesDatum);
-        if (index > -1) {
-            schichten.splice(index, 1);
-            localStorage.setItem("schichtenDaten", JSON.stringify(schichten));
-        }
+document.getElementById("schichtLoeschen")?.addEventListener("click", () => {
+    const index = schichten.findIndex(s => s.mitarbeiterId === aktiveMitarbeiterId && s.datum === aktivesDatum);
+    if (index > -1) {
+        schichten.splice(index, 1);
+        localStorage.setItem("schichtenDaten", JSON.stringify(schichten));
+    }
+    document.getElementById("schichtDialog").classList.remove("aktiv");
+    schichtplanLaden();
+});
 
-        document.getElementById("schichtDialog").classList.remove("aktiv");
-        schichtplanLaden();
-    });
-}
-
-// Beim Start einmal ausführen
+// Initialer Aufruf
 schichtplanLaden();

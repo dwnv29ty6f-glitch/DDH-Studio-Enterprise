@@ -1,58 +1,55 @@
 "use strict";
 
-/* ==========================================
-   DDH Studio Enterprise 10.0
-   DOM
-========================================== */
+/*
+===========================================
+DDH Studio Enterprise 10.0
+DOM-Verwaltung
+===========================================
+*/
 
 const DOM = {
 
-    inhalt: null,
+    id(name) {
 
-    seitenTitel: null,
+        return document.getElementById(name);
 
-    sidebar: null,
+    },
 
-    dialogOverlay: null,
+    klasse(name) {
 
-    dialogTitel: null,
+        return document.querySelector("." + name);
 
-    dialogInhalt: null,
+    },
 
-    dialogFuss: null,
+    klassen(name) {
 
-    toastContainer: null,
+        return document.querySelectorAll("." + name);
 
-    ladeOverlay: null,
+    },
 
-    initialisieren(){
+    erstellen(element) {
 
-        this.inhalt =
-            document.getElementById("inhalt");
+        return document.createElement(element);
 
-        this.seitenTitel =
-            document.getElementById("seitenTitel");
+    },
 
-        this.sidebar =
-            document.getElementById("sidebar");
+    text(element, wert) {
 
-        this.dialogOverlay =
-            document.getElementById("dialogOverlay");
+        if (element) {
 
-        this.dialogTitel =
-            document.getElementById("dialogTitel");
+            element.textContent = wert;
 
-        this.dialogInhalt =
-            document.getElementById("dialogInhalt");
+        }
 
-        this.dialogFuss =
-            document.getElementById("dialogFuss");
+    },
 
-        this.toastContainer =
-            document.getElementById("toastContainer");
+    html(element, wert) {
 
-        this.ladeOverlay =
-            document.getElementById("ladeOverlay");
+        if (element) {
+
+            element.innerHTML = wert;
+
+        }
 
     }
 

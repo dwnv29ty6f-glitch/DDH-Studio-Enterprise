@@ -1,15 +1,17 @@
 "use strict";
 
-// ==========================================
-// DDH Studio Enterprise 10.0
-// Navigation
-// ==========================================
+/* ==========================================
+   DDH Studio Enterprise 10.0
+   Navigation
+========================================== */
+
+let aktuelleSeite = "dashboard";
 
 function seiteOeffnen(seite){
 
-    document
-    .querySelectorAll(".navButton")
-    .forEach(button=>{
+    aktuelleSeite = seite;
+
+    DOM.navButtons.forEach(button=>{
 
         button.classList.remove("aktiv");
 
@@ -24,60 +26,46 @@ function seiteOeffnen(seite){
     switch(seite){
 
         case "dashboard":
-
             dashboardZeichnen();
-
             break;
 
         case "kalender":
-
             kalenderZeichnen();
-
             break;
 
         case "mitarbeiter":
-
             mitarbeiterZeichnen();
-
             break;
 
         case "schichtplan":
-
             schichtplanZeichnen();
-
             break;
 
         case "druck":
-
             druckcenterZeichnen();
-
-            break;
-
-        case "einstellungen":
-
-            einstellungenZeichnen();
-
             break;
 
         default:
-
             dashboardZeichnen();
 
     }
 
 }
 
-document.addEventListener("click",event=>{
+function navigationStarten(){
 
-    const button =
-    event.target.closest(".navButton");
+    DOM.navButtons.forEach(button=>{
 
-    if(!button){
-        return;
-    }
+        button.addEventListener("click",()=>{
 
-    seiteOeffnen(
-        button.dataset.seite
-    );
+            seiteOeffnen(
 
-});
+                button.dataset.seite
+
+            );
+
+        });
+
+    });
+
+}

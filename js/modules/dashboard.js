@@ -11,41 +11,23 @@ const Dashboard = {
 
     anzeigen() {
 
-        document
-            .querySelectorAll(".seite")
-            .forEach(seite => {
+        document.getElementById("seitenTitel").textContent =
+            "Dashboard";
 
-                seite.classList.remove("aktiv");
+        document.getElementById("seitenPfad").textContent =
+            "DDH Studio Enterprise";
 
-            });
+        document.getElementById("dashboardMitarbeiter").textContent =
+            mitarbeiter.length;
 
-        document
-            .getElementById("seite-dashboard")
-            .classList.add("aktiv");
+        document.getElementById("dashboardTermine").textContent =
+            termine.length;
 
-        document.getElementById(
-            "seitenTitel"
-        ).textContent = "Dashboard";
+        document.getElementById("dashboardSchichten").textContent =
+            schichten.length;
 
-        document.getElementById(
-            "seitenPfad"
-        ).textContent = "DDH Studio Enterprise";
-
-        document.getElementById(
-            "dashboardMitarbeiter"
-        ).textContent = mitarbeiter.length;
-
-        document.getElementById(
-            "dashboardTermine"
-        ).textContent = termine.length;
-
-        document.getElementById(
-            "dashboardSchichten"
-        ).textContent = schichten.length;
-
-        document.getElementById(
-            "dashboardAufgaben"
-        ).textContent = todos.length;
+        document.getElementById("dashboardAufgaben").textContent =
+            todos.length;
 
     }
 

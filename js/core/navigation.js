@@ -7,104 +7,109 @@
 
 let aktuelleSeite = "dashboard";
 
-function navigationStarten(){
+const Navigation = {
 
-    const buttons =
-    document.querySelectorAll(".navButton");
+    initialisieren(){
 
-    buttons.forEach(button=>{
+        document
+        .querySelectorAll(".navButton")
+        .forEach(button=>{
 
-        button.addEventListener("click",()=>{
+            button.addEventListener(
+                "click",
+                ()=>{
 
-            seiteOeffnen(
-                button.dataset.seite
+                    this.oeffnen(
+                        button.dataset.seite
+                    );
+
+                }
             );
 
         });
 
-    });
+    },
 
-}
+    oeffnen(seite){
 
-function seiteOeffnen(seite){
+        aktuelleSeite = seite;
 
-    aktuelleSeite = seite;
+        document
+        .querySelectorAll(".navButton")
+        .forEach(button=>{
 
-    document
-    .querySelectorAll(".navButton")
-    .forEach(button=>{
+            button.classList.remove(
+                "aktiv"
+            );
 
-        button.classList.remove("aktiv");
+            if(button.dataset.seite===seite){
 
-        if(button.dataset.seite===seite){
+                button.classList.add(
+                    "aktiv"
+                );
 
-            button.classList.add("aktiv");
+            }
+
+        });
+
+        const titel =
+        document.getElementById(
+            "seitenTitel"
+        );
+
+        if(titel){
+
+            titel.textContent =
+            seite.charAt(0)
+            .toUpperCase() +
+            seite.slice(1);
 
         }
 
-    });
+        switch(seite){
 
-    const titel =
-    document.getElementById("seitenTitel");
+            case "dashboard":
 
-    if(titel){
+                dashboardZeichnen();
 
-        titel.textContent =
-        seite.charAt(0).toUpperCase() +
-        seite.slice(1);
+                break;
 
-    }
+            case "mitarbeiter":
 
-    switch(seite){
+                mitarbeiterZeichnen();
 
-        case "dashboard":
-            dashboardZeichnen();
-            break;
+                break;
 
-        case "mitarbeiter":
-            mitarbeiterZeichnen();
-            break;
+            case "schichtplan":
 
-        case "schichtplan":
-            schichtplanZeichnen();
-            break;
+                schichtplanZeichnen();
 
-        case "kalender":
-            kalenderZeichnen();
-            break;
+                break;
 
-        case "aufgaben":
-            todosZeichnen();
-            break;
+            case "kalender":
 
-        case "druck":
-            druckcenterZeichnen();
-            break;
+                kalenderZeichnen();
 
-        case "einstellungen":
+                break;
 
-            DOM.inhalt.innerHTML = `
+            case "aufgaben":
 
-                <div class="karte">
+                todosZeichnen();
 
-                    <h2>Einstellungen</h2>
+                break;
 
-                    <p>
+            case "druck":
 
-                        Dieses Modul wird später entwickelt.
+                druckZeichnen();
 
-                    </p>
+                break;
 
-                </div>
+            default:
 
-            `;
+                dashboardZeichnen();
 
-            break;
-
-        default:
-
-            dashboardZeichnen();
+        }
 
     }
 
-}
+};

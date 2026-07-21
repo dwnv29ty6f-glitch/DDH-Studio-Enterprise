@@ -14,7 +14,9 @@ name="theme-color"
 content="#0F4C81">
 
 <title>
+
 DDH Studio Enterprise 10.0
+
 </title>
 
 <link
@@ -35,9 +37,17 @@ href="style.css">
 
         <div id="logo">
 
-            <h1>DDH Studio</h1>
+            <h1>
 
-            <span>Enterprise 10.0</span>
+                DDH Studio
+
+            </h1>
+
+            <span>
+
+                Enterprise 10.0
+
+            </span>
 
         </div>
 
@@ -166,235 +176,324 @@ href="style.css">
         </header>
 
         <section id="inhalt">
-                    <div class="dashboard">
 
-                <div class="karte willkommen">
+            <!-- ==========================================
+                 DASHBOARD
+            =========================================== -->
+
+            <div
+                id="seite-dashboard"
+                class="seite aktiv">
+                                <div class="dashboard">
+
+                    <div class="karte willkommen">
+
+                        <h1>
+
+                            Willkommen bei DDH Studio Enterprise
+
+                        </h1>
+
+                        <p>
+
+                            Betriebsmanagement für
+                            DDH Service GmbH
+
+                        </p>
+
+                    </div>
+
+                    <div class="dashboardGrid">
+
+                        <div class="kachel">
+
+                            <div class="kachelIcon">
+
+                                👥
+
+                            </div>
+
+                            <div class="kachelTitel">
+
+                                Mitarbeiter
+
+                            </div>
+
+                            <div
+                                id="dashboardMitarbeiter"
+                                class="kachelWert">
+
+                                0
+
+                            </div>
+
+                        </div>
+
+                        <div class="kachel">
+
+                            <div class="kachelIcon">
+
+                                📅
+
+                            </div>
+
+                            <div class="kachelTitel">
+
+                                Termine
+
+                            </div>
+
+                            <div
+                                id="dashboardTermine"
+                                class="kachelWert">
+
+                                0
+
+                            </div>
+
+                        </div>
+
+                        <div class="kachel">
+
+                            <div class="kachelIcon">
+
+                                👷
+
+                            </div>
+
+                            <div class="kachelTitel">
+
+                                Schichten
+
+                            </div>
+
+                            <div
+                                id="dashboardSchichten"
+                                class="kachelWert">
+
+                                0
+
+                            </div>
+
+                        </div>
+
+                        <div class="kachel">
+
+                            <div class="kachelIcon">
+
+                                ✅
+
+                            </div>
+
+                            <div class="kachelTitel">
+
+                                Aufgaben
+
+                            </div>
+
+                            <div
+                                id="dashboardAufgaben"
+                                class="kachelWert">
+
+                                0
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="karte">
+
+                        <h2>
+
+                            Schnellzugriff
+
+                        </h2>
+
+                        <div class="schnellzugriffe">
+
+                            <button
+                                class="hauptButton"
+                                data-seite="mitarbeiter">
+
+                                👥 Mitarbeiter
+
+                            </button>
+
+                            <button
+                                class="hauptButton"
+                                data-seite="schichtplan">
+
+                                📅 Schichtplan
+
+                            </button>
+
+                            <button
+                                class="hauptButton"
+                                data-seite="kalender">
+
+                                🗓️ Kalender
+
+                            </button>
+
+                            <button
+                                class="hauptButton"
+                                data-seite="aufgaben">
+
+                                ✅ Aufgaben
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ==========================================
+                 MITARBEITER
+            =========================================== -->
+
+            <div
+                id="seite-mitarbeiter"
+                class="seite">
+                                <div class="seiteKopf">
 
                     <h1>
 
-                        Willkommen bei DDH Studio Enterprise
+                        Mitarbeiter
 
                     </h1>
 
-                    <p>
+                    <button
+                        id="mitarbeiterSpeichern"
+                        class="hauptButton">
 
-                        Betriebsmanagement für
-                        DDH Service GmbH
+                        ➕ Mitarbeiter hinzufügen
 
-                    </p>
-
-                </div>
-
-                <div class="kachel">
-
-                    <div class="kachelIcon">
-
-                        👥
-
-                    </div>
-
-                    <div class="kachelTitel">
-
-                        Mitarbeiter
-
-                    </div>
-
-                    <div
-                        id="dashboardMitarbeiter"
-                        class="kachelWert">
-
-                        0
-
-                    </div>
+                    </button>
 
                 </div>
 
-                <div class="kachel">
+                <div class="karte">
 
-                    <div class="kachelIcon">
-
-                        📅
-
-                    </div>
-
-                    <div class="kachelTitel">
-
-                        Termine
-
-                    </div>
-
-                    <div
-                        id="dashboardTermine"
-                        class="kachelWert">
-
-                        0
-
-                    </div>
+                    <input
+                        id="mitarbeiterName"
+                        type="text"
+                        placeholder="Name des Mitarbeiters">
 
                 </div>
 
-                <div class="kachel">
-
-                    <div class="kachelIcon">
-
-                        👷
-
-                    </div>
-
-                    <div class="kachelTitel">
-
-                        Schichten
-
-                    </div>
-
-                    <div
-                        id="dashboardSchichten"
-                        class="kachelWert">
-
-                        0
-
-                    </div>
+                <div
+                    id="mitarbeiterListe"
+                    class="mitarbeiterListe">
 
                 </div>
 
-                <div class="kachel">
+            </div>
 
-                    <div class="kachelIcon">
+            <!-- ==========================================
+                 SCHICHTPLAN
+            =========================================== -->
 
-                        ✅
+            <div
+                id="seite-schichtplan"
+                class="seite">
 
-                    </div>
+                <div class="seiteKopf">
 
-                    <div class="kachelTitel">
+                    <h1>
+
+                        Schichtplan
+
+                    </h1>
+
+                </div>
+
+                <div
+                    id="schichtplanInhalt">
+
+                </div>
+
+            </div>
+
+            <!-- ==========================================
+                 KALENDER
+            =========================================== -->
+
+            <div
+                id="seite-kalender"
+                class="seite">
+
+                <div class="seiteKopf">
+
+                    <h1>
+
+                        Kalender
+
+                    </h1>
+
+                </div>
+
+                <div
+                    id="kalenderInhalt">
+
+                </div>
+
+            </div>
+
+            <!-- ==========================================
+                 AUFGABEN
+            =========================================== -->
+
+            <div
+                id="seite-aufgaben"
+                class="seite">
+
+                <div class="seiteKopf">
+
+                    <h1>
 
                         Aufgaben
 
-                    </div>
+                    </h1>
 
-                    <div
-                        id="dashboardAufgaben"
-                        class="kachelWert">
+                </div>
 
-                        0
-
-                    </div>
+                <div
+                    id="aufgabenInhalt">
 
                 </div>
 
             </div>
-                    </section>
-
-    </main>
-
-    <!-- ==========================================
-         DIALOG
-    =========================================== -->
-
-    <div
-        id="dialogOverlay"
-        class="dialogOverlay">
-
-        <div
-            id="dialogFenster"
-            class="dialogFenster">
-
-            <div class="dialogKopf">
-
-                <h2 id="dialogTitel">
-
-                </h2>
-
-                <button
-                    id="dialogSchliessen">
-
-                    ✕
-
-                </button>
-
-            </div>
+                        <!-- ==========================================
+                 DRUCKCENTER
+            =========================================== -->
 
             <div
-                id="dialogInhalt">
+                id="seite-druck"
+                class="seite">
+
+                <div class="seiteKopf">
+
+                    <h1>
+
+                        Druckcenter
+
+                    </h1>
+
+                </div>
+
+                <div
+                    id="druckInhalt">
+
+                </div>
 
             </div>
 
-            <div
-                id="dialogFuss">
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- ==========================================
-         TOASTS
-    =========================================== -->
-
-    <div
-        id="toastContainer">
-
-    </div>
-
-    <!-- ==========================================
-         LADEBILDSCHIRM
-    =========================================== -->
-
-    <div
-        id="ladeOverlay">
-
-        <div
-            class="ladeFenster">
-
-            <div
-                class="spinner">
-
-            </div>
-
-            <p>
-
-                Daten werden geladen...
-
-            </p>
-
-        </div>
-
-    </div>
-    </div>
-
-<!-- ==========================================
-     JAVASCRIPT
-========================================== -->
-
-<script src="js/core/config.js"></script>
-
-<script src="js/daten.js"></script>
-
-<script src="js/core/speicher.js"></script>
-
-<script src="js/core/funktionen.js"></script>
-
-<script src="js/core/dom.js"></script>
-
-<script src="js/dialoge.js"></script>
-
-<script src="js/core/navigation.js"></script>
-
-<script src="js/modules/dashboard.js"></script>
-
-<script src="js/modules/mitarbeiter.js"></script>
-
-<script src="js/schichtplan.js"></script>
-
-<script src="js/modules/kalender.js"></script>
-
-<script src="js/modules/termine.js"></script>
-
-<script src="js/modules/todos.js"></script>
-
-<script src="js/modules/druck.js"></script>
-
-<script src="js/core/start.js"></script>
-</body>
-
-</html>
+            <!-- ==========================================
+                 EINSTELLUNGEN
+            =========================================== -->

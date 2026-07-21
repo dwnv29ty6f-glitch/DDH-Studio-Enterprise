@@ -5,12 +5,9 @@
 // Mitarbeiterverwaltung
 // ==========================================
 
-const mitarbeiterListe =
-document.getElementById("mitarbeiterListe");
+let mitarbeiterListe;
 
-const dashboardMitarbeiter =
-document.getElementById("dashboardMitarbeiter");
-
+let dashboardMitarbeiter;
 let mitarbeiter =
 JSON.parse(
 localStorage.getItem("ddhMitarbeiter")
@@ -30,7 +27,15 @@ function mitarbeiterAnzeigen(){
     if(!mitarbeiterListe){
         return;
     }
+    mitarbeiterListe =
+    document.getElementById(
+        "mitarbeiterListe"
+    );
 
+    dashboardMitarbeiter =
+    document.getElementById(
+        "dashboardMitarbeiter"
+    );
     mitarbeiterListe.innerHTML = "";
 
     mitarbeiter.forEach((person,index)=>{
@@ -151,7 +156,11 @@ mitarbeiterLoeschen;
 // ==========================================
 // Start
 // ==========================================
+function mitarbeiterZeichnen(){
 
+    mitarbeiterAnzeigen();
+
+}
 document.addEventListener("DOMContentLoaded", () => {
 
     mitarbeiterAnzeigen();

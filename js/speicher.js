@@ -1,11 +1,11 @@
 "use strict";
 
-// ==========================================
-// DDH Studio Enterprise 10.0
-// Speicherverwaltung
-// ==========================================
+/* ==========================================
+   DDH Studio Enterprise 10.0
+   Speicherverwaltung
+========================================== */
 
-const SPEICHER = {
+const Speicher = {
 
     laden(){
 
@@ -14,19 +14,19 @@ const SPEICHER = {
             localStorage.getItem("ddh_mitarbeiter")
         ) || [];
 
+        schichten =
+        JSON.parse(
+            localStorage.getItem("ddh_schichten")
+        ) || [];
+
         termine =
         JSON.parse(
             localStorage.getItem("ddh_termine")
         ) || [];
 
-        todos =
+        aufgaben =
         JSON.parse(
-            localStorage.getItem("ddh_todos")
-        ) || [];
-
-        schichten =
-        JSON.parse(
-            localStorage.getItem("ddh_schichten")
+            localStorage.getItem("ddh_aufgaben")
         ) || [];
 
         dokumente =
@@ -34,15 +34,21 @@ const SPEICHER = {
             localStorage.getItem("ddh_dokumente")
         ) || [];
 
-        kunden =
+        einrichtungen =
         JSON.parse(
-            localStorage.getItem("ddh_kunden")
+            localStorage.getItem("ddh_einrichtungen")
         ) || [];
 
-        projekte =
+        const daten =
         JSON.parse(
-            localStorage.getItem("ddh_projekte")
-        ) || [];
+            localStorage.getItem("ddh_einstellungen")
+        );
+
+        if(daten){
+
+            einstellungen = daten;
+
+        }
 
     },
 
@@ -54,18 +60,18 @@ const SPEICHER = {
         );
 
         localStorage.setItem(
+            "ddh_schichten",
+            JSON.stringify(schichten)
+        );
+
+        localStorage.setItem(
             "ddh_termine",
             JSON.stringify(termine)
         );
 
         localStorage.setItem(
-            "ddh_todos",
-            JSON.stringify(todos)
-        );
-
-        localStorage.setItem(
-            "ddh_schichten",
-            JSON.stringify(schichten)
+            "ddh_aufgaben",
+            JSON.stringify(aufgaben)
         );
 
         localStorage.setItem(
@@ -74,18 +80,18 @@ const SPEICHER = {
         );
 
         localStorage.setItem(
-            "ddh_kunden",
-            JSON.stringify(kunden)
+            "ddh_einrichtungen",
+            JSON.stringify(einrichtungen)
         );
 
         localStorage.setItem(
-            "ddh_projekte",
-            JSON.stringify(projekte)
+            "ddh_einstellungen",
+            JSON.stringify(einstellungen)
         );
 
     },
 
-    loeschen(){
+    allesLoeschen(){
 
         if(!confirm(
             "Alle Daten wirklich löschen?"

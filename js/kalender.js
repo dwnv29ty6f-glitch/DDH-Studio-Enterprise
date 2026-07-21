@@ -1,148 +1,49 @@
 "use strict";
 
+// ==========================================
+// DDH Studio Enterprise 10.0
+// Kalender
+// ==========================================
+
 function kalenderZeichnen(){
 
-    dom.tage.innerHTML = "";
+    const inhalt =
+    document.getElementById("inhalt");
 
-    dom.monatTitel.textContent =
-        MONATE[aktuellerMonat] +
-        " " +
-        aktuellesJahr;
-
-    dom.datumTitel.textContent =
-        datumText(
-            ausgewaehlterTag,
-            aktuellerMonat,
-            aktuellesJahr
-        );
-
-    const ersterTag =
-        ersterWochentag(
-            aktuellerMonat,
-            aktuellesJahr
-        );
-
-    const anzahlTage =
-        tageImMonat(
-            aktuellerMonat,
-            aktuellesJahr
-        );
-
-    for(let i=1;i<ersterTag;i++){
-
-        const leer =
-        document.createElement("div");
-
-        leer.className = "tag leer";
-
-        dom.tage.appendChild(leer);
-
+    if(!inhalt){
+        return;
     }
-        for(let tag=1;tag<=anzahlTage;tag++){
 
-        const feld =
-        document.createElement("div");
+    inhalt.innerHTML = `
 
-        feld.className = "tag";
+    <section class="seite">
 
-        if(tag===ausgewaehlterTag){
+        <div class="karte gross">
 
-            feld.classList.add("aktiv");
+            <h2>📅 Kalender</h2>
 
-        }
+            <p>
 
-        const nummer =
-        document.createElement("div");
+            Termine, Besprechungen und Erinnerungen
 
-        nummer.className = "tagNummer";
-        nummer.textContent = tag;
+            </p>
 
-        feld.appendChild(nummer);
+        </div>
 
-        const anzahlTermine =
-        termine.filter(t=>
+        <div class="karte">
 
-            t.tag===tag &&
-            t.monat===aktuellerMonat &&
-            t.jahr===aktuellesJahr
+            <h3>Monatskalender</h3>
 
-        ).length;
+            <p>
 
-        if(anzahlTermine>0){
+            Der Kalender wird im nächsten Schritt entwickelt.
 
-            const badge =
-            document.createElement("div");
+            </p>
 
-            badge.className = "tagBadge";
-            badge.textContent = anzahlTermine;
+        </div>
 
-            feld.appendChild(badge);
+    </section>
 
-        }
-                feld.addEventListener("click",()=>{
-
-            ausgewaehlterTag = tag;
-
-            kalenderZeichnen();
-
-            termineAnzeigen();
-
-            dashboardAktualisieren();
-
-        });
-
-        dom.tage.appendChild(feld);
-
-    }
+    `;
 
 }
-
-// ===============================
-// Monat zurück
-// ===============================
-
-dom.btnVorher.onclick = ()=>{
-
-    aktuellerMonat--;
-
-    if(aktuellerMonat < 0){
-
-        aktuellerMonat = 11;
-        aktuellesJahr--;
-
-    }
-
-    ausgewaehlterTag = 1;
-
-    kalenderZeichnen();
-
-    termineAnzeigen();
-
-    dashboardAktualisieren();
-
-};
-
-// ===============================
-// Monat weiter
-// ===============================
-
-dom.btnWeiter.onclick = ()=>{
-
-    aktuellerMonat++;
-
-    if(aktuellerMonat > 11){
-
-        aktuellerMonat = 0;
-        aktuellesJahr++;
-
-    }
-
-    ausgewaehlterTag = 1;
-
-    kalenderZeichnen();
-
-    termineAnzeigen();
-
-    dashboardAktualisieren();
-
-};

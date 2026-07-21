@@ -314,3 +314,42 @@ function mitarbeiterLoeschen(id){
     mitarbeiterListeZeichnen();
 
 }
+/* ==========================================
+   Ereignisse
+========================================== */
+
+document.addEventListener("click",(event)=>{
+
+    const karte =
+    event.target.closest(".mitarbeiterKarte");
+
+    if(!karte){
+        return;
+    }
+
+    const id =
+    karte.dataset.id;
+
+    const auswahl =
+    prompt(
+
+`Aktion wählen
+
+1 = Bearbeiten
+2 = Löschen`
+
+    );
+
+    if(auswahl==="1"){
+
+        mitarbeiterBearbeiten(id);
+
+    }
+
+    if(auswahl==="2"){
+
+        mitarbeiterLoeschen(id);
+
+    }
+
+});

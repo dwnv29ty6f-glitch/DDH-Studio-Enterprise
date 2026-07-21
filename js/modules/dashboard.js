@@ -1,123 +1,122 @@
 "use strict";
 
-/* ==========================================
-   DDH Studio Enterprise 10.0
-   Dashboard
-========================================== */
+/*
+===========================================
+DDH Studio Enterprise 10.0
+Dashboard
+===========================================
+*/
 
-function dashboardZeichnen(){
+const Dashboard = {
 
-    DOM.seitenTitel.textContent = "Dashboard";
+    anzeigen() {
 
-    DOM.inhalt.innerHTML = `
+        const inhalt = DOM.id("inhalt");
 
-    <div class="dashboard">
+        if (!inhalt) {
 
-        <div class="karte willkommen">
+            return;
 
-            <h1>
+        }
 
-                Willkommen bei DDH Studio Enterprise
+        inhalt.innerHTML = `
 
-            </h1>
+        <div class="dashboard">
 
-            <p>
+            <div class="karte">
 
-                DDH Service GmbH
+                <h1>DDH Studio Enterprise</h1>
 
-            </p>
+                <p>Willkommen zurück.</p>
+
+            </div>
+
+            <div class="dashboardKacheln">
+
+                <div class="kachel">
+
+                    <div class="titel">
+
+                        Mitarbeiter
+
+                    </div>
+
+                    <div class="wert">
+
+                        ${mitarbeiter.length}
+
+                    </div>
+
+                </div>
+
+                <div class="kachel">
+
+                    <div class="titel">
+
+                        Termine
+
+                    </div>
+
+                    <div class="wert">
+
+                        ${termine.length}
+
+                    </div>
+
+                </div>
+
+                <div class="kachel">
+
+                    <div class="titel">
+
+                        Aufgaben
+
+                    </div>
+
+                    <div class="wert">
+
+                        ${todos.length}
+
+                    </div>
+
+                </div>
+
+                <div class="kachel">
+
+                    <div class="titel">
+
+                        Schichten
+
+                    </div>
+
+                    <div class="wert">
+
+                        ${schichten.length}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="karte">
+
+                <h2>Schnellzugriff</h2>
+
+                <button
+                    class="hauptButton"
+                    onclick="Navigation.oeffnen('mitarbeiter')">
+
+                    Mitarbeiter öffnen
+
+                </button>
+
+            </div>
 
         </div>
 
-        <div class="kachel">
+        `;
 
-            <div class="kachelIcon">
-                👥
-            </div>
+    }
 
-            <div class="kachelTitel">
-                Mitarbeiter
-            </div>
-
-            <div class="kachelWert">
-                ${mitarbeiter.length}
-            </div>
-
-        </div>
-
-        <div class="kachel">
-
-            <div class="kachelIcon">
-                📅
-            </div>
-
-            <div class="kachelTitel">
-                Termine
-            </div>
-
-            <div class="kachelWert">
-                ${termine.length}
-            </div>
-
-        </div>
-
-        <div class="kachel">
-
-            <div class="kachelIcon">
-                👷
-            </div>
-
-            <div class="kachelTitel">
-                Schichten
-            </div>
-
-            <div class="kachelWert">
-                ${schichten.length}
-            </div>
-
-        </div>
-
-        <div class="kachel">
-
-            <div class="kachelIcon">
-                ✅
-            </div>
-
-            <div class="kachelTitel">
-                Aufgaben
-            </div>
-
-            <div class="kachelWert">
-                ${todos.length}
-            </div>
-
-        </div>
-
-        <div class="karte">
-
-            <h2>
-
-                Heute
-
-            </h2>
-
-            <p>
-
-                Willkommen im neuen DDH Studio Enterprise 10.0.
-
-            </p>
-
-            <p>
-
-                In den nächsten Schritten entstehen hier Live-Kennzahlen,
-                Krankmeldungen, Geburtstage, Termine und Schnellzugriffe.
-
-            </p>
-
-        </div>
-
-    </div>
-
-    `;
-
-}
+};

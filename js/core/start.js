@@ -36,8 +36,7 @@ const DDH = {
 
         Navigation.initialisieren();
 
-        Dashboard.anzeigen();
-
+Navigation.oeffnen("dashboard");
         this.gestartet = true;
 
         console.log(

@@ -158,3 +158,74 @@ function mitarbeiterListeZeichnen(){
     });
 
 }
+/* ==========================================
+   Neuer Mitarbeiter
+========================================== */
+
+function mitarbeiterDialogNeu(){
+
+    const vorname =
+    prompt("Vorname");
+
+    if(!vorname){
+        return;
+    }
+
+    const name =
+    prompt("Nachname");
+
+    if(!name){
+        return;
+    }
+
+    mitarbeiter.push({
+
+        id:
+        neueID(),
+
+        personalnummer:
+        "",
+
+        vorname:
+        vorname.trim(),
+
+        name:
+        name.trim(),
+
+        bereich:
+        "Küche",
+
+        position:
+        "Mitarbeiter",
+
+        einrichtung:
+        "",
+
+        wochenstunden:
+        40,
+
+        urlaub:
+        30,
+
+        telefon:
+        "",
+
+        email:
+        "",
+
+        farbe:
+        APP.farben.sekundär,
+
+        aktiv:
+        true,
+
+        notizen:
+        ""
+
+    });
+
+    Speicher.speichern();
+
+    mitarbeiterListeZeichnen();
+
+}

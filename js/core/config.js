@@ -2,6 +2,7 @@
 
 /* ==========================================
    DDH Studio Enterprise 10.0
+   Core
    Konfiguration
 ========================================== */
 
@@ -15,27 +16,87 @@ const APP = {
 
     farben: {
 
-        primär: "#0F4C81",
-        sekundär: "#00B8B0",
+        primaer: "#00bcd4",
 
-        hintergrund: "#F4F7FB",
-        karte: "#FFFFFF",
+        sekundär: "#0097a7",
 
-        text: "#1F2937",
-        textHell: "#6B7280",
+        erfolg: "#4caf50",
 
-        rand: "#D7E3EE",
+        warnung: "#ff9800",
 
-        erfolg: "#22C55E",
-        warnung: "#F59E0B",
-        fehler: "#EF4444"
+        fehler: "#f44336"
+
+    }
+
+};
+
+const MONATE = [
+
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember"
+
+];
+
+const SCHICHTEN = {
+
+    frueh: {
+
+        kurz: "F",
+
+        name: "Früh"
 
     },
 
-    standardWochenstunden: 40,
+    spaet: {
 
-    standardSollstunden: 160,
+        kurz: "S",
 
-    sprache: "de-DE"
+        name: "Spät"
+
+    },
+
+    nacht: {
+
+        kurz: "N",
+
+        name: "Nacht"
+
+    },
+
+    frei: {
+
+        kurz: "-",
+
+        name: "Frei"
+
+    },
+
+    urlaub: {
+
+        kurz: "U",
+
+        name: "Urlaub"
+
+    },
+
+    krank: {
+
+        kurz: "K",
+
+        name: "Krank"
+
+    }
 
 };
+
+const SOLLSTUNDEN = 160;

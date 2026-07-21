@@ -7,11 +7,32 @@
 
 let aktuelleSeite = "dashboard";
 
+function navigationStarten(){
+
+    const buttons =
+    document.querySelectorAll(".navButton");
+
+    buttons.forEach(button=>{
+
+        button.addEventListener("click",()=>{
+
+            seiteOeffnen(
+                button.dataset.seite
+            );
+
+        });
+
+    });
+
+}
+
 function seiteOeffnen(seite){
 
     aktuelleSeite = seite;
 
-    DOM.navButtons.forEach(button=>{
+    document
+    .querySelectorAll(".navButton")
+    .forEach(button=>{
 
         button.classList.remove("aktiv");
 
@@ -23,14 +44,21 @@ function seiteOeffnen(seite){
 
     });
 
+    const titel =
+    document.getElementById("seitenTitel");
+
+    if(titel){
+
+        titel.textContent =
+        seite.charAt(0).toUpperCase() +
+        seite.slice(1);
+
+    }
+
     switch(seite){
 
         case "dashboard":
             dashboardZeichnen();
-            break;
-
-        case "kalender":
-            kalenderZeichnen();
             break;
 
         case "mitarbeiter":
@@ -41,31 +69,42 @@ function seiteOeffnen(seite){
             schichtplanZeichnen();
             break;
 
+        case "kalender":
+            kalenderZeichnen();
+            break;
+
+        case "aufgaben":
+            todosZeichnen();
+            break;
+
         case "druck":
             druckcenterZeichnen();
             break;
 
+        case "einstellungen":
+
+            DOM.inhalt.innerHTML = `
+
+                <div class="karte">
+
+                    <h2>Einstellungen</h2>
+
+                    <p>
+
+                        Dieses Modul wird später entwickelt.
+
+                    </p>
+
+                </div>
+
+            `;
+
+            break;
+
         default:
+
             dashboardZeichnen();
 
     }
-
-}
-
-function navigationStarten(){
-
-    DOM.navButtons.forEach(button=>{
-
-        button.addEventListener("click",()=>{
-
-            seiteOeffnen(
-
-                button.dataset.seite
-
-            );
-
-        });
-
-    });
 
 }

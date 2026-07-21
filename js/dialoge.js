@@ -2,104 +2,98 @@
 
 /* ==========================================
    DDH Studio Enterprise 10.0
-   Dialoge
+   Dialogsystem
 ========================================== */
 
-function dialogOeffnen(titel,inhalt){
+const Dialog = {
 
-    let dialog =
-    document.getElementById("ddhDialog");
+    overlay: null,
 
-    if(!dialog){
+    titel: null,
 
-        dialog =
-        document.createElement("div");
+    inhalt: null,
 
-        dialog.id = "ddhDialog";
+    fuss: null,
 
-        dialog.innerHTML = `
+    initialisieren() {
 
-        <div class="dialogFenster">
+        this.overlay =
+            document.getElementById(
+                "dialogOverlay"
+            );
 
-            <div class="dialogKopf">
+        this.titel =
+            document.getElementById(
+                "dialogTitel"
+            );
 
-                <h2 id="dialogTitel"></h2>
+        this.inhalt =
+            document.getElementById(
+                "dialogInhalt"
+            );
 
-                <button id="dialogSchliessen">
-                    ✕
-                </button>
+        this.fuss =
+            document.getElementById(
+                "dialogFuss"
+            );
 
-            </div>
+        const schliessen =
+            document.getElementById(
+                "dialogSchliessen"
+            );
 
-            <div id="dialogInhalt">
+        if(schliessen){
 
-            </div>
+            schliessen.onclick =
+                ()=>this.schliessen();
 
-        </div>
+        }
 
-        `;
+    },
 
-        document.body.appendChild(dialog);
+    anzeigen(titel,inhalt,buttons=""){
 
-        document
-        .getElementById("dialogSchliessen")
-        .addEventListener(
-            "click",
-            dialogSchliessen
-        );
+        this.titel.textContent =
+            titel;
 
-    }
+        this.inhalt.innerHTML =
+            inhalt;
 
-    document.getElementById(
-        "dialogTitel"
-    ).textContent = titel;
+        this.fuss.innerHTML =
+            buttons;
 
-    document.getElementById(
-        "dialogInhalt"
-    ).innerHTML = inhalt;
+        this.overlay.style.display =
+            "flex";
 
-    dialog.style.display = "flex";
+    },
 
-}
-/* ==========================================
-   Hinweisdialog
-========================================== */
+    schliessen(){
 
-function dialogHinweis(text){
+        this.overlay.style.display =
+            "none";
 
-    dialogOeffnen(
+    },
 
-        "Hinweis",
+    hinweis(text){
 
-        `
+        this.anzeigen(
 
-        <div class="dialogText">
+            "Hinweis",
 
-            ${text}
+            `<p>${text}</p>`,
 
-        </div>
-
-        <div class="dialogButtons">
-
+            `
             <button
                 class="hauptButton"
-                id="dialogOK">
+                onclick="Dialog.schliessen()">
 
                 OK
 
             </button>
+            `
 
-        </div>
+        );
 
-        `
+    }
 
-    );
-
-    document
-    .getElementById("dialogOK")
-    .addEventListener(
-        "click",
-        dialogSchliessen
-    );
-
-}
+};

@@ -1,38 +1,87 @@
 "use strict";
 
+/* ==========================================
+   DDH Studio Enterprise 10.0
+   Datenmodell
+========================================== */
+
 // ==========================================
-// DDH Studio Enterprise 10.0
-// Datenverwaltung
+// Mitarbeiter
 // ==========================================
 
-// Mitarbeiter
 let mitarbeiter = [];
 
-// Termine
-let termine = [];
+// Datensatz:
+//
+// {
+//     id: "",
+//     personalnummer: "",
+//     name: "",
+//     vorname: "",
+//     bereich: "",
+//     position: "",
+//     einrichtung: "",
+//     wochenstunden: 40,
+//     urlaub: 30,
+//     farbe: "",
+//     aktiv: true
+// }
 
-// Aufgaben
-let todos = [];
 
+// ==========================================
 // Schichten
+// ==========================================
+
 let schichten = [];
 
+// Datensatz:
+//
+// {
+//     id: "",
+//     mitarbeiterId: "",
+//     datum: "",
+//     schicht: "",
+//     stunden: 8
+// }
+
+
+// ==========================================
+// Termine
+// ==========================================
+
+let termine = [];
+
+
+// ==========================================
+// Aufgaben
+// ==========================================
+
+let aufgaben = [];
+
+
+// ==========================================
 // Dokumente
+// ==========================================
+
 let dokumente = [];
 
-// Kunden
-let kunden = [];
 
-// Projekte
-let projekte = [];
+// ==========================================
+// Einrichtungen
+// ==========================================
 
+let einrichtungen = [];
+
+
+// ==========================================
 // Einstellungen
+// ==========================================
+
 let einstellungen = {
 
-    firma: "DDH Service GmbH",
+    firma: APP.firma,
 
-    farbe: "#14B8A6",
-
-    sollstunden: 160
+    standardSollstunden:
+    APP.standardSollstunden
 
 };

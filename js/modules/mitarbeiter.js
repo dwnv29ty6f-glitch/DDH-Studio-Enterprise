@@ -72,3 +72,114 @@ function mitarbeiterAnzeigen(){
     }
 
 }
+function mitarbeiterHinzufuegen(){
+
+    const name = prompt("Name des Mitarbeiters:");
+
+    if(!name){
+        return;
+    }
+
+    const neuerName = name.trim();
+
+    if(neuerName===""){
+        return;
+    }
+
+    if(
+        mitarbeiter.some(m =>
+            m.name.toLowerCase() === neuerName.toLowerCase()
+        )
+    ){
+        alert("Mitarbeiter existiert bereits.");
+        return;
+    }
+
+    mitarbeiter.push({
+        name: neuerName
+    });
+
+    mitarbeiterSpeichern();
+
+    mitarbeiterAnzeigen();
+
+}
+
+function mitarbeiterBearbeiten(index){
+
+    const neu = prompt(
+        "Neuer Name:",
+        mitarbeiter[index].name
+    );
+
+    if(!neu){
+        return;
+    }
+
+    mitarbeiter[index].name = neu.trim();
+
+    mitarbeiterSpeichern();
+
+    mitarbeiterAnzeigen();
+
+}
+
+function mitarbeiterLoeschen(index){
+
+    if(
+        !confirm(
+            mitarbeiter[index].name +
+            " wirklich löschen?"
+        )
+    ){
+        return;
+    }
+
+    mitarbeiter.splice(index,1);
+
+    mitarbeiterSpeichern();
+
+    mitarbeiterAnzeigen();
+
+}
+
+window.mitarbeiterBearbeiten =
+mitarbeiterBearbeiten;
+
+window.mitarbeiterLoeschen =
+mitarbeiterLoeschen;
+// ==========================================
+// Start
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    mitarbeiterAnzeigen();
+
+    const btn =
+    document.getElementById("mitarbeiterSpeichern");
+
+    const eingabe =
+    document.getElementById("mitarbeiterName");
+
+    if(btn){
+
+        btn.onclick = mitarbeiterHinzufuegen;
+
+    }
+
+    if(eingabe){
+
+        eingabe.addEventListener("keydown", e=>{
+
+            if(e.key==="Enter"){
+
+                mitarbeiterHinzufuegen();
+
+            }
+
+        });
+
+    }
+
+});

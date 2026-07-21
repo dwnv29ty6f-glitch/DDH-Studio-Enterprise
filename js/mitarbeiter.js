@@ -229,3 +229,47 @@ function mitarbeiterDialogNeu(){
     mitarbeiterListeZeichnen();
 
 }
+/* ==========================================
+   Mitarbeiter bearbeiten
+========================================== */
+
+function mitarbeiterBearbeiten(id){
+
+    const person =
+    mitarbeiter.find(m=>m.id===id);
+
+    if(!person){
+        return;
+    }
+
+    const vorname =
+    prompt(
+        "Vorname",
+        person.vorname
+    );
+
+    if(vorname===null){
+        return;
+    }
+
+    const name =
+    prompt(
+        "Nachname",
+        person.name
+    );
+
+    if(name===null){
+        return;
+    }
+
+    person.vorname =
+    vorname.trim();
+
+    person.name =
+    name.trim();
+
+    Speicher.speichern();
+
+    mitarbeiterListeZeichnen();
+
+}

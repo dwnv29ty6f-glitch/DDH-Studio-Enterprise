@@ -273,3 +273,44 @@ function mitarbeiterBearbeiten(id){
     mitarbeiterListeZeichnen();
 
 }
+/* ==========================================
+   Mitarbeiter löschen
+========================================== */
+
+function mitarbeiterLoeschen(id){
+
+    const person =
+    mitarbeiter.find(
+        m=>m.id===id
+    );
+
+    if(!person){
+        return;
+    }
+
+    if(!bestaetigen(
+
+        "Mitarbeiter\n\n" +
+
+        person.vorname +
+
+        " " +
+
+        person.name +
+
+        "\n\nwirklich löschen?"
+
+    )){
+        return;
+    }
+
+    mitarbeiter =
+    mitarbeiter.filter(
+        m=>m.id!==id
+    );
+
+    Speicher.speichern();
+
+    mitarbeiterListeZeichnen();
+
+}

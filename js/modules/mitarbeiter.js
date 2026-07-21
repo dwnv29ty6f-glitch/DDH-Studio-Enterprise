@@ -165,7 +165,6 @@ function mitarbeiterZeichnen(){
 }
 document.addEventListener("DOMContentLoaded", () => {
 
-    mitarbeiterAnzeigen();
 
     const btn =
     document.getElementById("mitarbeiterSpeichern");

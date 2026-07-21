@@ -1,34 +1,24 @@
 "use strict";
 
-// ==========================================
-// DDH Studio Enterprise 10.0
-// Dashboard
-// ==========================================
+/* ==========================================
+   DDH Studio Enterprise 10.0
+   Dashboard
+========================================== */
 
 function dashboardZeichnen(){
 
-    const inhalt =
-    document.getElementById("inhalt");
+    DOM.inhalt.innerHTML = `
 
-    if(!inhalt){
-        return;
-    }
+    <div class="dashboard">
 
-    inhalt.innerHTML = `
+        <div class="karte willkommen">
 
-    <section class="dashboard">
-
-        <div class="karte gross">
-
-            <h2>
-            Willkommen bei
-            DDH Studio Enterprise 10
-            </h2>
+            <h1>Willkommen bei DDH Studio Enterprise</h1>
 
             <p>
 
-            Betriebsmanagement für
-            DDH Service GmbH
+                Betriebsmanagement für
+                DDH Service GmbH
 
             </p>
 
@@ -36,11 +26,15 @@ function dashboardZeichnen(){
 
         <div class="kachel">
 
-            <h3>📅 Termine</h3>
+            <div class="kachelTitel">
+                👥 Mitarbeiter
+            </div>
 
-            <div id="dashboardTermine">
+            <div
+            id="dashboardMitarbeiter"
+            class="kachelZahl">
 
-                0
+                ${mitarbeiter.length}
 
             </div>
 
@@ -48,11 +42,15 @@ function dashboardZeichnen(){
 
         <div class="kachel">
 
-            <h3>✅ Aufgaben</h3>
+            <div class="kachelTitel">
+                📅 Termine
+            </div>
 
-            <div id="dashboardAufgaben">
+            <div
+            id="dashboardTermine"
+            class="kachelZahl">
 
-                0
+                ${termine.length}
 
             </div>
 
@@ -60,11 +58,15 @@ function dashboardZeichnen(){
 
         <div class="kachel">
 
-            <h3>👥 Mitarbeiter</h3>
+            <div class="kachelTitel">
+                🕒 Schichten
+            </div>
 
-            <div id="dashboardMitarbeiter">
+            <div
+            id="dashboardSchichten"
+            class="kachelZahl">
 
-                0
+                ${schichten.length}
 
             </div>
 
@@ -72,17 +74,21 @@ function dashboardZeichnen(){
 
         <div class="kachel">
 
-            <h3>🕒 Heute im Dienst</h3>
+            <div class="kachelTitel">
+                ✅ Aufgaben
+            </div>
 
-            <div id="dashboardDienst">
+            <div
+            id="dashboardAufgaben"
+            class="kachelZahl">
 
-                0
+                ${aufgaben.length}
 
             </div>
 
         </div>
 
-    </section>
+    </div>
 
     `;
 

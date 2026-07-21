@@ -353,3 +353,47 @@ document.addEventListener("click",(event)=>{
     }
 
 });
+/* ==========================================
+   Mitarbeiter suchen
+========================================== */
+
+function mitarbeiterSuchen(text){
+
+    text =
+    text
+    .trim()
+    .toLowerCase();
+
+    return mitarbeiter.filter(person=>{
+
+        const name = (
+
+            person.vorname +
+
+            " " +
+
+            person.name
+
+        ).toLowerCase();
+
+        const bereich =
+        person.bereich
+        .toLowerCase();
+
+        const position =
+        person.position
+        .toLowerCase();
+
+        return (
+
+            name.includes(text) ||
+
+            bereich.includes(text) ||
+
+            position.includes(text)
+
+        );
+
+    });
+
+}

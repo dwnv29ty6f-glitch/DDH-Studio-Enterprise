@@ -1060,6 +1060,20 @@ label{
 .p20{
 
     padding:20px;
+/* ======================================
+   Seiten
+====================================== */
+
+.seite{
+
+    display:none;
+
+}
+
+.seite.aktiv{
+
+    display:block;
+
 
 }
 

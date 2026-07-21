@@ -1,76 +1,77 @@
 "use strict";
 
-/* ==========================================
-   DDH Studio Enterprise 10.0
-   Navigation
-========================================== */
-
-let aktuelleSeite = "dashboard";
+/*
+===========================================
+DDH Studio Enterprise 10.0
+Navigation
+===========================================
+*/
 
 const Navigation = {
 
-    initialisieren(){
+    aktuelleSeite: "dashboard",
 
-        document
-        .querySelectorAll(".navButton")
-        .forEach(button=>{
+    initialisieren() {
+
+        const buttons =
+            document.querySelectorAll(".navButton");
+
+        buttons.forEach(button => {
 
             button.addEventListener(
+
                 "click",
-                ()=>{
+
+                () => {
 
                     this.oeffnen(
+
                         button.dataset.seite
+
                     );
 
                 }
+
             );
 
         });
 
     },
 
-    oeffnen(seite){
+    oeffnen(seite) {
 
-        aktuelleSeite = seite;
+        this.aktuelleSeite = seite;
 
         document
-        .querySelectorAll(".navButton")
-        .forEach(button=>{
+            .querySelectorAll(".navButton")
+            .forEach(button => {
 
-            button.classList.remove(
-                "aktiv"
+                button.classList.remove("aktiv");
+
+            });
+
+        const aktiv =
+            document.querySelector(
+
+                '.navButton[data-seite="' +
+
+                seite +
+
+                '"]'
+
             );
 
-            if(button.dataset.seite===seite){
+        if (aktiv) {
 
-                button.classList.add(
-                    "aktiv"
-                );
-
-            }
-
-        });
-
-        const titel =
-        document.getElementById(
-            "seitenTitel"
-        );
-
-        if(titel){
-
-            titel.textContent =
-            seite.charAt(0)
-            .toUpperCase() +
-            seite.slice(1);
+            aktiv.classList.add("aktiv");
 
         }
 
-        switch(seite){
+        switch (seite) {
 
             case "dashboard":
 
-                dashboardZeichnen();
+                Dashboard.anzeigen();
 
                 break;
 
@@ -82,31 +83,47 @@ const Navigation = {
 
             case "schichtplan":
 
-                schichtplanZeichnen();
+                if (typeof schichtplanZeichnen === "function") {
+
+                    schichtplanZeichnen();
+
+                }
 
                 break;
 
             case "kalender":
 
-                kalenderZeichnen();
+                if (typeof kalenderZeichnen === "function") {
+
+                    kalenderZeichnen();
+
+                }
 
                 break;
 
-            case "aufgaben":
+            case "todos":
 
-                todosZeichnen();
+                if (typeof todosZeichnen === "function") {
+
+                    todosZeichnen();
+
+                }
 
                 break;
 
             case "druck":
 
-                druckZeichnen();
+                if (typeof druckZeichnen === "function") {
+
+                    druckZeichnen();
+
+                }
 
                 break;
 
             default:
 
-                dashboardZeichnen();
+                Dashboard.anzeigen();
 
         }
 

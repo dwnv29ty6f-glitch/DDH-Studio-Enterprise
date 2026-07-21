@@ -1,74 +1,63 @@
 "use strict";
 
-/* ==========================================
-   DDH Studio Enterprise 10.0
-   Speicherverwaltung
-========================================== */
+/*
+===========================================
+DDH Studio Enterprise 10.0
+Speicherverwaltung
+===========================================
+*/
 
 const Speicher = {
 
-    laden() {
+    laden(schluessel, standardwert) {
 
-        window.termine =
-            JSON.parse(
-                localStorage.getItem("ddhTermine")
-            ) || [];
+        try {
 
-        window.todos =
-            JSON.parse(
-                localStorage.getItem("ddhTodos")
-            ) || [];
+            const daten = localStorage.getItem(schluessel);
 
-        window.mitarbeiter =
-            JSON.parse(
-                localStorage.getItem("ddhMitarbeiter")
-            ) || [];
+            if (daten === null) {
 
-        window.schichten =
-            JSON.parse(
-                localStorage.getItem("ddhSchichten")
-            ) || [];
+                return standardwert;
+
+            }
+
+            return JSON.parse(daten);
+
+        } catch (fehler) {
+
+            console.error(
+                "Fehler beim Laden:",
+                schluessel,
+                fehler
+            );
+
+            return standardwert;
+
+        }
 
     },
 
-    speichern() {
+    speichern(schluessel, daten) {
 
         localStorage.setItem(
-            "ddhTermine",
-            JSON.stringify(termine)
+
+            schluessel,
+
+            JSON.stringify(daten)
+
         );
 
-        localStorage.setItem(
-            "ddhTodos",
-            JSON.stringify(todos)
-        );
+    },
 
-        localStorage.setItem(
-            "ddhMitarbeiter",
-            JSON.stringify(mitarbeiter)
-        );
+    loeschen(schluessel) {
 
-        localStorage.setItem(
-            "ddhSchichten",
-            JSON.stringify(schichten)
-        );
+        localStorage.removeItem(schluessel);
 
     },
 
     allesLoeschen() {
 
-        if(!confirm(
-            "Alle Daten wirklich löschen?"
-        )){
-            return;
-        }
-
-        localStorage.removeItem("ddhTermine");
-        localStorage.removeItem("ddhTodos");
-        localStorage.removeItem("ddhMitarbeiter");
-        localStorage.removeItem("ddhSchichten");
-
-        this.laden();
+        localStorage.clear();
 
     }
 

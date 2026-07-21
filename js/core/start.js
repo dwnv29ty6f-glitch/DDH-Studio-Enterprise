@@ -18,87 +18,27 @@ function starten(){
         APP.name +
         " " +
         APP.version +
-        " gestartet"
+        " wird gestartet..."
     );
+
+    // DOM laden
+    DOM.initialisieren();
+
+    // Dialogsystem
+    Dialog.initialisieren();
 
     // Daten laden
     Speicher.laden();
 
-    // Navigation starten
-    navigationStarten();
+    // Navigation
+    Navigation.initialisieren();
 
-    // Dashboard anzeigen
-    seiteOeffnen("dashboard");
+    // Startseite
+    Navigation.oeffnen("dashboard");
 
-    // Event-Handler registrieren
-    globaleEvents();
-
-}
-
-/* ==========================================
-   Globale Events
-========================================== */
-
-function globaleEvents(){
-
-    const suche =
-    document.getElementById(
-        "btnSuche"
+    console.log(
+        APP.name +
+        " erfolgreich gestartet."
     );
-
-    if(suche){
-
-        suche.addEventListener(
-            "click",
-            ()=>{
-
-                dialogHinweis(
-                    "Suche folgt in einer späteren Version."
-                );
-
-            }
-        );
-
-    }
-
-    const benutzer =
-    document.getElementById(
-        "btnBenutzer"
-    );
-
-    if(benutzer){
-
-        benutzer.addEventListener(
-            "click",
-            ()=>{
-
-                dialogHinweis(
-                    "Benutzerverwaltung folgt später."
-                );
-
-            }
-        );
-
-    }
-
-    const einstellungen =
-    document.getElementById(
-        "btnEinstellungen"
-    );
-
-    if(einstellungen){
-
-        einstellungen.addEventListener(
-            "click",
-            ()=>{
-
-                seiteOeffnen(
-                    "einstellungen"
-                );
-
-            }
-        );
-
-    }
 
 }

@@ -1,14 +1,31 @@
 "use strict";
 
-// ==========================================
-// DDH Studio Enterprise 10.0
-// Start
-// ==========================================
+/* ==========================================
+   DDH Studio Enterprise 10.0
+   Start
+========================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    starten
+);
 
-    console.log("DDH Studio Enterprise 10 gestartet.");
+function starten(){
 
-    dashboardZeichnen();
+    console.log(
+        APP.name +
+        " " +
+        APP.version +
+        " gestartet"
+    );
 
-});
+    // Daten laden
+    Speicher.laden();
+
+    // Navigation starten
+    navigationStarten();
+
+    // Startseite öffnen
+    seiteOeffnen("dashboard");
+
+}

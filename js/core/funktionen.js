@@ -1,123 +1,96 @@
 "use strict";
 
-/* ==========================================
-   DDH Studio Enterprise 10.0
-   Allgemeine Funktionen
-========================================== */
+/*
+===========================================
+DDH Studio Enterprise 10.0
+Hilfsfunktionen
+===========================================
+*/
 
-// ==========================================
-// ID erzeugen
-// ==========================================
+const Funktionen = {
 
-function neueID(){
+    heute() {
 
-    return crypto.randomUUID();
+        return new Date();
 
-}
+    },
 
-// ==========================================
-// Datum
-// ==========================================
+    jahr() {
 
-function heute(){
+        return this.heute().getFullYear();
 
-    return new Date();
+    },
 
-}
+    monat() {
 
-// ==========================================
-// Datum formatieren
-// ==========================================
+        return this.heute().getMonth();
 
-function datumFormatieren(datum){
+    },
 
-    if(!datum){
+    tag() {
 
-        return "";
+        return this.heute().getDate();
 
-    }
+    },
 
-    return new Date(datum)
-    .toLocaleDateString(
-        APP.sprache
-    );
+    tageImMonat(monat, jahr) {
 
-}
+        return new Date(
 
-// ==========================================
-// Uhrzeit formatieren
-// ==========================================
+            jahr,
 
-function uhrzeitFormatieren(datum){
+            monat + 1,
 
-    if(!datum){
+            0
 
-        return "";
+        ).getDate();
 
-    }
+    },
 
-    return new Date(datum)
-    .toLocaleTimeString(
-        APP.sprache,
-        {
-            hour:"2-digit",
-            minute:"2-digit"
+    ersterWochentag(monat, jahr) {
+
+        let tag = new Date(
+
+            jahr,
+
+            monat,
+
+            1
+
+        ).getDay();
+
+        if (tag === 0) {
+
+            tag = 7;
+
         }
-    );
 
-}
+        return tag;
 
-// ==========================================
-// Element suchen
-// ==========================================
+    },
 
-function $(id){
+    datum(monat, tag, jahr) {
 
-    return document.getElementById(id);
+        return tag + ". " +
 
-}
+            APP.monate[monat] +
 
-// ==========================================
-// Element erzeugen
-// ==========================================
+            " " +
 
-function element(tag,klasse=""){
+            jahr;
 
-    const e =
-    document.createElement(tag);
+    },
 
-    if(klasse){
+    uuid() {
 
-        e.className = klasse;
+        if (crypto.randomUUID) {
+
+            return crypto.randomUUID();
+
+        }
+
+        return Date.now().toString();
 
     }
 
-    return e;
-
-}
-
-// ==========================================
-// Meldungen
-// ==========================================
-
-function info(text){
-
-    alert(text);
-
-}
-
-function fehler(text){
-
-    alert("Fehler:\n\n" + text);
-
-}
-
-// ==========================================
-// Bestätigung
-// ==========================================
-
-function bestaetigen(text){
-
-    return confirm(text);
-
-}
+};

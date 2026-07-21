@@ -397,3 +397,59 @@ function mitarbeiterSuchen(text){
     });
 
 }
+/* ==========================================
+   Mitarbeiter nach ID
+========================================== */
+
+function mitarbeiterNachID(id){
+
+    return mitarbeiter.find(
+
+        person=>person.id===id
+
+    );
+
+}
+
+/* ==========================================
+   Mitarbeiter speichern
+========================================== */
+
+function mitarbeiterSpeichern(){
+
+    Speicher.speichern();
+
+}
+
+/* ==========================================
+   Mitarbeiter sortieren
+========================================== */
+
+function mitarbeiterSortieren(){
+
+    mitarbeiter.sort((a,b)=>{
+
+        const nameA = (
+
+            a.nachname || a.name
+
+        ).toLowerCase();
+
+        const nameB = (
+
+            b.nachname || b.name
+
+        ).toLowerCase();
+
+        return nameA.localeCompare(
+            nameB,
+            "de"
+        );
+
+    });
+
+    mitarbeiterListeZeichnen();
+
+    Speicher.speichern();
+
+}

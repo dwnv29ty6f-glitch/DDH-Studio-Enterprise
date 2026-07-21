@@ -542,3 +542,52 @@ document.addEventListener(
     }
 
 );
+/* ==========================================
+   Weitere Hilfsfunktionen
+========================================== */
+
+    nachPersonalnummer(personalnummer){
+
+        return this.daten.find(
+
+            person =>
+
+            person.personalnummer === personalnummer
+
+        );
+
+    },
+
+    existiert(personalnummer){
+
+        return this.nachPersonalnummer(
+
+            personalnummer
+
+        ) !== undefined;
+
+    },
+
+    anzahl(){
+
+        return this.daten.length;
+
+    }
+
+};
+
+/* ==========================================
+   Initialisierung
+========================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    () => {
+
+        Mitarbeiter.laden();
+
+    }
+
+);

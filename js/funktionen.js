@@ -1,31 +1,64 @@
 "use strict";
 
+/* ==========================================
+   DDH Studio Enterprise 10.0
+   Allgemeine Funktionen
+========================================== */
+
 // ==========================================
-// DDH Studio Enterprise 10.0
-// Allgemeine Funktionen
+// ID erzeugen
 // ==========================================
 
-// Aktuelles Datum
+function neueID(){
+
+    return crypto.randomUUID();
+
+}
+
+// ==========================================
+// Datum
+// ==========================================
+
 function heute(){
 
     return new Date();
 
 }
 
+// ==========================================
 // Datum formatieren
+// ==========================================
+
 function datumFormatieren(datum){
 
-    return datum.toLocaleDateString(
-        "de-DE"
+    if(!datum){
+
+        return "";
+
+    }
+
+    return new Date(datum)
+    .toLocaleDateString(
+        APP.sprache
     );
 
 }
 
+// ==========================================
 // Uhrzeit formatieren
+// ==========================================
+
 function uhrzeitFormatieren(datum){
 
-    return datum.toLocaleTimeString(
-        "de-DE",
+    if(!datum){
+
+        return "";
+
+    }
+
+    return new Date(datum)
+    .toLocaleTimeString(
+        APP.sprache,
         {
             hour:"2-digit",
             minute:"2-digit"
@@ -34,29 +67,55 @@ function uhrzeitFormatieren(datum){
 
 }
 
-// Zufällige ID erzeugen
-function neueID(){
+// ==========================================
+// Element suchen
+// ==========================================
 
-    return Date.now().toString(36) +
-    Math.random().toString(36).substring(2,8);
+function $(id){
+
+    return document.getElementById(id);
 
 }
 
-// Meldung anzeigen
+// ==========================================
+// Element erzeugen
+// ==========================================
+
+function element(tag,klasse=""){
+
+    const e =
+    document.createElement(tag);
+
+    if(klasse){
+
+        e.className = klasse;
+
+    }
+
+    return e;
+
+}
+
+// ==========================================
+// Meldungen
+// ==========================================
+
 function info(text){
 
     alert(text);
 
 }
 
-// Fehler anzeigen
 function fehler(text){
 
     alert("Fehler:\n\n" + text);
 
 }
 
+// ==========================================
 // Bestätigung
+// ==========================================
+
 function bestaetigen(text){
 
     return confirm(text);

@@ -24,9 +24,6 @@ function mitarbeiterSpeichern(){
 
 function mitarbeiterAnzeigen(){
 
-    if(!mitarbeiterListe){
-        return;
-    }
     mitarbeiterListe =
     document.getElementById(
         "mitarbeiterListe"
@@ -36,6 +33,11 @@ function mitarbeiterAnzeigen(){
     document.getElementById(
         "dashboardMitarbeiter"
     );
+
+    if(!mitarbeiterListe){
+        return;
+    }
+
     mitarbeiterListe.innerHTML = "";
 
     mitarbeiter.forEach((person,index)=>{

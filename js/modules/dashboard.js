@@ -11,111 +11,41 @@ const Dashboard = {
 
     anzeigen() {
 
-        const inhalt = DOM.id("inhalt");
+        document
+            .querySelectorAll(".seite")
+            .forEach(seite => {
 
-        if (!inhalt) {
+                seite.classList.remove("aktiv");
 
-            return;
+            });
 
-        }
+        document
+            .getElementById("seite-dashboard")
+            .classList.add("aktiv");
 
-        inhalt.innerHTML = `
+        document.getElementById(
+            "seitenTitel"
+        ).textContent = "Dashboard";
 
-        <div class="dashboard">
+        document.getElementById(
+            "seitenPfad"
+        ).textContent = "DDH Studio Enterprise";
 
-            <div class="karte">
+        document.getElementById(
+            "dashboardMitarbeiter"
+        ).textContent = mitarbeiter.length;
 
-                <h1>DDH Studio Enterprise</h1>
+        document.getElementById(
+            "dashboardTermine"
+        ).textContent = termine.length;
 
-                <p>Willkommen zurück.</p>
+        document.getElementById(
+            "dashboardSchichten"
+        ).textContent = schichten.length;
 
-            </div>
-
-            <div class="dashboardKacheln">
-
-                <div class="kachel">
-
-                    <div class="titel">
-
-                        Mitarbeiter
-
-                    </div>
-
-                    <div class="wert">
-
-                        ${mitarbeiter.length}
-
-                    </div>
-
-                </div>
-
-                <div class="kachel">
-
-                    <div class="titel">
-
-                        Termine
-
-                    </div>
-
-                    <div class="wert">
-
-                        ${termine.length}
-
-                    </div>
-
-                </div>
-
-                <div class="kachel">
-
-                    <div class="titel">
-
-                        Aufgaben
-
-                    </div>
-
-                    <div class="wert">
-
-                        ${todos.length}
-
-                    </div>
-
-                </div>
-
-                <div class="kachel">
-
-                    <div class="titel">
-
-                        Schichten
-
-                    </div>
-
-                    <div class="wert">
-
-                        ${schichten.length}
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="karte">
-
-                <h2>Schnellzugriff</h2>
-
-                <button
-                    class="hauptButton"
-                    onclick="Navigation.oeffnen('mitarbeiter')">
-
-                    Mitarbeiter öffnen
-
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
+        document.getElementById(
+            "dashboardAufgaben"
+        ).textContent = todos.length;
 
     }
 

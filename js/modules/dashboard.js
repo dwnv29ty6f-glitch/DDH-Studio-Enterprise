@@ -11,23 +11,87 @@ const Dashboard = {
 
     anzeigen() {
 
-        document.getElementById("seitenTitel").textContent =
+        // Überschrift
+
+        const titel =
+        document.getElementById(
+            "seitenTitel"
+        );
+
+        if(titel){
+
+            titel.textContent =
             "Dashboard";
 
-        document.getElementById("seitenPfad").textContent =
+        }
+
+        const pfad =
+        document.getElementById(
+            "seitenPfad"
+        );
+
+        if(pfad){
+
+            pfad.textContent =
             "DDH Studio Enterprise";
 
-        document.getElementById("dashboardMitarbeiter").textContent =
+        }
+
+        // Mitarbeiter
+
+        const mitarbeiterKachel =
+        document.getElementById(
+            "dashboardMitarbeiter"
+        );
+
+        if(mitarbeiterKachel){
+
+            mitarbeiterKachel.textContent =
             mitarbeiter.length;
 
-        document.getElementById("dashboardTermine").textContent =
+        }
+
+        // Termine
+
+        const termineKachel =
+        document.getElementById(
+            "dashboardTermine"
+        );
+
+        if(termineKachel){
+
+            termineKachel.textContent =
             termine.length;
 
-        document.getElementById("dashboardSchichten").textContent =
+        }
+
+        // Schichten
+
+        const schichtenKachel =
+        document.getElementById(
+            "dashboardSchichten"
+        );
+
+        if(schichtenKachel){
+
+            schichtenKachel.textContent =
             schichten.length;
 
-        document.getElementById("dashboardAufgaben").textContent =
+        }
+
+        // Aufgaben
+
+        const aufgabenKachel =
+        document.getElementById(
+            "dashboardAufgaben"
+        );
+
+        if(aufgabenKachel){
+
+            aufgabenKachel.textContent =
             todos.length;
+
+        }
 
     }
 

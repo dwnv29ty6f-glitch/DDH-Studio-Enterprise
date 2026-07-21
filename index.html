@@ -9,10 +9,12 @@
 name="viewport"
 content="width=device-width, initial-scale=1.0">
 
+<meta
+name="theme-color"
+content="#0F4C81">
+
 <title>
-
 DDH Studio Enterprise 10.0
-
 </title>
 
 <link
@@ -25,35 +27,29 @@ href="style.css">
 
 <div id="app">
 
-    <!-- =====================================
+    <!-- ==========================================
          SIDEBAR
-    ====================================== -->
+    =========================================== -->
 
-    <aside class="sidebar">
+    <aside id="sidebar">
 
-        <div class="logo">
+        <div id="logo">
 
-            <h1>
+            <h1>DDH Studio</h1>
 
-                DDH Studio
-
-            </h1>
-
-            <span>
-
-                Enterprise 10.0
-
-            </span>
+            <span>Enterprise 10.0</span>
 
         </div>
 
-        <nav class="navigation">
+        <nav id="navigation">
 
             <button
                 class="navButton aktiv"
                 data-seite="dashboard">
 
-                📊 Dashboard
+                <span class="icon">📊</span>
+
+                <span>Dashboard</span>
 
             </button>
 
@@ -61,7 +57,9 @@ href="style.css">
                 class="navButton"
                 data-seite="mitarbeiter">
 
-                👥 Mitarbeiter
+                <span class="icon">👥</span>
+
+                <span>Mitarbeiter</span>
 
             </button>
 
@@ -69,7 +67,9 @@ href="style.css">
                 class="navButton"
                 data-seite="schichtplan">
 
-                👷 Schichtplan
+                <span class="icon">📅</span>
+
+                <span>Schichtplan</span>
 
             </button>
 
@@ -77,15 +77,19 @@ href="style.css">
                 class="navButton"
                 data-seite="kalender">
 
-                📅 Kalender
+                <span class="icon">🗓️</span>
+
+                <span>Kalender</span>
 
             </button>
 
             <button
                 class="navButton"
-                data-seite="todos">
+                data-seite="aufgaben">
 
-                ✅ Aufgaben
+                <span class="icon">✅</span>
+
+                <span>Aufgaben</span>
 
             </button>
 
@@ -93,7 +97,19 @@ href="style.css">
                 class="navButton"
                 data-seite="druck">
 
-                🖨️ Druckcenter
+                <span class="icon">🖨️</span>
+
+                <span>Druckcenter</span>
+
+            </button>
+
+            <button
+                class="navButton"
+                data-seite="einstellungen">
+
+                <span class="icon">⚙️</span>
+
+                <span>Einstellungen</span>
 
             </button>
 
@@ -101,110 +117,285 @@ href="style.css">
 
     </aside>
 
-    <!-- =====================================
+    <!-- ==========================================
          HAUPTBEREICH
-    ====================================== -->
+    =========================================== -->
 
-    <main class="hauptbereich">
+    <main id="hauptbereich">
 
-        <header class="kopfbereich">
+        <header id="kopfbereich">
 
-            <div>
+            <div id="kopfLinks">
 
-                Willkommen bei
+                <h2 id="seitenTitel">
 
-                <strong>
+                    Dashboard
+
+                </h2>
+
+                <div id="seitenPfad">
 
                     DDH Studio Enterprise
 
-                </strong>
+                </div>
+
+            </div>
+
+            <div id="kopfRechts">
+
+                <button id="btnSuche">
+
+                    🔍
+
+                </button>
+
+                <button id="btnBenutzer">
+
+                    👤
+
+                </button>
+
+                <button id="btnEinstellungen">
+
+                    ⚙️
+
+                </button>
 
             </div>
 
         </header>
 
-        <section
-            id="inhalt"
-            class="inhalt">
+        <section id="inhalt">
+                    <div class="dashboard">
 
-        </section>
-        <!-- =====================================
-             DIALOG
-        ====================================== -->
-        <!-- =====================================
-             BENACHRICHTIGUNGEN
-        ====================================== -->
+                <div class="karte willkommen">
 
-        <div
-            id="toastContainer"
-            class="toastContainer">
+                    <h1>
 
-        </div>
+                        Willkommen bei DDH Studio Enterprise
 
-        <!-- =====================================
-             LADEANZEIGE
-        ====================================== -->
+                    </h1>
 
-        <div
-            id="ladeOverlay"
-            class="ladeOverlay">
+                    <p>
 
-            <div
-                class="ladeFenster">
+                        Betriebsmanagement für
+                        DDH Service GmbH
 
-                <div
-                    class="spinner">
+                    </p>
 
                 </div>
 
-                <p>
+                <div class="kachel">
 
-                    Bitte warten...
+                    <div class="kachelIcon">
 
-                </p>
+                        👥
+
+                    </div>
+
+                    <div class="kachelTitel">
+
+                        Mitarbeiter
+
+                    </div>
+
+                    <div
+                        id="dashboardMitarbeiter"
+                        class="kachelWert">
+
+                        0
+
+                    </div>
+
+                </div>
+
+                <div class="kachel">
+
+                    <div class="kachelIcon">
+
+                        📅
+
+                    </div>
+
+                    <div class="kachelTitel">
+
+                        Termine
+
+                    </div>
+
+                    <div
+                        id="dashboardTermine"
+                        class="kachelWert">
+
+                        0
+
+                    </div>
+
+                </div>
+
+                <div class="kachel">
+
+                    <div class="kachelIcon">
+
+                        👷
+
+                    </div>
+
+                    <div class="kachelTitel">
+
+                        Schichten
+
+                    </div>
+
+                    <div
+                        id="dashboardSchichten"
+                        class="kachelWert">
+
+                        0
+
+                    </div>
+
+                </div>
+
+                <div class="kachel">
+
+                    <div class="kachelIcon">
+
+                        ✅
+
+                    </div>
+
+                    <div class="kachelTitel">
+
+                        Aufgaben
+
+                    </div>
+
+                    <div
+                        id="dashboardAufgaben"
+                        class="kachelWert">
+
+                        0
+
+                    </div>
+
+                </div>
 
             </div>
+                    </section>
 
-        </div>
-        <div
-            id="dialogOverlay"
-            class="dialogOverlay">
-
-            <div
-                id="dialogFenster"
-                class="dialogFenster">
-
-                <div
-                    class="dialogKopf">
-
-                    <h2
-                        id="dialogTitel">
-
-                    </h2>
-
-                    <button
-                        id="dialogSchliessen">
-
-                        ✕
-
-                    </button>
-
-                </div>
-
-                <div
-                    id="dialogInhalt">
-
-                </div>
-
-                <div
-                    id="dialogFuss"
-                    class="dialogFuss">
-
-                </div>
-
-            </div>
-
-        </div>
     </main>
 
-</div>
+    <!-- ==========================================
+         DIALOG
+    =========================================== -->
+
+    <div
+        id="dialogOverlay"
+        class="dialogOverlay">
+
+        <div
+            id="dialogFenster"
+            class="dialogFenster">
+
+            <div class="dialogKopf">
+
+                <h2 id="dialogTitel">
+
+                </h2>
+
+                <button
+                    id="dialogSchliessen">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+            <div
+                id="dialogInhalt">
+
+            </div>
+
+            <div
+                id="dialogFuss">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         TOASTS
+    =========================================== -->
+
+    <div
+        id="toastContainer">
+
+    </div>
+
+    <!-- ==========================================
+         LADEBILDSCHIRM
+    =========================================== -->
+
+    <div
+        id="ladeOverlay">
+
+        <div
+            class="ladeFenster">
+
+            <div
+                class="spinner">
+
+            </div>
+
+            <p>
+
+                Daten werden geladen...
+
+            </p>
+
+        </div>
+
+    </div>
+    </div>
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="js/config.js"></script>
+
+<script src="js/daten.js"></script>
+
+<script src="js/speicher.js"></script>
+
+<script src="js/funktionen.js"></script>
+
+<script src="js/dom.js"></script>
+
+<script src="js/dialoge.js"></script>
+
+<script src="js/navigation.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+<script src="js/mitarbeiter.js"></script>
+
+<script src="js/schichtplan.js"></script>
+
+<script src="js/kalender.js"></script>
+
+<script src="js/termine.js"></script>
+
+<script src="js/todos.js"></script>
+
+<script src="js/druck.js"></script>
+
+<script src="js/start.js"></script>
+
+</body>
+
+</html>

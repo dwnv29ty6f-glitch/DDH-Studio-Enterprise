@@ -2,45 +2,58 @@
 
 /* ==========================================
    DDH Studio Enterprise 10.0
-   DOM-Zentrale
+   DOM
 ========================================== */
 
 const DOM = {
 
-    // ======================================
-    // Grundlayout
-    // ======================================
+    inhalt: null,
 
-    app:
-    document.getElementById("app"),
+    seitenTitel: null,
 
-    header:
-    document.getElementById("header"),
+    sidebar: null,
 
-    navigation:
-    document.getElementById("navigation"),
+    dialogOverlay: null,
 
-    inhalt:
-    document.getElementById("inhalt"),
+    dialogTitel: null,
 
-    // ======================================
-    // Header
-    // ======================================
+    dialogInhalt: null,
 
-    btnSuche:
-    document.getElementById("btnSuche"),
+    dialogFuss: null,
 
-    btnBenutzer:
-    document.getElementById("btnBenutzer"),
+    toastContainer: null,
 
-    btnEinstellungen:
-    document.getElementById("btnEinstellungen"),
+    ladeOverlay: null,
 
-    // ======================================
-    // Navigation
-    // ======================================
+    initialisieren(){
 
-    navButtons:
-    document.querySelectorAll(".navButton")
+        this.inhalt =
+            document.getElementById("inhalt");
+
+        this.seitenTitel =
+            document.getElementById("seitenTitel");
+
+        this.sidebar =
+            document.getElementById("sidebar");
+
+        this.dialogOverlay =
+            document.getElementById("dialogOverlay");
+
+        this.dialogTitel =
+            document.getElementById("dialogTitel");
+
+        this.dialogInhalt =
+            document.getElementById("dialogInhalt");
+
+        this.dialogFuss =
+            document.getElementById("dialogFuss");
+
+        this.toastContainer =
+            document.getElementById("toastContainer");
+
+        this.ladeOverlay =
+            document.getElementById("ladeOverlay");
+
+    }
 
 };

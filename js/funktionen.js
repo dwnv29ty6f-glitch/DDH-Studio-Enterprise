@@ -1,123 +1,64 @@
 "use strict";
 
-// ===============================
+// ==========================================
+// DDH Studio Enterprise 10.0
+// Allgemeine Funktionen
+// ==========================================
+
+// Aktuelles Datum
+function heute(){
+
+    return new Date();
+
+}
+
 // Datum formatieren
-// ===============================
+function datumFormatieren(datum){
 
-function datumText(tag, monat, jahr) {
-
-    return tag + ". " + MONATE[monat] + " " + jahr;
-
-}
-
-// ===============================
-// Tage im Monat
-// ===============================
-
-function tageImMonat(monat, jahr) {
-
-    return new Date(jahr, monat + 1, 0).getDate();
-
-}
-
-// ===============================
-// Erster Wochentag
-// ===============================
-
-function ersterWochentag(monat, jahr) {
-
-    let tag = new Date(jahr, monat, 1).getDay();
-
-    if (tag === 0) {
-        tag = 7;
-    }
-
-    return tag;
-
-}
-
-// ===============================
-// Schicht Kurztext
-// ===============================
-
-function schichtKurz(typ) {
-
-    if (!SCHICHTEN[typ]) {
-        return "";
-    }
-
-    return SCHICHTEN[typ].kurz;
-
-}
-
-// ===============================
-// Schichtname
-// ===============================
-
-function schichtName(typ) {
-
-    if (!SCHICHTEN[typ]) {
-        return "";
-    }
-
-    return SCHICHTEN[typ].name;
-
-}
-
-// ===============================
-// Schichtstunden
-// ===============================
-
-function schichtStunden(typ) {
-
-    switch (typ) {
-
-        case "frueh":
-        case "spaet":
-            return 8;
-
-        case "nacht":
-            return 10;
-
-        default:
-            return 0;
-
-    }
-
-}
-
-// ===============================
-// Schicht suchen
-// ===============================
-
-function schichtSuchen(name, tag) {
-
-    return schichten.find(s =>
-
-        s.name === name &&
-        s.tag === tag &&
-        s.monat === aktuellerMonat &&
-        s.jahr === aktuellesJahr
-
+    return datum.toLocaleDateString(
+        "de-DE"
     );
 
 }
 
-// ===============================
-// Schicht löschen
-// ===============================
+// Uhrzeit formatieren
+function uhrzeitFormatieren(datum){
 
-function schichtLoeschen(name, tag) {
+    return datum.toLocaleTimeString(
+        "de-DE",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
 
-    schichten = schichten.filter(s => !(
+}
 
-        s.name === name &&
-        s.tag === tag &&
-        s.monat === aktuellerMonat &&
-        s.jahr === aktuellesJahr
+// Zufällige ID erzeugen
+function neueID(){
 
-    ));
+    return Date.now().toString(36) +
+    Math.random().toString(36).substring(2,8);
 
-    speichern();
+}
+
+// Meldung anzeigen
+function info(text){
+
+    alert(text);
+
+}
+
+// Fehler anzeigen
+function fehler(text){
+
+    alert("Fehler:\n\n" + text);
+
+}
+
+// Bestätigung
+function bestaetigen(text){
+
+    return confirm(text);
 
 }

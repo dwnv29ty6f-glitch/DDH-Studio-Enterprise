@@ -61,3 +61,45 @@ function dialogOeffnen(titel,inhalt){
     dialog.style.display = "flex";
 
 }
+/* ==========================================
+   Hinweisdialog
+========================================== */
+
+function dialogHinweis(text){
+
+    dialogOeffnen(
+
+        "Hinweis",
+
+        `
+
+        <div class="dialogText">
+
+            ${text}
+
+        </div>
+
+        <div class="dialogButtons">
+
+            <button
+                class="hauptButton"
+                id="dialogOK">
+
+                OK
+
+            </button>
+
+        </div>
+
+        `
+
+    );
+
+    document
+    .getElementById("dialogOK")
+    .addEventListener(
+        "click",
+        dialogSchliessen
+    );
+
+}

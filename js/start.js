@@ -1,34 +1,14 @@
 "use strict";
 
-document.addEventListener("DOMContentLoaded", ()=>{
+// ==========================================
+// DDH Studio Enterprise 10.0
+// Start
+// ==========================================
 
-    kalenderZeichnen();
+document.addEventListener("DOMContentLoaded", () => {
 
-    termineAnzeigen();
+    console.log("DDH Studio Enterprise 10 gestartet.");
 
-    todosAnzeigen();
-
-    mitarbeiterAnzeigen();
-
-    schichtplanZeichnen();
-
-    dashboardAktualisieren();
-
-    const letzteSeite =
-    localStorage.getItem("ddhSeite");
-
-    if(letzteSeite){
-
-        seiteAnzeigen(letzteSeite);
-
-    }else{
-
-        seiteAnzeigen("dashboard");
-
-    }
-
-    console.log(
-        "DDH Studio Enterprise gestartet."
-    );
+    dashboardZeichnen();
 
 });

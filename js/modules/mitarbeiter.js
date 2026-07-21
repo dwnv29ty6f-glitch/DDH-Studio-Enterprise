@@ -1,574 +1,544 @@
 "use strict";
 
-/* ==========================================
-   DDH Studio Enterprise 10.0
-   Mitarbeiterverwaltung
-========================================== */
+/*
+===========================================
+DDH Studio Enterprise 10.0
+Mitarbeiterverwaltung
+Teil 1
+===========================================
+*/
 
-let mitarbeiter = [];
+const Mitarbeiter = {
 
-/* ==========================================
-   Mitarbeiter laden
-========================================== */
+    daten: [],
 
-function mitarbeiterLaden() {
+    laden() {
 
-    const daten = localStorage.getItem("ddh_mitarbeiter");
+        this.daten = Speicher.laden(
+            "ddh_mitarbeiter",
+            []
+        );
 
-    if (daten) {
+    },
 
-        mitarbeiter = JSON.parse(daten);
+    speichern() {
 
-    } else {
+        Speicher.speichern(
+            "ddh_mitarbeiter",
+            this.daten
+        );
 
-        mitarbeiter = [];
+    },
 
-    }
+    neuePersonalnummer() {
 
-}
+        if (this.daten.length === 0) {
 
-/* ==========================================
-   Mitarbeiter speichern
-========================================== */
+            return 1000;
 
-function mitarbeiterSpeichern() {
+        }
 
-    localStorage.setItem(
-        "ddh_mitarbeiter",
-        JSON.stringify(mitarbeiter)
-    );
+        return Math.max(
 
-}
+            ...this.daten.map(
+                m => m.personalnummer
+            )
 
-/* ==========================================
-   Neue Personalnummer
-========================================== */
+        ) + 1;
 
-function neuePersonalnummer() {
+    },
 
-    if (mitarbeiter.length === 0) {
+    anzeigen() {
 
-        return 1000;
+        Navigation.aktuelleSeite = "mitarbeiter";
 
-    }
+        const inhalt = DOM.id("inhalt");
 
-    return Math.max(
-        ...mitarbeiter.map(m => m.personalnummer)
-    ) + 1;
+        inhalt.innerHTML = `
 
-}
-/* ==========================================
-   Mitarbeiter hinzufügen
-========================================== */
+<div class="mitarbeiterSeite">
 
-function mitarbeiterHinzufuegen(daten) {
+    <div class="karte">
 
-    const neuerMitarbeiter = {
+        <div class="toolbar">
 
-        id: crypto.randomUUID(),
+            <input
+                id="mitarbeiterSuche"
+                type="text"
+                placeholder="Mitarbeiter suchen...">
 
-        personalnummer: neuePersonalnummer(),
+            <button
+                id="btnNeuerMitarbeiter"
+                class="hauptButton">
 
-        vorname: daten.vorname || "",
+                ➕ Neuer Mitarbeiter
 
-        nachname: daten.nachname || "",
-
-        position: daten.position || "",
-
-        abteilung: daten.abteilung || "",
-
-        telefon: daten.telefon || "",
-
-        email: daten.email || "",
-
-        wochenstunden: daten.wochenstunden || 39,
-
-        urlaub: daten.urlaub || 30,
-
-        kranktage: 0,
-
-        eintritt: daten.eintritt || "",
-
-        notizen: daten.notizen || ""
-
-    };
-
-    mitarbeiter.push(neuerMitarbeiter);
-
-    mitarbeiterSpeichern();
-
-    return neuerMitarbeiter;
-
-}
-
-/* ==========================================
-   Mitarbeiter finden
-========================================== */
-
-function mitarbeiterNachId(id) {
-
-    return mitarbeiter.find(m => m.id === id);
-
-}
-
-/* ==========================================
-   Mitarbeiter löschen
-========================================== */
-
-function mitarbeiterLoeschen(id) {
-
-    mitarbeiter = mitarbeiter.filter(
-
-        m => m.id !== id
-
-    );
-
-    mitarbeiterSpeichern();
-
-}
-/* ==========================================
-   Mitarbeiter bearbeiten
-========================================== */
-
-function mitarbeiterBearbeiten(id, daten) {
-
-    const person = mitarbeiterNachId(id);
-
-    if (!person) {
-
-        return;
-
-    }
-
-    Object.assign(person, daten);
-
-    mitarbeiterSpeichern();
-
-}
-
-/* ==========================================
-   Mitarbeiter suchen
-========================================== */
-
-function mitarbeiterSuchen(suchtext) {
-
-    const text = suchtext.toLowerCase();
-
-    return mitarbeiter.filter(person =>
-
-        person.personalnummer.toString().includes(text) ||
-
-        person.vorname.toLowerCase().includes(text) ||
-
-        person.nachname.toLowerCase().includes(text) ||
-
-        person.position.toLowerCase().includes(text) ||
-
-        person.abteilung.toLowerCase().includes(text)
-
-    );
-
-}
-
-/* ==========================================
-   Alle Mitarbeiter zurückgeben
-========================================== */
-
-function alleMitarbeiter() {
-
-    return mitarbeiter;
-
-}
-/* ==========================================
-   Mitarbeiter als Karten anzeigen
-========================================== */
-
-function mitarbeiterAnzeigen() {
-
-    const container = document.getElementById("mitarbeiterListe");
-
-    if (!container) {
-
-        return;
-
-    }
-
-    container.innerHTML = "";
-
-    if (mitarbeiter.length === 0) {
-
-        container.innerHTML = `
-            <div class="karte">
-                Keine Mitarbeiter vorhanden.
-            </div>
-        `;
-
-        return;
-
-    }
-
-    mitarbeiter.forEach(person => {
-
-        const karte = document.createElement("div");
-
-        karte.className = "karte mitarbeiterKarte";
-
-        karte.innerHTML = `
-
-            <h3>${person.vorname} ${person.nachname}</h3>
-
-            <p><strong>PN:</strong> ${person.personalnummer}</p>
-
-            <p><strong>Position:</strong> ${person.position}</p>
-
-            <p><strong>Abteilung:</strong> ${person.abteilung}</p>
-
-            <p><strong>Wochenstunden:</strong> ${person.wochenstunden}</p>
-
-            <div class="kartenButtons">
-
-                <button class="btnBearbeiten"
-                    onclick="mitarbeiterDialog('${person.id}')">
-
-                    Bearbeiten
-
-                </button>
-
-                <button class="btnLoeschen"
-                    onclick="mitarbeiterLoeschenDialog('${person.id}')">
-
-                    Löschen
-
-                </button>
-
-            </div>
-
-        `;
-
-        container.appendChild(karte);
-
-    });
-
-}
-/* ==========================================
-   Mitarbeiterseite anzeigen
-========================================== */
-
-function mitarbeiterZeichnen() {
-
-    DOM.seitenTitel.textContent = "Mitarbeiter";
-
-    DOM.inhalt.innerHTML = `
-
-    <div class="mitarbeiterSeite">
-
-        <div class="karte">
-
-            <div class="toolbar">
-
-                <input
-                    id="sucheMitarbeiter"
-                    type="text"
-                    placeholder="Mitarbeiter suchen...">
-
-                <button
-                    id="btnNeuerMitarbeiter"
-                    class="hauptButton">
-
-                    ➕ Neuer Mitarbeiter
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <div
-            id="mitarbeiterListe"
-            class="mitarbeiterListe">
+            </button>
 
         </div>
 
     </div>
 
-    `;
+    <div
+        id="mitarbeiterListe"
+        class="mitarbeiterListe">
 
-    mitarbeiterAnzeigen();
+    </div>
 
-    document
-        .getElementById("sucheMitarbeiter")
-        .addEventListener(
+</div>
+
+`;
+
+        this.rendern();
+
+        DOM.id(
+            "mitarbeiterSuche"
+        ).addEventListener(
+
             "input",
-            mitarbeiterSucheAktualisieren
-        );
 
-    document
-        .getElementById("btnNeuerMitarbeiter")
-        .addEventListener(
-            "click",
-            ()=>{
+            e => {
 
-                mitarbeiterDialog();
+                this.rendern(
+                    e.target.value
+                );
 
             }
+
         );
 
-}
-/* ==========================================
-   Mitarbeiterdialog
-========================================== */
+        DOM.id(
+            "btnNeuerMitarbeiter"
+        ).addEventListener(
 
-function mitarbeiterDialog(id = null) {
+            "click",
 
-    let person = null;
+            () => {
 
-    if (id) {
+                this.dialog();
 
-        person = mitarbeiterNachId(id);
+            }
 
-    }
-
-    Dialog.anzeigen(
-
-        id ? "Mitarbeiter bearbeiten" : "Neuer Mitarbeiter",
-
-        `
-
-        <label>Vorname</label>
-        <input id="dlgVorname" value="${person ? person.vorname : ""}">
-
-        <label>Nachname</label>
-        <input id="dlgNachname" value="${person ? person.nachname : ""}">
-
-        <label>Abteilung</label>
-        <input id="dlgAbteilung" value="${person ? person.abteilung : ""}">
-
-        <label>Position</label>
-        <input id="dlgPosition" value="${person ? person.position : ""}">
-
-        <label>Telefon</label>
-        <input id="dlgTelefon" value="${person ? person.telefon : ""}">
-
-        <label>E-Mail</label>
-        <input id="dlgEmail" value="${person ? person.email : ""}">
-
-        <label>Wochenstunden</label>
-        <input id="dlgWochenstunden"
-               type="number"
-               value="${person ? person.wochenstunden : 39}">
-
-        <label>Urlaubstage</label>
-        <input id="dlgUrlaub"
-               type="number"
-               value="${person ? person.urlaub : 30}">
-
-        `,
-
-        `
-
-        <button
-            class="sekundenButton"
-            onclick="Dialog.schliessen()">
-
-            Abbrechen
-
-        </button>
-
-        <button
-            class="hauptButton"
-            onclick="mitarbeiterDialogSpeichern('${id ?? ""}')">
-
-            Speichern
-
-        </button>
-
-        `
-
-    );
-
-}
-/* ==========================================
-   Dialog speichern
-========================================== */
-
-function mitarbeiterDialogSpeichern(id = "") {
-
-    const daten = {
-
-        vorname: document.getElementById("dlgVorname").value.trim(),
-
-        nachname: document.getElementById("dlgNachname").value.trim(),
-
-        abteilung: document.getElementById("dlgAbteilung").value.trim(),
-
-        position: document.getElementById("dlgPosition").value.trim(),
-
-        telefon: document.getElementById("dlgTelefon").value.trim(),
-
-        email: document.getElementById("dlgEmail").value.trim(),
-
-        wochenstunden: Number(
-            document.getElementById("dlgWochenstunden").value
-        ),
-
-        urlaub: Number(
-            document.getElementById("dlgUrlaub").value
-        )
-
-    };
-
-    if(daten.vorname === "" || daten.nachname === ""){
-
-        Dialog.hinweis(
-            "Bitte Vor- und Nachnamen eingeben."
         );
 
-        return;
+    },
 
-    }
+    rendern(filter = "") {
 
-    if(id){
+        const liste =
+        DOM.id("mitarbeiterListe");
 
-        mitarbeiterBearbeiten(id,daten);
+        liste.innerHTML = "";
 
-    }else{
+        let daten = this.daten;
 
-        mitarbeiterHinzufuegen(daten);
+        if (filter !== "") {
 
-    }
+            const text =
+            filter.toLowerCase();
 
-    Dialog.schliessen();
+            daten = daten.filter(
 
-    mitarbeiterAnzeigen();
+                person =>
 
-}
+                person.vorname
+                .toLowerCase()
+                .includes(text)
 
-/* ==========================================
-   Löschdialog
-========================================== */
+                ||
 
-function mitarbeiterLoeschenDialog(id){
+                person.nachname
+                .toLowerCase()
+                .includes(text)
 
-    const person = mitarbeiterNachId(id);
+                ||
 
-    if(!person){
+                person.abteilung
+                .toLowerCase()
+                .includes(text)
 
-        return;
+                ||
 
-    }
+                person.position
+                .toLowerCase()
+                .includes(text)
 
-    Dialog.anzeigen(
+            );
 
-        "Mitarbeiter löschen",
+        }
 
-        `
+        if (daten.length === 0) {
 
-        <p>
+            liste.innerHTML =
 
-            Soll
+            `<div class="karte">
 
-            <strong>
+                Keine Mitarbeiter vorhanden.
 
-            ${person.vorname} ${person.nachname}
+            </div>`;
 
-            </strong>
+            return;
 
-            wirklich gelöscht werden?
+        }
+                daten.forEach(person => {
 
-        </p>
+            const karte =
+            DOM.erstellen("div");
 
-        `,
-
-        `
-
-        <button
-            class="sekundenButton"
-            onclick="Dialog.schliessen()">
-
-            Abbrechen
-
-        </button>
-
-        <button
-            class="hauptButton"
-            onclick="mitarbeiterLoeschenBestaetigen('${id}')">
-
-            Löschen
-
-        </button>
-
-        `
-
-    );
-
-}
-
-function mitarbeiterLoeschenBestaetigen(id){
-
-    mitarbeiterLoeschen(id);
-
-    Dialog.schliessen();
-
-    mitarbeiterAnzeigen();
-
-}
-
-/* ==========================================
-   Suche
-========================================== */
-
-function mitarbeiterSucheAktualisieren(event){
-
-    const treffer =
-        mitarbeiterSuchen(event.target.value);
-
-    const container =
-        document.getElementById("mitarbeiterListe");
-
-    container.innerHTML = "";
-
-    if(treffer.length===0){
-
-        container.innerHTML =
-
-        "<div class='karte'>Keine Mitarbeiter gefunden.</div>";
-
-        return;
-
-    }
-
-    treffer.forEach(person=>{
-
-        const karte =
-            document.createElement("div");
-
-        karte.className =
+            karte.className =
             "karte mitarbeiterKarte";
 
-        karte.innerHTML = `
+            karte.innerHTML = `
 
-            <h3>
+<h2>
 
-                ${person.vorname} ${person.nachname}
+${person.vorname}
+${person.nachname}
 
-            </h3>
+</h2>
 
-            <p>
+<p>
 
-                ${person.position}
+<b>Personalnummer:</b>
 
-            </p>
+${person.personalnummer}
 
-            <p>
+</p>
 
-                ${person.abteilung}
+<p>
 
-            </p>
+<b>Position:</b>
 
-        `;
+${person.position}
 
-        container.appendChild(karte);
+</p>
 
-    });
+<p>
 
-}
+<b>Abteilung:</b>
+
+${person.abteilung}
+
+</p>
+
+<p>
+
+<b>Wochenstunden:</b>
+
+${person.wochenstunden}
+
+</p>
+
+<div class="kartenButtons">
+
+<button
+class="hauptButton">
+
+Bearbeiten
+
+</button>
+
+<button
+class="sekundaerButton">
+
+Löschen
+
+</button>
+
+</div>
+
+`;
+
+            karte
+            .querySelector(".hauptButton")
+            .addEventListener(
+
+                "click",
+
+                () => {
+
+                    this.dialog(person.id);
+
+                }
+
+            );
+
+            karte
+            .querySelector(".sekundaerButton")
+            .addEventListener(
+
+                "click",
+
+                () => {
+
+                    this.loeschen(person.id);
+
+                }
+
+            );
+
+            liste.appendChild(karte);
+
+        });
+
+    },
+
+    dialog(id = null) {
+
+        let person = null;
+
+        if (id) {
+
+            person =
+            this.daten.find(
+
+                m => m.id === id
+
+            );
+
+        }
+
+        Dialog.anzeigen(
+
+            id
+            ? "Mitarbeiter bearbeiten"
+            : "Neuer Mitarbeiter",
+
+            `
+
+<label>Vorname</label>
+
+<input
+id="vorname"
+value="${person ? person.vorname : ""}">
+
+<label>Nachname</label>
+
+<input
+id="nachname"
+value="${person ? person.nachname : ""}">
+
+<label>Position</label>
+
+<input
+id="position"
+value="${person ? person.position : ""}">
+
+<label>Abteilung</label>
+
+<input
+id="abteilung"
+value="${person ? person.abteilung : ""}">
+
+<label>Wochenstunden</label>
+
+<input
+id="wochenstunden"
+type="number"
+value="${person ? person.wochenstunden : 39}">
+
+`
+            `,
+
+            `
+
+<button
+class="sekundaerButton"
+onclick="Dialog.schliessen()">
+
+Abbrechen
+
+</button>
+
+<button
+class="hauptButton"
+onclick="Mitarbeiter.speichernDialog('${id ?? ""}')">
+
+Speichern
+
+</button>
+
+`
+
+        );
+
+    },
+
+    speichernDialog(id = "") {
+
+        const daten = {
+
+            vorname:
+            DOM.id("vorname").value.trim(),
+
+            nachname:
+            DOM.id("nachname").value.trim(),
+
+            position:
+            DOM.id("position").value.trim(),
+
+            abteilung:
+            DOM.id("abteilung").value.trim(),
+
+            wochenstunden:
+            Number(
+                DOM.id("wochenstunden").value
+            )
+
+        };
+
+        if (
+            daten.vorname === "" ||
+            daten.nachname === ""
+        ) {
+
+            alert(
+                "Bitte Vor- und Nachnamen eingeben."
+            );
+
+            return;
+
+        }
+
+        if (id === "") {
+
+            this.daten.push({
+
+                id: Funktionen.uuid(),
+
+                personalnummer:
+                this.neuePersonalnummer(),
+
+                vorname:
+                daten.vorname,
+
+                nachname:
+                daten.nachname,
+
+                position:
+                daten.position,
+
+                abteilung:
+                daten.abteilung,
+
+                wochenstunden:
+                daten.wochenstunden
+
+            });
+
+        } else {
+
+            const person =
+            this.daten.find(
+
+                m => m.id === id
+
+            );
+
+            if (person) {
+
+                person.vorname =
+                daten.vorname;
+
+                person.nachname =
+                daten.nachname;
+
+                person.position =
+                daten.position;
+
+                person.abteilung =
+                daten.abteilung;
+
+                person.wochenstunden =
+                daten.wochenstunden;
+
+            }
+
+        }
+
+        this.speichern();
+
+        Dialog.schliessen();
+
+        this.rendern();
+
+    },
+        loeschen(id) {
+
+        const person =
+        this.daten.find(
+            m => m.id === id
+        );
+
+        if (!person) {
+
+            return;
+
+        }
+
+        if (
+            !confirm(
+                person.vorname +
+                " " +
+                person.nachname +
+                " wirklich löschen?"
+            )
+        ) {
+
+            return;
+
+        }
+
+        this.daten =
+        this.daten.filter(
+            m => m.id !== id
+        );
+
+        this.speichern();
+
+        this.rendern();
+
+    },
+
+    statistik() {
+
+        return {
+
+            gesamt:
+            this.daten.length,
+
+            vollzeit:
+            this.daten.filter(
+
+                m =>
+
+                m.wochenstunden >= 39
+
+            ).length,
+
+            teilzeit:
+            this.daten.filter(
+
+                m =>
+
+                m.wochenstunden < 39
+
+            ).length
+
+        };
+
+    }
+
+};
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    () => {
+
+        Mitarbeiter.laden();
+
+    }
+
+);

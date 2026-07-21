@@ -7,91 +7,55 @@
 
 const Speicher = {
 
-    laden(){
+    laden() {
 
-        mitarbeiter =
-        JSON.parse(
-            localStorage.getItem("ddh_mitarbeiter")
-        ) || [];
+        window.termine =
+            JSON.parse(
+                localStorage.getItem("ddhTermine")
+            ) || [];
 
-        schichten =
-        JSON.parse(
-            localStorage.getItem("ddh_schichten")
-        ) || [];
+        window.todos =
+            JSON.parse(
+                localStorage.getItem("ddhTodos")
+            ) || [];
 
-        termine =
-        JSON.parse(
-            localStorage.getItem("ddh_termine")
-        ) || [];
+        window.mitarbeiter =
+            JSON.parse(
+                localStorage.getItem("ddhMitarbeiter")
+            ) || [];
 
-        aufgaben =
-        JSON.parse(
-            localStorage.getItem("ddh_aufgaben")
-        ) || [];
-
-        dokumente =
-        JSON.parse(
-            localStorage.getItem("ddh_dokumente")
-        ) || [];
-
-        einrichtungen =
-        JSON.parse(
-            localStorage.getItem("ddh_einrichtungen")
-        ) || [];
-
-        const daten =
-        JSON.parse(
-            localStorage.getItem("ddh_einstellungen")
-        );
-
-        if(daten){
-
-            einstellungen = daten;
-
-        }
+        window.schichten =
+            JSON.parse(
+                localStorage.getItem("ddhSchichten")
+            ) || [];
 
     },
 
-    speichern(){
+    speichern() {
 
         localStorage.setItem(
-            "ddh_mitarbeiter",
-            JSON.stringify(mitarbeiter)
-        );
-
-        localStorage.setItem(
-            "ddh_schichten",
-            JSON.stringify(schichten)
-        );
-
-        localStorage.setItem(
-            "ddh_termine",
+            "ddhTermine",
             JSON.stringify(termine)
         );
 
         localStorage.setItem(
-            "ddh_aufgaben",
-            JSON.stringify(aufgaben)
+            "ddhTodos",
+            JSON.stringify(todos)
         );
 
         localStorage.setItem(
-            "ddh_dokumente",
-            JSON.stringify(dokumente)
+            "ddhMitarbeiter",
+            JSON.stringify(mitarbeiter)
         );
 
         localStorage.setItem(
-            "ddh_einrichtungen",
-            JSON.stringify(einrichtungen)
-        );
-
-        localStorage.setItem(
-            "ddh_einstellungen",
-            JSON.stringify(einstellungen)
+            "ddhSchichten",
+            JSON.stringify(schichten)
         );
 
     },
 
-    allesLoeschen(){
+    allesLoeschen() {
 
         if(!confirm(
             "Alle Daten wirklich löschen?"
@@ -99,9 +63,12 @@ const Speicher = {
             return;
         }
 
-        localStorage.clear();
+        localStorage.removeItem("ddhTermine");
+        localStorage.removeItem("ddhTodos");
+        localStorage.removeItem("ddhMitarbeiter");
+        localStorage.removeItem("ddhSchichten");
 
-        location.reload();
+        this.laden();
 
     }
 

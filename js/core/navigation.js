@@ -13,10 +13,18 @@ const Navigation = {
 
     initialisieren() {
 
-        console.log(
-            "Navigation gestartet."
+    console.log(
+        "Navigation gestartet."
+    );
+
+    const buttons =
+        document.querySelectorAll(
+            ".navButton"
         );
 
-    }
+    console.log(
+        buttons.length +
+        " Navigationsbuttons gefunden."
+    );
 
-};
+}

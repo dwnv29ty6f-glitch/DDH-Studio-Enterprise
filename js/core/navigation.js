@@ -65,17 +65,52 @@ const Navigation = {
             });
 
         // Gewählte Seite anzeigen
-        const aktuelleSeite =
-            document.getElementById(
-                "seite-" + seite
-            );
+const aktuelleSeite =
+    document.getElementById(
+        "seite-" + seite
+    );
 
-        if (aktuelleSeite) {
+if (aktuelleSeite) {
 
-            aktuelleSeite.style.display = "block";
+    aktuelleSeite.style.display = "block";
 
+}
+
+// Modul starten
+switch (seite) {
+
+    case "dashboard":
+        Dashboard.anzeigen();
+        break;
+
+    case "mitarbeiter":
+        if (typeof mitarbeiterZeichnen === "function") {
+            mitarbeiterZeichnen();
         }
+        break;
 
-    }
+    case "schichtplan":
+        if (typeof schichtplanZeichnen === "function") {
+            schichtplanZeichnen();
+        }
+        break;
 
-};
+    case "kalender":
+        if (typeof kalenderZeichnen === "function") {
+            kalenderZeichnen();
+        }
+        break;
+
+    case "aufgaben":
+        if (typeof todosZeichnen === "function") {
+            todosZeichnen();
+        }
+        break;
+
+    case "druck":
+        if (typeof druckZeichnen === "function") {
+            druckZeichnen();
+        }
+        break;
+
+}

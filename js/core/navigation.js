@@ -27,7 +27,19 @@ const Navigation = {
 
             });
 
-        this.oeffnen("dashboard");
+        document
+            .querySelectorAll(".hauptButton[data-seite]")
+            .forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    this.oeffnen(
+                        button.dataset.seite
+                    );
+
+                });
+
+            });
 
     },
 
@@ -35,83 +47,138 @@ const Navigation = {
 
         this.aktuelleSeite = seite;
 
+        // --------------------------
         // Navigation markieren
+        // --------------------------
+
         document
             .querySelectorAll(".navButton")
-            .forEach(button =>
-                button.classList.remove("aktiv")
-            );
+            .forEach(button => {
 
-        const aktiv =
+                button.classList.remove("aktiv");
+
+            });
+
+        const navButton =
             document.querySelector(
                 '.navButton[data-seite="' +
                 seite +
                 '"]'
             );
 
-        if (aktiv) {
+        if(navButton){
 
-            aktiv.classList.add("aktiv");
+            navButton.classList.add("aktiv");
 
         }
 
+        // --------------------------
         // Alle Seiten ausblenden
+        // --------------------------
+
         document
             .querySelectorAll(".seite")
-            .forEach(seiteElement => {
+            .forEach(element => {
 
-                seiteElement.style.display = "none";
+                element.classList.remove("aktiv");
 
             });
 
+        // --------------------------
         // Gewählte Seite anzeigen
-const aktuelleSeite =
-    document.getElementById(
-        "seite-" + seite
-    );
+        // --------------------------
 
-if (aktuelleSeite) {
+        const seiteElement =
+            document.getElementById(
+                "seite-" + seite
+            );
 
-    aktuelleSeite.style.display = "block";
+        if(seiteElement){
 
-}
+            seiteElement.classList.add("aktiv");
 
-// Modul starten
-switch (seite) {
-
-    case "dashboard":
-        Dashboard.anzeigen();
-        break;
-
-    case "mitarbeiter":
-        if (typeof mitarbeiterZeichnen === "function") {
-            mitarbeiterZeichnen();
         }
-        break;
 
-    case "schichtplan":
-        if (typeof schichtplanZeichnen === "function") {
-            schichtplanZeichnen();
-        }
-        break;
+        // --------------------------
+        // Seitentitel
+        // --------------------------
 
-    case "kalender":
-        if (typeof kalenderZeichnen === "function") {
-            kalenderZeichnen();
-        }
-        break;
+        const titel =
+            document.getElementById("seitenTitel");
 
-    case "aufgaben":
-        if (typeof todosZeichnen === "function") {
-            todosZeichnen();
-        }
-        break;
+        if(titel){
 
-    case "druck":
-        if (typeof druckZeichnen === "function") {
-            druckZeichnen();
+            titel.textContent =
+                seite.charAt(0).toUpperCase() +
+                seite.slice(1);
+
         }
-        break;
+
+        // --------------------------
+        // Module laden
+        // --------------------------
+
+        switch(seite){
+
+            case "dashboard":
+
+                if(typeof Dashboard !== "undefined"){
+
+                    Dashboard.anzeigen();
+
+                }
+
+                break;
+
+            case "mitarbeiter":
+
+                if(typeof mitarbeiterZeichnen === "function"){
+
+                    mitarbeiterZeichnen();
+
+                }
+
+                break;
+
+            case "schichtplan":
+
+                if(typeof schichtplanZeichnen === "function"){
+
+                    schichtplanZeichnen();
+
+                }
+
+                break;
+
+            case "kalender":
+
+                if(typeof kalenderZeichnen === "function"){
+
+                    kalenderZeichnen();
+
+                }
+
+                break;
+
+            case "aufgaben":
+
+                if(typeof todosZeichnen === "function"){
+
+                    todosZeichnen();
+
+                }
+
+                break;
+
+            case "druck":
+
+                if(typeof druckZeichnen === "function"){
+
+                    druckZeichnen();
+
+                }
+
+                break;
 
         }
 

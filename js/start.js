@@ -12,6 +12,8 @@ document.addEventListener(
 
 function starten(){
 
+    console.clear();
+
     console.log(
         APP.name +
         " " +
@@ -25,7 +27,78 @@ function starten(){
     // Navigation starten
     navigationStarten();
 
-    // Startseite öffnen
+    // Dashboard anzeigen
     seiteOeffnen("dashboard");
+
+    // Event-Handler registrieren
+    globaleEvents();
+
+}
+
+/* ==========================================
+   Globale Events
+========================================== */
+
+function globaleEvents(){
+
+    const suche =
+    document.getElementById(
+        "btnSuche"
+    );
+
+    if(suche){
+
+        suche.addEventListener(
+            "click",
+            ()=>{
+
+                dialogHinweis(
+                    "Suche folgt in einer späteren Version."
+                );
+
+            }
+        );
+
+    }
+
+    const benutzer =
+    document.getElementById(
+        "btnBenutzer"
+    );
+
+    if(benutzer){
+
+        benutzer.addEventListener(
+            "click",
+            ()=>{
+
+                dialogHinweis(
+                    "Benutzerverwaltung folgt später."
+                );
+
+            }
+        );
+
+    }
+
+    const einstellungen =
+    document.getElementById(
+        "btnEinstellungen"
+    );
+
+    if(einstellungen){
+
+        einstellungen.addEventListener(
+            "click",
+            ()=>{
+
+                seiteOeffnen(
+                    "einstellungen"
+                );
+
+            }
+        );
+
+    }
 
 }

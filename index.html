@@ -1,92 +1,92 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDH Studio Enterprise</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DDH Studio Enterprise 10</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-    <div class="app">
-        <header class="hauptHeader">
-            <div class="headerLinks"><button id="vorherigerMonat">◀</button></div>
-            <div class="headerMitte"><h1>DDH Studio</h1><p id="headerUntertitel">Enterprise 9.0</p></div>
-            <div class="headerRechts"><button id="naechsterMonat">▶</button></div>
-        </header>
 
-        <nav id="navigation">
-            <button class="navButton aktiv" data-seite="dashboard">📊 Dashboard</button>
-            <button class="navButton" data-seite="kalender">📅 Kalender</button>
-            <button class="navButton" data-seite="schichtplan">👷 Schichtplan</button>
-        </nav>
+<div id="app">
 
-        <!-- DASHBOARD -->
-        <section id="seite-dashboard" class="seite aktiv">
-            <div class="modul"><div id="heuteTermine">0</div></div>
-        </section>
-        
-        <!-- KALENDER -->
-        <section id="seite-kalender" class="seite">
-            <div class="modul"><div id="tage"></div><div id="terminListe"></div></div>
-        </section>
-        
-        <!-- SCHICHTPLAN -->
-        <section id="seite-schichtplan" class="seite">
-            <div class="modul">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <tbody id="schichtplanBody"></tbody>
-                </table>
-                <div style="padding: 20px;">
-                    <button id="addMitarbeiterBtn" style="width: 100%;">+ Neuen Mitarbeiter hinzufügen</button>
-                </div>
-            </div>
-        </section>
+    <header id="header">
 
-        <!-- BEARBEITEN -->
-        <section id="seite-bearbeiten" class="seite">
-            <div class="modul">
-                <h2>Mitarbeiter verwalten</h2>
-                <input type="text" id="editName" placeholder="Name">
-                <input type="text" id="editRolle" placeholder="Rolle">
-                <div style="display: flex; gap: 10px;">
-                    <button id="saveMitarbeiterBtn" style="flex:2;">Speichern</button>
-                    <button id="deleteMitarbeiterBtn" style="flex:1; background:#e74c3c;">Löschen</button>
-                </div>
-                <button id="cancelMitarbeiterBtn" style="width:100%; margin-top:10px; background:#555;">Abbrechen</button>
-            </div>
-        </section>
-    </div>
+        <div id="logo">
 
-    <!-- SCHICHT-DIALOG -->
-    <div id="schichtDialog" class="schichtDialog">
-        <div class="schichtFenster">
-            <h2>Schicht auswählen</h2>
-            <div class="schichtAuswahlGrid">
-                <button class="schichtAuswahl" data-schicht="Früh">Früh</button>
-                <button class="schichtAuswahl" data-schicht="Spät">Spät</button>
-                <button class="schichtAuswahl" data-schicht="Nacht">Nacht</button>
-                <button class="schichtAuswahl" data-schicht="Frei">Frei</button>
-            </div>
-            <button id="schichtLoeschen" style="background:#e74c3c; width:100%; margin-top:10px;">Schicht löschen</button>
-            <button id="schichtAbbrechen" style="width:100%; margin-top:10px;">Abbrechen</button>
+            <h1>DDH Studio</h1>
+
+            <span>Enterprise 10.0</span>
+
         </div>
-    </div>
 
-    <!-- SCRIPTE -->
-<script src="js/config.js" defer></script>
-<script src="js/dom.js" defer></script>
-<script src="js/daten.js" defer></script>
-<script src="js/speicher.js" defer></script>
-<script src="js/funktionen.js" defer></script>
-<script src="js/navigation.js" defer></script>
-<script src="js/kalender.js" defer></script>
-<script src="js/termine.js" defer></script>
-<script src="js/todos.js" defer></script>
-<script src="js/dashboard.js" defer></script>
-<script src="js/mitarbeiter.js" defer></script>
-<script src="js/schichtplan.js" defer></script>
-<script src="js/druck.js" defer></script>
-<script src="js/start.js" defer></script>
-    
+        <div id="headerButtons">
+
+            <button id="btnSuche">🔍</button>
+
+            <button id="btnBenutzer">👤</button>
+
+            <button id="btnEinstellungen">⚙️</button>
+
+        </div>
+
+    </header>
+
+    <nav id="navigation">
+
+        <button class="navButton aktiv" data-seite="dashboard">
+            📊 Dashboard
+        </button>
+
+        <button class="navButton" data-seite="kalender">
+            📅 Kalender
+        </button>
+
+        <button class="navButton" data-seite="mitarbeiter">
+            👥 Mitarbeiter
+        </button>
+
+        <button class="navButton" data-seite="schichtplan">
+            👷 Schichtplan
+        </button>
+
+        <button class="navButton" data-seite="druck">
+            🖨️ Druckcenter
+        </button>
+
+        <button class="navButton" data-seite="einstellungen">
+            ⚙️ Einstellungen
+        </button>
+
+    </nav>
+
+    <main id="inhalt">
+
+    </main>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/dom.js"></script>
+<script src="js/daten.js"></script>
+<script src="js/speicher.js"></script>
+<script src="js/funktionen.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/kalender.js"></script>
+<script src="js/termine.js"></script>
+<script src="js/todos.js"></script>
+<script src="js/mitarbeiter.js"></script>
+<script src="js/schichtplan.js"></script>
+<script src="js/druck.js"></script>
+<script src="js/start.js"></script>
+
 </body>
+
 </html>

@@ -13,28 +13,21 @@ const Navigation = {
 
     initialisieren() {
 
-        const buttons =
-            document.querySelectorAll(".navButton");
+        document
+            .querySelectorAll(".navButton")
+            .forEach(button => {
 
-        buttons.forEach(button => {
-
-            button.addEventListener(
-
-                "click",
-
-                () => {
+                button.addEventListener("click", () => {
 
                     this.oeffnen(
-
                         button.dataset.seite
-
                     );
 
-                }
+                });
 
-            );
+            });
 
-        });
+        this.oeffnen("dashboard");
 
     },
 
@@ -42,23 +35,18 @@ const Navigation = {
 
         this.aktuelleSeite = seite;
 
+        // Navigation markieren
         document
             .querySelectorAll(".navButton")
-            .forEach(button => {
-
-                button.classList.remove("aktiv");
-
-            });
+            .forEach(button =>
+                button.classList.remove("aktiv")
+            );
 
         const aktiv =
             document.querySelector(
-
                 '.navButton[data-seite="' +
-
                 seite +
-
                 '"]'
-
             );
 
         if (aktiv) {
@@ -67,63 +55,24 @@ const Navigation = {
 
         }
 
-        switch (seite) {
+        // Alle Seiten ausblenden
+        document
+            .querySelectorAll(".seite")
+            .forEach(seiteElement => {
 
-            case "dashboard":
+                seiteElement.style.display = "none";
 
-                Dashboard.anzeigen();
+            });
 
-                break;
+        // Gewählte Seite anzeigen
+        const aktuelleSeite =
+            document.getElementById(
+                "seite-" + seite
+            );
 
-            case "mitarbeiter":
+        if (aktuelleSeite) {
 
-                mitarbeiterZeichnen();
-
-                break;
-
-            case "schichtplan":
-
-                if (typeof schichtplanZeichnen === "function") {
-
-                    schichtplanZeichnen();
-
-                }
-
-                break;
-
-            case "kalender":
-
-                if (typeof kalenderZeichnen === "function") {
-
-                    kalenderZeichnen();
-
-                }
-
-                break;
-
-            case "todos":
-
-                if (typeof todosZeichnen === "function") {
-
-                    todosZeichnen();
-
-                }
-
-                break;
-
-            case "druck":
-
-                if (typeof druckZeichnen === "function") {
-
-                    druckZeichnen();
-
-                }
-
-                break;
-
-            default:
-
-                Dashboard.anzeigen();
+            aktuelleSeite.style.display = "block";
 
         }
 

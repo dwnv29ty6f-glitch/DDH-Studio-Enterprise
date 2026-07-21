@@ -70,3 +70,91 @@ function mitarbeiterZeichnen(){
     mitarbeiterListeZeichnen();
 
 }
+/* ==========================================
+   Mitarbeiterliste
+========================================== */
+
+function mitarbeiterListeZeichnen(){
+
+    const liste =
+    $("mitarbeiterListe");
+
+    if(!liste){
+        return;
+    }
+
+    const suche =
+    $("sucheMitarbeiter")
+    .value
+    .trim()
+    .toLowerCase();
+
+    liste.innerHTML = "";
+
+    const daten =
+    mitarbeiter.filter(person=>{
+
+        const name = (
+
+            person.vorname +
+
+            " " +
+
+            person.name
+
+        ).toLowerCase();
+
+        return name.includes(suche);
+
+    });
+
+    if(daten.length===0){
+
+        liste.innerHTML = `
+
+        <div class="karte">
+
+            Keine Mitarbeiter gefunden.
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+    daten.forEach(person=>{
+
+        liste.innerHTML += `
+
+        <div
+            class="karte mitarbeiterKarte"
+            data-id="${person.id}">
+
+            <h3>
+
+                ${person.vorname}
+                ${person.name}
+
+            </h3>
+
+            <p>
+
+                ${person.bereich}
+
+            </p>
+
+            <p>
+
+                ${person.position}
+
+            </p>
+
+        </div>
+
+        `;
+
+    });
+
+}

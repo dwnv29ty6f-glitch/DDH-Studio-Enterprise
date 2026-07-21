@@ -1,37 +1,33 @@
 "use strict";
 
-// ==========================================
-// DDH Studio Enterprise 10.0
-// Mitarbeiter
-// ==========================================
+/* ==========================================
+   DDH Studio Enterprise 10.0
+   Mitarbeiter
+========================================== */
 
 function mitarbeiterZeichnen(){
 
-    const inhalt =
-    document.getElementById("inhalt");
+    DOM.inhalt.innerHTML = `
 
-    if(!inhalt){
-        return;
-    }
+    <div class="dashboard">
 
-    inhalt.innerHTML = `
+        <div class="karte willkommen">
 
-    <section class="seite">
-
-        <div class="karte gross">
-
-            <h2>👥 Mitarbeiter</h2>
+            <h1>Mitarbeiter</h1>
 
             <p>
-            Mitarbeiterverwaltung
-            DDH Service GmbH
+
+                Mitarbeiterverwaltung der
+                DDH Service GmbH
+
             </p>
 
         </div>
 
         <div class="karte">
 
-            <button id="btnNeuerMitarbeiter"
+            <button
+            id="btnNeuerMitarbeiter"
             class="hauptButton">
 
                 ➕ Mitarbeiter hinzufügen
@@ -41,41 +37,46 @@ function mitarbeiterZeichnen(){
         </div>
 
         <div
-        id="mitarbeiterListe"
-        class="mitarbeiterListe">
+        id="mitarbeiterListe">
 
         </div>
 
-    </section>
+    </div>
 
     `;
 
-    mitarbeiterAktualisieren();
+    mitarbeiterListeAnzeigen();
+
+    $("btnNeuerMitarbeiter")
+    .addEventListener(
+        "click",
+        neuerMitarbeiter
+    );
 
 }
 
-// ==========================================
-// Mitarbeiterliste
-// ==========================================
+/* ==========================================
+   Liste
+========================================== */
 
-function mitarbeiterAktualisieren(){
+function mitarbeiterListeAnzeigen(){
 
     const liste =
-    document.getElementById(
-        "mitarbeiterListe"
-    );
-
-    if(!liste){
-        return;
-    }
+    $("mitarbeiterListe");
 
     liste.innerHTML = "";
 
     if(mitarbeiter.length===0){
 
-        liste.innerHTML =
+        liste.innerHTML = `
 
-        "<div class='karte'>Noch keine Mitarbeiter vorhanden.</div>";
+        <div class="karte">
+
+            Noch keine Mitarbeiter vorhanden.
+
+        </div>
+
+        `;
 
         return;
 
@@ -87,13 +88,16 @@ function mitarbeiterAktualisieren(){
 
         <div class="karte">
 
-            <h3>${person.name}</h3>
+            <h3>
+
+                ${person.vorname}
+                ${person.name}
+
+            </h3>
 
             <p>
 
-            Bereich:
-
-            ${person.bereich}
+                ${person.bereich}
 
             </p>
 
@@ -102,5 +106,58 @@ function mitarbeiterAktualisieren(){
         `;
 
     });
+
+}
+
+/* ==========================================
+   Neuer Mitarbeiter
+========================================== */
+
+function neuerMitarbeiter(){
+
+    const vorname =
+    prompt("Vorname");
+
+    if(!vorname){
+        return;
+    }
+
+    const name =
+    prompt("Nachname");
+
+    if(!name){
+        return;
+    }
+
+    mitarbeiter.push({
+
+        id:
+        neueID(),
+
+        vorname:
+        vorname,
+
+        name:
+        name,
+
+        bereich:
+        "Küche",
+
+        position:
+        "Mitarbeiter",
+
+        wochenstunden:
+        40,
+
+        urlaub:
+        30,
+
+        aktiv:true
+
+    });
+
+    Speicher.speichern();
+
+    mitarbeiterListeAnzeigen();
 
 }

@@ -1,169 +1,59 @@
 "use strict";
 
 // ==========================================
-// Mitarbeiter anzeigen
+// DDH Studio Enterprise 10.0
+// Mitarbeiter
 // ==========================================
 
-function mitarbeiterAnzeigen(){
+function mitarbeiterZeichnen(){
 
-    dom.mitarbeiterListe.innerHTML = "";
+    const inhalt =
+    document.getElementById("inhalt");
 
-    if(mitarbeiter.length===0){
-
-        dom.mitarbeiterListe.innerHTML =
-        "<p>Noch keine Mitarbeiter vorhanden.</p>";
-
-        return;
-
-    }
-
-    mitarbeiter.forEach(person=>{
-
-        const karte =
-        document.createElement("div");
-
-        karte.className = "mitarbeiter";
-
-        const name =
-        document.createElement("strong");
-
-        name.textContent =
-        person.name;
-
-        karte.appendChild(name);
-
-        const buttons =
-        document.createElement("div");
-
-        buttons.className =
-        "mitarbeiterButtons";
-                const bearbeiten =
-        document.createElement("button");
-
-        bearbeiten.textContent = "✏️";
-
-        bearbeiten.onclick = ()=>{
-
-            dom.mitarbeiterName.value =
-            person.name;
-
-            mitarbeiter =
-            mitarbeiter.filter(m=>m!==person);
-
-            speichern();
-
-            mitarbeiterAnzeigen();
-
-            schichtplanZeichnen();
-
-        };
-
-        const loeschen =
-        document.createElement("button");
-
-        loeschen.textContent = "🗑️";
-
-        loeschen.onclick = ()=>{
-
-            if(!confirm(
-                person.name +
-                " wirklich löschen?"
-            )){
-                return;
-            }
-
-            mitarbeiter =
-            mitarbeiter.filter(m=>m!==person);
-
-            schichten =
-            schichten.filter(s=>
-                s.name!==person.name
-            );
-
-            speichern();
-
-            mitarbeiterAnzeigen();
-
-            schichtplanZeichnen();
-
-            dashboardAktualisieren();
-
-        };
-
-        buttons.appendChild(bearbeiten);
-        buttons.appendChild(loeschen);
-
-        karte.appendChild(buttons);
-
-        dom.mitarbeiterListe.appendChild(karte);
-
-    });
-}
-// ==========================================
-// Mitarbeiter speichern
-// ==========================================
-
-dom.mitarbeiterSpeichern.onclick = ()=>{
-
-    const name =
-    dom.mitarbeiterName.value.trim();
-
-    if(name===""){
+    if(!inhalt){
         return;
     }
 
-    if(
-        mitarbeiter.some(m=>m.name===name)
-    ){
+    inhalt.innerHTML = `
 
-        alert(
-            "Mitarbeiter existiert bereits."
-        );
+    <section class="seite">
 
-        return;
+        <div class="karte gross">
 
-    }
+            <h2>👥 Mitarbeiter</h2>
 
-    mitarbeiter.push({
+            <p>
 
-        name:name
+            Mitarbeiterverwaltung der DDH Service GmbH
 
-    });
+            </p>
 
-    speichern();
+        </div>
 
-    dom.mitarbeiterName.value = "";
+        <div class="karte">
 
-    mitarbeiterAnzeigen();
+            <button class="hauptButton">
 
-    schichtplanZeichnen();
+                ➕ Neuer Mitarbeiter
 
-};
-// ==========================================
-// Enter = Mitarbeiter speichern
-// ==========================================
+            </button>
 
-dom.mitarbeiterName.addEventListener(
+        </div>
 
-    "keydown",
+        <div class="karte">
 
-    event=>{
+            <h3>Mitarbeiterliste</h3>
 
-        if(event.key==="Enter"){
+            <p>
 
-            dom.mitarbeiterSpeichern.click();
+            Hier werden später alle Mitarbeiter angezeigt.
 
-        }
+            </p>
 
-    }
+        </div>
 
-);
-// ==========================================
-// Mitarbeiter suchen
-// ==========================================
+    </section>
 
-function mitarbeiterSuchen(name){
-
-    return mitarbeiter.find(m=>m.name===name);
+    `;
 
 }

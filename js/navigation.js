@@ -1,17 +1,83 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const navButtons = document.querySelectorAll(".navButton");
-    const seiten = document.querySelectorAll(".seite");
+"use strict";
 
-    navButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            // Aktiven Status der Buttons wechseln
-            navButtons.forEach(b => b.classList.remove("aktiv"));
-            btn.classList.add("aktiv");
+// ==========================================
+// DDH Studio Enterprise 10.0
+// Navigation
+// ==========================================
 
-            // Seiten umschalten
-            seiten.forEach(s => s.classList.remove("aktiv"));
-            const zielSeite = document.getElementById("seite-" + btn.dataset.seite);
-            if (zielSeite) zielSeite.classList.add("aktiv");
-        });
+function seiteOeffnen(seite){
+
+    document
+    .querySelectorAll(".navButton")
+    .forEach(button=>{
+
+        button.classList.remove("aktiv");
+
+        if(button.dataset.seite===seite){
+
+            button.classList.add("aktiv");
+
+        }
+
     });
+
+    switch(seite){
+
+        case "dashboard":
+
+            dashboardZeichnen();
+
+            break;
+
+        case "kalender":
+
+            kalenderZeichnen();
+
+            break;
+
+        case "mitarbeiter":
+
+            mitarbeiterZeichnen();
+
+            break;
+
+        case "schichtplan":
+
+            schichtplanZeichnen();
+
+            break;
+
+        case "druck":
+
+            druckcenterZeichnen();
+
+            break;
+
+        case "einstellungen":
+
+            einstellungenZeichnen();
+
+            break;
+
+        default:
+
+            dashboardZeichnen();
+
+    }
+
+}
+
+document.addEventListener("click",event=>{
+
+    const button =
+    event.target.closest(".navButton");
+
+    if(!button){
+        return;
+    }
+
+    seiteOeffnen(
+        button.dataset.seite
+    );
+
 });

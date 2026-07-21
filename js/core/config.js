@@ -1,10 +1,11 @@
 "use strict";
 
-/* ==========================================
-   DDH Studio Enterprise 10.0
-   Core
-   Konfiguration
-========================================== */
+/*
+===========================================
+DDH Studio Enterprise 10.0
+Konfiguration
+===========================================
+*/
 
 const APP = {
 
@@ -16,87 +17,71 @@ const APP = {
 
     farben: {
 
-        primaer: "#00bcd4",
+        primaer: "#0B5FA5",
 
-        sekundär: "#0097a7",
+        sekundär: "#00B8B8",
 
-        erfolg: "#4caf50",
+        hintergrund: "#F5F7FA"
 
-        warnung: "#ff9800",
+    },
 
-        fehler: "#f44336"
+    monate: [
 
-    }
+        "Januar",
+        "Februar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+
+    ],
+
+    schichten: {
+
+        frueh: {
+            kurz: "F",
+            name: "Früh",
+            stunden: 8
+        },
+
+        spaet: {
+            kurz: "S",
+            name: "Spät",
+            stunden: 8
+        },
+
+        nacht: {
+            kurz: "N",
+            name: "Nacht",
+            stunden: 10
+        },
+
+        frei: {
+            kurz: "-",
+            name: "Frei",
+            stunden: 0
+        },
+
+        urlaub: {
+            kurz: "U",
+            name: "Urlaub",
+            stunden: 0
+        },
+
+        krank: {
+            kurz: "K",
+            name: "Krank",
+            stunden: 0
+        }
+
+    },
+
+    sollstunden: 160
 
 };
-
-const MONATE = [
-
-    "Januar",
-    "Februar",
-    "März",
-    "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "Dezember"
-
-];
-
-const SCHICHTEN = {
-
-    frueh: {
-
-        kurz: "F",
-
-        name: "Früh"
-
-    },
-
-    spaet: {
-
-        kurz: "S",
-
-        name: "Spät"
-
-    },
-
-    nacht: {
-
-        kurz: "N",
-
-        name: "Nacht"
-
-    },
-
-    frei: {
-
-        kurz: "-",
-
-        name: "Frei"
-
-    },
-
-    urlaub: {
-
-        kurz: "U",
-
-        name: "Urlaub"
-
-    },
-
-    krank: {
-
-        kurz: "K",
-
-        name: "Krank"
-
-    }
-
-};
-
-const SOLLSTUNDEN = 160;

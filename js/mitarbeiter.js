@@ -5,11 +5,15 @@
    Mitarbeiter
 ========================================== */
 
+// ==========================================
+// Seite öffnen
+// ==========================================
+
 function mitarbeiterZeichnen(){
 
     DOM.inhalt.innerHTML = `
 
-    <div class="dashboard">
+    <section class="mitarbeiterSeite">
 
         <div class="karte willkommen">
 
@@ -17,147 +21,52 @@ function mitarbeiterZeichnen(){
 
             <p>
 
-                Mitarbeiterverwaltung der
+                Mitarbeiterverwaltung
                 DDH Service GmbH
 
             </p>
 
         </div>
 
-        <div class="karte">
+        <div class="karte toolbar">
+
+            <input
+                id="sucheMitarbeiter"
+                type="text"
+                placeholder="🔍 Mitarbeiter suchen">
 
             <button
-            id="btnNeuerMitarbeiter"
-            class="hauptButton">
+                id="btnNeuerMitarbeiter"
+                class="hauptButton">
 
-                ➕ Mitarbeiter hinzufügen
+                ➕ Mitarbeiter
 
             </button>
 
         </div>
 
         <div
-        id="mitarbeiterListe">
+            id="mitarbeiterListe"
+            class="mitarbeiterListe">
 
         </div>
 
-    </div>
+    </section>
 
     `;
-
-    mitarbeiterListeAnzeigen();
 
     $("btnNeuerMitarbeiter")
     .addEventListener(
         "click",
-        neuerMitarbeiter
+        mitarbeiterDialogNeu
     );
 
-}
+    $("sucheMitarbeiter")
+    .addEventListener(
+        "input",
+        mitarbeiterListeZeichnen
+    );
 
-/* ==========================================
-   Liste
-========================================== */
-
-function mitarbeiterListeAnzeigen(){
-
-    const liste =
-    $("mitarbeiterListe");
-
-    liste.innerHTML = "";
-
-    if(mitarbeiter.length===0){
-
-        liste.innerHTML = `
-
-        <div class="karte">
-
-            Noch keine Mitarbeiter vorhanden.
-
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-    mitarbeiter.forEach(person=>{
-
-        liste.innerHTML += `
-
-        <div class="karte">
-
-            <h3>
-
-                ${person.vorname}
-                ${person.name}
-
-            </h3>
-
-            <p>
-
-                ${person.bereich}
-
-            </p>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-/* ==========================================
-   Neuer Mitarbeiter
-========================================== */
-
-function neuerMitarbeiter(){
-
-    const vorname =
-    prompt("Vorname");
-
-    if(!vorname){
-        return;
-    }
-
-    const name =
-    prompt("Nachname");
-
-    if(!name){
-        return;
-    }
-
-    mitarbeiter.push({
-
-        id:
-        neueID(),
-
-        vorname:
-        vorname,
-
-        name:
-        name,
-
-        bereich:
-        "Küche",
-
-        position:
-        "Mitarbeiter",
-
-        wochenstunden:
-        40,
-
-        urlaub:
-        30,
-
-        aktiv:true
-
-    });
-
-    Speicher.speichern();
-
-    mitarbeiterListeAnzeigen();
+    mitarbeiterListeZeichnen();
 
 }

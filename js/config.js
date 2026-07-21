@@ -1,64 +1,80 @@
 "use strict";
 
-// ===============================
-// Monate
-// ===============================
+// ==========================================
+// DDH Studio Enterprise 10.0
+// Konfiguration
+// ==========================================
 
-const MONATE = [
-    "Januar",
-    "Februar",
-    "März",
-    "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "Dezember"
-];
+const APP = {
 
-// ===============================
-// Schichten
-// ===============================
+    name: "DDH Studio Enterprise",
 
-const SCHICHTEN = {
+    version: "10.0",
 
-    frueh: {
-        kurz: "F",
-        name: "Früh"
+    firma: "DDH Service GmbH",
+
+    farben: {
+
+        blau: "#0F4C81",
+
+        tuerkis: "#00B8B0",
+
+        hintergrund: "#F4F7FB",
+
+        karte: "#FFFFFF",
+
+        text: "#1F2937",
+
+        rand: "#D8E2EC"
+
     },
 
-    spaet: {
-        kurz: "S",
-        name: "Spät"
-    },
+    sollstunden: 160,
 
-    nacht: {
-        kurz: "N",
-        name: "Nacht"
-    },
+    schichten: [
 
-    frei: {
-        kurz: "-",
-        name: "Frei"
-    },
+        {
+            id:"F",
+            name:"Frühdienst",
+            stunden:8,
+            farbe:"#4CAF50"
+        },
 
-    urlaub: {
-        kurz: "U",
-        name: "Urlaub"
-    },
+        {
+            id:"S",
+            name:"Spätdienst",
+            stunden:8,
+            farbe:"#2196F3"
+        },
 
-    krank: {
-        kurz: "K",
-        name: "Krank"
-    }
+        {
+            id:"N",
+            name:"Nachtdienst",
+            stunden:10,
+            farbe:"#673AB7"
+        },
+
+        {
+            id:"U",
+            name:"Urlaub",
+            stunden:0,
+            farbe:"#FFC107"
+        },
+
+        {
+            id:"K",
+            name:"Krank",
+            stunden:0,
+            farbe:"#F44336"
+        },
+
+        {
+            id:"Frei",
+            name:"Frei",
+            stunden:0,
+            farbe:"#BDBDBD"
+        }
+
+    ]
 
 };
-
-// ===============================
-// Sollstunden
-// ===============================
-
-const SOLLSTUNDEN = 160;

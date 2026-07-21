@@ -7,6 +7,8 @@
 
 function dashboardZeichnen(){
 
+    DOM.seitenTitel.textContent = "Dashboard";
+
     DOM.inhalt.innerHTML = `
 
     <div class="dashboard">
@@ -30,22 +32,15 @@ function dashboardZeichnen(){
         <div class="kachel">
 
             <div class="kachelIcon">
-
                 👥
-
             </div>
 
             <div class="kachelTitel">
-
                 Mitarbeiter
-
             </div>
 
-            <div
-                class="kachelWert">
-
+            <div class="kachelWert">
                 ${mitarbeiter.length}
-
             </div>
 
         </div>
@@ -53,22 +48,15 @@ function dashboardZeichnen(){
         <div class="kachel">
 
             <div class="kachelIcon">
-
                 📅
-
             </div>
 
             <div class="kachelTitel">
-
                 Termine
-
             </div>
 
-            <div
-                class="kachelWert">
-
+            <div class="kachelWert">
                 ${termine.length}
-
             </div>
 
         </div>
@@ -76,22 +64,15 @@ function dashboardZeichnen(){
         <div class="kachel">
 
             <div class="kachelIcon">
-
                 👷
-
             </div>
 
             <div class="kachelTitel">
-
                 Schichten
-
             </div>
 
-            <div
-                class="kachelWert">
-
+            <div class="kachelWert">
                 ${schichten.length}
-
             </div>
 
         </div>
@@ -99,22 +80,15 @@ function dashboardZeichnen(){
         <div class="kachel">
 
             <div class="kachelIcon">
-
                 ✅
-
             </div>
 
             <div class="kachelTitel">
-
                 Aufgaben
-
             </div>
 
-            <div
-                class="kachelWert">
-
-                ${aufgaben.length}
-
+            <div class="kachelWert">
+                ${todos.length}
             </div>
 
         </div>
@@ -129,43 +103,16 @@ function dashboardZeichnen(){
 
             <p>
 
-                Willkommen bei DDH Studio Enterprise 10.0.
+                Willkommen im neuen DDH Studio Enterprise 10.0.
 
             </p>
 
             <p>
 
-                Dieses Dashboard wird später automatisch alle wichtigen Informationen anzeigen.
+                In den nächsten Schritten entstehen hier Live-Kennzahlen,
+                Krankmeldungen, Geburtstage, Termine und Schnellzugriffe.
 
             </p>
-
-        </div>
-
-        <div class="karte">
-
-            <h2>
-
-                Schnellzugriff
-
-            </h2>
-
-            <button
-                class="hauptButton"
-                onclick="seiteOeffnen('mitarbeiter')">
-
-                👥 Mitarbeiter
-
-            </button>
-
-            <br><br>
-
-            <button
-                class="hauptButton"
-                onclick="seiteOeffnen('schichtplan')">
-
-                📅 Schichtplan
-
-            </button>
 
         </div>
 

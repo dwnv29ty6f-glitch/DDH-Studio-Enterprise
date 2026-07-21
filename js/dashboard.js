@@ -13,11 +13,14 @@ function dashboardZeichnen(){
 
         <div class="karte willkommen">
 
-            <h1>Willkommen bei DDH Studio Enterprise</h1>
+            <h1>
+
+                Willkommen bei DDH Studio Enterprise
+
+            </h1>
 
             <p>
 
-                Betriebsmanagement für
                 DDH Service GmbH
 
             </p>
@@ -26,13 +29,20 @@ function dashboardZeichnen(){
 
         <div class="kachel">
 
+            <div class="kachelIcon">
+
+                👥
+
+            </div>
+
             <div class="kachelTitel">
-                👥 Mitarbeiter
+
+                Mitarbeiter
+
             </div>
 
             <div
-            id="dashboardMitarbeiter"
-            class="kachelZahl">
+                class="kachelWert">
 
                 ${mitarbeiter.length}
 
@@ -42,13 +52,20 @@ function dashboardZeichnen(){
 
         <div class="kachel">
 
+            <div class="kachelIcon">
+
+                📅
+
+            </div>
+
             <div class="kachelTitel">
-                📅 Termine
+
+                Termine
+
             </div>
 
             <div
-            id="dashboardTermine"
-            class="kachelZahl">
+                class="kachelWert">
 
                 ${termine.length}
 
@@ -58,13 +75,20 @@ function dashboardZeichnen(){
 
         <div class="kachel">
 
+            <div class="kachelIcon">
+
+                👷
+
+            </div>
+
             <div class="kachelTitel">
-                🕒 Schichten
+
+                Schichten
+
             </div>
 
             <div
-            id="dashboardSchichten"
-            class="kachelZahl">
+                class="kachelWert">
 
                 ${schichten.length}
 
@@ -74,17 +98,74 @@ function dashboardZeichnen(){
 
         <div class="kachel">
 
+            <div class="kachelIcon">
+
+                ✅
+
+            </div>
+
             <div class="kachelTitel">
-                ✅ Aufgaben
+
+                Aufgaben
+
             </div>
 
             <div
-            id="dashboardAufgaben"
-            class="kachelZahl">
+                class="kachelWert">
 
                 ${aufgaben.length}
 
             </div>
+
+        </div>
+
+        <div class="karte">
+
+            <h2>
+
+                Heute
+
+            </h2>
+
+            <p>
+
+                Willkommen bei DDH Studio Enterprise 10.0.
+
+            </p>
+
+            <p>
+
+                Dieses Dashboard wird später automatisch alle wichtigen Informationen anzeigen.
+
+            </p>
+
+        </div>
+
+        <div class="karte">
+
+            <h2>
+
+                Schnellzugriff
+
+            </h2>
+
+            <button
+                class="hauptButton"
+                onclick="seiteOeffnen('mitarbeiter')">
+
+                👥 Mitarbeiter
+
+            </button>
+
+            <br><br>
+
+            <button
+                class="hauptButton"
+                onclick="seiteOeffnen('schichtplan')">
+
+                📅 Schichtplan
+
+            </button>
 
         </div>
 

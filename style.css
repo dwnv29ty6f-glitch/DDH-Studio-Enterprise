@@ -98,6 +98,14 @@ textarea{
 
 #sidebar{
 
+    display:flex;
+
+    flex-direction:column;
+
+    width:280px;
+
+    min-height:100vh;
+
     background:
         linear-gradient(
             180deg,
@@ -107,11 +115,10 @@ textarea{
 
     color:white;
 
-    display:flex;
-
-    flex-direction:column;
-
     padding:24px;
+
+    box-shadow:
+        4px 0 18px rgba(0,0,0,.08);
 
 }
 

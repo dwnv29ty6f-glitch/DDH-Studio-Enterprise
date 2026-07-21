@@ -4,11 +4,20 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DDH Studio Enterprise 10</title>
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+<title>
+
+DDH Studio Enterprise 10.0
+
+</title>
+
+<link
+rel="stylesheet"
+href="style.css">
 
 </head>
 
@@ -16,77 +25,152 @@
 
 <div id="app">
 
-    <header id="header">
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
 
-        <div id="logo">
+    <aside class="sidebar">
 
-            <h1>DDH Studio</h1>
+        <div class="logo">
 
-            <span>Enterprise 10.0</span>
+            <h1>
+
+                DDH Studio
+
+            </h1>
+
+            <span>
+
+                Enterprise 10.0
+
+            </span>
 
         </div>
 
-        <div id="headerButtons">
+        <nav class="navigation">
 
-            <button id="btnSuche">🔍</button>
+            <button
+                class="navButton aktiv"
+                data-seite="dashboard">
 
-            <button id="btnBenutzer">👤</button>
+                📊 Dashboard
 
-            <button id="btnEinstellungen">⚙️</button>
+            </button>
+
+            <button
+                class="navButton"
+                data-seite="mitarbeiter">
+
+                👥 Mitarbeiter
+
+            </button>
+
+            <button
+                class="navButton"
+                data-seite="schichtplan">
+
+                👷 Schichtplan
+
+            </button>
+
+            <button
+                class="navButton"
+                data-seite="kalender">
+
+                📅 Kalender
+
+            </button>
+
+            <button
+                class="navButton"
+                data-seite="todos">
+
+                ✅ Aufgaben
+
+            </button>
+
+            <button
+                class="navButton"
+                data-seite="druck">
+
+                🖨️ Druckcenter
+
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!-- =====================================
+         HAUPTBEREICH
+    ====================================== -->
+
+    <main class="hauptbereich">
+
+        <header class="kopfbereich">
+
+            <div>
+
+                Willkommen bei
+
+                <strong>
+
+                    DDH Studio Enterprise
+
+                </strong>
+
+            </div>
+
+        </header>
+
+        <section
+            id="inhalt"
+            class="inhalt">
+
+        </section>
+        <!-- =====================================
+             DIALOG
+        ====================================== -->
+
+        <div
+            id="dialogOverlay"
+            class="dialogOverlay">
+
+            <div
+                id="dialogFenster"
+                class="dialogFenster">
+
+                <div
+                    class="dialogKopf">
+
+                    <h2
+                        id="dialogTitel">
+
+                    </h2>
+
+                    <button
+                        id="dialogSchliessen">
+
+                        ✕
+
+                    </button>
+
+                </div>
+
+                <div
+                    id="dialogInhalt">
+
+                </div>
+
+                <div
+                    id="dialogFuss"
+                    class="dialogFuss">
+
+                </div>
+
+            </div>
 
         </div>
-
-    </header>
-
-    <nav id="navigation">
-
-        <button class="navButton aktiv" data-seite="dashboard">
-            📊 Dashboard
-        </button>
-
-        <button class="navButton" data-seite="kalender">
-            📅 Kalender
-        </button>
-
-        <button class="navButton" data-seite="mitarbeiter">
-            👥 Mitarbeiter
-        </button>
-
-        <button class="navButton" data-seite="schichtplan">
-            👷 Schichtplan
-        </button>
-
-        <button class="navButton" data-seite="druck">
-            🖨️ Druckcenter
-        </button>
-
-        <button class="navButton" data-seite="einstellungen">
-            ⚙️ Einstellungen
-        </button>
-
-    </nav>
-
-    <main id="inhalt">
-
     </main>
 
 </div>
-
-<script src="js/config.js"></script>
-<script src="js/dom.js"></script>
-<script src="js/daten.js"></script>
-<script src="js/speicher.js"></script>
-<script src="js/funktionen.js"></script>
-<script src="js/navigation.js"></script>
-<script src="js/dashboard.js"></script>
-<script src="js/kalender.js"></script>
-<script src="js/termine.js"></script>
-<script src="js/todos.js"></script>
-<script src="js/mitarbeiter.js"></script>
-<script src="js/schichtplan.js"></script>
-<script src="js/druck.js"></script>
-<script src="js/start.js"></script>
-
-</body>
-
-</html>

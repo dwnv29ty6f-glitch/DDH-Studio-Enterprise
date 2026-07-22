@@ -1,206 +1,208 @@
 "use strict";
 
-// ==========================================
-// Aufgaben anzeigen
-// ==========================================
+/*
+================================================
+DDH Studio Enterprise 10.0
+Aufgaben
+================================================
+*/
 
-function todosAnzeigen(){
+const Todos = {
 
-    dom.todoListe.innerHTML = "";
+    daten: [],
 
-    const projekt =
-    dom.todoProjekt.value;
+    anzeigen() {
 
-    const liste =
-    todos.filter(todo=>
+        this.daten = Speicher.laden(
 
-        todo.projekt===projekt
+            CONFIG.speicher.aufgaben,
 
-    );
+            []
 
-    if(liste.length===0){
+        );
 
-        dom.todoListe.innerHTML =
-        "<p>Keine Aufgaben vorhanden.</p>";
+        let html = `
 
-        return;
+<div
+    id="seite-aufgaben"
+    class="seite aktiv">
 
-    }
-        liste.forEach(todo=>{
+    <div class="karte">
 
-        const box =
-        document.createElement("div");
+        <h1>
 
-        box.className =
-        "todo " + todo.prioritaet;
+            Aufgaben
 
-        if(todo.erledigt){
+        </h1>
 
-            box.classList.add("erledigt");
+        <p>
+
+            Aufgabenverwaltung
+
+        </p>
+
+        <div class="toolbar">
+
+            <input
+                id="todoSuche"
+                type="text"
+                placeholder="Aufgabe suchen...">
+
+            <button
+                id="btnNeueAufgabe"
+                class="hauptButton">
+
+                ➕ Aufgabe
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="karte">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+
+                        Aufgabe
+
+                    </th>
+
+                    <th>
+
+                        Priorität
+
+                    </th>
+
+                    <th>
+
+                        Fällig
+
+                    </th>
+
+                    <th>
+
+                        Status
+
+                    </th>
+
+                    <th>
+
+                        Aktionen
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+`;
+
+        if (this.daten.length === 0) {
+
+            html += `
+
+<tr>
+
+    <td colspan="5">
+
+        Keine Aufgaben vorhanden.
+
+    </td>
+
+</tr>
+
+`;
 
         }
 
-        const titel =
-        document.createElement("div");
+        this.daten.forEach(aufgabe => {
 
-        titel.className = "todoText";
-        titel.textContent = todo.text;
+            html += `
 
-        box.appendChild(titel);
+<tr>
 
-        const info =
-        document.createElement("div");
+    <td>
 
-        info.className = "todoInfo";
+        ${aufgabe.titel || "-"}
 
-        info.textContent =
-        "📁 " +
-        todo.projekt +
-        " • " +
-        todo.prioritaet;
+    </td>
 
-        box.appendChild(info);
+    <td>
 
-        const buttons =
-        document.createElement("div");
+        ${aufgabe.prioritaet || "-"}
 
-        buttons.className =
-        "todoButtons";
-                const fertig =
-        document.createElement("button");
+    </td>
 
-        fertig.textContent = "✔";
+    <td>
 
-        fertig.onclick = ()=>{
+        ${aufgabe.datum || "-"}
 
-            todo.erledigt = !todo.erledigt;
+    </td>
 
-            speichern();
+    <td>
 
-            todosAnzeigen();
+        ${aufgabe.status || "Offen"}
 
-            dashboardAktualisieren();
+    </td>
 
-        };
+    <td>
 
-        const bearbeiten =
-        document.createElement("button");
+        <button
+            class="sekundenButton">
 
-        bearbeiten.textContent = "✏️";
+            Bearbeiten
 
-        bearbeiten.onclick = ()=>{
+        </button>
 
-            dom.todoText.value = todo.text;
+    </td>
 
-            dom.todoPrioritaet.value =
-            todo.prioritaet;
+</tr>
 
-            dom.todoProjekt.value =
-            todo.projekt;
+`;
 
-            todos =
-            todos.filter(t=>t!==todo);
+        });
 
-            speichern();
+        html += `
 
-            todosAnzeigen();
+            </tbody>
 
-            dashboardAktualisieren();
+        </table>
 
-        };
+    </div>
 
-        const loeschen =
-        document.createElement("button");
+</div>
 
-        loeschen.textContent = "🗑️";
+`;
 
-        loeschen.onclick = ()=>{
+        DOM.html(
 
-            if(!confirm(
-                "Aufgabe wirklich löschen?"
-            )){
-                return;
-            }
+            "inhalt",
 
-            todos =
-            todos.filter(t=>t!==todo);
+            html
 
-            speichern();
+        );
 
-            todosAnzeigen();
+    },
 
-            dashboardAktualisieren();
+    speichern() {
 
-        };
+        Speicher.speichern(
 
-        buttons.appendChild(fertig);
-        buttons.appendChild(bearbeiten);
-        buttons.appendChild(loeschen);
+            CONFIG.speicher.aufgaben,
 
-        box.appendChild(buttons);
+            this.daten
 
-        dom.todoListe.appendChild(box);
+        );
 
-    });
     }
-
-// ==========================================
-// Aufgabe speichern
-// ==========================================
-
-dom.todoSpeichern.onclick = ()=>{
-
-    const text =
-    dom.todoText.value.trim();
-
-    if(text===""){
-        return;
-    }
-
-    todos.push({
-
-        projekt:
-        dom.todoProjekt.value,
-
-        text:
-        text,
-
-        prioritaet:
-        dom.todoPrioritaet.value,
-
-        erledigt:false
-
-    });
-
-    speichern();
-
-    dom.todoText.value = "";
-
-    todosAnzeigen();
-
-    dashboardAktualisieren();
 
 };
-// ==========================================
-// Projekt wechseln
-// ==========================================
-
-dom.todoProjekt.onchange = ()=>{
-
-    todosAnzeigen();
-
-};
-
-// ==========================================
-// Enter = Aufgabe speichern
-// ==========================================
-
-dom.todoText.addEventListener("keydown",event=>{
-
-    if(event.key==="Enter"){
-
-        dom.todoSpeichern.click();
-
-    }
-
-});

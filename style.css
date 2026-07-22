@@ -1320,7 +1320,7 @@ DIALOG
 
     inset:0;
 
-    display:flex;
+    display:none;
 
     align-items:center;
 

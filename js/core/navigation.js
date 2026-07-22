@@ -11,50 +11,102 @@ const Navigation = {
 
     aktuelleSeite: "dashboard",
 
+    module: {
+
+        dashboard: Dashboard,
+
+        mitarbeiter: Mitarbeiter,
+
+        kalender: Kalender,
+
+        termine: Termine,
+
+        aufgaben: Todos,
+
+        speiseplaene: Speiseplaene,
+
+        schichtplan: Schichtplan,
+
+        bestellungen: Bestellungen,
+
+        dokumente: Dokumente,
+
+        druckcenter: Druck,
+
+        einstellungen: Einstellungen
+
+    },
+
     initialisieren() {
 
         const buttons =
-            DOM.selectorAlle(".navButton");
 
-        buttons.forEach(button => {
+            DOM.selectorAlle(
 
-            button.addEventListener(
-
-                "click",
-
-                () => {
-
-                    this.oeffnen(
-
-                        button.dataset.seite
-
-                    );
-
-                }
+                ".navButton"
 
             );
 
-        });
+        buttons.forEach(
+
+            button => {
+
+                button.addEventListener(
+
+                    "click",
+
+                    () => {
+
+                        this.oeffnen(
+
+                            button.dataset.seite
+
+                        );
+
+                    }
+
+                );
+
+            }
+
+        );
 
     },
 
     oeffnen(seite) {
 
-        this.aktuelleSeite = seite;
+        if(
 
-        DOM.selectorAlle(
+            !this.module[seite]
 
-            ".seite"
+        ){
 
-        ).forEach(element => {
+            console.warn(
 
-            element.classList.remove(
+                "Modul nicht gefunden:",
 
-                "aktiv"
+                seite
 
             );
 
-        });
+            return;
+
+        }
+
+        this.aktuelleSeite =
+
+            seite;
+
+        this.navigationAktualisieren();
+
+        this.kopfAktualisieren();
+
+        this.module[seite]
+
+            .anzeigen();
+
+    },
+        navigationAktualisieren() {
 
         DOM.selectorAlle(
 
@@ -70,18 +122,19 @@ const Navigation = {
 
         });
 
-        const button =
-            DOM.selector(
+        const aktiv = DOM.selector(
 
-                '[data-seite="' +
-                seite +
-                '"]'
+            '[data-seite="' +
 
-            );
+            this.aktuelleSeite +
 
-        if(button){
+            '"]'
 
-            button.classList.add(
+        );
+
+        if (aktiv) {
+
+            aktiv.classList.add(
 
                 "aktiv"
 
@@ -89,156 +142,90 @@ const Navigation = {
 
         }
 
-        switch(seite){
-
-            case "dashboard":
-
-                Dashboard.anzeigen();
-
-                break;
-
-            case "mitarbeiter":
-
-                Mitarbeiter.anzeigen();
-
-                break;
-
-            case "kalender":
-
-                Kalender.anzeigen();
-
-                break;
-
-            case "termine":
-
-                Termine.anzeigen();
-
-                break;
-
-            case "aufgaben":
-
-                Todos.anzeigen();
-
-                break;
-
-            case "speiseplaene":
-
-                Speiseplaene.anzeigen();
-
-                break;
-
-            case "schichtplan":
-
-                Schichtplan.anzeigen();
-
-                break;
-
-            case "bestellungen":
-
-                Bestellungen.anzeigen();
-
-                break;
-
-            case "dokumente":
-
-                Dokumente.anzeigen();
-
-                break;
-
-            case "druckcenter":
-
-                Druck.anzeigen();
-
-                break;
-
-            case "einstellungen":
-
-                Einstellungen.anzeigen();
-
-                break;
-
-        }
-
-        const titel =
-            DOM.id(
-
-                "seitenTitel"
-
-            );
-
-        if(titel){
-
-            titel.textContent =
-
-                this.titel(
-
-                    seite
-
-                );
-
-        }
-
-        const pfad =
-            DOM.id(
-
-                "seitenPfad"
-
-            );
-
-        if(pfad){
-
-            pfad.textContent =
-
-                "DDH Studio Enterprise";
-
-        }
-
     },
 
-    titel(seite){
+    kopfAktualisieren() {
 
-        const namen = {
+        const titel = {
 
-            dashboard:
-                "Dashboard",
+            dashboard: "Dashboard",
 
-            mitarbeiter:
-                "Mitarbeiter",
+            mitarbeiter: "Mitarbeiter",
 
-            kalender:
-                "Kalender",
+            kalender: "Kalender",
 
-            termine:
-                "Termine",
+            termine: "Termine",
 
-            aufgaben:
-                "Aufgaben",
+            aufgaben: "Aufgaben",
 
-            speiseplaene:
-                "Speisepläne",
+            speiseplaene: "Speisepläne",
 
-            schichtplan:
-                "Schichtplan",
+            schichtplan: "Schichtplan",
 
-            bestellungen:
-                "Bestellungen",
+            bestellungen: "Bestellungen",
 
-            dokumente:
-                "Dokumente",
+            dokumente: "Dokumente",
 
-            druckcenter:
-                "Druckcenter",
+            druckcenter: "Druckcenter",
 
-            einstellungen:
-                "Einstellungen"
+            einstellungen: "Einstellungen"
 
         };
 
-        return namen[seite]
+        DOM.text(
 
-            ||
+            "seitenTitel",
 
-            "DDH Studio Enterprise";
+            titel[this.aktuelleSeite]
+
+        );
+
+        DOM.text(
+
+            "seitenPfad",
+
+            "DDH Studio Enterprise"
+
+        );
+
+    },
+        aktuelleSeiteName() {
+
+        return this.aktuelleSeite;
+
+    },
+
+    existiert(seite) {
+
+        return Object.prototype.hasOwnProperty.call(
+
+            this.module,
+
+            seite
+
+        );
+
+    },
+
+    neuLaden() {
+
+        if (
+
+            this.existiert(
+
+                this.aktuelleSeite
+
+            )
+
+        ) {
+
+            this.module[
+
+                this.aktuelleSeite
+
+            ].anzeigen();
+
+        }
 
     }
 

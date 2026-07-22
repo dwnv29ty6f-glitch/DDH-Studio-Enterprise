@@ -385,6 +385,7 @@ const Mitarbeiter = {
     );
 
     this.anzeigen();
+    },
 
         bearbeiten(id) {
 

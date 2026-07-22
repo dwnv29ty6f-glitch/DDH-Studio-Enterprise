@@ -1,87 +1,91 @@
 "use strict";
 
 /*
-===========================================
+================================================
 DDH Studio Enterprise 10.0
 Konfiguration
-===========================================
+================================================
 */
 
-const APP = {
+const CONFIG = {
 
-    name: "DDH Studio Enterprise",
+    app: {
 
-    version: "10.0",
+        name:
+            "DDH Studio Enterprise",
 
-    firma: "DDH Service GmbH",
+        version:
+            "10.0.0"
+
+    },
+
+    firma: {
+
+        name:
+            "DDH Service GmbH"
+
+    },
 
     farben: {
 
-        primaer: "#0B5FA5",
+        primary:
+            "#0F4C81",
 
-        sekundär: "#00B8B8",
+        success:
+            "#16A34A",
 
-        hintergrund: "#F5F7FA"
+        warning:
+            "#F59E0B",
 
-    },
+        danger:
+            "#DC2626",
 
-    monate: [
-
-        "Januar",
-        "Februar",
-        "März",
-        "April",
-        "Mai",
-        "Juni",
-        "Juli",
-        "August",
-        "September",
-        "Oktober",
-        "November",
-        "Dezember"
-
-    ],
-
-    schichten: {
-
-        frueh: {
-            kurz: "F",
-            name: "Früh",
-            stunden: 8
-        },
-
-        spaet: {
-            kurz: "S",
-            name: "Spät",
-            stunden: 8
-        },
-
-        nacht: {
-            kurz: "N",
-            name: "Nacht",
-            stunden: 10
-        },
-
-        frei: {
-            kurz: "-",
-            name: "Frei",
-            stunden: 0
-        },
-
-        urlaub: {
-            kurz: "U",
-            name: "Urlaub",
-            stunden: 0
-        },
-
-        krank: {
-            kurz: "K",
-            name: "Krank",
-            stunden: 0
-        }
+        info:
+            "#2563EB"
 
     },
 
-    sollstunden: 160
+    speicher: {
+
+        mitarbeiter:
+            "ddh_mitarbeiter",
+
+        schichtplan:
+            "ddh_schichtplan",
+
+        kalender:
+            "ddh_kalender",
+
+        aufgaben:
+            "ddh_aufgaben",
+
+        rezepte:
+            "ddh_rezepte",
+
+        lager:
+            "ddh_lager",
+
+        lieferanten:
+            "ddh_lieferanten",
+
+        bestellungen:
+            "ddh_bestellungen"
+
+    },
+
+    schichten: [
+
+        "F1",
+        "F2",
+        "M1",
+        "M2",
+        "S1",
+        "S2",
+        "S3",
+        "U",
+        "K",
+        "F"
+
+    ]
 
 };

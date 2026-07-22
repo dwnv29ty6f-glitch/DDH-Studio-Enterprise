@@ -4,6 +4,7 @@
 ================================================
 DDH Studio Enterprise 10.0
 Mitarbeiterverwaltung
+Teil 1
 ================================================
 */
 
@@ -96,19 +97,23 @@ const Mitarbeiter = {
     },
         listeAktualisieren() {
 
-    let html = "";
+        let html = "";
 
-    if (this.daten.length === 0) {
+        if (this.daten.length === 0) {
 
-        html = `
+            html = `
 
 <div class="karte">
 
-    <h2>Keine Mitarbeiter vorhanden</h2>
+    <h2>
+
+        Keine Mitarbeiter vorhanden
+
+    </h2>
 
     <p>
 
-        Tippe oben auf „➕ Mitarbeiter“, um den ersten Mitarbeiter anzulegen.
+        Klicke auf „➕ Mitarbeiter“, um den ersten Mitarbeiter anzulegen.
 
     </p>
 
@@ -116,42 +121,65 @@ const Mitarbeiter = {
 
 `;
 
-    } else {
+        } else {
 
-        this.daten.forEach(mitarbeiter => {
+            this.daten.forEach(mitarbeiter => {
 
-            html += `
+                html += `
 
 <div class="karte mitarbeiterKarte">
 
     <div class="mitarbeiterLinks">
 
         <div
+
             class="avatar"
-            style="background:${mitarbeiter.farbe || '#0077C8'};">
+
+            style="background:${mitarbeiter.farbe || "#0077C8"};">
 
             ${((mitarbeiter.vorname || "?").charAt(0)).toUpperCase()}
 
         </div>
 
-        <div>
+        <div class="mitarbeiterInfos">
 
             <h2>
 
                 ${(mitarbeiter.vorname || "")}
+
                 ${(mitarbeiter.nachname || "")}
 
             </h2>
 
-            <p><strong>Position:</strong> ${mitarbeiter.position || "-"}</p>
+            <p>
 
-            <p><strong>Bereich:</strong> ${mitarbeiter.bereich || "-"}</p>
+                💼 ${mitarbeiter.position || "-"}
 
-            <p><strong>Personalnummer:</strong> ${mitarbeiter.personalnummer || "-"}</p>
+            </p>
 
-            <p><strong>Vertragsstunden:</strong> ${mitarbeiter.vertragsstunden || 0} Std.</p>
+            <p>
 
-            <p><strong>Status:</strong> ${mitarbeiter.status || "Aktiv"}</p>
+                🏢 ${mitarbeiter.bereich || "-"}
+
+            </p>
+
+            <p>
+
+                🆔 ${mitarbeiter.personalnummer || "-"}
+
+            </p>
+
+            <p>
+
+                ⏰ ${mitarbeiter.vertragsstunden || 0} Std.
+
+            </p>
+
+            <p>
+
+                ✅ ${mitarbeiter.status || "Aktiv"}
+
+            </p>
 
         </div>
 
@@ -160,7 +188,9 @@ const Mitarbeiter = {
     <div class="mitarbeiterRechts">
 
         <button
+
             class="sekundenButton bearbeiten"
+
             data-id="${mitarbeiter.id}">
 
             ✏️
@@ -168,7 +198,9 @@ const Mitarbeiter = {
         </button>
 
         <button
+
             class="sekundenButton loeschen"
+
             data-id="${mitarbeiter.id}">
 
             🗑
@@ -181,19 +213,19 @@ const Mitarbeiter = {
 
 `;
 
-        });
+            });
 
-    }
+        }
 
-    DOM.html(
+        DOM.html(
 
-        "mitarbeiterListe",
+            "mitarbeiterListe",
 
-        html
+            html
 
-    );
+        );
 
-},
+    },
         events() {
 
         const neu = DOM.id(
@@ -206,7 +238,7 @@ const Mitarbeiter = {
 
             neu.onclick = () => {
 
-                this.neu();
+                this.dialogNeu();
 
             };
 
@@ -244,7 +276,7 @@ const Mitarbeiter = {
 
                 button.onclick = () => {
 
-                    this.bearbeiten(
+                    this.dialogBearbeiten(
 
                         button.dataset.id
 
@@ -311,325 +343,156 @@ const Mitarbeiter = {
             });
 
     },
+        dialogNeu() {
 
-    neu() {
+        Dialog.oeffnen(
 
-    Dialog.oeffnen(
+            "Neuer Mitarbeiter",
 
-    "Neuer Mitarbeiter",
-
-    `
-        `
+            `
 
 <div class="dialogGrid">
 
 <div class="dialogLabel">
+
 <label>Vorname</label>
-<input id="dlgVorname" type="text">
+
+<input
+id="dlgVorname"
+type="text">
+
 </div>
 
 <div class="dialogLabel">
+
 <label>Nachname</label>
-<input id="dlgNachname" type="text">
+
+<input
+id="dlgNachname"
+type="text">
+
 </div>
 
 <div class="dialogLabel">
-<label>Personalnummer</label>
-<input id="dlgPersonalnummer" type="text">
-</div>
 
-<div class="dialogLabel">
 <label>Bereich</label>
-<input id="dlgBereich" type="text" value="Küche">
+
+<input
+id="dlgBereich"
+type="text"
+value="Küche">
+
 </div>
 
 <div class="dialogLabel">
+
 <label>Position</label>
-<input id="dlgPosition" type="text" value="Mitarbeiter">
+
+<input
+id="dlgPosition"
+type="text"
+value="Mitarbeiter">
+
 </div>
 
 <div class="dialogLabel">
-<label>Status</label>
-<select id="dlgStatus">
-<option>Aktiv</option>
-<option>Urlaub</option>
-<option>Krank</option>
-<option>Elternzeit</option>
-<option>Inaktiv</option>
-</select>
+
+<label>Personalnummer</label>
+
+<input
+id="dlgPersonalnummer"
+type="text">
+
 </div>
 
 <div class="dialogLabel">
-<label>Wochenstunden</label>
-<input id="dlgWochenstunden" type="number" value="39">
-</div>
 
-<div class="dialogLabel">
-<label>Telefon</label>
-<input id="dlgTelefon" type="text">
-</div>
+<label>Vertragsstunden</label>
 
-<div class="dialogLabel dialogGridVoll">
-<label>E-Mail</label>
-<input id="dlgEmail" type="email">
-</div>
+<input
+id="dlgVertragsstunden"
+type="number"
+value="39">
 
-<div class="dialogLabel dialogGridVoll">
-<label>Straße</label>
-<input id="dlgStrasse" type="text">
-</div>
-
-<div class="dialogLabel">
-<label>PLZ</label>
-<input id="dlgPlz" type="text">
-</div>
-
-<div class="dialogLabel">
-<label>Ort</label>
-<input id="dlgOrt" type="text">
-</div>
-
-<div class="dialogLabel">
-<label>Geburtsdatum</label>
-<input id="dlgGeburtsdatum" type="date">
-</div>
-
-<div class="dialogLabel">
-<label>Eintrittsdatum</label>
-<input id="dlgEintrittsdatum" type="date">
-</div>
-
-<div class="dialogLabel dialogGridVoll">
-<label>Notiz</label>
-<textarea id="dlgNotiz" rows="4"></textarea>
 </div>
 
 </div>
 
-    DOM.id(
-
-        "dialogAbbrechen"
-
-    ).onclick = () => {
-
-        DOM.ausblenden(
-
-            "dialogOverlay"
+`
 
         );
 
-    };
+        Dialog.abbrechen();
 
-    DOM.id(
+        Dialog.speichern(
 
-        "dialogSchliessen"
+            () => {
 
-    ).onclick = () => {
+                this.daten.push({
 
-        DOM.ausblenden(
+                    id: Date.now().toString(),
 
-            "dialogOverlay"
+                    vorname:
 
-        );
+                        DOM.id("dlgVorname").value,
 
-    };
+                    nachname:
 
-    DOM.id(
+                        DOM.id("dlgNachname").value,
 
-        "dialogSpeichern"
+                    name:
 
-    ).onclick = () => {
+                        DOM.id("dlgVorname").value +
 
-        this.daten.push({
+                        " " +
 
-            id: Date.now().toString(),
+                        DOM.id("dlgNachname").value,
 
-            vorname: DOM.id("dlgVorname").value,
+                    bereich:
 
-            nachname: DOM.id("dlgNachname").value,
+                        DOM.id("dlgBereich").value,
 
-            name:
+                    position:
 
-                DOM.id("dlgVorname").value +
+                        DOM.id("dlgPosition").value,
 
-                " " +
+                    personalnummer:
 
-                DOM.id("dlgNachname").value,
+                        DOM.id("dlgPersonalnummer").value,
 
-            bereich: DOM.id("dlgBereich").value,
+                    vertragsstunden:
 
-            position: DOM.id("dlgPosition").value,
+                        Number(
 
-            personalnummer:
+                            DOM.id("dlgVertragsstunden").value
 
-                DOM.id("dlgPersonalnummer").value,
+                        ),
 
-            wochenstunden:
+                    status:
 
-                Number(
+                        "Aktiv",
 
-                    DOM.id("dlgWochenstunden").value
+                    farbe:
 
-                ),
+                        "#0077C8"
 
-            vertragsstunden:
+                });
 
-                Number(
+                Speicher.speichern(
 
-                    DOM.id("dlgWochenstunden").value
+                    CONFIG.speicher.mitarbeiter,
 
-                ),
+                    this.daten
 
-            status: "Aktiv",
+                );
 
-            telefon: "",
+                Dialog.schliessen();
 
-            email: "",
+                this.anzeigen();
 
-            strasse: "",
-
-            plz: "",
-
-            ort: "",
-
-            geburtsdatum: "",
-
-            eintrittsdatum: "",
-
-            notiz: "",
-
-            farbe: "#0077C8",
-
-            foto: ""
-
-        });
-
-        Speicher.speichern(
-
-            CONFIG.speicher.mitarbeiter,
-
-            this.daten
+            }
 
         );
-
-        DOM.ausblenden(
-
-            "dialogOverlay"
-
-        );
-
-        this.anzeigen();
-
-    };
-
-},
-
-        bearbeiten(id) {
-
-        const mitarbeiter = this.daten.find(
-
-            m => m.id === id
-
-        );
-
-        if (!mitarbeiter) {
-
-            return;
-
-        }
-
-        const name = prompt(
-
-            "Name",
-
-            mitarbeiter.name
-
-        );
-
-        if (!name) {
-
-            return;
-
-        }
-
-        mitarbeiter.name = name;
-
-        mitarbeiter.bereich =
-
-            prompt(
-
-                "Bereich",
-
-                mitarbeiter.bereich
-
-            ) || mitarbeiter.bereich;
-
-        mitarbeiter.personalnummer =
-
-            prompt(
-
-                "Personalnummer",
-
-                mitarbeiter.personalnummer
-
-            ) || mitarbeiter.personalnummer;
-
-        mitarbeiter.wochenstunden = Number(
-
-            prompt(
-
-                "Wochenstunden",
-
-                mitarbeiter.wochenstunden
-
-            )
-
-        ) || mitarbeiter.wochenstunden;
-
-        Speicher.speichern(
-
-            CONFIG.speicher.mitarbeiter,
-
-            this.daten
-
-        );
-
-        this.anzeigen();
 
     },
-
-    loeschen(id) {
-
-        if (
-
-            !confirm(
-
-                "Mitarbeiter wirklich löschen?"
-
-            )
-
-        ) {
-
-            return;
-
-        }
-
-        this.daten = this.daten.filter(
-
-            m => m.id !== id
-
-        );
-
-        Speicher.speichern(
-
-            CONFIG.speicher.mitarbeiter,
-
-            this.daten
-
-        );
-
-        this.anzeigen();
-
-    }
-
-};
+    

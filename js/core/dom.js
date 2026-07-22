@@ -1,53 +1,107 @@
 "use strict";
 
 /*
-===========================================
+================================================
 DDH Studio Enterprise 10.0
-DOM-Verwaltung
-===========================================
+DOM
+================================================
 */
 
 const DOM = {
 
-    id(name) {
+    id(id) {
 
-        return document.getElementById(name);
+        return document.getElementById(id);
 
     },
 
     klasse(name) {
 
-        return document.querySelector("." + name);
+        return document.getElementsByClassName(name);
 
     },
 
-    klassen(name) {
+    selector(selector) {
 
-        return document.querySelectorAll("." + name);
-
-    },
-
-    erstellen(element) {
-
-        return document.createElement(element);
+        return document.querySelector(selector);
 
     },
 
-    text(element, wert) {
+    selectorAlle(selector) {
 
-        if (element) {
+        return document.querySelectorAll(selector);
 
-            element.textContent = wert;
+    },
+
+    erstellen(tag) {
+
+        return document.createElement(tag);
+
+    },
+
+    text(id,text) {
+
+        const element = this.id(id);
+
+        if(element){
+
+            element.textContent = text;
 
         }
 
     },
 
-    html(element, wert) {
+    html(id,html) {
 
-        if (element) {
+        const element = this.id(id);
 
-            element.innerHTML = wert;
+        if(element){
+
+            element.innerHTML = html;
+
+        }
+
+    },
+
+    anzeigen(id) {
+
+        const element = this.id(id);
+
+        if(element){
+
+            element.style.display = "";
+
+        }
+
+    },
+
+    ausblenden(id) {
+
+        const element = this.id(id);
+
+        if(element){
+
+            element.style.display = "none";
+
+        }
+
+    },
+
+    klasseHinzu(element,klasse){
+
+        if(element){
+
+            element.classList.add(klasse);
+
+        }
+
+    },
+
+    klasseEntfernen(element,klasse){
+
+        if(element){
+
+            element.classList.remove(klasse);
 
         }
 

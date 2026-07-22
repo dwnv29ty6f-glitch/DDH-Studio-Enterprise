@@ -138,29 +138,48 @@ const Mitarbeiter = {
 
         <div>
 
-            <h2>
+           <h2>
 
-                ${mitarbeiter.name}
+    ${(mitarbeiter.vorname || "")}
 
-            </h2>
+    ${(mitarbeiter.nachname || "")}
 
-            <p>
+</h2>
 
-                Bereich: ${mitarbeiter.bereich || "-"}
+<p>
 
-            </p>
+    Position:
+    ${mitarbeiter.position || "-"}
 
-            <p>
+</p>
 
-                Personalnummer: ${mitarbeiter.personalnummer || "-"}
+<p>
 
-            </p>
+    Bereich:
+    ${mitarbeiter.bereich || "-"}
 
-            <p>
+</p>
 
-                Wochenstunden: ${mitarbeiter.wochenstunden || 0}
+<p>
 
-            </p>
+    Personalnummer:
+    ${mitarbeiter.personalnummer || "-"}
+
+</p>
+
+<p>
+
+    Vertragsstunden:
+    ${mitarbeiter.vertragsstunden || 0} Std.
+
+</p>
+
+<p>
+
+    Status:
+    ${mitarbeiter.status || "Aktiv"}
+
+</p>
 
         </div>
 

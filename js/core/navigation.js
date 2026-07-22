@@ -59,6 +59,18 @@ seiten.forEach(element => {
     );
 
 });
+const aktuelleSeite =
+    document.getElementById(
+        "seite-" + seite
+    );
+
+if (aktuelleSeite) {
+
+    aktuelleSeite.classList.add(
+        "aktiv"
+    );
+
+}
     }
 
 };

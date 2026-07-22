@@ -1,63 +1,92 @@
 "use strict";
 
 /*
-===========================================
+================================================
 DDH Studio Enterprise 10.0
-Speicherverwaltung
-===========================================
+Speicher
+================================================
 */
 
 const Speicher = {
 
-    laden(schluessel, standardwert) {
+    laden(schluessel,standard=[]){
 
-        try {
+        try{
 
-            const daten = localStorage.getItem(schluessel);
+            const daten =
+                localStorage.getItem(
+                    schluessel
+                );
 
-            if (daten === null) {
+            if(daten===null){
 
-                return standardwert;
+                return standard;
 
             }
 
             return JSON.parse(daten);
 
-        } catch (fehler) {
+        }
 
-            console.error(
-                "Fehler beim Laden:",
-                schluessel,
-                fehler
-            );
+        catch(fehler){
 
-            return standardwert;
+            console.error(fehler);
+
+            return standard;
 
         }
 
     },
 
-    speichern(schluessel, daten) {
+    speichern(schluessel,daten){
 
-        localStorage.setItem(
+        try{
 
-            schluessel,
+            localStorage.setItem(
 
-            JSON.stringify(daten)
+                schluessel,
+
+                JSON.stringify(daten)
+
+            );
+
+            return true;
+
+        }
+
+        catch(fehler){
+
+            console.error(fehler);
+
+            return false;
+
+        }
+
+    },
+
+    loeschen(schluessel){
+
+        localStorage.removeItem(
+
+            schluessel
 
         );
 
     },
 
-    loeschen(schluessel) {
+    allesLoeschen(){
 
-        localStorage.removeItem(schluessel);
+        localStorage.clear();
 
     },
 
-    allesLoeschen() {
+    existiert(schluessel){
 
-        localStorage.clear();
+        return localStorage.getItem(
+
+            schluessel
+
+        )!==null;
 
     }
 

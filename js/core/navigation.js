@@ -26,6 +26,17 @@ const Navigation = {
         buttons.length +
         " Navigationsbuttons gefunden."
     );
+buttons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        Navigation.oeffnen(
+            button.dataset.seite
+        );
+
+    });
+
+});
 
 }
 

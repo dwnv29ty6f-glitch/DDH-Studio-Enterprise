@@ -12,7 +12,16 @@ const Navigation = {
     aktuelleSeite: "dashboard",
 
     initialisieren() {
+    oeffnen(seite) {
 
+        console.log(
+            "Seite:",
+            seite
+        );
+
+        this.aktuelleSeite = seite;
+
+    }
     console.log(
         "Navigation gestartet."
     );

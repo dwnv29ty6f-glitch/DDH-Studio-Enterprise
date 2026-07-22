@@ -1,42 +1,1519 @@
 /*
-===========================================
+================================================
 DDH Studio Enterprise 10.0
+Style.css
+Teil 1
 Grundlayout
-===========================================
+================================================
 */
 
-* {
+/* ============================================
+   RESET
+============================================ */
 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after{
 
-}
-
-html,
-body {
-
-    width: 100%;
-    height: 100%;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 
 }
 
-body {
+html{
+
+    font-size:16px;
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    margin:0;
+
+    padding:0;
+
+    width:100%;
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    background:#F3F6FA;
+
+    color:#1F2937;
 
     font-family:
+
         "Segoe UI",
         Arial,
+        Helvetica,
         sans-serif;
 
-    background: #F4F7FB;
+}
 
-    color: #1F2937;
+/* ============================================
+   ROOT
+============================================ */
+
+:root{
+
+    --farbe-hintergrund:#F3F6FA;
+
+    --farbe-weiss:#FFFFFF;
+
+    --farbe-sidebar:#0F4C81;
+
+    --farbe-sidebar-hover:#155D9A;
+
+    --farbe-sidebar-aktiv:#1976D2;
+
+    --farbe-topbar:#FFFFFF;
+
+    --farbe-text:#1F2937;
+
+    --farbe-text-hell:#6B7280;
+
+    --farbe-rand:#D6DEE8;
+
+    --farbe-primary:#0F4C81;
+
+    --farbe-success:#16A34A;
+
+    --farbe-warning:#F59E0B;
+
+    --farbe-danger:#DC2626;
+
+    --farbe-info:#2563EB;
+
+    --radius-klein:8px;
+
+    --radius-normal:12px;
+
+    --radius-gross:18px;
+
+    --schatten:
+
+        0 8px 25px rgba(0,0,0,.08);
 
 }
 
-#app {
+/* ============================================
+   APP
+============================================ */
 
-    width: 100%;
-    min-height: 100vh;
+#app{
+
+    width:100%;
+
+    height:100vh;
+
+    display:grid;
+
+    grid-template-columns:
+
+        280px
+        1fr;
+
+    overflow:hidden;
 
 }
+
+/* ============================================
+   SIDEBAR
+============================================ */
+
+#sidebar{
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #0F4C81,
+
+            #0A3960
+
+        );
+
+    color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    box-shadow:
+
+        4px 0 20px rgba(0,0,0,.15);
+
+}
+
+/* ============================================
+   LOGO
+============================================ */
+
+#logo{
+
+    padding:30px;
+
+    border-bottom:
+
+        1px solid
+
+        rgba(255,255,255,.10);
+
+}
+
+#logo h1{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+#logo span{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:14px;
+
+    opacity:.80;
+
+}
+
+/* ============================================
+   NAVIGATION
+============================================ */
+
+#navigation{
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:16px;
+
+    gap:8px;
+
+}
+
+.navButton{
+
+    width:100%;
+
+    min-height:52px;
+
+    border:none;
+
+    background:transparent;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:
+
+        0
+        18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+
+.navButton:hover{
+
+    background:
+
+        rgba(255,255,255,.10);
+
+}
+
+.navButton.aktiv{
+
+    background:
+
+        rgba(255,255,255,.18);
+
+}
+/* ============================================
+   HAUPTBEREICH
+============================================ */
+
+#hauptbereich{
+
+    display:flex;
+
+    flex-direction:column;
+
+    background:var(--farbe-hintergrund);
+
+    overflow:hidden;
+
+}
+
+/* ============================================
+   TOPBAR
+============================================ */
+
+#kopfbereich{
+
+    height:72px;
+
+    background:var(--farbe-topbar);
+
+    border-bottom:
+
+        1px solid
+        var(--farbe-rand);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+
+        0
+        30px;
+
+    box-shadow:
+
+        0 2px 10px rgba(0,0,0,.05);
+
+}
+
+#kopfLinks{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+#seitenTitel{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:var(--farbe-primary);
+
+}
+
+#seitenPfad{
+
+    font-size:14px;
+
+    color:var(--farbe-text-hell);
+
+}
+
+#kopfRechts{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+#kopfRechts button{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:18px;
+
+    box-shadow:
+
+        0 2px 8px rgba(0,0,0,.08);
+
+}
+
+#kopfRechts button:hover{
+
+    background:
+
+        var(--farbe-primary);
+
+    color:white;
+
+}
+
+/* ============================================
+   INHALT
+============================================ */
+
+#inhalt{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:30px;
+
+}
+
+/* ============================================
+   SEITEN
+============================================ */
+
+.seite{
+
+    display:none;
+
+    animation:
+
+        seiteEinblenden
+        .25s ease;
+
+}
+
+.seite.aktiv{
+
+    display:block;
+
+}
+
+/* ============================================
+   KARTEN
+============================================ */
+
+.karte{
+
+    background:white;
+
+    border-radius:
+
+        var(--radius-gross);
+
+    box-shadow:
+
+        var(--schatten);
+
+    padding:24px;
+
+    margin-bottom:24px;
+
+}
+
+.karte h1{
+
+    font-size:34px;
+
+    margin-bottom:14px;
+
+}
+
+.karte h2{
+
+    font-size:24px;
+
+    margin-bottom:18px;
+
+}
+
+.karte p{
+
+    line-height:1.6;
+
+    color:var(--farbe-text-hell);
+
+}
+
+/* ============================================
+   DASHBOARD GRID
+============================================ */
+
+.dashboardGrid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(
+            auto-fit,
+            minmax(260px,1fr)
+        );
+
+    gap:24px;
+
+    margin-bottom:30px;
+
+}
+
+/* ============================================
+   KACHELN
+============================================ */
+
+.kachel{
+
+    background:white;
+
+    border-radius:
+
+        var(--radius-gross);
+
+    padding:26px;
+
+    box-shadow:
+
+        var(--schatten);
+
+    transition:.25s;
+
+}
+
+.kachel:hover{
+
+    transform:
+
+        translateY(-4px);
+
+}
+
+.kachelIcon{
+
+    font-size:34px;
+
+    margin-bottom:18px;
+
+}
+
+.kachelTitel{
+
+    color:
+
+        var(--farbe-text-hell);
+
+    font-size:15px;
+
+}
+
+.kachelWert{
+
+    margin-top:12px;
+
+    font-size:40px;
+
+    font-weight:700;
+
+    color:
+
+        var(--farbe-primary);
+
+}
+/* ============================================
+   BUTTONS
+============================================ */
+
+button{
+
+    font-family:inherit;
+
+}
+
+.hauptButton{
+
+    background:
+
+        var(--farbe-primary);
+
+    color:white;
+
+    border:none;
+
+    border-radius:
+
+        var(--radius-normal);
+
+    padding:
+
+        14px
+        24px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.hauptButton:hover{
+
+    background:
+
+        #1565C0;
+
+}
+
+.sekundenButton{
+
+    background:white;
+
+    color:
+
+        var(--farbe-primary);
+
+    border:
+
+        1px solid
+        var(--farbe-rand);
+
+    border-radius:
+
+        var(--radius-normal);
+
+    padding:
+
+        14px
+        24px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.sekundenButton:hover{
+
+    background:
+
+        #EEF5FC;
+
+}
+
+/* ============================================
+   FORMULARE
+============================================ */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border:
+
+        1px solid
+        var(--farbe-rand);
+
+    border-radius:
+
+        var(--radius-normal);
+
+    background:white;
+
+    font-size:15px;
+
+    transition:.25s;
+
+    outline:none;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:
+
+        var(--farbe-primary);
+
+    box-shadow:
+
+        0 0 0 3px
+        rgba(15,76,129,.12);
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+/* ============================================
+   TOOLBAR
+============================================ */
+
+.toolbar{
+
+    display:flex;
+
+    gap:16px;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    margin-bottom:24px;
+
+}
+
+.toolbar input{
+
+    flex:1;
+
+}
+
+/* ============================================
+   SUCHFELD
+============================================ */
+
+.suche{
+
+    max-width:420px;
+
+    width:100%;
+
+}
+
+/* ============================================
+   TABELLEN
+============================================ */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:
+
+        var(--radius-gross);
+
+    overflow:hidden;
+
+    box-shadow:
+
+        var(--schatten);
+
+}
+
+thead{
+
+    background:
+
+        var(--farbe-primary);
+
+    color:white;
+
+}
+
+th{
+
+    padding:16px;
+
+    text-align:left;
+
+    font-weight:600;
+
+}
+
+td{
+
+    padding:16px;
+
+    border-bottom:
+
+        1px solid
+        #ECECEC;
+
+}
+
+tbody tr:hover{
+
+    background:
+
+        #F8FBFF;
+
+}
+
+/* ============================================
+   STATUS
+============================================ */
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:90px;
+
+    padding:
+
+        6px
+        12px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.status.aktiv{
+
+    background:#DCFCE7;
+
+    color:#166534;
+
+}
+
+.status.inaktiv{
+
+    background:#F3F4F6;
+
+    color:#6B7280;
+
+}
+
+.status.urlaub{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+
+.status.krank{
+
+    background:#FEE2E2;
+
+    color:#B91C1C;
+
+}
+/* ============================================
+   MITARBEITER
+============================================ */
+
+.mitarbeiterListe{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fill,minmax(320px,1fr));
+
+    gap:24px;
+
+}
+
+.mitarbeiterKarte{
+
+    background:white;
+
+    border-radius:
+        var(--radius-gross);
+
+    padding:24px;
+
+    box-shadow:
+        var(--schatten);
+
+    transition:.25s;
+
+    border:2px solid transparent;
+
+}
+
+.mitarbeiterKarte:hover{
+
+    border-color:
+        var(--farbe-primary);
+
+    transform:
+        translateY(-4px);
+
+}
+
+.mitarbeiterName{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:
+        var(--farbe-primary);
+
+    margin-bottom:18px;
+
+}
+
+.mitarbeiterInfo{
+
+    color:
+        var(--farbe-text-hell);
+
+    margin-bottom:8px;
+
+}
+
+.mitarbeiterButtons{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+.mitarbeiterButtons button{
+
+    flex:1;
+
+}
+
+/* ============================================
+   DIALOG
+============================================ */
+
+.dialogOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.45);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:5000;
+
+}
+
+.dialogFenster{
+
+    width:min(700px,90vw);
+
+    background:white;
+
+    border-radius:
+        var(--radius-gross);
+
+    overflow:hidden;
+
+    box-shadow:
+
+        0 25px 60px rgba(0,0,0,.25);
+
+}
+
+.dialogKopf{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:
+        var(--farbe-primary);
+
+    color:white;
+
+    padding:22px;
+
+}
+
+.dialogKopf h2{
+
+    font-size:24px;
+
+}
+
+.dialogKopf button{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.15);
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+#dialogInhalt{
+
+    padding:24px;
+
+}
+
+#dialogFuss{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    padding:20px 24px;
+
+    border-top:
+
+        1px solid
+        var(--farbe-rand);
+
+}
+
+/* ============================================
+   TOAST
+============================================ */
+
+#toastContainer{
+
+    position:fixed;
+
+    top:20px;
+
+    right:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    z-index:6000;
+
+}
+
+.toast{
+
+    min-width:320px;
+
+    background:white;
+
+    border-left:
+
+        6px solid
+        var(--farbe-primary);
+
+    padding:18px;
+
+    border-radius:
+        var(--radius-normal);
+
+    box-shadow:
+        var(--schatten);
+
+    animation:
+        toastEinblenden .25s ease;
+
+}
+
+.toast.erfolg{
+
+    border-left-color:
+        var(--farbe-success);
+
+}
+
+.toast.warnung{
+
+    border-left-color:
+        var(--farbe-warning);
+
+}
+
+.toast.fehler{
+
+    border-left-color:
+        var(--farbe-danger);
+
+}
+
+/* ============================================
+   LADEBILDSCHIRM
+============================================ */
+
+#ladeOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+        rgba(255,255,255,.85);
+
+    z-index:7000;
+
+}
+
+.ladeFenster{
+
+    width:320px;
+
+    background:white;
+
+    border-radius:
+        var(--radius-gross);
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:
+        var(--schatten);
+
+}
+
+.spinner{
+
+    width:64px;
+
+    height:64px;
+
+    margin:0 auto 24px;
+
+    border-radius:50%;
+
+    border:
+
+        6px solid #E5E7EB;
+
+    border-top:
+
+        6px solid
+        var(--farbe-primary);
+
+    animation:
+
+        drehen 1s linear infinite;
+
+}
+/* ============================================
+   RESPONSIVE
+============================================ */
+
+@media (max-width:1200px){
+
+    #app{
+
+        grid-template-columns:
+            90px 1fr;
+
+    }
+
+    #logo span{
+
+        display:none;
+
+    }
+
+    .navButton span{
+
+        display:none;
+
+    }
+
+    .navButton{
+
+        justify-content:center;
+
+        padding:0;
+
+    }
+
+}
+
+@media (max-width:900px){
+
+    #app{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    #sidebar{
+
+        position:fixed;
+
+        left:-300px;
+
+        top:0;
+
+        width:280px;
+
+        height:100vh;
+
+        z-index:1000;
+
+        transition:.3s;
+
+    }
+
+    #sidebar.offen{
+
+        left:0;
+
+    }
+
+    #kopfbereich{
+
+        padding:0 20px;
+
+    }
+
+}
+
+@media (max-width:700px){
+
+    #inhalt{
+
+        padding:16px;
+
+    }
+
+    .dashboardGrid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .mitarbeiterListe{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* ============================================
+   SCROLLBAR
+============================================ */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#EEF2F6;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--farbe-primary);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#0A3960;
+
+}
+
+/* ============================================
+   ANIMATIONEN
+============================================ */
+
+@keyframes drehen{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+@keyframes toastEinblenden{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes seiteEinblenden{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ============================================
+   HILFSKLASSEN
+============================================ */
+
+.versteckt{
+
+    display:none !important;
+
+}
+
+.flex{
+
+    display:flex;
+
+}
+
+.flexMitte{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.flexZwischen{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.textLinks{
+
+    text-align:left;
+
+}
+
+.textMitte{
+
+    text-align:center;
+
+}
+
+.textRechts{
+
+    text-align:right;
+
+}
+
+.mt10{
+
+    margin-top:10px;
+
+}
+
+.mt20{
+
+    margin-top:20px;
+
+}
+
+.mt30{
+
+    margin-top:30px;
+
+}
+
+.mb10{
+
+    margin-bottom:10px;
+
+}
+
+.mb20{
+
+    margin-bottom:20px;
+
+}
+
+.mb30{
+
+    margin-bottom:30px;
+
+}
+
+.p10{
+
+    padding:10px;
+
+}
+
+.p20{
+
+    padding:20px;
+
+}
+
+.p30{
+
+    padding:30px;
+
+}
+
+.rund{
+
+    border-radius:var(--radius-normal);
+
+}
+
+.schatten{
+
+    box-shadow:var(--schatten);
+
+}
+
+/* ============================================
+   DRUCK
+============================================ */
+
+@media print{
+
+    #sidebar,
+
+    #kopfbereich{
+
+        display:none;
+
+    }
+
+    #app{
+
+        display:block;
+
+    }
+
+    #inhalt{
+
+        padding:0;
+
+    }
+
+}
+
+/* ============================================
+   DARK MODE (Vorbereitung)
+============================================ */
+
+body.dark{
+
+    --farbe-hintergrund:#1F2937;
+
+    --farbe-weiss:#2C3642;
+
+    --farbe-topbar:#2C3642;
+
+    --farbe-text:#F3F6FA;
+
+    --farbe-text-hell:#CBD5E1;
+
+    --farbe-rand:#475569;
+
+}
+
+/* ============================================
+   ENDE
+============================================ */

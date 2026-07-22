@@ -128,30 +128,64 @@ const Mitarbeiter = {
 
 <div class="karte mitarbeiterKarte">
 
-    <div class="mitarbeiterLinks">
+   <div class="mitarbeiterLinks">
 
-        <div class="avatar">
+    <div
 
-            ${(mitarbeiter.name || "?").charAt(0).toUpperCase()}
+        class="avatar"
 
-        </div>
+        style="background:${mitarbeiter.farbe || '#0077C8'};">
 
-        <div>
+        ${((mitarbeiter.vorname || mitarbeiter.name || "?").charAt(0)).toUpperCase()}
 
-           <h2>
+    </div>
 
-    ${(mitarbeiter.vorname || "")}
+    <div>
 
-    ${(mitarbeiter.nachname || "")}
+        <h2>
 
-</h2>
+            ${(mitarbeiter.vorname || "")}
 
-<p>
+            ${(mitarbeiter.nachname || "")}
 
-    Position:
-    ${mitarbeiter.position || "-"}
+        </h2>
 
-</p>
+        <p>
+
+            Position:
+            ${mitarbeiter.position || "-"}
+
+        </p>
+
+        <p>
+
+            Bereich:
+            ${mitarbeiter.bereich || "-"}
+
+        </p>
+
+        <p>
+
+            Personalnummer:
+            ${mitarbeiter.personalnummer || "-"}
+
+        </p>
+
+        <p>
+
+            Vertragsstunden:
+            ${mitarbeiter.vertragsstunden || 0} Std.
+
+        </p>
+
+        <p>
+
+            Status:
+            ${mitarbeiter.status || "Aktiv"}
+
+        </p>
+
+    </div>
 
 <p>
 

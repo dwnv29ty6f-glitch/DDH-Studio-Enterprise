@@ -250,6 +250,7 @@ const Mitarbeiter = {
 
 };
 }
+}
         const suche = DOM.id(
 
             "mitarbeiterSuche"

@@ -1,184 +1,172 @@
 "use strict";
 
-// ==========================================
-// Termine anzeigen
-// ==========================================
+/*
+================================================
+DDH Studio Enterprise 10.0
+Termine
+================================================
+*/
 
-function termineAnzeigen(){
+const Termine = {
 
-    dom.terminListe.innerHTML = "";
+    daten: [],
 
-    const liste = termine
+    anzeigen() {
 
-        .filter(t=>
+        this.daten = Speicher.laden(
 
-            t.tag===ausgewaehlterTag &&
-            t.monat===aktuellerMonat &&
-            t.jahr===aktuellesJahr
+            "ddh_termine",
 
-        )
-
-        .sort((a,b)=>
-
-            (a.uhrzeit || "").localeCompare(
-                b.uhrzeit || ""
-            )
+            []
 
         );
 
-    if(liste.length===0){
+        let html = `
 
-        dom.terminListe.innerHTML =
-        "<p>Keine Termine vorhanden.</p>";
+<div
+    id="seite-termine"
+    class="seite aktiv">
 
-        return;
+    <div class="karte">
+
+        <h1>
+
+            Termine
+
+        </h1>
+
+        <p>
+
+            Terminverwaltung
+
+        </p>
+
+        <div class="toolbar">
+
+            <input
+                id="terminSuche"
+                type="text"
+                placeholder="Termin suchen...">
+
+            <button
+                id="btnNeuerTermin"
+                class="hauptButton">
+
+                ➕ Neuer Termin
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="karte">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Datum</th>
+
+                    <th>Uhrzeit</th>
+
+                    <th>Titel</th>
+
+                    <th>Ort</th>
+
+                    <th>Aktion</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+`;
+
+        if (this.daten.length === 0) {
+
+            html += `
+
+<tr>
+
+<td colspan="5">
+
+Noch keine Termine vorhanden.
+
+</td>
+
+</tr>
+
+`;
+
+        }
+
+        this.daten.forEach(termin => {
+
+            html += `
+
+<tr>
+
+<td>${termin.datum || "-"}</td>
+
+<td>${termin.uhrzeit || "-"}</td>
+
+<td>${termin.titel || "-"}</td>
+
+<td>${termin.ort || "-"}</td>
+
+<td>
+
+<button
+class="sekundenButton">
+
+Bearbeiten
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+        });
+
+        html += `
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+`;
+
+        DOM.html(
+
+            "inhalt",
+
+            html
+
+        );
+
+    },
+
+    speichern() {
+
+        Speicher.speichern(
+
+            "ddh_termine",
+
+            this.daten
+
+        );
 
     }
-        liste.forEach(eintrag=>{
-
-        const box =
-        document.createElement("div");
-
-        box.className = "termin";
-
-        const info =
-        document.createElement("div");
-
-        info.className = "terminInfo";
-
-        info.innerHTML =
-
-            "<strong>" +
-
-            (eintrag.uhrzeit || "--:--") +
-
-            "</strong><br>" +
-
-            "[" +
-
-            eintrag.kategorie +
-
-            "] " +
-
-            eintrag.text;
-
-        box.appendChild(info);
-
-        const buttons =
-        document.createElement("div");
-
-        buttons.className = "terminButtons";
-                const bearbeiten =
-        document.createElement("button");
-
-        bearbeiten.textContent = "✏️";
-
-        bearbeiten.onclick = ()=>{
-
-            dom.uhrzeit.value =
-            eintrag.uhrzeit;
-
-            dom.kategorie.value =
-            eintrag.kategorie;
-
-            dom.termin.value =
-            eintrag.text;
-
-            termine =
-            termine.filter(t=>t!==eintrag);
-
-            speichern();
-
-            kalenderZeichnen();
-
-            termineAnzeigen();
-
-            dashboardAktualisieren();
-
-        };
-
-        const loeschen =
-        document.createElement("button");
-
-        loeschen.textContent = "🗑️";
-
-        loeschen.onclick = ()=>{
-
-            if(!confirm(
-                "Termin wirklich löschen?"
-            )){
-                return;
-            }
-
-            termine =
-            termine.filter(t=>t!==eintrag);
-
-            speichern();
-
-            kalenderZeichnen();
-
-            termineAnzeigen();
-
-            dashboardAktualisieren();
-
-        };
-
-        buttons.appendChild(bearbeiten);
-        buttons.appendChild(loeschen);
-
-        box.appendChild(buttons);
-
-        dom.terminListe.appendChild(box);
-
-    });
-    }
-
-// ==========================================
-// Termin speichern
-// ==========================================
-
-dom.speichernTermin.onclick = ()=>{
-
-    const text =
-    dom.termin.value.trim();
-
-    if(text===""){
-        return;
-    }
-
-    termine.push({
-
-        jahr: aktuellesJahr,
-        monat: aktuellerMonat,
-        tag: ausgewaehlterTag,
-        uhrzeit: dom.uhrzeit.value,
-        kategorie: dom.kategorie.value,
-        text: text
-
-    });
-
-    speichern();
-
-    dom.termin.value = "";
-
-    kalenderZeichnen();
-
-    termineAnzeigen();
-
-    dashboardAktualisieren();
 
 };
-
-// ==========================================
-// Enter = Speichern
-// ==========================================
-
-dom.termin.addEventListener("keydown",event=>{
-
-    if(event.key==="Enter"){
-
-        dom.speichernTermin.click();
-
-    }
-
-});

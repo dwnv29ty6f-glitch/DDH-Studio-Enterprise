@@ -11,87 +11,39 @@ const Navigation = {
 
     aktuelleSeite: "dashboard",
 
-    module: {
-
-        dashboard: Dashboard,
-
-        mitarbeiter: Mitarbeiter,
-
-        kalender: Kalender,
-
-        termine: Termine,
-
-        aufgaben: Todos,
-
-        speiseplaene: Speiseplaene,
-
-        schichtplan: Schichtplan,
-
-        bestellungen: Bestellungen,
-
-        dokumente: Dokumente,
-
-        druckcenter: Druck,
-
-        einstellungen: Einstellungen
-
-    },
-
     initialisieren() {
 
         const buttons =
 
-            DOM.selectorAlle(
+            document.querySelectorAll(
 
                 ".navButton"
 
             );
 
-        buttons.forEach(
+        buttons.forEach(button => {
 
-            button => {
+            button.addEventListener(
 
-                button.addEventListener(
+                "click",
 
-                    "click",
+                () => {
 
-                    () => {
+                    this.oeffnen(
 
-                        this.oeffnen(
+                        button.dataset.seite
 
-                            button.dataset.seite
+                    );
 
-                        );
+                }
 
-                    }
+            );
 
-                );
-
-            }
-
-        );
+        });
 
     },
 
     oeffnen(seite) {
-
-        if(
-
-            !this.module[seite]
-
-        ){
-
-            console.warn(
-
-                "Modul nicht gefunden:",
-
-                seite
-
-            );
-
-            return;
-
-        }
 
         this.aktuelleSeite =
 
@@ -101,18 +53,88 @@ const Navigation = {
 
         this.kopfAktualisieren();
 
-        this.module[seite]
+        switch(seite){
 
-            .anzeigen();
+            case "dashboard":
+
+                Dashboard.anzeigen();
+
+                break;
+
+            case "mitarbeiter":
+
+                Mitarbeiter.anzeigen();
+
+                break;
+
+            case "kalender":
+
+                Kalender.anzeigen();
+
+                break;
+
+            case "termine":
+
+                Termine.anzeigen();
+
+                break;
+
+            case "aufgaben":
+
+                Todos.anzeigen();
+
+                break;
+
+            case "speiseplaene":
+
+                Speiseplaene.anzeigen();
+
+                break;
+
+            case "schichtplan":
+
+                Schichtplan.anzeigen();
+
+                break;
+
+            case "bestellungen":
+
+                Bestellungen.anzeigen();
+
+                break;
+
+            case "dokumente":
+
+                Dokumente.anzeigen();
+
+                break;
+
+            case "druckcenter":
+
+                Druck.anzeigen();
+
+                break;
+
+            case "einstellungen":
+
+                Einstellungen.anzeigen();
+
+                break;
+
+        }
 
     },
         navigationAktualisieren() {
 
-        DOM.selectorAlle(
+        const buttons =
 
-            ".navButton"
+            document.querySelectorAll(
 
-        ).forEach(button => {
+                ".navButton"
+
+            );
+
+        buttons.forEach(button => {
 
             button.classList.remove(
 
@@ -122,15 +144,17 @@ const Navigation = {
 
         });
 
-        const aktiv = DOM.selector(
+        const aktiv =
 
-            '[data-seite="' +
+            document.querySelector(
 
-            this.aktuelleSeite +
+                '[data-seite="' +
 
-            '"]'
+                this.aktuelleSeite +
 
-        );
+                '"]'
+
+            );
 
         if (aktiv) {
 
@@ -172,38 +196,64 @@ const Navigation = {
 
         };
 
-        DOM.text(
+        const seitenTitel =
 
-            "seitenTitel",
+            document.getElementById(
 
-            titel[this.aktuelleSeite]
+                "seitenTitel"
 
-        );
+            );
 
-        DOM.text(
+        if (seitenTitel) {
 
-            "seitenPfad",
+            seitenTitel.textContent =
 
-            "DDH Studio Enterprise"
+                titel[this.aktuelleSeite] ||
 
-        );
+                "DDH Studio Enterprise";
+
+        }
+
+        const seitenPfad =
+
+            document.getElementById(
+
+                "seitenPfad"
+
+            );
+
+        if (seitenPfad) {
+
+            seitenPfad.textContent =
+
+                "DDH Studio Enterprise";
+
+        }
 
     },
-        aktuelleSeiteName() {
+        existiert(seite) {
 
-        return this.aktuelleSeite;
+        switch (seite) {
 
-    },
+            case "dashboard":
+            case "mitarbeiter":
+            case "kalender":
+            case "termine":
+            case "aufgaben":
+            case "speiseplaene":
+            case "schichtplan":
+            case "bestellungen":
+            case "dokumente":
+            case "druckcenter":
+            case "einstellungen":
 
-    existiert(seite) {
+                return true;
 
-        return Object.prototype.hasOwnProperty.call(
+            default:
 
-            this.module,
+                return false;
 
-            seite
-
-        );
+        }
 
     },
 
@@ -219,11 +269,11 @@ const Navigation = {
 
         ) {
 
-            this.module[
+            this.oeffnen(
 
                 this.aktuelleSeite
 
-            ].anzeigen();
+            );
 
         }
 

@@ -11,65 +11,51 @@ const CONFIG = {
 
     app: {
 
-        name:
-            "DDH Studio Enterprise",
+        name: "DDH Studio Enterprise",
 
-        version:
-            "10.0.0"
+        version: "10.0.0",
 
-    },
-
-    firma: {
-
-        name:
-            "DDH Service GmbH"
+        firma: "DDH Service GmbH"
 
     },
 
     farben: {
 
-        primary:
-            "#0F4C81",
+        primary: "#0F4C81",
 
-        success:
-            "#16A34A",
+        success: "#16A34A",
 
-        warning:
-            "#F59E0B",
+        warning: "#F59E0B",
 
-        danger:
-            "#DC2626",
+        danger: "#DC2626",
 
-        info:
-            "#2563EB"
+        info: "#2563EB",
+
+        hell: "#F8FAFC",
+
+        dunkel: "#1F2937"
 
     },
 
     speicher: {
 
-        mitarbeiter:
-            "ddh_mitarbeiter",
+        mitarbeiter: "ddh_mitarbeiter",
 
-        schichtplan:
-            "ddh_schichtplan",
+        kalender: "ddh_kalender",
 
-        kalender:
-            "ddh_kalender",
+        termine: "ddh_termine",
 
-        aufgaben:
-            "ddh_aufgaben",
+        aufgaben: "ddh_aufgaben",
 
-        rezepte:
-            "ddh_rezepte",
+        speiseplaene: "ddh_speiseplaene",
 
-        lager:
-            "ddh_lager",
+        schichtplan: "ddh_schichtplan",
 
-        lieferanten:
-            "ddh_lieferanten",
+        bestellungen: "ddh_bestellungen",
 
-        bestellungen:
-            "ddh_bestellungen"
+        dokumente: "ddh_dokumente",
+
+        einstellungen: "ddh_einstellungen"
 
     },
 
@@ -82,9 +68,39 @@ const CONFIG = {
         "S1",
         "S2",
         "S3",
+        "N",
         "U",
         "K",
         "F"
+
+    ],
+
+    monate: [
+
+        "Januar",
+        "Februar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+
+    ],
+
+    wochentage: [
+
+        "Montag",
+        "Dienstag",
+        "Mittwoch",
+        "Donnerstag",
+        "Freitag",
+        "Samstag",
+        "Sonntag"
 
     ]
 

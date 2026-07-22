@@ -4,7 +4,6 @@
 ================================================
 DDH Studio Enterprise 10.0
 Schichtplan
-Phase 3
 ================================================
 */
 
@@ -19,30 +18,21 @@ const Schichtplan = {
     anzeigen() {
 
         this.mitarbeiter = Speicher.laden(
-
             CONFIG.speicher.mitarbeiter,
-
             []
-
         );
 
         this.schichten = Speicher.laden(
-
             CONFIG.speicher.schichtplan,
-
             []
-
         );
 
         DOM.html(
-
             "inhalt",
-
             this.html()
-
         );
 
-        this.monatAktualisieren();
+        this.monatTitel();
 
         this.statistik();
 
@@ -58,95 +48,57 @@ const Schichtplan = {
 
 <div class="schichtplan">
 
-<div class="welcomeCard">
+    <div class="welcomeCard">
 
-<h1>
+        <h1>👷 Schichtplan</h1>
 
-👷 Schichtplan
+        <p>Dienstplanung der DDH Service GmbH</p>
 
-</h1>
+    </div>
 
-<p>
+    <div class="karte">
 
-Dienstplanung der DDH Service GmbH
+        <div class="toolbar">
 
-</p>
+            <button
+                id="btnMonatZurueck"
+                class="hauptButton">
 
-</div>
+                ◀
 
-<div class="karte">
+            </button>
 
-<div class="toolbar">
+            <div
+                id="monatTitel"
+                class="monatTitel">
 
-<button
-id="btnMonatZurueck"
-class="hauptButton">
+            </div>
 
-◀
+            <button
+                id="btnMonatVor"
+                class="hauptButton">
 
-</button>
+                ▶
 
-<div
-id="monatTitel"
-class="monatTitel">
+            </button>
 
-</div>
+            <div class="toolbarSpacer"></div>
 
-<button
-id="btnMonatVor"
-class="hauptButton">
+            <button
+                id="btnHeute"
+                class="sekundenButton">
 
-▶
+                Heute
 
-</button>
+            </button>
 
-<div class="toolbarSpacer"></div>
+        </div>
 
-<button
-id="btnHeute"
-class="sekundenButton">
+    </div>
 
-Heute
+    <div id="schichtplanStatistik"></div>
 
-</button>
-
-<button
-id="btnDrucken"
-class="sekundenButton">
-
-🖨 Drucken
-
-</button>
-
-<button
-id="btnPdf"
-class="sekundenButton">
-
-📄 PDF
-
-</button>
-
-<button
-id="btnExcel"
-class="sekundenButton">
-
-📊 Excel
-
-</button>
-
-</div>
-
-</div>
-
-<div
-id="schichtplanStatistik">
-
-</div>
-
-<div
-id="schichtplanRaster">
-
-</div>
+    <div id="schichtplanRaster"></div>
 
 </div>
 
@@ -154,7 +106,7 @@ id="schichtplanRaster">
 
     },
 
-    monatAktualisieren() {
+    monatTitel() {
 
         const monate = [
 
@@ -179,13 +131,9 @@ id="schichtplanRaster">
 
             monate[
                 this.aktuellesDatum.getMonth()
-            ]
+            ] +
 
-            +
-
-            " "
-
-            +
+            " " +
 
             this.aktuellesDatum.getFullYear()
 
@@ -203,77 +151,33 @@ id="schichtplanRaster">
 
 <div class="dashboardGrid">
 
-<div class="statCard">
+    <div class="statCard">
 
-<div class="statIcon">👥</div>
+        <div class="statIcon">👥</div>
 
-<div class="statTitel">
+        <div class="statTitel">Mitarbeiter</div>
 
-Mitarbeiter
+        <div class="statWert">
 
-</div>
+            ${this.mitarbeiter.length}
 
-<div class="statWert">
+        </div>
 
-${this.mitarbeiter.length}
+    </div>
 
-</div>
+    <div class="statCard">
 
-</div>
+        <div class="statIcon">📅</div>
 
-<div class="statCard">
+        <div class="statTitel">Schichten</div>
 
-<div class="statIcon">📅</div>
+        <div class="statWert">
 
-<div class="statTitel">
+            ${this.schichten.length}
 
-Schichten
+        </div>
 
-</div>
-
-<div class="statWert">
-
-${this.schichten.length}
-
-</div>
-
-</div>
-
-<div class="statCard">
-
-<div class="statIcon">⏱</div>
-
-<div class="statTitel">
-
-Sollstunden
-
-</div>
-
-<div class="statWert">
-
-0
-
-</div>
-
-</div>
-
-<div class="statCard">
-
-<div class="statIcon">✅</div>
-
-<div class="statTitel">
-
-Iststunden
-
-</div>
-
-<div class="statWert">
-
-0
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -288,7 +192,7 @@ Iststunden
 
         const monat = this.aktuellesDatum.getMonth();
 
-        const tageImMonat = new Date(
+        const tage = new Date(
 
             jahr,
 
@@ -302,25 +206,23 @@ Iststunden
 
 <div class="teamsPlan">
 
-<div class="teamsHeader">
+    <div class="teamsHeader">
 
-<div class="mitarbeiterSpalte">
+        <div class="mitarbeiterSpalte">
 
-Mitarbeiter
+            Mitarbeiter
 
-</div>
-
-<div class="tageBereich">
+        </div>
 
 `;
 
-        for (let tag = 1; tag <= tageImMonat; tag++) {
+        for (let tag = 1; tag <= tage; tag++) {
 
             html += `
 
 <div class="tagKopf">
 
-${tag}
+    ${tag}
 
 </div>
 
@@ -330,11 +232,7 @@ ${tag}
 
         html += `
 
-</div>
-
-</div>
-
-<div class="teamsBody">
+    </div>
 
 `;
 
@@ -344,7 +242,7 @@ ${tag}
 
 <div class="teamsLeer">
 
-Noch keine Mitarbeiter vorhanden.
+    Noch keine Mitarbeiter vorhanden.
 
 </div>
 
@@ -352,75 +250,69 @@ Noch keine Mitarbeiter vorhanden.
 
         }
 
-        this.mitarbeiter.forEach(
+        this.mitarbeiter.forEach(mitarbeiter => {
 
-            mitarbeiter => {
-
-                html += `
+            html += `
 
 <div class="teamsZeile">
 
-<div class="mitarbeiterSpalte">
+    <div class="mitarbeiterSpalte">
 
-<div class="avatar">
+        <div class="avatar">
 
-${(mitarbeiter.name || "?")
-.charAt(0)
-.toUpperCase()}
+            ${(mitarbeiter.name || "?").charAt(0).toUpperCase()}
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<div class="mitarbeiterName">
+            <div class="mitarbeiterName">
 
-${mitarbeiter.name || "-"}
+                ${mitarbeiter.name || ""}
 
-</div>
+            </div>
 
-<div class="mitarbeiterBereich">
+            <div class="mitarbeiterBereich">
 
-${mitarbeiter.bereich || "Küche"}
+                ${mitarbeiter.bereich || ""}
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-</div>
-
-<div class="tageBereich">
+    </div>
 
 `;
 
-                for (let tag = 1; tag <= tageImMonat; tag++) {
+            for (let tag = 1; tag <= tage; tag++) {
 
-                    const datum =
+                const datum =
 
-                        jahr +
+                    jahr +
 
-                        "-" +
+                    "-" +
 
-                        String(monat + 1).padStart(2, "0") +
+                    String(monat + 1).padStart(2, "0") +
 
-                        "-" +
+                    "-" +
 
-                        String(tag).padStart(2, "0");
+                    String(tag).padStart(2, "0");
 
-                    const schicht = this.schichten.find(
+                const schicht = this.schichten.find(
 
-                        s =>
+                    s =>
 
-                            s.mitarbeiterId == mitarbeiter.id &&
+                        s.mitarbeiterId == mitarbeiter.id &&
 
-                            s.datum == datum
+                        s.datum == datum
 
-                    );
+                );
 
-                    html += `
+                html += `
 
 <div
 
-class="schichtZelle ${schicht ? "schicht-" + schicht.schicht : ""}"
+class="schichtZelle"
 
 data-mitarbeiter="${mitarbeiter.id}"
 
@@ -434,23 +326,17 @@ ${schicht ? schicht.schicht : ""}
 
 `;
 
-                }
+            }
 
-                html += `
-
-</div>
+            html += `
 
 </div>
 
 `;
 
-            }
-
-        );
+        });
 
         html += `
-
-</div>
 
 </div>
 
@@ -468,110 +354,74 @@ ${schicht ? schicht.schicht : ""}
         events() {
 
         const btnZurueck = DOM.id(
-
             "btnMonatZurueck"
-
         );
 
         if (btnZurueck) {
 
-            btnZurueck.addEventListener(
+            btnZurueck.onclick = () => {
 
-                "click",
+                this.aktuellesDatum.setMonth(
 
-                () => {
+                    this.aktuellesDatum.getMonth() - 1
 
-                    this.aktuellesDatum.setMonth(
+                );
 
-                        this.aktuellesDatum.getMonth() - 1
+                this.anzeigen();
 
-                    );
-
-                    this.anzeigen();
-
-                }
-
-            );
+            };
 
         }
 
         const btnVor = DOM.id(
-
             "btnMonatVor"
-
         );
 
         if (btnVor) {
 
-            btnVor.addEventListener(
+            btnVor.onclick = () => {
 
-                "click",
+                this.aktuellesDatum.setMonth(
 
-                () => {
+                    this.aktuellesDatum.getMonth() + 1
 
-                    this.aktuellesDatum.setMonth(
+                );
 
-                        this.aktuellesDatum.getMonth() + 1
+                this.anzeigen();
 
-                    );
-
-                    this.anzeigen();
-
-                }
-
-            );
+            };
 
         }
 
         const btnHeute = DOM.id(
-
             "btnHeute"
-
         );
 
         if (btnHeute) {
 
-            btnHeute.addEventListener(
+            btnHeute.onclick = () => {
 
-                "click",
+                this.aktuellesDatum = new Date();
 
-                () => {
+                this.anzeigen();
 
-                    this.aktuellesDatum = new Date();
-
-                    this.anzeigen();
-
-                }
-
-            );
+            };
 
         }
 
         document
-
-            .querySelectorAll(
-
-                ".schichtZelle"
-
-            )
-
+            .querySelectorAll(".schichtZelle")
             .forEach(zelle => {
 
-                zelle.addEventListener(
+                zelle.onclick = () => {
 
-                    "click",
+                    this.schichtBearbeiten(
 
-                    () => {
+                        zelle
 
-                        this.schichtBearbeiten(
+                    );
 
-                            zelle
-
-                        );
-
-                    }
-
-                );
+                };
 
             });
 
@@ -579,9 +429,9 @@ ${schicht ? schicht.schicht : ""}
 
     schichtBearbeiten(zelle) {
 
-        const wert = prompt(
+        const schicht = prompt(
 
-`Schicht eingeben
+`Schicht auswählen
 
 F1
 F2
@@ -598,6 +448,12 @@ Leer = löschen`
 
         );
 
+        if (schicht === null) {
+
+            return;
+
+        }
+
         const mitarbeiterId =
 
             zelle.dataset.mitarbeiter;
@@ -610,37 +466,21 @@ Leer = löschen`
 
             this.schichten.findIndex(
 
-                s =>
+                eintrag =>
 
-                    s.mitarbeiterId ==
+                    eintrag.mitarbeiterId ==
 
                     mitarbeiterId &&
 
-                    s.datum == datum
+                    eintrag.datum ==
+
+                    datum
 
             );
 
-        if (
+        if (schicht.trim() === "") {
 
-            wert === null
-
-        ) {
-
-            return;
-
-        }
-
-        if (
-
-            wert.trim() === ""
-
-        ) {
-
-            if (
-
-                index > -1
-
-            ) {
+            if (index >= 0) {
 
                 this.schichten.splice(
 
@@ -654,7 +494,11 @@ Leer = löschen`
 
         } else {
 
-            const eintrag = {
+            const daten = {
+
+                id:
+
+                    Date.now().toString(),
 
                 mitarbeiterId:
 
@@ -666,25 +510,21 @@ Leer = löschen`
 
                 schicht:
 
-                    wert.toUpperCase()
+                    schicht.toUpperCase()
 
             };
 
-            if (
-
-                index > -1
-
-            ) {
+            if (index >= 0) {
 
                 this.schichten[index] =
 
-                    eintrag;
+                    daten;
 
             } else {
 
                 this.schichten.push(
 
-                    eintrag
+                    daten
 
                 );
 
@@ -700,260 +540,8 @@ Leer = löschen`
 
         );
 
-        this.raster();
-
-        this.events();
-
-    }
-
-};
-    dialogOeffnen(mitarbeiterId, datum) {
-
-        this.aktuelleZelle = {
-
-            mitarbeiterId,
-
-            datum
-
-        };
-
-        DOM.html(
-
-            "dialogTitel",
-
-            "Schicht bearbeiten"
-
-        );
-
-        DOM.html(
-
-            "dialogInhalt",
-
-            `
-
-<div class="schichtDialog">
-
-<button class="schichtAuswahl" data-schicht="F1">🌅 F1 Frühdienst</button>
-
-<button class="schichtAuswahl" data-schicht="F2">🌤 F2 Frühdienst</button>
-
-<button class="schichtAuswahl" data-schicht="M1">☀️ M1 Mitteldienst</button>
-
-<button class="schichtAuswahl" data-schicht="M2">🌇 M2 Mitteldienst</button>
-
-<button class="schichtAuswahl" data-schicht="S1">🌙 S1 Spätdienst</button>
-
-<button class="schichtAuswahl" data-schicht="S2">🌃 S2 Spätdienst</button>
-
-<button class="schichtAuswahl" data-schicht="S3">🌌 S3 Spätdienst</button>
-
-<button class="schichtAuswahl" data-schicht="U">🏖 Urlaub</button>
-
-<button class="schichtAuswahl" data-schicht="K">🤒 Krank</button>
-
-<button class="schichtAuswahl" data-schicht="F">💤 Frei</button>
-
-<button
-id="schichtLoeschen"
-class="sekundenButton">
-
-🗑 Schicht löschen
-
-</button>
-
-</div>
-
-`
-
-        );
-
-        DOM.anzeigen(
-
-            "dialogOverlay"
-
-        );
-
-        this.dialogEvents();
-
-    },
-
-    dialogEvents() {
-
-        document
-
-            .querySelectorAll(
-
-                ".schichtAuswahl"
-
-            )
-
-            .forEach(button => {
-
-                button.addEventListener(
-
-                    "click",
-
-                    () => {
-
-                        this.schichtSpeichern(
-
-                            button.dataset.schicht
-
-                        );
-
-                    }
-
-                );
-
-            });
-
-        const loeschen = DOM.id(
-
-            "schichtLoeschen"
-
-        );
-
-        if (loeschen) {
-
-            loeschen.addEventListener(
-
-                "click",
-
-                () => {
-
-                    this.schichtLoeschen();
-
-                }
-
-            );
-
-        }
-
-        const schliessen = DOM.id(
-
-            "dialogSchliessen"
-
-        );
-
-        if (schliessen) {
-
-            schliessen.onclick = () => {
-
-                DOM.ausblenden(
-
-                    "dialogOverlay"
-
-                );
-
-            };
-
-        }
-
-    },
-        schichtSpeichern(schicht) {
-
-        const index = this.schichten.findIndex(
-
-            eintrag =>
-
-                eintrag.mitarbeiterId === this.aktuelleZelle.mitarbeiterId &&
-
-                eintrag.datum === this.aktuelleZelle.datum
-
-        );
-
-        const daten = {
-
-            id: Date.now().toString(),
-
-            mitarbeiterId: this.aktuelleZelle.mitarbeiterId,
-
-            datum: this.aktuelleZelle.datum,
-
-            schicht: schicht,
-
-            beginn: "",
-
-            ende: "",
-
-            pause: 0,
-
-            notiz: ""
-
-        };
-
-        if (index >= 0) {
-
-            this.schichten[index] = daten;
-
-        } else {
-
-            this.schichten.push(daten);
-
-        }
-
-        Speicher.speichern(
-
-            CONFIG.speicher.schichtplan,
-
-            this.schichten
-
-        );
-
-        DOM.ausblenden(
-
-            "dialogOverlay"
-
-        );
-
-        this.anzeigen();
-
-    },
-
-    schichtLoeschen() {
-
-        this.schichten = this.schichten.filter(
-
-            eintrag =>
-
-                !(
-
-                    eintrag.mitarbeiterId === this.aktuelleZelle.mitarbeiterId &&
-
-                    eintrag.datum === this.aktuelleZelle.datum
-
-                )
-
-        );
-
-        Speicher.speichern(
-
-            CONFIG.speicher.schichtplan,
-
-            this.schichten
-
-        );
-
-        DOM.ausblenden(
-
-            "dialogOverlay"
-
-        );
-
         this.anzeigen();
 
     }
-    schichtBearbeiten(zelle) {
 
-        this.dialogOeffnen(
-
-            zelle.dataset.mitarbeiter,
-
-            zelle.dataset.datum
-
-        );
-
-    }
-
-};
 };

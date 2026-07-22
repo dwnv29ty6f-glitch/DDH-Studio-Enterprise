@@ -14,33 +14,37 @@ const START = {
         console.clear();
 
         console.log(
-
             CONFIG.app.name +
-
             " " +
-
             CONFIG.app.version
-
         );
 
         console.log(
-
-            "Starte DDH Studio..."
-
+            "DDH Studio wird gestartet..."
         );
 
         Navigation.initialisieren();
 
         Navigation.oeffnen(
-
             "dashboard"
+        );
 
+        this.pruefen();
+
+        console.log(
+            "DDH Studio erfolgreich gestartet."
+        );
+
+    },
+
+    pruefen() {
+
+        console.log(
+            "Core geladen."
         );
 
         console.log(
-
-            "DDH Studio gestartet."
-
+            "Module geladen."
         );
 
     }

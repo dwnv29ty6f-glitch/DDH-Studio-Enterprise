@@ -380,98 +380,79 @@ const Mitarbeiter = {
 
     neu() {
 
-        const name = prompt(
+    const vorname = prompt("Vorname");
 
-            "Name"
+    if (!vorname) return;
 
-        );
+    const nachname = prompt("Nachname");
 
-        if (!name) {
+    if (!nachname) return;
 
-            return;
+    const bereich = prompt("Bereich", "Küche") || "Küche";
 
-        }
+    const position = prompt("Position", "Mitarbeiter") || "Mitarbeiter";
 
-        const bereich = prompt(
+    const personalnummer = prompt("Personalnummer", "") || "";
 
-            "Bereich",
+    const wochenstunden = Number(
+        prompt("Wochenstunden", "39")
+    ) || 39;
 
-            "Küche"
+    this.daten.push({
 
-        ) || "Küche";
+        id: Date.now().toString(),
 
-        const personalnummer = prompt(
+        vorname,
 
-            "Personalnummer",
+        nachname,
 
-            ""
+        name: vorname + " " + nachname,
 
-        ) || "";
+        personalnummer,
 
-        const wochenstunden = Number(
+        bereich,
 
-            prompt(
+        position,
 
-                "Wochenstunden",
+        wochenstunden,
 
-                "39"
+        vertragsstunden: wochenstunden,
 
-            )
+        status: "Aktiv",
 
-        ) || 39;
+        telefon: "",
 
-        this.daten.push({
+        email: "",
 
-    id: Date.now().toString(),
+        strasse: "",
 
-    vorname: "",
+        plz: "",
 
-    nachname: "",
+        ort: "",
 
-    name: name,
+        geburtsdatum: "",
 
-    personalnummer: personalnummer,
+        eintrittsdatum: "",
 
-    bereich: bereich,
+        notiz: "",
 
-    position: "Mitarbeiter",
+        farbe: "#0077C8",
 
-    wochenstunden: wochenstunden,
+        foto: ""
 
-    vertragsstunden: wochenstunden,
+    });
 
-    status: "Aktiv",
+    Speicher.speichern(
 
-    telefon: "",
+        CONFIG.speicher.mitarbeiter,
 
-    email: "",
+        this.daten
 
-    strasse: "",
+    );
 
-    plz: "",
+    this.anzeigen();
 
-    ort: "",
-
-    geburtsdatum: "",
-
-    eintrittsdatum: "",
-
-    notiz: "",
-
-    farbe: "#0077C8",
-
-    foto: ""
-
-});
-
-        Speicher.speichern(
-
-            CONFIG.speicher.mitarbeiter,
-
-            this.daten
-
-        );
-
+},
         this.anzeigen();
 
     },

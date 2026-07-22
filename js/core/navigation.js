@@ -1,10 +1,10 @@
 "use strict";
 
 /*
-===========================================
+================================================
 DDH Studio Enterprise 10.0
 Navigation
-===========================================
+================================================
 */
 
 const Navigation = {
@@ -12,65 +12,155 @@ const Navigation = {
     aktuelleSeite: "dashboard",
 
     initialisieren() {
-    
-    console.log(
-        "Navigation gestartet."
-    );
 
-    const buttons =
-        document.querySelectorAll(
-            ".navButton"
-        );
+        const buttons =
+            DOM.selectorAlle(".navButton");
 
-    console.log(
-        buttons.length +
-        " Navigationsbuttons gefunden."
-    );
-buttons.forEach(button => {
+        buttons.forEach(button => {
 
-    button.addEventListener("click", () => {
+            button.addEventListener(
 
-        Navigation.oeffnen(
-            button.dataset.seite
-        );
+                "click",
 
-    });
+                () => {
 
-});
+                    this.oeffnen(
+                        button.dataset.seite
+                    );
 
-},
-oeffnen(seite) {
+                }
 
-        console.log(
-            "Seite:",
-            seite
-        );
+            );
+
+        });
+
+    },
+
+    oeffnen(seite) {
 
         this.aktuelleSeite = seite;
-const seiten =
-    document.querySelectorAll(
-        ".seite"
-    );
 
-seiten.forEach(element => {
+        DOM.selectorAlle(".seite")
+            .forEach(element => {
 
-    element.classList.remove(
-        "aktiv"
-    );
+                element.classList.remove(
+                    "aktiv"
+                );
 
-});
-const aktuelleSeite =
-    document.getElementById(
-        "seite-" + seite
-    );
+            });
 
-if (aktuelleSeite) {
+        const aktuelleSeite =
+            DOM.id(
+                "seite-" + seite
+            );
 
-    aktuelleSeite.classList.add(
-        "aktiv"
-    );
+        if (aktuelleSeite) {
 
-}
+            aktuelleSeite.classList.add(
+                "aktiv"
+            );
+
+        }
+
+        DOM.selectorAlle(".navButton")
+            .forEach(button => {
+
+                button.classList.remove(
+                    "aktiv"
+                );
+
+            });
+
+        const aktiverButton =
+            DOM.selector(
+                '[data-seite="' +
+                seite +
+                '"]'
+            );
+
+        if (aktiverButton) {
+
+            aktiverButton.classList.add(
+                "aktiv"
+            );
+
+        }
+
+        const titel =
+            DOM.id("seitenTitel");
+
+        if (titel) {
+
+            titel.textContent =
+                this.name(seite);
+
+        }
+
+        const pfad =
+            DOM.id("seitenPfad");
+
+        if (pfad) {
+
+            pfad.textContent =
+                "DDH Studio Enterprise";
+
+        }
+
+    },
+
+    name(seite) {
+
+        const namen = {
+
+            dashboard:
+                "Dashboard",
+
+            mitarbeiter:
+                "Mitarbeiter",
+
+            schichtplan:
+                "Schichtplan",
+
+            dienstplan:
+                "Dienstplan",
+
+            kalender:
+                "Kalender",
+
+            aufgaben:
+                "Aufgaben",
+
+            rezepte:
+                "Rezepte",
+
+            speiseplaene:
+                "Speisepläne",
+
+            lager:
+                "Lager",
+
+            bestellungen:
+                "Bestellungen",
+
+            lieferanten:
+                "Lieferanten",
+
+            haccp:
+                "HACCP",
+
+            reinigung:
+                "Reinigung",
+
+            druckcenter:
+                "Druckcenter",
+
+            einstellungen:
+                "Einstellungen"
+
+        };
+
+        return namen[seite] || "DDH Studio";
+
     }
 
 };

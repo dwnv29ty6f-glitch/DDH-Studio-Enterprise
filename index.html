@@ -3,29 +3,29 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="theme-color"
-        content="#0F4C81">
+<meta
+name="theme-color"
+content="#0F4C81">
 
-    <meta
-        name="description"
-        content="DDH Studio Enterprise">
+<meta
+name="description"
+content="DDH Studio Enterprise">
 
-    <title>
+<title>
 
-        DDH Studio Enterprise 10.0
+DDH Studio Enterprise 10.0
 
-    </title>
+</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css">
+<link
+rel="stylesheet"
+href="style.css">
 
 </head>
 
@@ -33,230 +33,400 @@
 
 <div id="app">
 
-    <!-- ==========================================
-         SIDEBAR
-    =========================================== -->
+<!-- ==========================================
+SIDEBAR
+========================================== -->
 
-    <aside id="sidebar">
+<aside id="sidebar">
 
-        <div id="logo">
+<div id="logo">
 
-            <h1>
+<h1>
 
-                DDH Studio
+DDH Studio
 
-            </h1>
+</h1>
 
-            <span>
+<span>
 
-                Enterprise 10.0
+Enterprise 10.0
 
-            </span>
-
-        </div>
-
-        <nav id="navigation">
-
-            <button
-                class="navButton"
-                data-seite="dashboard">
-
-                📊
-                <span>Dashboard</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="mitarbeiter">
-
-                👥
-                <span>Mitarbeiter</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="schichtplan">
-
-                📅
-                <span>Schichtplan</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="dienstplan">
-
-                🕒
-                <span>Dienstplan</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="kalender">
-
-                🗓
-                <span>Kalender</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="aufgaben">
-
-                ✅
-                <span>Aufgaben</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="rezepte">
-
-                🍽
-                <span>Rezepte</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="speiseplaene">
-
-                📖
-                <span>Speisepläne</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="lager">
-
-                📦
-                <span>Lager</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="bestellungen">
-
-                🚚
-                <span>Bestellungen</span>
-
-            </button>
-                        <button
-                class="navButton"
-                data-seite="lieferanten">
-
-                🏢
-                <span>Lieferanten</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="haccp">
-
-                🧼
-                <span>HACCP</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="reinigung">
-
-                🧹
-                <span>Reinigung</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="druckcenter">
-
-                🖨
-                <span>Druckcenter</span>
-
-            </button>
-
-            <button
-                class="navButton"
-                data-seite="einstellungen">
-
-                ⚙
-                <span>Einstellungen</span>
-
-            </button>
-
-        </nav>
-
-    </aside>
-
-    <!-- ==========================================
-         HAUPTBEREICH
-    =========================================== -->
-
-    <main id="hauptbereich">
-
-        <header id="kopfbereich">
-
-            <div id="kopfLinks">
-
-                <h2 id="seitenTitel">
-
-                    Dashboard
-
-                </h2>
-
-                <div id="seitenPfad">
-
-                    DDH Studio Enterprise
-
-                </div>
-
-            </div>
-
-            <div id="kopfRechts">
-
-                <button id="btnSuche">
-
-                    🔍
-
-                </button>
-
-                <button id="btnBenachrichtigungen">
-
-                    🔔
-
-                </button>
-
-                <button id="btnBenutzer">
-
-                    👤
-
-                </button>
-
-            </div>
-
-        </header>
-
-        <section id="inhalt">
-                    <!-- Seiten werden hier später eingefügt -->
-
-        </section>
-
-    </main>
+</span>
 
 </div>
 
+<nav id="navigation">
+
+<button
+class="navButton aktiv"
+data-seite="dashboard">
+
+📊
+
+<span>
+
+Dashboard
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="mitarbeiter">
+
+👥
+
+<span>
+
+Mitarbeiter
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="kalender">
+
+🗓️
+
+<span>
+
+Kalender
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="termine">
+
+📅
+
+<span>
+
+Termine
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="aufgaben">
+
+✅
+
+<span>
+
+Aufgaben
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="speiseplaene">
+
+🍽️
+
+<span>
+
+Speisepläne
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="schichtplan">
+
+👷
+
+<span>
+
+Schichtplan
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="bestellungen">
+
+📦
+
+<span>
+
+Bestellungen
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="dokumente">
+
+📄
+
+<span>
+
+Dokumente
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="druckcenter">
+
+🖨️
+
+<span>
+
+Druckcenter
+
+</span>
+
+</button>
+
+<button
+class="navButton"
+data-seite="einstellungen">
+
+⚙️
+
+<span>
+
+Einstellungen
+
+</span>
+
+</button>
+
+</nav>
+
+</aside>
+
+<!-- ==========================================
+HAUPTBEREICH
+========================================== -->
+
+<main id="hauptbereich">
+
+<header id="kopfbereich">
+
+<div id="kopfLinks">
+
+<h2 id="seitenTitel">
+
+Dashboard
+
+</h2>
+
+<div id="seitenPfad">
+
+DDH Studio Enterprise
+
+</div>
+
+</div>
+
+<div id="kopfRechts">
+
+<button id="btnSuche">
+
+🔍
+
+</button>
+
+<button id="btnBenachrichtigungen">
+
+🔔
+
+</button>
+
+<button id="btnBenutzer">
+
+👤
+
+</button>
+
+</div>
+
+</header>
+
+<section id="inhalt">
+<!-- ==========================================
+DASHBOARD
+========================================== -->
+
+<div
+id="seite-dashboard"
+class="seite aktiv">
+
+</div>
+
+<!-- ==========================================
+MITARBEITER
+========================================== -->
+
+<div
+id="seite-mitarbeiter"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+KALENDER
+========================================== -->
+
+<div
+id="seite-kalender"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+TERMINE
+========================================== -->
+
+<div
+id="seite-termine"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+AUFGABEN
+========================================== -->
+
+<div
+id="seite-aufgaben"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+SPEISEPLÄNE
+========================================== -->
+
+<div
+id="seite-speiseplaene"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+SCHICHTPLAN
+========================================== -->
+
+<div
+id="seite-schichtplan"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+BESTELLUNGEN
+========================================== -->
+
+<div
+id="seite-bestellungen"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+DOKUMENTE
+========================================== -->
+
+<div
+id="seite-dokumente"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+DRUCKCENTER
+========================================== -->
+
+<div
+id="seite-druckcenter"
+class="seite">
+
+</div>
+
+<!-- ==========================================
+EINSTELLUNGEN
+========================================== -->
+
+<div
+id="seite-einstellungen"
+class="seite">
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<!-- ==========================================
+DIALOG
+========================================== -->
+
+<div
+id="dialogOverlay"
+class="dialogOverlay">
+
+<div
+id="dialogFenster"
+class="dialogFenster">
+
+<div
+class="dialogKopf">
+
+<h2
+id="dialogTitel">
+
+</h2>
+
+<button
+id="dialogSchliessen">
+
+✕
+
+</button>
+
+</div>
+
+<div
+id="dialogInhalt">
+
+</div>
+
+<div
+id="dialogFuss">
+
+</div>
+
+</div>
+
+</div>
 <script src="js/core/config.js"></script>
 <script src="js/core/dom.js"></script>
 <script src="js/core/funktionen.js"></script>
-<script src="js/core/navigation.js"></script>
 <script src="js/core/speicher.js"></script>
+<script src="js/core/navigation.js"></script>
 <script src="js/core/start.js"></script>
 
 <script src="js/daten.js"></script>
@@ -268,7 +438,11 @@
 <script src="js/modules/kalender.js"></script>
 <script src="js/modules/termine.js"></script>
 <script src="js/modules/todos.js"></script>
+<script src="js/modules/speiseplaene.js"></script>
+<script src="js/modules/bestellungen.js"></script>
+<script src="js/modules/dokumente.js"></script>
 <script src="js/modules/druck.js"></script>
+<script src="js/modules/einstellungen.js"></script>
 
 </body>
 

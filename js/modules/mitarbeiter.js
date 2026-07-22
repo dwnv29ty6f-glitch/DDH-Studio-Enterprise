@@ -369,17 +369,47 @@ const Mitarbeiter = {
 
         this.daten.push({
 
-            id: Date.now().toString(),
+    id: Date.now().toString(),
 
-            name,
+    vorname: "",
 
-            bereich,
+    nachname: "",
 
-            personalnummer,
+    name: name,
 
-            wochenstunden
+    personalnummer: personalnummer,
 
-        });
+    bereich: bereich,
+
+    position: "Mitarbeiter",
+
+    wochenstunden: wochenstunden,
+
+    vertragsstunden: wochenstunden,
+
+    status: "Aktiv",
+
+    telefon: "",
+
+    email: "",
+
+    strasse: "",
+
+    plz: "",
+
+    ort: "",
+
+    geburtsdatum: "",
+
+    eintrittsdatum: "",
+
+    notiz: "",
+
+    farbe: "#0077C8",
+
+    foto: ""
+
+});
 
         Speicher.speichern(
 

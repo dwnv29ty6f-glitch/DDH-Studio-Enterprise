@@ -452,10 +452,6 @@ const Mitarbeiter = {
 
     this.anzeigen();
 
-},
-        this.anzeigen();
-
-    },
         bearbeiten(id) {
 
         const mitarbeiter = this.daten.find(

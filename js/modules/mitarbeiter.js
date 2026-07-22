@@ -346,8 +346,9 @@ const Mitarbeiter = {
         dialogNeu() {
 
         Dialog.oeffnen(
-
-            "Neuer Mitarbeiter",
+    "Neuer Mitarbeiter",
+    `<h1 style="color:red">TEST</h1>`
+);
 
             `
 

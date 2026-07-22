@@ -4,6 +4,7 @@
 ================================================
 DDH Studio Enterprise 10.0
 Mitarbeiterverwaltung
+Teil 1
 ================================================
 */
 
@@ -14,13 +15,19 @@ const Mitarbeiter = {
     anzeigen() {
 
         this.daten = Speicher.laden(
+
             CONFIG.speicher.mitarbeiter,
+
             []
+
         );
 
         DOM.html(
+
             "inhalt",
+
             this.html()
+
         );
 
         this.listeAktualisieren();
@@ -56,15 +63,175 @@ const Mitarbeiter = {
         <div class="toolbar">
 
             <input
+
                 id="mitarbeiterSuche"
+
                 type="text"
+
                 placeholder="Mitarbeiter suchen...">
 
             <button
+
                 id="btnMitarbeiterNeu"
+
                 class="hauptButton">
 
-                   events() {
+                ➕ Mitarbeiter
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+
+        id="mitarbeiterListe">
+
+    </div>
+
+</div>
+
+`;
+
+    },
+
+    listeAktualisieren() {
+
+        let html = "";
+
+        if (this.daten.length === 0) {
+
+            html = `
+
+<div class="karte">
+
+    <h2>
+
+        Keine Mitarbeiter vorhanden
+
+    </h2>
+
+    <p>
+
+        Klicke auf „➕ Mitarbeiter“, um den ersten Mitarbeiter anzulegen.
+
+    </p>
+
+</div>
+
+`;
+
+        } else {
+
+            this.daten.forEach(
+
+                mitarbeiter => {
+
+                    html += `
+
+<div class="karte mitarbeiterKarte">
+
+    <div class="mitarbeiterLinks">
+
+        <div
+
+            class="avatar"
+
+            style="background:${mitarbeiter.farbe || "#0077C8"};">
+
+            ${((mitarbeiter.vorname || "?").charAt(0)).toUpperCase()}
+
+        </div>
+
+        <div class="mitarbeiterInfos">
+
+            <h2>
+
+                ${mitarbeiter.vorname || ""}
+
+                ${mitarbeiter.nachname || ""}
+
+            </h2>
+
+            <p>
+
+                💼 ${mitarbeiter.position || "-"}
+
+            </p>
+
+            <p>
+
+                🏢 ${mitarbeiter.bereich || "-"}
+
+            </p>
+
+            <p>
+
+                🆔 ${mitarbeiter.personalnummer || "-"}
+
+            </p>
+
+            <p>
+
+                ⏰ ${mitarbeiter.vertragsstunden || 0} Std.
+
+            </p>
+
+            <p>
+
+                ✅ ${mitarbeiter.status || "Aktiv"}
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="mitarbeiterRechts">
+
+        <button
+
+            class="sekundenButton bearbeiten"
+
+            data-id="${mitarbeiter.id}">
+
+            ✏️
+
+        </button>
+
+        <button
+
+            class="sekundenButton loeschen"
+
+            data-id="${mitarbeiter.id}">
+
+            🗑
+
+        </button>
+
+    </div>
+
+</div>
+
+`;
+
+                }
+
+            );
+
+        }
+
+        DOM.html(
+
+            "mitarbeiterListe",
+
+            html
+
+        );
+
+    },
+        events() {
 
         const neu = DOM.id(
 
@@ -150,7 +317,9 @@ const Mitarbeiter = {
 
     suchen(text) {
 
-        text = text.toLowerCase();
+        text =
+
+            text.toLowerCase();
 
         document
 
@@ -182,7 +351,112 @@ const Mitarbeiter = {
 
     },
 
-       bearbeiten(id) {
+    neu() {
+
+        const vorname =
+
+            prompt("Vorname");
+
+        if (!vorname) return;
+
+        const nachname =
+
+            prompt("Nachname");
+
+        if (!nachname) return;
+
+        const bereich =
+
+            prompt(
+
+                "Bereich",
+
+                "Küche"
+
+            ) || "Küche";
+
+        const position =
+
+            prompt(
+
+                "Position",
+
+                "Mitarbeiter"
+
+            ) || "Mitarbeiter";
+
+        const personalnummer =
+
+            prompt(
+
+                "Personalnummer",
+
+                ""
+
+            ) || "";
+
+        const vertragsstunden =
+
+            Number(
+
+                prompt(
+
+                    "Vertragsstunden",
+
+                    "39"
+
+                )
+
+            ) || 39;
+
+        this.daten.push({
+
+            id:
+
+                Date.now().toString(),
+
+            vorname,
+
+            nachname,
+
+            name:
+
+                vorname +
+
+                " " +
+
+                nachname,
+
+            bereich,
+
+            position,
+
+            personalnummer,
+
+            vertragsstunden,
+
+            status:
+
+                "Aktiv",
+
+            farbe:
+
+                "#0077C8"
+
+        });
+
+        Speicher.speichern(
+
+            CONFIG.speicher.mitarbeiter,
+
+            this.daten
+
+        );
+
+        this.anzeigen();
+
+    },
+        bearbeiten(id) {
 
         const mitarbeiter = this.daten.find(
 

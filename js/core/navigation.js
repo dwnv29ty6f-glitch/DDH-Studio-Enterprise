@@ -25,7 +25,9 @@ const Navigation = {
                 () => {
 
                     this.oeffnen(
+
                         button.dataset.seite
+
                     );
 
                 }
@@ -40,75 +42,160 @@ const Navigation = {
 
         this.aktuelleSeite = seite;
 
-        DOM.selectorAlle(".seite")
-            .forEach(element => {
+        DOM.selectorAlle(
 
-                element.classList.remove(
-                    "aktiv"
-                );
+            ".seite"
 
-            });
+        ).forEach(element => {
 
-        const aktuelleSeite =
-            DOM.id(
-                "seite-" + seite
+            element.classList.remove(
+
+                "aktiv"
+
             );
 
-        if (aktuelleSeite) {
+        });
 
-            aktuelleSeite.classList.add(
+        DOM.selectorAlle(
+
+            ".navButton"
+
+        ).forEach(button => {
+
+            button.classList.remove(
+
                 "aktiv"
+
+            );
+
+        });
+
+        const button =
+            DOM.selector(
+
+                '[data-seite="' +
+                seite +
+                '"]'
+
+            );
+
+        if(button){
+
+            button.classList.add(
+
+                "aktiv"
+
             );
 
         }
 
-        DOM.selectorAlle(".navButton")
-            .forEach(button => {
+        switch(seite){
 
-                button.classList.remove(
-                    "aktiv"
-                );
+            case "dashboard":
 
-            });
+                Dashboard.anzeigen();
 
-        const aktiverButton =
-            DOM.selector(
-                '[data-seite="' +
-                seite +
-                '"]'
-            );
+                break;
 
-        if (aktiverButton) {
+            case "mitarbeiter":
 
-            aktiverButton.classList.add(
-                "aktiv"
-            );
+                Mitarbeiter.anzeigen();
+
+                break;
+
+            case "kalender":
+
+                Kalender.anzeigen();
+
+                break;
+
+            case "termine":
+
+                Termine.anzeigen();
+
+                break;
+
+            case "aufgaben":
+
+                Todos.anzeigen();
+
+                break;
+
+            case "speiseplaene":
+
+                Speiseplaene.anzeigen();
+
+                break;
+
+            case "schichtplan":
+
+                Schichtplan.anzeigen();
+
+                break;
+
+            case "bestellungen":
+
+                Bestellungen.anzeigen();
+
+                break;
+
+            case "dokumente":
+
+                Dokumente.anzeigen();
+
+                break;
+
+            case "druckcenter":
+
+                Druck.anzeigen();
+
+                break;
+
+            case "einstellungen":
+
+                Einstellungen.anzeigen();
+
+                break;
 
         }
 
         const titel =
-            DOM.id("seitenTitel");
+            DOM.id(
 
-        if (titel) {
+                "seitenTitel"
+
+            );
+
+        if(titel){
 
             titel.textContent =
-                this.name(seite);
+
+                this.titel(
+
+                    seite
+
+                );
 
         }
 
         const pfad =
-            DOM.id("seitenPfad");
+            DOM.id(
 
-        if (pfad) {
+                "seitenPfad"
+
+            );
+
+        if(pfad){
 
             pfad.textContent =
+
                 "DDH Studio Enterprise";
 
         }
 
     },
 
-    name(seite) {
+    titel(seite){
 
         const namen = {
 
@@ -118,38 +205,26 @@ const Navigation = {
             mitarbeiter:
                 "Mitarbeiter",
 
-            schichtplan:
-                "Schichtplan",
-
-            dienstplan:
-                "Dienstplan",
-
             kalender:
                 "Kalender",
+
+            termine:
+                "Termine",
 
             aufgaben:
                 "Aufgaben",
 
-            rezepte:
-                "Rezepte",
-
             speiseplaene:
                 "Speisepläne",
 
-            lager:
-                "Lager",
+            schichtplan:
+                "Schichtplan",
 
             bestellungen:
                 "Bestellungen",
 
-            lieferanten:
-                "Lieferanten",
-
-            haccp:
-                "HACCP",
-
-            reinigung:
-                "Reinigung",
+            dokumente:
+                "Dokumente",
 
             druckcenter:
                 "Druckcenter",
@@ -159,7 +234,11 @@ const Navigation = {
 
         };
 
-        return namen[seite] || "DDH Studio";
+        return namen[seite]
+
+            ||
+
+            "DDH Studio Enterprise";
 
     }
 

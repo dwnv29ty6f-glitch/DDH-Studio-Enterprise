@@ -11,38 +11,100 @@ const Dialog = {
 
     oeffnen(titel, inhalt) {
 
-        DOM.text("dialogTitel", titel);
+        DOM.text(
 
-        DOM.html("dialogInhalt", inhalt);
+            "dialogTitel",
 
-        DOM.anzeigen("dialogOverlay");
+            titel
+
+        );
+
+        DOM.html(
+
+            "dialogInhalt",
+
+            inhalt
+
+        );
+
+        DOM.anzeigen(
+
+            "dialogOverlay"
+
+        );
 
     },
 
     schliessen() {
 
-        DOM.ausblenden("dialogOverlay");
+        DOM.ausblenden(
+
+            "dialogOverlay"
+
+        );
+
+    },
+
+    abbrechen() {
+
+        const button = DOM.id(
+
+            "dialogAbbrechen"
+
+        );
+
+        if (button) {
+
+            button.onclick = () => {
+
+                this.schliessen();
+
+            };
+
+        }
+
+    },
+
+    speichern(callback) {
+
+        const button = DOM.id(
+
+            "dialogSpeichern"
+
+        );
+
+        if (button) {
+
+            button.onclick = callback;
+
+        }
 
     }
 
 };
 
-window.onload = () => {
+window.addEventListener(
 
-    const x = DOM.id("dialogSchliessen");
+    "load",
 
-    if (x) {
+    () => {
 
-        x.onclick = () => Dialog.schliessen();
+        const x = DOM.id(
+
+            "dialogSchliessen"
+
+        );
+
+        if (x) {
+
+            x.onclick = () => {
+
+                Dialog.schliessen();
+
+            };
+
+        }
 
     }
 
-    const abbrechen = DOM.id("dialogAbbrechen");
-
-    if (abbrechen) {
-
-        abbrechen.onclick = () => Dialog.schliessen();
-
-    }
-
-};
+);

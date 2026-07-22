@@ -4,15 +4,13 @@
 ================================================
 DDH Studio Enterprise 10.0
 Schichtplan
-Microsoft Teams Edition
+Phase 3
 ================================================
 */
 
 const Schichtplan = {
 
-    aktuellesDatum:
-
-        new Date(),
+    aktuellesDatum: new Date(),
 
     mitarbeiter: [],
 
@@ -20,25 +18,21 @@ const Schichtplan = {
 
     anzeigen() {
 
-        this.mitarbeiter =
+        this.mitarbeiter = Speicher.laden(
 
-            Speicher.laden(
+            CONFIG.speicher.mitarbeiter,
 
-                CONFIG.speicher.mitarbeiter,
+            []
 
-                []
+        );
 
-            );
+        this.schichten = Speicher.laden(
 
-        this.schichten =
+            CONFIG.speicher.schichtplan,
 
-            Speicher.laden(
+            []
 
-                CONFIG.speicher.schichtplan,
-
-                []
-
-            );
+        );
 
         DOM.html(
 
@@ -48,7 +42,7 @@ const Schichtplan = {
 
         );
 
-        this.toolbar();
+        this.monatAktualisieren();
 
         this.statistik();
 
@@ -74,7 +68,7 @@ const Schichtplan = {
 
 <p>
 
-Microsoft Teams Shifts für die DDH Service GmbH
+Dienstplanung der DDH Service GmbH
 
 </p>
 
@@ -85,7 +79,7 @@ Microsoft Teams Shifts für die DDH Service GmbH
 <div class="toolbar">
 
 <button
-id="monatZurueck"
+id="btnMonatZurueck"
 class="hauptButton">
 
 ◀
@@ -96,24 +90,20 @@ class="hauptButton">
 id="monatTitel"
 class="monatTitel">
 
-Juli 2026
-
 </div>
 
 <button
-id="monatVor"
+id="btnMonatVor"
 class="hauptButton">
 
 ▶
 
 </button>
 
-<div class="toolbarSpacer">
-
-</div>
+<div class="toolbarSpacer"></div>
 
 <button
-id="heuteButton"
+id="btnHeute"
 class="sekundenButton">
 
 Heute
@@ -121,7 +111,7 @@ Heute
 </button>
 
 <button
-id="druckButton"
+id="btnDrucken"
 class="sekundenButton">
 
 🖨 Drucken
@@ -129,7 +119,7 @@ class="sekundenButton">
 </button>
 
 <button
-id="pdfButton"
+id="btnPdf"
 class="sekundenButton">
 
 📄 PDF
@@ -137,7 +127,7 @@ class="sekundenButton">
 </button>
 
 <button
-id="excelButton"
+id="btnExcel"
 class="sekundenButton">
 
 📊 Excel
@@ -163,7 +153,8 @@ id="schichtplanRaster">
 `;
 
     },
-        toolbar() {
+
+    monatAktualisieren() {
 
         const monate = [
 
@@ -182,41 +173,39 @@ id="schichtplanRaster">
 
         ];
 
-        const titel = DOM.id(
+        DOM.text(
 
-            "monatTitel"
+            "monatTitel",
+
+            monate[
+                this.aktuellesDatum.getMonth()
+            ]
+
+            +
+
+            " "
+
+            +
+
+            this.aktuellesDatum.getFullYear()
 
         );
-
-        if (titel) {
-
-            titel.textContent =
-
-                monate[
-                    this.aktuellesDatum.getMonth()
-                ] +
-
-                " " +
-
-                this.aktuellesDatum.getFullYear();
-
-        }
 
     },
 
     statistik() {
 
-        const html = `
+        DOM.html(
+
+            "schichtplanStatistik",
+
+            `
 
 <div class="dashboardGrid">
 
 <div class="statCard">
 
-<div class="statIcon">
-
-👥
-
-</div>
+<div class="statIcon">👥</div>
 
 <div class="statTitel">
 
@@ -230,21 +219,11 @@ ${this.mitarbeiter.length}
 
 </div>
 
-<div class="statText">
-
-Aktive Mitarbeiter
-
-</div>
-
 </div>
 
 <div class="statCard">
 
-<div class="statIcon">
-
-📅
-
-</div>
+<div class="statIcon">📅</div>
 
 <div class="statTitel">
 
@@ -258,21 +237,11 @@ ${this.schichten.length}
 
 </div>
 
-<div class="statText">
-
-Geplante Schichten
-
-</div>
-
 </div>
 
 <div class="statCard">
 
-<div class="statIcon">
-
-⏱
-
-</div>
+<div class="statIcon">⏱</div>
 
 <div class="statTitel">
 
@@ -286,21 +255,11 @@ Sollstunden
 
 </div>
 
-<div class="statText">
-
-Wird automatisch berechnet
-
-</div>
-
 </div>
 
 <div class="statCard">
 
-<div class="statIcon">
-
-✅
-
-</div>
+<div class="statIcon">✅</div>
 
 <div class="statTitel">
 
@@ -314,48 +273,30 @@ Iststunden
 
 </div>
 
-<div class="statText">
-
-Wird automatisch berechnet
-
 </div>
 
 </div>
 
-</div>
-
-`;
-
-        DOM.html(
-
-            "schichtplanStatistik",
-
-            html
+`
 
         );
 
     },
         raster() {
 
-        const jahr =
+        const jahr = this.aktuellesDatum.getFullYear();
 
-            this.aktuellesDatum.getFullYear();
+        const monat = this.aktuellesDatum.getMonth();
 
-        const monat =
+        const tageImMonat = new Date(
 
-            this.aktuellesDatum.getMonth();
+            jahr,
 
-        const tage =
+            monat + 1,
 
-            new Date(
+            0
 
-                jahr,
-
-                monat + 1,
-
-                0
-
-            ).getDate();
+        ).getDate();
 
         let html = `
 
@@ -373,19 +314,11 @@ Mitarbeiter
 
 `;
 
-        for (
-
-            let tag = 1;
-
-            tag <= tage;
-
-            tag++
-
-        ) {
+        for (let tag = 1; tag <= tageImMonat; tag++) {
 
             html += `
 
-<div class="tag">
+<div class="tagKopf">
 
 ${tag}
 
@@ -405,11 +338,7 @@ ${tag}
 
 `;
 
-        if (
-
-            this.mitarbeiter.length === 0
-
-        ) {
+        if (this.mitarbeiter.length === 0) {
 
             html += `
 
@@ -463,22 +392,43 @@ ${mitarbeiter.bereich || "Küche"}
 
 `;
 
-                for (
+                for (let tag = 1; tag <= tageImMonat; tag++) {
 
-                    let tag = 1;
+                    const datum =
 
-                    tag <= tage;
+                        jahr +
 
-                    tag++
+                        "-" +
 
-                ) {
+                        String(monat + 1).padStart(2, "0") +
+
+                        "-" +
+
+                        String(tag).padStart(2, "0");
+
+                    const schicht = this.schichten.find(
+
+                        s =>
+
+                            s.mitarbeiterId == mitarbeiter.id &&
+
+                            s.datum == datum
+
+                    );
 
                     html += `
 
 <div
-class="schichtZelle"
-data-mitarbeiter="${mitarbeiter.id || ""}"
-data-tag="${tag}">
+
+class="schichtZelle ${schicht ? "schicht-" + schicht.schicht : ""}"
+
+data-mitarbeiter="${mitarbeiter.id}"
+
+data-datum="${datum}"
+
+>
+
+${schicht ? schicht.schicht : ""}
 
 </div>
 
@@ -517,13 +467,11 @@ data-tag="${tag}">
     },
         events() {
 
-        const btnZurueck =
+        const btnZurueck = DOM.id(
 
-            DOM.id(
+            "btnMonatZurueck"
 
-                "monatZurueck"
-
-            );
+        );
 
         if (btnZurueck) {
 
@@ -547,13 +495,11 @@ data-tag="${tag}">
 
         }
 
-        const btnVor =
+        const btnVor = DOM.id(
 
-            DOM.id(
+            "btnMonatVor"
 
-                "monatVor"
-
-            );
+        );
 
         if (btnVor) {
 
@@ -568,6 +514,30 @@ data-tag="${tag}">
                         this.aktuellesDatum.getMonth() + 1
 
                     );
+
+                    this.anzeigen();
+
+                }
+
+            );
+
+        }
+
+        const btnHeute = DOM.id(
+
+            "btnHeute"
+
+        );
+
+        if (btnHeute) {
+
+            btnHeute.addEventListener(
+
+                "click",
+
+                () => {
+
+                    this.aktuellesDatum = new Date();
 
                     this.anzeigen();
 
@@ -593,7 +563,7 @@ data-tag="${tag}">
 
                     () => {
 
-                        this.schichtWaehlen(
+                        this.schichtBearbeiten(
 
                             zelle
 
@@ -607,11 +577,11 @@ data-tag="${tag}">
 
     },
 
-    schichtWaehlen(zelle) {
+    schichtBearbeiten(zelle) {
 
-        const schicht = prompt(
+        const wert = prompt(
 
-`Schicht auswählen:
+`Schicht eingeben
 
 F1
 F2
@@ -622,26 +592,368 @@ S2
 S3
 U
 K
-F`
+F
+
+Leer = löschen`
 
         );
 
-        if (!schicht) {
+        const mitarbeiterId =
+
+            zelle.dataset.mitarbeiter;
+
+        const datum =
+
+            zelle.dataset.datum;
+
+        const index =
+
+            this.schichten.findIndex(
+
+                s =>
+
+                    s.mitarbeiterId ==
+
+                    mitarbeiterId &&
+
+                    s.datum == datum
+
+            );
+
+        if (
+
+            wert === null
+
+        ) {
 
             return;
 
         }
 
-        zelle.textContent =
+        if (
 
-            schicht.toUpperCase();
+            wert.trim() === ""
 
-        zelle.className =
+        ) {
 
-            "schichtZelle schicht-" +
+            if (
 
-            schicht.toUpperCase();
+                index > -1
+
+            ) {
+
+                this.schichten.splice(
+
+                    index,
+
+                    1
+
+                );
+
+            }
+
+        } else {
+
+            const eintrag = {
+
+                mitarbeiterId:
+
+                    mitarbeiterId,
+
+                datum:
+
+                    datum,
+
+                schicht:
+
+                    wert.toUpperCase()
+
+            };
+
+            if (
+
+                index > -1
+
+            ) {
+
+                this.schichten[index] =
+
+                    eintrag;
+
+            } else {
+
+                this.schichten.push(
+
+                    eintrag
+
+                );
+
+            }
+
+        }
+
+        Speicher.speichern(
+
+            CONFIG.speicher.schichtplan,
+
+            this.schichten
+
+        );
+
+        this.raster();
+
+        this.events();
 
     }
 
+};
+    dialogOeffnen(mitarbeiterId, datum) {
+
+        this.aktuelleZelle = {
+
+            mitarbeiterId,
+
+            datum
+
+        };
+
+        DOM.html(
+
+            "dialogTitel",
+
+            "Schicht bearbeiten"
+
+        );
+
+        DOM.html(
+
+            "dialogInhalt",
+
+            `
+
+<div class="schichtDialog">
+
+<button class="schichtAuswahl" data-schicht="F1">🌅 F1 Frühdienst</button>
+
+<button class="schichtAuswahl" data-schicht="F2">🌤 F2 Frühdienst</button>
+
+<button class="schichtAuswahl" data-schicht="M1">☀️ M1 Mitteldienst</button>
+
+<button class="schichtAuswahl" data-schicht="M2">🌇 M2 Mitteldienst</button>
+
+<button class="schichtAuswahl" data-schicht="S1">🌙 S1 Spätdienst</button>
+
+<button class="schichtAuswahl" data-schicht="S2">🌃 S2 Spätdienst</button>
+
+<button class="schichtAuswahl" data-schicht="S3">🌌 S3 Spätdienst</button>
+
+<button class="schichtAuswahl" data-schicht="U">🏖 Urlaub</button>
+
+<button class="schichtAuswahl" data-schicht="K">🤒 Krank</button>
+
+<button class="schichtAuswahl" data-schicht="F">💤 Frei</button>
+
+<button
+id="schichtLoeschen"
+class="sekundenButton">
+
+🗑 Schicht löschen
+
+</button>
+
+</div>
+
+`
+
+        );
+
+        DOM.anzeigen(
+
+            "dialogOverlay"
+
+        );
+
+        this.dialogEvents();
+
+    },
+
+    dialogEvents() {
+
+        document
+
+            .querySelectorAll(
+
+                ".schichtAuswahl"
+
+            )
+
+            .forEach(button => {
+
+                button.addEventListener(
+
+                    "click",
+
+                    () => {
+
+                        this.schichtSpeichern(
+
+                            button.dataset.schicht
+
+                        );
+
+                    }
+
+                );
+
+            });
+
+        const loeschen = DOM.id(
+
+            "schichtLoeschen"
+
+        );
+
+        if (loeschen) {
+
+            loeschen.addEventListener(
+
+                "click",
+
+                () => {
+
+                    this.schichtLoeschen();
+
+                }
+
+            );
+
+        }
+
+        const schliessen = DOM.id(
+
+            "dialogSchliessen"
+
+        );
+
+        if (schliessen) {
+
+            schliessen.onclick = () => {
+
+                DOM.ausblenden(
+
+                    "dialogOverlay"
+
+                );
+
+            };
+
+        }
+
+    },
+        schichtSpeichern(schicht) {
+
+        const index = this.schichten.findIndex(
+
+            eintrag =>
+
+                eintrag.mitarbeiterId === this.aktuelleZelle.mitarbeiterId &&
+
+                eintrag.datum === this.aktuelleZelle.datum
+
+        );
+
+        const daten = {
+
+            id: Date.now().toString(),
+
+            mitarbeiterId: this.aktuelleZelle.mitarbeiterId,
+
+            datum: this.aktuelleZelle.datum,
+
+            schicht: schicht,
+
+            beginn: "",
+
+            ende: "",
+
+            pause: 0,
+
+            notiz: ""
+
+        };
+
+        if (index >= 0) {
+
+            this.schichten[index] = daten;
+
+        } else {
+
+            this.schichten.push(daten);
+
+        }
+
+        Speicher.speichern(
+
+            CONFIG.speicher.schichtplan,
+
+            this.schichten
+
+        );
+
+        DOM.ausblenden(
+
+            "dialogOverlay"
+
+        );
+
+        this.anzeigen();
+
+    },
+
+    schichtLoeschen() {
+
+        this.schichten = this.schichten.filter(
+
+            eintrag =>
+
+                !(
+
+                    eintrag.mitarbeiterId === this.aktuelleZelle.mitarbeiterId &&
+
+                    eintrag.datum === this.aktuelleZelle.datum
+
+                )
+
+        );
+
+        Speicher.speichern(
+
+            CONFIG.speicher.schichtplan,
+
+            this.schichten
+
+        );
+
+        DOM.ausblenden(
+
+            "dialogOverlay"
+
+        );
+
+        this.anzeigen();
+
+    }
+    schichtBearbeiten(zelle) {
+
+        this.dialogOeffnen(
+
+            zelle.dataset.mitarbeiter,
+
+            zelle.dataset.datum
+
+        );
+
+    }
+
+};
 };

@@ -1135,3 +1135,176 @@ ANIMATION
     }
 
 }
+/*
+================================================
+SCHICHTPLAN
+================================================
+*/
+
+.schichtplan{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.teamsPlan{
+
+    overflow:auto;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    box-shadow:var(--shadow-medium);
+
+}
+
+.teamsHeader{
+
+    display:grid;
+
+    grid-template-columns:260px 1fr;
+
+    position:sticky;
+
+    top:0;
+
+    background:#fff;
+
+    z-index:5;
+
+}
+
+.teamsZeile{
+
+    display:grid;
+
+    grid-template-columns:260px 1fr;
+
+    border-top:1px solid var(--border);
+
+}
+
+.mitarbeiterSpalte{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:18px;
+
+    min-height:72px;
+
+    background:#fff;
+
+    border-right:1px solid var(--border);
+
+}
+
+.tageBereich{
+
+    display:grid;
+
+    grid-auto-flow:column;
+
+    grid-auto-columns:70px;
+
+}
+
+.tagKopf{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    height:72px;
+
+    font-weight:700;
+
+    border-right:1px solid var(--border);
+
+    background:#F8FBFF;
+
+}
+
+.schichtZelle{
+
+    width:70px;
+
+    height:72px;
+
+    border-right:1px solid var(--border);
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+}
+
+.schichtZelle:hover{
+
+    background:#EAF8FF;
+
+}
+
+.avatar{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:var(--gradient-primary);
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:700;
+
+}
+
+.mitarbeiterName{
+
+    font-weight:700;
+
+}
+
+.mitarbeiterBereich{
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
+
+.teamsLeer{
+
+    padding:40px;
+
+    text-align:center;
+
+    color:var(--text-light);
+
+}

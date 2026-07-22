@@ -1,48 +1,101 @@
 "use strict";
 
-// ==========================================
-// DDH Studio Enterprise 10.0
-// Schichtplan
-// ==========================================
+/*
+================================================
+DDH Studio Enterprise 10.0
+Schichtplan
+================================================
+*/
 
-function schichtplanZeichnen(){
+const Schichtplan = {
 
-    const inhalt =
-    document.getElementById("inhalt");
+    aktuellesJahr:
 
-    if(!inhalt){
-        return;
-    }
+        new Date().getFullYear(),
 
-    inhalt.innerHTML = `
+    aktuellerMonat:
 
-    <section class="seite">
+        new Date().getMonth(),
 
-        <div class="karte gross">
+    mitarbeiter: [],
 
-            <h2>👷 Schichtplan</h2>
+    schichten: [],
 
-            <p>
+    anzeigen() {
 
-            Moderner Dienstplan im Stil von Microsoft Teams Shifts
+        this.mitarbeiter = Speicher.laden(
 
-            </p>
+            CONFIG.speicher.mitarbeiter,
 
-        </div>
+            []
 
-        <div class="karte">
+        );
 
-            <div style="display:flex;justify-content:space-between;align-items:center;">
+        this.schichten = Speicher.laden(
 
-                <button class="hauptButton">
+            CONFIG.speicher.schichtplan,
 
-                    ◀ August 2026
+            []
+
+        );
+
+        DOM.html(
+
+            "inhalt",
+
+            this.html()
+
+        );
+
+        this.kopf();
+
+        this.tabelle();
+
+    },
+
+    html() {
+
+        return `
+
+<div
+    id="seite-schichtplan"
+    class="seite aktiv">
+
+    <div class="karte">
+
+        <div class="flexZwischen">
+
+            <div>
+
+                <h1>
+
+                    Schichtplan
+
+                </h1>
+
+                <p>
+
+                    Microsoft Teams Ansicht
+
+                </p>
+
+            </div>
+
+            <div class="toolbar">
+
+                <button
+                    id="monatZurueck"
+                    class="hauptButton">
+
+                    ◀
 
                 </button>
 
-                <button class="hauptButton">
+                <button
+                    id="monatVor"
+                    class="hauptButton">
 
-                    September 2026 ▶
+                    ▶
 
                 </button>
 
@@ -50,20 +103,300 @@ function schichtplanZeichnen(){
 
         </div>
 
-        <div class="karte">
+    </div>
 
-            <h3>Schichtplan</h3>
+    <div
+        id="schichtplanKopf"
+        class="karte">
 
-            <p>
+    </div>
 
-            Der moderne Teams-Shifts-Dienstplan wird in den nächsten Schritten aufgebaut.
+    <div
+        id="schichtplanTabelle"
+        class="karte">
 
-            </p>
+    </div>
 
-        </div>
+</div>
 
-    </section>
+`;
 
-    `;
+    },
+        kopf() {
 
-}
+        const monate = [
+
+            "Januar",
+            "Februar",
+            "März",
+            "April",
+            "Mai",
+            "Juni",
+            "Juli",
+            "August",
+            "September",
+            "Oktober",
+            "November",
+            "Dezember"
+
+        ];
+
+        DOM.html(
+
+            "schichtplanKopf",
+
+            `
+
+<div class="flexZwischen">
+
+    <h2>
+
+        ${monate[this.aktuellerMonat]}
+        ${this.aktuellesJahr}
+
+    </h2>
+
+    <div>
+
+        Mitarbeiter:
+
+        ${this.mitarbeiter.length}
+
+    </div>
+
+</div>
+
+`
+
+        );
+
+    },
+
+    tabelle() {
+
+        const tageImMonat = new Date(
+
+            this.aktuellesJahr,
+
+            this.aktuellerMonat + 1,
+
+            0
+
+        ).getDate();
+
+        let html = `
+
+<table class="schichtplanTabelle">
+
+<thead>
+
+<tr>
+
+<th>
+
+Mitarbeiter
+
+</th>
+
+`;
+
+        for (
+
+            let tag = 1;
+
+            tag <= tageImMonat;
+
+            tag++
+
+        ) {
+
+            html += `
+
+<th>
+
+${tag}
+
+</th>
+
+`;
+
+        }
+
+        html += `
+
+</tr>
+
+</thead>
+
+<tbody>
+
+`;
+        if (this.mitarbeiter.length === 0) {
+
+            html += `
+
+<tr>
+
+    <td colspan="${tageImMonat + 1}">
+
+        Noch keine Mitarbeiter vorhanden.
+
+    </td>
+
+</tr>
+
+`;
+
+        }
+
+        this.mitarbeiter.forEach(mitarbeiter => {
+
+            html += `
+
+<tr>
+
+<td>
+
+<strong>
+
+${mitarbeiter.name || "-"}
+
+</strong>
+
+</td>
+
+`;
+
+            for (
+
+                let tag = 1;
+
+                tag <= tageImMonat;
+
+                tag++
+
+            ) {
+
+                html += `
+
+<td
+class="schichtZelle">
+
+-
+
+</td>
+
+`;
+
+            }
+
+            html += `
+
+</tr>
+
+`;
+
+        });
+
+        html += `
+
+</tbody>
+
+</table>
+
+`;
+
+        DOM.html(
+
+            "schichtplanTabelle",
+
+            html
+
+        );
+
+    },
+        speichern() {
+
+        Speicher.speichern(
+
+            CONFIG.speicher.schichtplan,
+
+            this.schichten
+
+        );
+
+    },
+
+    vorherigerMonat() {
+
+        this.aktuellerMonat--;
+
+        if (this.aktuellerMonat < 0) {
+
+            this.aktuellerMonat = 11;
+
+            this.aktuellesJahr--;
+
+        }
+
+        this.anzeigen();
+
+    },
+
+    naechsterMonat() {
+
+        this.aktuellerMonat++;
+
+        if (this.aktuellerMonat > 11) {
+
+            this.aktuellerMonat = 0;
+
+            this.aktuellesJahr++;
+
+        }
+
+        this.anzeigen();
+
+    },
+
+    events() {
+
+        const btnZurueck = document.getElementById(
+
+            "monatZurueck"
+
+        );
+
+        const btnVor = document.getElementById(
+
+            "monatVor"
+
+        );
+
+        if (btnZurueck) {
+
+            btnZurueck.addEventListener(
+
+                "click",
+
+                () => this.vorherigerMonat()
+
+            );
+
+        }
+
+        if (btnVor) {
+
+            btnVor.addEventListener(
+
+                "click",
+
+                () => this.naechsterMonat()
+
+            );
+
+        }
+
+    }
+
+};

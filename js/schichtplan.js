@@ -4,18 +4,15 @@
 ================================================
 DDH Studio Enterprise 10.0
 Schichtplan
+Microsoft Teams Edition
 ================================================
 */
 
 const Schichtplan = {
 
-    aktuellesJahr:
+    aktuellesDatum:
 
-        new Date().getFullYear(),
-
-    aktuellerMonat:
-
-        new Date().getMonth(),
+        new Date(),
 
     mitarbeiter: [],
 
@@ -23,21 +20,25 @@ const Schichtplan = {
 
     anzeigen() {
 
-        this.mitarbeiter = Speicher.laden(
+        this.mitarbeiter =
 
-            CONFIG.speicher.mitarbeiter,
+            Speicher.laden(
 
-            []
+                CONFIG.speicher.mitarbeiter,
 
-        );
+                []
 
-        this.schichten = Speicher.laden(
+            );
 
-            CONFIG.speicher.schichtplan,
+        this.schichten =
 
-            []
+            Speicher.laden(
 
-        );
+                CONFIG.speicher.schichtplan,
+
+                []
+
+            );
 
         DOM.html(
 
@@ -47,9 +48,13 @@ const Schichtplan = {
 
         );
 
-        this.kopf();
+        this.toolbar();
 
-        this.tabelle();
+        this.statistik();
+
+        this.raster();
+
+        this.events();
 
     },
 
@@ -57,72 +62,108 @@ const Schichtplan = {
 
         return `
 
+<div class="schichtplan">
+
+<div class="welcomeCard">
+
+<h1>
+
+👷 Schichtplan
+
+</h1>
+
+<p>
+
+Microsoft Teams Shifts für die DDH Service GmbH
+
+</p>
+
+</div>
+
+<div class="karte">
+
+<div class="toolbar">
+
+<button
+id="monatZurueck"
+class="hauptButton">
+
+◀
+
+</button>
+
 <div
-    id="seite-schichtplan"
-    class="seite aktiv">
+id="monatTitel"
+class="monatTitel">
 
-    <div class="karte">
+Juli 2026
 
-        <div class="flexZwischen">
+</div>
 
-            <div>
+<button
+id="monatVor"
+class="hauptButton">
 
-                <h1>
+▶
 
-                    Schichtplan
+</button>
 
-                </h1>
+<div class="toolbarSpacer">
 
-                <p>
+</div>
 
-                    Microsoft Teams Ansicht
+<button
+id="heuteButton"
+class="sekundenButton">
 
-                </p>
+Heute
 
-            </div>
+</button>
 
-            <div class="toolbar">
+<button
+id="druckButton"
+class="sekundenButton">
 
-                <button
-                    id="monatZurueck"
-                    class="hauptButton">
+🖨 Drucken
 
-                    ◀
+</button>
 
-                </button>
+<button
+id="pdfButton"
+class="sekundenButton">
 
-                <button
-                    id="monatVor"
-                    class="hauptButton">
+📄 PDF
 
-                    ▶
+</button>
 
-                </button>
+<button
+id="excelButton"
+class="sekundenButton">
 
-            </div>
+📊 Excel
 
-        </div>
+</button>
 
-    </div>
+</div>
 
-    <div
-        id="schichtplanKopf"
-        class="karte">
+</div>
 
-    </div>
+<div
+id="schichtplanStatistik">
 
-    <div
-        id="schichtplanTabelle"
-        class="karte">
+</div>
 
-    </div>
+<div
+id="schichtplanRaster">
+
+</div>
 
 </div>
 
 `;
 
     },
-        kopf() {
+        toolbar() {
 
         const monate = [
 
@@ -141,62 +182,194 @@ const Schichtplan = {
 
         ];
 
-        DOM.html(
+        const titel = DOM.id(
 
-            "schichtplanKopf",
+            "monatTitel"
 
-            `
+        );
 
-<div class="flexZwischen">
+        if (titel) {
 
-    <h2>
+            titel.textContent =
 
-        ${monate[this.aktuellerMonat]}
-        ${this.aktuellesJahr}
+                monate[
+                    this.aktuellesDatum.getMonth()
+                ] +
 
-    </h2>
+                " " +
 
-    <div>
+                this.aktuellesDatum.getFullYear();
 
-        Mitarbeiter:
+        }
 
-        ${this.mitarbeiter.length}
+    },
 
-    </div>
+    statistik() {
+
+        const html = `
+
+<div class="dashboardGrid">
+
+<div class="statCard">
+
+<div class="statIcon">
+
+👥
 
 </div>
 
-`
+<div class="statTitel">
+
+Mitarbeiter
+
+</div>
+
+<div class="statWert">
+
+${this.mitarbeiter.length}
+
+</div>
+
+<div class="statText">
+
+Aktive Mitarbeiter
+
+</div>
+
+</div>
+
+<div class="statCard">
+
+<div class="statIcon">
+
+📅
+
+</div>
+
+<div class="statTitel">
+
+Schichten
+
+</div>
+
+<div class="statWert">
+
+${this.schichten.length}
+
+</div>
+
+<div class="statText">
+
+Geplante Schichten
+
+</div>
+
+</div>
+
+<div class="statCard">
+
+<div class="statIcon">
+
+⏱
+
+</div>
+
+<div class="statTitel">
+
+Sollstunden
+
+</div>
+
+<div class="statWert">
+
+0
+
+</div>
+
+<div class="statText">
+
+Wird automatisch berechnet
+
+</div>
+
+</div>
+
+<div class="statCard">
+
+<div class="statIcon">
+
+✅
+
+</div>
+
+<div class="statTitel">
+
+Iststunden
+
+</div>
+
+<div class="statWert">
+
+0
+
+</div>
+
+<div class="statText">
+
+Wird automatisch berechnet
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+        DOM.html(
+
+            "schichtplanStatistik",
+
+            html
 
         );
 
     },
+        raster() {
 
-    tabelle() {
+        const jahr =
 
-        const tageImMonat = new Date(
+            this.aktuellesDatum.getFullYear();
 
-            this.aktuellesJahr,
+        const monat =
 
-            this.aktuellerMonat + 1,
+            this.aktuellesDatum.getMonth();
 
-            0
+        const tage =
 
-        ).getDate();
+            new Date(
+
+                jahr,
+
+                monat + 1,
+
+                0
+
+            ).getDate();
 
         let html = `
 
-<table class="schichtplanTabelle">
+<div class="teamsPlan">
 
-<thead>
+<div class="teamsHeader">
 
-<tr>
-
-<th>
+<div class="mitarbeiterSpalte">
 
 Mitarbeiter
 
-</th>
+</div>
+
+<div class="tageBereich">
 
 `;
 
@@ -204,7 +377,7 @@ Mitarbeiter
 
             let tag = 1;
 
-            tag <= tageImMonat;
+            tag <= tage;
 
             tag++
 
@@ -212,11 +385,11 @@ Mitarbeiter
 
             html += `
 
-<th>
+<div class="tag">
 
 ${tag}
 
-</th>
+</div>
 
 `;
 
@@ -224,154 +397,133 @@ ${tag}
 
         html += `
 
-</tr>
+</div>
 
-</thead>
+</div>
 
-<tbody>
+<div class="teamsBody">
 
 `;
-        if (this.mitarbeiter.length === 0) {
+
+        if (
+
+            this.mitarbeiter.length === 0
+
+        ) {
 
             html += `
 
-<tr>
+<div class="teamsLeer">
 
-    <td colspan="${tageImMonat + 1}">
+Noch keine Mitarbeiter vorhanden.
 
-        Noch keine Mitarbeiter vorhanden.
-
-    </td>
-
-</tr>
+</div>
 
 `;
 
         }
 
-        this.mitarbeiter.forEach(mitarbeiter => {
+        this.mitarbeiter.forEach(
 
-            html += `
-
-<tr>
-
-<td>
-
-<strong>
-
-${mitarbeiter.name || "-"}
-
-</strong>
-
-</td>
-
-`;
-
-            for (
-
-                let tag = 1;
-
-                tag <= tageImMonat;
-
-                tag++
-
-            ) {
+            mitarbeiter => {
 
                 html += `
 
-<td
-class="schichtZelle">
+<div class="teamsZeile">
 
--
+<div class="mitarbeiterSpalte">
 
-</td>
+<div class="avatar">
+
+${(mitarbeiter.name || "?")
+.charAt(0)
+.toUpperCase()}
+
+</div>
+
+<div>
+
+<div class="mitarbeiterName">
+
+${mitarbeiter.name || "-"}
+
+</div>
+
+<div class="mitarbeiterBereich">
+
+${mitarbeiter.bereich || "Küche"}
+
+</div>
+
+</div>
+
+</div>
+
+<div class="tageBereich">
+
+`;
+
+                for (
+
+                    let tag = 1;
+
+                    tag <= tage;
+
+                    tag++
+
+                ) {
+
+                    html += `
+
+<div
+class="schichtZelle"
+data-mitarbeiter="${mitarbeiter.id || ""}"
+data-tag="${tag}">
+
+</div>
+
+`;
+
+                }
+
+                html += `
+
+</div>
+
+</div>
 
 `;
 
             }
 
-            html += `
-
-</tr>
-
-`;
-
-        });
+        );
 
         html += `
 
-</tbody>
+</div>
 
-</table>
+</div>
 
 `;
 
         DOM.html(
 
-            "schichtplanTabelle",
+            "schichtplanRaster",
 
             html
 
         );
 
     },
-        speichern() {
+        events() {
 
-        Speicher.speichern(
+        const btnZurueck =
 
-            CONFIG.speicher.schichtplan,
+            DOM.id(
 
-            this.schichten
+                "monatZurueck"
 
-        );
-
-    },
-
-    vorherigerMonat() {
-
-        this.aktuellerMonat--;
-
-        if (this.aktuellerMonat < 0) {
-
-            this.aktuellerMonat = 11;
-
-            this.aktuellesJahr--;
-
-        }
-
-        this.anzeigen();
-
-    },
-
-    naechsterMonat() {
-
-        this.aktuellerMonat++;
-
-        if (this.aktuellerMonat > 11) {
-
-            this.aktuellerMonat = 0;
-
-            this.aktuellesJahr++;
-
-        }
-
-        this.anzeigen();
-
-    },
-
-    events() {
-
-        const btnZurueck = document.getElementById(
-
-            "monatZurueck"
-
-        );
-
-        const btnVor = document.getElementById(
-
-            "monatVor"
-
-        );
+            );
 
         if (btnZurueck) {
 
@@ -379,11 +531,29 @@ class="schichtZelle">
 
                 "click",
 
-                () => this.vorherigerMonat()
+                () => {
+
+                    this.aktuellesDatum.setMonth(
+
+                        this.aktuellesDatum.getMonth() - 1
+
+                    );
+
+                    this.anzeigen();
+
+                }
 
             );
 
         }
+
+        const btnVor =
+
+            DOM.id(
+
+                "monatVor"
+
+            );
 
         if (btnVor) {
 
@@ -391,11 +561,86 @@ class="schichtZelle">
 
                 "click",
 
-                () => this.naechsterMonat()
+                () => {
+
+                    this.aktuellesDatum.setMonth(
+
+                        this.aktuellesDatum.getMonth() + 1
+
+                    );
+
+                    this.anzeigen();
+
+                }
 
             );
 
         }
+
+        document
+
+            .querySelectorAll(
+
+                ".schichtZelle"
+
+            )
+
+            .forEach(zelle => {
+
+                zelle.addEventListener(
+
+                    "click",
+
+                    () => {
+
+                        this.schichtWaehlen(
+
+                            zelle
+
+                        );
+
+                    }
+
+                );
+
+            });
+
+    },
+
+    schichtWaehlen(zelle) {
+
+        const schicht = prompt(
+
+`Schicht auswählen:
+
+F1
+F2
+M1
+M2
+S1
+S2
+S3
+U
+K
+F`
+
+        );
+
+        if (!schicht) {
+
+            return;
+
+        }
+
+        zelle.textContent =
+
+            schicht.toUpperCase();
+
+        zelle.className =
+
+            "schichtZelle schicht-" +
+
+            schicht.toUpperCase();
 
     }
 

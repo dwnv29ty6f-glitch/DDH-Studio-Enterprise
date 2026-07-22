@@ -243,7 +243,7 @@ const Mitarbeiter = {
 
             neu.onclick = () => {
 
-                this.neu();
+                alert("Button funktioniert");
 
             };
 

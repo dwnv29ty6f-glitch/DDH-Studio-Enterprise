@@ -314,18 +314,11 @@ const Mitarbeiter = {
 
     neu() {
 
-    DOM.text(
+    Dialog.oeffnen(
 
-        "dialogTitel",
+    "Neuer Mitarbeiter",
 
-        "Neuer Mitarbeiter"
-
-    );
-
-    DOM.html(
-
-        "dialogInhalt",
-
+    `
         `
 
 <div class="dialogGrid">
@@ -381,13 +374,6 @@ const Mitarbeiter = {
 </div>
 
 `
-
-    );
-
-    DOM.anzeigen(
-
-        "dialogOverlay"
-
     );
 
     DOM.id(

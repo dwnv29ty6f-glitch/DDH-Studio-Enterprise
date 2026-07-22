@@ -243,11 +243,12 @@ const Mitarbeiter = {
 
             neu.onclick = () => {
 
-                alert("Button funktioniert");
+    Dialog.oeffnen(
+        "Test",
+        "<h2 style='color:red'>Hallo DDH Studio</h2>"
+    );
 
-            };
-
-        }
+};
 
         const suche = DOM.id(
 

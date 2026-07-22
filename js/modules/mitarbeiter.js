@@ -314,78 +314,199 @@ const Mitarbeiter = {
 
     neu() {
 
-    const vorname = prompt("Vorname");
+    DOM.text(
 
-    if (!vorname) return;
+        "dialogTitel",
 
-    const nachname = prompt("Nachname");
-
-    if (!nachname) return;
-
-    const bereich = prompt("Bereich", "Küche") || "Küche";
-
-    const position = prompt("Position", "Mitarbeiter") || "Mitarbeiter";
-
-    const personalnummer = prompt("Personalnummer", "") || "";
-
-    const wochenstunden = Number(
-        prompt("Wochenstunden", "39")
-    ) || 39;
-
-    this.daten.push({
-
-        id: Date.now().toString(),
-
-        vorname,
-
-        nachname,
-
-        name: vorname + " " + nachname,
-
-        personalnummer,
-
-        bereich,
-
-        position,
-
-        wochenstunden,
-
-        vertragsstunden: wochenstunden,
-
-        status: "Aktiv",
-
-        telefon: "",
-
-        email: "",
-
-        strasse: "",
-
-        plz: "",
-
-        ort: "",
-
-        geburtsdatum: "",
-
-        eintrittsdatum: "",
-
-        notiz: "",
-
-        farbe: "#0077C8",
-
-        foto: ""
-
-    });
-
-    Speicher.speichern(
-
-        CONFIG.speicher.mitarbeiter,
-
-        this.daten
+        "Neuer Mitarbeiter"
 
     );
 
-    this.anzeigen();
-    },
+    DOM.html(
+
+        "dialogInhalt",
+
+        `
+
+<div class="dialogGrid">
+
+<div class="dialogLabel">
+
+<label>Vorname</label>
+
+<input id="dlgVorname" type="text">
+
+</div>
+
+<div class="dialogLabel">
+
+<label>Nachname</label>
+
+<input id="dlgNachname" type="text">
+
+</div>
+
+<div class="dialogLabel">
+
+<label>Bereich</label>
+
+<input id="dlgBereich" type="text" value="Küche">
+
+</div>
+
+<div class="dialogLabel">
+
+<label>Position</label>
+
+<input id="dlgPosition" type="text" value="Mitarbeiter">
+
+</div>
+
+<div class="dialogLabel">
+
+<label>Personalnummer</label>
+
+<input id="dlgPersonalnummer" type="text">
+
+</div>
+
+<div class="dialogLabel">
+
+<label>Wochenstunden</label>
+
+<input id="dlgWochenstunden" type="number" value="39">
+
+</div>
+
+</div>
+
+`
+
+    );
+
+    DOM.anzeigen(
+
+        "dialogOverlay"
+
+    );
+
+    DOM.id(
+
+        "dialogAbbrechen"
+
+    ).onclick = () => {
+
+        DOM.ausblenden(
+
+            "dialogOverlay"
+
+        );
+
+    };
+
+    DOM.id(
+
+        "dialogSchliessen"
+
+    ).onclick = () => {
+
+        DOM.ausblenden(
+
+            "dialogOverlay"
+
+        );
+
+    };
+
+    DOM.id(
+
+        "dialogSpeichern"
+
+    ).onclick = () => {
+
+        this.daten.push({
+
+            id: Date.now().toString(),
+
+            vorname: DOM.id("dlgVorname").value,
+
+            nachname: DOM.id("dlgNachname").value,
+
+            name:
+
+                DOM.id("dlgVorname").value +
+
+                " " +
+
+                DOM.id("dlgNachname").value,
+
+            bereich: DOM.id("dlgBereich").value,
+
+            position: DOM.id("dlgPosition").value,
+
+            personalnummer:
+
+                DOM.id("dlgPersonalnummer").value,
+
+            wochenstunden:
+
+                Number(
+
+                    DOM.id("dlgWochenstunden").value
+
+                ),
+
+            vertragsstunden:
+
+                Number(
+
+                    DOM.id("dlgWochenstunden").value
+
+                ),
+
+            status: "Aktiv",
+
+            telefon: "",
+
+            email: "",
+
+            strasse: "",
+
+            plz: "",
+
+            ort: "",
+
+            geburtsdatum: "",
+
+            eintrittsdatum: "",
+
+            notiz: "",
+
+            farbe: "#0077C8",
+
+            foto: ""
+
+        });
+
+        Speicher.speichern(
+
+            CONFIG.speicher.mitarbeiter,
+
+            this.daten
+
+        );
+
+        DOM.ausblenden(
+
+            "dialogOverlay"
+
+        );
+
+        this.anzeigen();
+
+    };
+
+},
 
         bearbeiten(id) {
 

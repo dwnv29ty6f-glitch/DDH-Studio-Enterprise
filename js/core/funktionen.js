@@ -1,95 +1,104 @@
 "use strict";
 
 /*
-===========================================
+================================================
 DDH Studio Enterprise 10.0
 Hilfsfunktionen
-===========================================
+================================================
 */
 
 const Funktionen = {
 
-    heute() {
+    zufallsID() {
 
-        return new Date();
+        return Date.now().toString(36) +
 
-    },
-
-    jahr() {
-
-        return this.heute().getFullYear();
+            Math.random()
+            .toString(36)
+            .substring(2,8);
 
     },
 
-    monat() {
+    datumHeute() {
 
-        return this.heute().getMonth();
-
-    },
-
-    tag() {
-
-        return this.heute().getDate();
+        return new Date()
+            .toISOString()
+            .split("T")[0];
 
     },
 
-    tageImMonat(monat, jahr) {
+    uhrzeitJetzt() {
 
-        return new Date(
-
-            jahr,
-
-            monat + 1,
-
-            0
-
-        ).getDate();
-
-    },
-
-    ersterWochentag(monat, jahr) {
-
-        let tag = new Date(
-
-            jahr,
-
-            monat,
-
-            1
-
-        ).getDay();
-
-        if (tag === 0) {
-
-            tag = 7;
-
-        }
-
-        return tag;
+        return new Date()
+            .toLocaleTimeString(
+                "de-DE",
+                {
+                    hour:"2-digit",
+                    minute:"2-digit"
+                }
+            );
 
     },
 
-    datum(monat, tag, jahr) {
+    zahl(text) {
 
-        return tag + ". " +
-
-            APP.monate[monat] +
-
-            " " +
-
-            jahr;
+        return Number(text);
 
     },
 
-    uuid() {
+    text(text) {
 
-        if (crypto.randomUUID) {
+        return String(text);
 
-            return crypto.randomUUID();
+    },
 
-        }
+    runden(zahl,stellen=2) {
 
-        return Date.now().toString();
+        return Number(
+            zahl.toFixed(stellen)
+        );
+
+    },
+
+    leer(wert) {
+
+        return (
+
+            wert === null ||
+
+            wert === undefined ||
+
+            wert === ""
+
+        );
+
+    },
+
+    kopie(objekt) {
+
+        return JSON.parse(
+
+            JSON.stringify(objekt)
+
+        );
+
+    },
+
+    warten(ms) {
+
+        return new Promise(
+
+            resolve =>
+
+                setTimeout(
+
+                    resolve,
+
+                    ms
+
+                )
+
+        );
 
     }
 

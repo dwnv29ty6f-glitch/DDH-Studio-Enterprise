@@ -350,76 +350,8 @@ const Mitarbeiter = {
     `<h1 style="color:red">TEST</h1>`
 );
 
-            `
 
-<div class="dialogGrid">
 
-<div class="dialogLabel">
-
-<label>Vorname</label>
-
-<input
-id="dlgVorname"
-type="text">
-
-</div>
-
-<div class="dialogLabel">
-
-<label>Nachname</label>
-
-<input
-id="dlgNachname"
-type="text">
-
-</div>
-
-<div class="dialogLabel">
-
-<label>Bereich</label>
-
-<input
-id="dlgBereich"
-type="text"
-value="Küche">
-
-</div>
-
-<div class="dialogLabel">
-
-<label>Position</label>
-
-<input
-id="dlgPosition"
-type="text"
-value="Mitarbeiter">
-
-</div>
-
-<div class="dialogLabel">
-
-<label>Personalnummer</label>
-
-<input
-id="dlgPersonalnummer"
-type="text">
-
-</div>
-
-<div class="dialogLabel">
-
-<label>Vertragsstunden</label>
-
-<input
-id="dlgVertragsstunden"
-type="number"
-value="39">
-
-</div>
-
-</div>
-
-`
 
         );
 

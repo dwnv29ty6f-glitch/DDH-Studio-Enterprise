@@ -96,23 +96,19 @@ const Mitarbeiter = {
     },
         listeAktualisieren() {
 
-        let html = "";
+    let html = "";
 
-        if (this.daten.length === 0) {
+    if (this.daten.length === 0) {
 
-            html = `
+        html = `
 
 <div class="karte">
 
-    <h2>
-
-        Keine Mitarbeiter vorhanden
-
-    </h2>
+    <h2>Keine Mitarbeiter vorhanden</h2>
 
     <p>
 
-        Tippe oben auf "➕ Mitarbeiter", um den ersten Mitarbeiter anzulegen.
+        Tippe oben auf „➕ Mitarbeiter“, um den ersten Mitarbeiter anzulegen.
 
     </p>
 
@@ -120,100 +116,42 @@ const Mitarbeiter = {
 
 `;
 
-        } else {
+    } else {
 
-            this.daten.forEach(mitarbeiter => {
+        this.daten.forEach(mitarbeiter => {
 
-                html += `
+            html += `
 
 <div class="karte mitarbeiterKarte">
 
-   <div class="mitarbeiterLinks">
+    <div class="mitarbeiterLinks">
 
-    <div
+        <div
+            class="avatar"
+            style="background:${mitarbeiter.farbe || '#0077C8'};">
 
-        class="avatar"
+            ${((mitarbeiter.vorname || "?").charAt(0)).toUpperCase()}
 
-        style="background:${mitarbeiter.farbe || '#0077C8'};">
+        </div>
 
-        ${((mitarbeiter.vorname || mitarbeiter.name || "?").charAt(0)).toUpperCase()}
+        <div>
 
-    </div>
+            <h2>
 
-    <div>
+                ${(mitarbeiter.vorname || "")}
+                ${(mitarbeiter.nachname || "")}
 
-        <h2>
+            </h2>
 
-            ${(mitarbeiter.vorname || "")}
+            <p><strong>Position:</strong> ${mitarbeiter.position || "-"}</p>
 
-            ${(mitarbeiter.nachname || "")}
+            <p><strong>Bereich:</strong> ${mitarbeiter.bereich || "-"}</p>
 
-        </h2>
+            <p><strong>Personalnummer:</strong> ${mitarbeiter.personalnummer || "-"}</p>
 
-        <p>
+            <p><strong>Vertragsstunden:</strong> ${mitarbeiter.vertragsstunden || 0} Std.</p>
 
-            Position:
-            ${mitarbeiter.position || "-"}
-
-        </p>
-
-        <p>
-
-            Bereich:
-            ${mitarbeiter.bereich || "-"}
-
-        </p>
-
-        <p>
-
-            Personalnummer:
-            ${mitarbeiter.personalnummer || "-"}
-
-        </p>
-
-        <p>
-
-            Vertragsstunden:
-            ${mitarbeiter.vertragsstunden || 0} Std.
-
-        </p>
-
-        <p>
-
-            Status:
-            ${mitarbeiter.status || "Aktiv"}
-
-        </p>
-
-    </div>
-
-<p>
-
-    Bereich:
-    ${mitarbeiter.bereich || "-"}
-
-</p>
-
-<p>
-
-    Personalnummer:
-    ${mitarbeiter.personalnummer || "-"}
-
-</p>
-
-<p>
-
-    Vertragsstunden:
-    ${mitarbeiter.vertragsstunden || 0} Std.
-
-</p>
-
-<p>
-
-    Status:
-    ${mitarbeiter.status || "Aktiv"}
-
-</p>
+            <p><strong>Status:</strong> ${mitarbeiter.status || "Aktiv"}</p>
 
         </div>
 
@@ -222,9 +160,7 @@ const Mitarbeiter = {
     <div class="mitarbeiterRechts">
 
         <button
-
             class="sekundenButton bearbeiten"
-
             data-id="${mitarbeiter.id}">
 
             ✏️
@@ -232,9 +168,7 @@ const Mitarbeiter = {
         </button>
 
         <button
-
             class="sekundenButton loeschen"
-
             data-id="${mitarbeiter.id}">
 
             🗑
@@ -247,19 +181,19 @@ const Mitarbeiter = {
 
 `;
 
-            });
+        });
 
-        }
+    }
 
-        DOM.html(
+    DOM.html(
 
-            "mitarbeiterListe",
+        "mitarbeiterListe",
 
-            html
+        html
 
-        );
+    );
 
-    },
+},
         events() {
 
         const neu = DOM.id(

@@ -324,57 +324,87 @@ const Mitarbeiter = {
 <div class="dialogGrid">
 
 <div class="dialogLabel">
-
 <label>Vorname</label>
-
 <input id="dlgVorname" type="text">
-
 </div>
 
 <div class="dialogLabel">
-
 <label>Nachname</label>
-
 <input id="dlgNachname" type="text">
-
 </div>
 
 <div class="dialogLabel">
-
-<label>Bereich</label>
-
-<input id="dlgBereich" type="text" value="Küche">
-
-</div>
-
-<div class="dialogLabel">
-
-<label>Position</label>
-
-<input id="dlgPosition" type="text" value="Mitarbeiter">
-
-</div>
-
-<div class="dialogLabel">
-
 <label>Personalnummer</label>
-
 <input id="dlgPersonalnummer" type="text">
-
 </div>
 
 <div class="dialogLabel">
+<label>Bereich</label>
+<input id="dlgBereich" type="text" value="Küche">
+</div>
 
+<div class="dialogLabel">
+<label>Position</label>
+<input id="dlgPosition" type="text" value="Mitarbeiter">
+</div>
+
+<div class="dialogLabel">
+<label>Status</label>
+<select id="dlgStatus">
+<option>Aktiv</option>
+<option>Urlaub</option>
+<option>Krank</option>
+<option>Elternzeit</option>
+<option>Inaktiv</option>
+</select>
+</div>
+
+<div class="dialogLabel">
 <label>Wochenstunden</label>
-
 <input id="dlgWochenstunden" type="number" value="39">
+</div>
 
+<div class="dialogLabel">
+<label>Telefon</label>
+<input id="dlgTelefon" type="text">
+</div>
+
+<div class="dialogLabel dialogGridVoll">
+<label>E-Mail</label>
+<input id="dlgEmail" type="email">
+</div>
+
+<div class="dialogLabel dialogGridVoll">
+<label>Straße</label>
+<input id="dlgStrasse" type="text">
+</div>
+
+<div class="dialogLabel">
+<label>PLZ</label>
+<input id="dlgPlz" type="text">
+</div>
+
+<div class="dialogLabel">
+<label>Ort</label>
+<input id="dlgOrt" type="text">
+</div>
+
+<div class="dialogLabel">
+<label>Geburtsdatum</label>
+<input id="dlgGeburtsdatum" type="date">
+</div>
+
+<div class="dialogLabel">
+<label>Eintrittsdatum</label>
+<input id="dlgEintrittsdatum" type="date">
+</div>
+
+<div class="dialogLabel dialogGridVoll">
+<label>Notiz</label>
+<textarea id="dlgNotiz" rows="4"></textarea>
 </div>
 
 </div>
-
-`
-    );
 
     DOM.id(
 

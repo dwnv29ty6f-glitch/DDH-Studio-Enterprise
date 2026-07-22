@@ -1,17 +1,13 @@
 "use strict";
 
 /*
-===========================================
+================================================
 DDH Studio Enterprise 10.0
 Start
-===========================================
+================================================
 */
 
-const DDH = {
-
-    version: APP.version,
-
-    gestartet: false,
+const START = {
 
     starten() {
 
@@ -19,55 +15,30 @@ const DDH = {
 
         console.log(
 
-            APP.name +
+            CONFIG.app.name +
             " " +
-            APP.version +
-            " startet..."
+            CONFIG.app.version
 
         );
-
-        this.initialisieren();
-
-    },
-
-    initialisieren() {
-
-        this.datenLaden();
-
-        Navigation.initialisieren();
-
-Navigation.oeffnen("dashboard");
-        this.gestartet = true;
 
         console.log(
 
-            APP.name +
-            " erfolgreich gestartet."
+            "Starte Anwendung..."
 
         );
 
-    },
+        Navigation.initialisieren();
 
-    datenLaden() {
+        Navigation.oeffnen(
 
-        window.mitarbeiter = Speicher.laden(
-            "ddh_mitarbeiter",
-            []
+            "dashboard"
+
         );
 
-        window.termine = Speicher.laden(
-            "ddh_termine",
-            []
-        );
+        console.log(
 
-        window.todos = Speicher.laden(
-            "ddh_todos",
-            []
-        );
+            "Anwendung gestartet."
 
-        window.schichten = Speicher.laden(
-            "ddh_schichten",
-            []
         );
 
     }
@@ -80,7 +51,7 @@ document.addEventListener(
 
     () => {
 
-        DDH.starten();
+        START.starten();
 
     }
 

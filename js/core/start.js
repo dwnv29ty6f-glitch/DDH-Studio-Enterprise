@@ -16,14 +16,16 @@ const START = {
         console.log(
 
             CONFIG.app.name +
+
             " " +
+
             CONFIG.app.version
 
         );
 
         console.log(
 
-            "Starte Anwendung..."
+            "Starte DDH Studio..."
 
         );
 
@@ -37,7 +39,7 @@ const START = {
 
         console.log(
 
-            "Anwendung gestartet."
+            "DDH Studio gestartet."
 
         );
 

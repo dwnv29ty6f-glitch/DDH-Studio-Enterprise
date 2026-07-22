@@ -1308,3 +1308,180 @@ SCHICHTPLAN
     color:var(--text-light);
 
 }
+/*
+================================================
+DIALOG
+================================================
+*/
+
+.dialogOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(15,35,55,.45);
+
+    backdrop-filter:blur(10px);
+
+    -webkit-backdrop-filter:blur(10px);
+
+    z-index:9999;
+
+    animation:dialogEinblenden .25s ease;
+
+}
+
+.dialogFenster{
+
+    width:min(900px,92vw);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:rgba(255,255,255,.96);
+
+    border-radius:30px;
+
+    box-shadow:0 30px 80px rgba(0,0,0,.25);
+
+    border:1px solid rgba(255,255,255,.8);
+
+}
+
+.dialogKopf{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:28px 32px;
+
+    background:var(--gradient-primary);
+
+    color:#FFFFFF;
+
+}
+
+.dialogKopf h2{
+
+    font-size:32px;
+
+    font-weight:800;
+
+}
+
+.dialogSchliessen{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    color:#FFFFFF;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.dialogSchliessen:hover{
+
+    background:rgba(255,255,255,.3);
+
+    transform:rotate(90deg);
+
+}
+
+.dialogInhalt{
+
+    padding:32px;
+
+    display:grid;
+
+    gap:20px;
+
+}
+
+.dialogFuss{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:18px;
+
+    padding:24px 32px;
+
+    border-top:1px solid var(--border);
+
+    background:#F8FBFE;
+
+}
+
+.dialogGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.dialogGridVoll{
+
+    grid-column:1 / -1;
+
+}
+
+.dialogLabel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+}
+
+@keyframes dialogEinblenden{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.95);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}

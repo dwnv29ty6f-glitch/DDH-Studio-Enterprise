@@ -1,195 +1,174 @@
 "use strict";
 
-// ==========================================
-// DDH Studio Enterprise 10.0
-// Mitarbeiterverwaltung
-// ==========================================
+/*
+================================================
+DDH Studio Enterprise 10.0
+Mitarbeiter
+================================================
+*/
 
-let mitarbeiterListe;
+const Mitarbeiter = {
 
-let dashboardMitarbeiter;
-let mitarbeiter =
-JSON.parse(
-localStorage.getItem("ddhMitarbeiter")
-) || [];
+    daten: [],
 
-function mitarbeiterSpeichern(){
+    anzeigen() {
 
-    localStorage.setItem(
-        "ddhMitarbeiter",
-        JSON.stringify(mitarbeiter)
-    );
+        this.daten = Speicher.laden(
 
-}
+            CONFIG.speicher.mitarbeiter,
 
-function mitarbeiterAnzeigen(){
+            []
 
-    mitarbeiterListe =
-    document.getElementById(
-        "mitarbeiterListe"
-    );
+        );
 
-    dashboardMitarbeiter =
-    document.getElementById(
-        "dashboardMitarbeiter"
-    );
+        let html = `
 
-    if(!mitarbeiterListe){
-        return;
-    }
+<div
+    id="seite-mitarbeiter"
+    class="seite aktiv">
 
-    mitarbeiterListe.innerHTML = "";
+    <div class="karte">
 
-    mitarbeiter.forEach((person,index)=>{
+        <h1>
 
-        const karte =
-        document.createElement("div");
+            Mitarbeiter
 
-        karte.className = "mitarbeiterKarte";
+        </h1>
 
-        karte.innerHTML = `
-            <div class="mitarbeiterName">
-                ${person.name}
-            </div>
+        <p>
 
-            <div class="mitarbeiterButtons">
+            Mitarbeiterverwaltung
 
-                <button
-                onclick="mitarbeiterBearbeiten(${index})">
-                ✏️
-                </button>
+        </p>
 
-                <button
-                onclick="mitarbeiterLoeschen(${index})">
-                🗑️
-                </button>
+        <div class="toolbar">
 
-            </div>
-        `;
+            <input
+                id="mitarbeiterSuche"
+                type="text"
+                placeholder="Mitarbeiter suchen...">
 
-        mitarbeiterListe.appendChild(karte);
+            <button
+                id="btnNeuerMitarbeiter"
+                class="hauptButton">
 
-    });
+                ➕ Mitarbeiter
 
-    if(dashboardMitarbeiter){
+            </button>
 
-        dashboardMitarbeiter.textContent =
-        mitarbeiter.length;
+        </div>
 
-    }
+    </div>
 
-}
-function mitarbeiterHinzufuegen(){
+    <div
+        id="mitarbeiterListe"
+        class="mitarbeiterListe">
 
-    const name = prompt("Name des Mitarbeiters:");
+`;
 
-    if(!name){
-        return;
-    }
+        if (this.daten.length === 0) {
 
-    const neuerName = name.trim();
+            html += `
 
-    if(neuerName===""){
-        return;
-    }
+<div class="karte">
 
-    if(
-        mitarbeiter.some(m =>
-            m.name.toLowerCase() === neuerName.toLowerCase()
-        )
-    ){
-        alert("Mitarbeiter existiert bereits.");
-        return;
-    }
+    Noch keine Mitarbeiter vorhanden.
 
-    mitarbeiter.push({
-        name: neuerName
-    });
+</div>
 
-    mitarbeiterSpeichern();
+`;
 
-    mitarbeiterAnzeigen();
+        }
 
-}
+        this.daten.forEach(
 
-function mitarbeiterBearbeiten(index){
+            mitarbeiter => {
 
-    const neu = prompt(
-        "Neuer Name:",
-        mitarbeiter[index].name
-    );
+                html += `
 
-    if(!neu){
-        return;
-    }
+<div class="mitarbeiterKarte">
 
-    mitarbeiter[index].name = neu.trim();
+    <div class="mitarbeiterName">
 
-    mitarbeiterSpeichern();
+        ${mitarbeiter.name || "-"}
 
-    mitarbeiterAnzeigen();
+    </div>
 
-}
+    <div class="mitarbeiterInfo">
 
-function mitarbeiterLoeschen(index){
+        Personalnummer:
+        ${mitarbeiter.personalnummer || "-"}
 
-    if(
-        !confirm(
-            mitarbeiter[index].name +
-            " wirklich löschen?"
-        )
-    ){
-        return;
-    }
+    </div>
 
-    mitarbeiter.splice(index,1);
+    <div class="mitarbeiterInfo">
 
-    mitarbeiterSpeichern();
+        Abteilung:
+        ${mitarbeiter.abteilung || "-"}
 
-    mitarbeiterAnzeigen();
+    </div>
 
-}
+    <div class="mitarbeiterInfo">
 
-window.mitarbeiterBearbeiten =
-mitarbeiterBearbeiten;
+        Vertragsstunden:
+        ${mitarbeiter.stunden || "-"}
 
-window.mitarbeiterLoeschen =
-mitarbeiterLoeschen;
-// ==========================================
-// Start
-// ==========================================
-function mitarbeiterZeichnen(){
+    </div>
 
-    mitarbeiterAnzeigen();
+    <div class="mitarbeiterButtons">
 
-}
-document.addEventListener("DOMContentLoaded", () => {
+        <button
+            class="sekundenButton">
 
+            Bearbeiten
 
-    const btn =
-    document.getElementById("mitarbeiterSpeichern");
+        </button>
 
-    const eingabe =
-    document.getElementById("mitarbeiterName");
+        <button
+            class="sekundenButton">
 
-    if(btn){
+            Löschen
 
-        btn.onclick = mitarbeiterHinzufuegen;
+        </button>
 
-    }
+    </div>
 
-    if(eingabe){
+</div>
 
-        eingabe.addEventListener("keydown", e=>{
-
-            if(e.key==="Enter"){
-
-                mitarbeiterHinzufuegen();
+`;
 
             }
 
-        });
+        );
+
+        html += `
+
+    </div>
+
+</div>
+
+`;
+
+        DOM.html(
+
+            "inhalt",
+
+            html
+
+        );
+
+    },
+
+    speichern() {
+
+        Speicher.speichern(
+
+            CONFIG.speicher.mitarbeiter,
+
+            this.daten
+
+        );
 
     }
 
-});
+};

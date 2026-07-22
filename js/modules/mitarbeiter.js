@@ -3,7 +3,7 @@
 /*
 ================================================
 DDH Studio Enterprise 10.0
-Mitarbeiter
+Mitarbeiterverwaltung
 ================================================
 */
 
@@ -21,35 +21,58 @@ const Mitarbeiter = {
 
         );
 
-        let html = `
+        DOM.html(
 
-<div
-    id="seite-mitarbeiter"
-    class="seite aktiv">
+            "inhalt",
 
-    <div class="karte">
+            this.html()
+
+        );
+
+        this.listeAktualisieren();
+
+        this.events();
+
+    },
+
+    html() {
+
+        return `
+
+<div class="mitarbeiter">
+
+    <div class="welcomeCard">
 
         <h1>
 
-            Mitarbeiter
+            👥 Mitarbeiter
 
         </h1>
 
         <p>
 
-            Mitarbeiterverwaltung
+            Mitarbeiterverwaltung der DDH Service GmbH
 
         </p>
+
+    </div>
+
+    <div class="karte">
 
         <div class="toolbar">
 
             <input
+
                 id="mitarbeiterSuche"
+
                 type="text"
+
                 placeholder="Mitarbeiter suchen...">
 
             <button
-                id="btnNeuerMitarbeiter"
+
+                id="btnMitarbeiterNeu"
+
                 class="hauptButton">
 
                 ➕ Mitarbeiter
@@ -61,73 +84,107 @@ const Mitarbeiter = {
     </div>
 
     <div
-        id="mitarbeiterListe"
-        class="mitarbeiterListe">
+
+        id="mitarbeiterListe">
+
+    </div>
+
+</div>
 
 `;
+
+    },
+        listeAktualisieren() {
+
+        let html = "";
 
         if (this.daten.length === 0) {
 
-            html += `
+            html = `
 
 <div class="karte">
 
-    Noch keine Mitarbeiter vorhanden.
+    <h2>
+
+        Keine Mitarbeiter vorhanden
+
+    </h2>
+
+    <p>
+
+        Tippe oben auf "➕ Mitarbeiter", um den ersten Mitarbeiter anzulegen.
+
+    </p>
 
 </div>
 
 `;
 
-        }
+        } else {
 
-        this.daten.forEach(
-
-            mitarbeiter => {
+            this.daten.forEach(mitarbeiter => {
 
                 html += `
 
-<div class="mitarbeiterKarte">
+<div class="karte mitarbeiterKarte">
 
-    <div class="mitarbeiterName">
+    <div class="mitarbeiterLinks">
 
-        ${mitarbeiter.name || "-"}
+        <div class="avatar">
+
+            ${(mitarbeiter.name || "?").charAt(0).toUpperCase()}
+
+        </div>
+
+        <div>
+
+            <h2>
+
+                ${mitarbeiter.name}
+
+            </h2>
+
+            <p>
+
+                Bereich: ${mitarbeiter.bereich || "-"}
+
+            </p>
+
+            <p>
+
+                Personalnummer: ${mitarbeiter.personalnummer || "-"}
+
+            </p>
+
+            <p>
+
+                Wochenstunden: ${mitarbeiter.wochenstunden || 0}
+
+            </p>
+
+        </div>
 
     </div>
 
-    <div class="mitarbeiterInfo">
-
-        Personalnummer:
-        ${mitarbeiter.personalnummer || "-"}
-
-    </div>
-
-    <div class="mitarbeiterInfo">
-
-        Abteilung:
-        ${mitarbeiter.abteilung || "-"}
-
-    </div>
-
-    <div class="mitarbeiterInfo">
-
-        Vertragsstunden:
-        ${mitarbeiter.stunden || "-"}
-
-    </div>
-
-    <div class="mitarbeiterButtons">
+    <div class="mitarbeiterRechts">
 
         <button
-            class="sekundenButton">
 
-            Bearbeiten
+            class="sekundenButton bearbeiten"
+
+            data-id="${mitarbeiter.id}">
+
+            ✏️
 
         </button>
 
         <button
-            class="sekundenButton">
 
-            Löschen
+            class="sekundenButton loeschen"
+
+            data-id="${mitarbeiter.id}">
+
+            🗑
 
         </button>
 
@@ -137,29 +194,192 @@ const Mitarbeiter = {
 
 `;
 
-            }
+            });
 
-        );
-
-        html += `
-
-    </div>
-
-</div>
-
-`;
+        }
 
         DOM.html(
 
-            "inhalt",
+            "mitarbeiterListe",
 
             html
 
         );
 
     },
+        events() {
 
-    speichern() {
+        const neu = DOM.id(
+
+            "btnMitarbeiterNeu"
+
+        );
+
+        if (neu) {
+
+            neu.onclick = () => {
+
+                this.neu();
+
+            };
+
+        }
+
+        const suche = DOM.id(
+
+            "mitarbeiterSuche"
+
+        );
+
+        if (suche) {
+
+            suche.oninput = () => {
+
+                this.suchen(
+
+                    suche.value
+
+                );
+
+            };
+
+        }
+
+        document
+
+            .querySelectorAll(
+
+                ".bearbeiten"
+
+            )
+
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    this.bearbeiten(
+
+                        button.dataset.id
+
+                    );
+
+                };
+
+            });
+
+        document
+
+            .querySelectorAll(
+
+                ".loeschen"
+
+            )
+
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    this.loeschen(
+
+                        button.dataset.id
+
+                    );
+
+                };
+
+            });
+
+    },
+
+    suchen(text) {
+
+        text = text.toLowerCase();
+
+        document
+
+            .querySelectorAll(
+
+                ".mitarbeiterKarte"
+
+            )
+
+            .forEach(karte => {
+
+                const sichtbar =
+
+                    karte.innerText
+
+                    .toLowerCase()
+
+                    .includes(text);
+
+                karte.style.display =
+
+                    sichtbar
+
+                    ? ""
+
+                    : "none";
+
+            });
+
+    },
+
+    neu() {
+
+        const name = prompt(
+
+            "Name"
+
+        );
+
+        if (!name) {
+
+            return;
+
+        }
+
+        const bereich = prompt(
+
+            "Bereich",
+
+            "Küche"
+
+        ) || "Küche";
+
+        const personalnummer = prompt(
+
+            "Personalnummer",
+
+            ""
+
+        ) || "";
+
+        const wochenstunden = Number(
+
+            prompt(
+
+                "Wochenstunden",
+
+                "39"
+
+            )
+
+        ) || 39;
+
+        this.daten.push({
+
+            id: Date.now().toString(),
+
+            name,
+
+            bereich,
+
+            personalnummer,
+
+            wochenstunden
+
+        });
 
         Speicher.speichern(
 
@@ -168,6 +388,115 @@ const Mitarbeiter = {
             this.daten
 
         );
+
+        this.anzeigen();
+
+    },
+        bearbeiten(id) {
+
+        const mitarbeiter = this.daten.find(
+
+            m => m.id === id
+
+        );
+
+        if (!mitarbeiter) {
+
+            return;
+
+        }
+
+        const name = prompt(
+
+            "Name",
+
+            mitarbeiter.name
+
+        );
+
+        if (!name) {
+
+            return;
+
+        }
+
+        mitarbeiter.name = name;
+
+        mitarbeiter.bereich =
+
+            prompt(
+
+                "Bereich",
+
+                mitarbeiter.bereich
+
+            ) || mitarbeiter.bereich;
+
+        mitarbeiter.personalnummer =
+
+            prompt(
+
+                "Personalnummer",
+
+                mitarbeiter.personalnummer
+
+            ) || mitarbeiter.personalnummer;
+
+        mitarbeiter.wochenstunden = Number(
+
+            prompt(
+
+                "Wochenstunden",
+
+                mitarbeiter.wochenstunden
+
+            )
+
+        ) || mitarbeiter.wochenstunden;
+
+        Speicher.speichern(
+
+            CONFIG.speicher.mitarbeiter,
+
+            this.daten
+
+        );
+
+        this.anzeigen();
+
+    },
+
+    loeschen(id) {
+
+        if (
+
+            !confirm(
+
+                "Mitarbeiter wirklich löschen?"
+
+            )
+
+        ) {
+
+            return;
+
+        }
+
+        this.daten = this.daten.filter(
+
+            m => m.id !== id
+
+        );
+
+        Speicher.speichern(
+
+            CONFIG.speicher.mitarbeiter,
+
+            this.daten
+
+        );
+
+        this.anzeigen();
 
     }
 

@@ -67,19 +67,25 @@ const Dialog = {
 
     speichern(callback) {
 
-        const button = DOM.id(
+    const button = DOM.id(
 
-            "dialogSpeichern"
+        "dialogSpeichern"
 
-        );
+    );
 
-        if (button) {
+    if (!button) {
 
-            button.onclick = callback;
-
-        }
+        return;
 
     }
+
+    button.onclick = () => {
+
+        callback();
+
+    };
+
+}
 
 };
 

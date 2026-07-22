@@ -47,7 +47,18 @@ oeffnen(seite) {
         );
 
         this.aktuelleSeite = seite;
+const seiten =
+    document.querySelectorAll(
+        ".seite"
+    );
 
+seiten.forEach(element => {
+
+    element.classList.remove(
+        "aktiv"
+    );
+
+});
     }
 
 };

@@ -351,109 +351,143 @@ const Mitarbeiter = {
 
     },
 
-    neu() {
+        neu() {
 
-        const vorname =
+        Dialog.oeffnen(
 
-            prompt("Vorname");
+            "Neuer Mitarbeiter",
 
-        if (!vorname) return;
+            `
 
-        const nachname =
+<div class="dialogGrid">
 
-            prompt("Nachname");
+    <div class="dialogLabel">
 
-        if (!nachname) return;
+        <label>Vorname</label>
 
-        const bereich =
+        <input
+            id="dlgVorname"
+            type="text">
 
-            prompt(
+    </div>
 
-                "Bereich",
+    <div class="dialogLabel">
 
-                "Küche"
+        <label>Nachname</label>
 
-            ) || "Küche";
+        <input
+            id="dlgNachname"
+            type="text">
 
-        const position =
+    </div>
 
-            prompt(
+    <div class="dialogLabel">
 
-                "Position",
+        <label>Bereich</label>
 
-                "Mitarbeiter"
+        <input
+            id="dlgBereich"
+            type="text"
+            value="Küche">
 
-            ) || "Mitarbeiter";
+    </div>
 
-        const personalnummer =
+    <div class="dialogLabel">
 
-            prompt(
+        <label>Position</label>
 
-                "Personalnummer",
+        <input
+            id="dlgPosition"
+            type="text"
+            value="Mitarbeiter">
 
-                ""
+    </div>
 
-            ) || "";
+    <div class="dialogLabel">
 
-        const vertragsstunden =
+        <label>Personalnummer</label>
 
-            Number(
+        <input
+            id="dlgPersonalnummer"
+            type="text">
 
-                prompt(
+    </div>
 
-                    "Vertragsstunden",
+    <div class="dialogLabel">
 
-                    "39"
+        <label>Vertragsstunden</label>
 
-                )
+        <input
+            id="dlgVertragsstunden"
+            type="number"
+            value="39">
 
-            ) || 39;
+    </div>
 
-        this.daten.push({
+</div>
 
-            id:
-
-                Date.now().toString(),
-
-            vorname,
-
-            nachname,
-
-            name:
-
-                vorname +
-
-                " " +
-
-                nachname,
-
-            bereich,
-
-            position,
-
-            personalnummer,
-
-            vertragsstunden,
-
-            status:
-
-                "Aktiv",
-
-            farbe:
-
-                "#0077C8"
-
-        });
-
-        Speicher.speichern(
-
-            CONFIG.speicher.mitarbeiter,
-
-            this.daten
+`
 
         );
 
-        this.anzeigen();
+        Dialog.abbrechen();
+
+        Dialog.speichern(
+
+            () => {
+
+                this.daten.push({
+
+                    id: Date.now().toString(),
+
+                    vorname:
+                        DOM.id("dlgVorname").value,
+
+                    nachname:
+                        DOM.id("dlgNachname").value,
+
+                    name:
+                        DOM.id("dlgVorname").value +
+                        " " +
+                        DOM.id("dlgNachname").value,
+
+                    bereich:
+                        DOM.id("dlgBereich").value,
+
+                    position:
+                        DOM.id("dlgPosition").value,
+
+                    personalnummer:
+                        DOM.id("dlgPersonalnummer").value,
+
+                    vertragsstunden:
+                        Number(
+                            DOM.id("dlgVertragsstunden").value
+                        ),
+
+                    status:
+                        "Aktiv",
+
+                    farbe:
+                        "#0077C8"
+
+                });
+
+                Speicher.speichern(
+
+                    CONFIG.speicher.mitarbeiter,
+
+                    this.daten
+
+                );
+
+                Dialog.schliessen();
+
+                this.anzeigen();
+
+            }
+
+        );
 
     },
         bearbeiten(id) {

@@ -447,6 +447,16 @@ const Mitarbeiter = {
         placeholder="max.mustermann@ddh.de">
 
 </div>
+
+<div class="dialogLabel">
+
+    <label>Eintrittsdatum</label>
+
+    <input
+        id="dlgEintritt"
+        type="date">
+
+</div>
 </div>
 
 `

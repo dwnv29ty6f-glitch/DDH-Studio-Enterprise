@@ -649,6 +649,42 @@ telefon:
         });
 
     },
+    
+    avatarAktualisieren() {
+
+    const vorname =
+
+        DOM.id("dlgVorname")?.value || "";
+
+    const nachname =
+
+        DOM.id("dlgNachname")?.value || "";
+
+    let initialen = "";
+
+    if (vorname.length > 0) {
+
+        initialen += vorname.charAt(0).toUpperCase();
+
+    }
+
+    if (nachname.length > 0) {
+
+        initialen += nachname.charAt(0).toUpperCase();
+
+    }
+
+    const avatar = DOM.id("profilAvatar");
+
+    if (avatar) {
+
+        avatar.textContent =
+
+            initialen || "👤";
+
+    }
+
+},
         bearbeiten(id) {
 
     const mitarbeiter = this.daten.find(

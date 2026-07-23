@@ -65,15 +65,25 @@ const DOM = {
 
     anzeigen(id) {
 
-        const element = this.id(id);
+    const element = this.id(id);
 
-        if(element){
+    if(!element){
 
-            element.style.display = "";
+        return;
 
-        }
+    }
 
-    },
+    if(id === "dialogOverlay"){
+
+        element.style.display = "flex";
+
+    }else{
+
+        element.style.display = "block";
+
+    }
+
+},
 
     ausblenden(id) {
 

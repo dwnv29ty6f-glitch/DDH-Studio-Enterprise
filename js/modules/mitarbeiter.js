@@ -460,7 +460,13 @@ const Mitarbeiter = {
 
                 ),
 
-                status: "Aktiv",
+                status:
+
+    DOM.id(
+
+        "dlgStatus"
+
+    ).value,
 
                 farbe: "#0077C8"
 

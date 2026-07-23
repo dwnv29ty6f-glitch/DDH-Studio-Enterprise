@@ -711,10 +711,11 @@ telefon:
 
         <label>Vorname</label>
 
-        <input
-            id="dlgVorname"
-            type="text"
-            value="${mitarbeiter.vorname || ""}">
+       <input
+    id="dlgVorname"
+    type="text"
+    value="${mitarbeiter.vorname || ""}"
+    oninput="Mitarbeiter.avatarAktualisieren()">
 
     </div>
 
@@ -722,10 +723,13 @@ telefon:
 
         <label>Nachname</label>
 
-        <input
-            id="dlgNachname"
-            type="text"
-            value="${mitarbeiter.nachname || ""}">
+       <label>Nachname</label>
+
+<input
+    id="dlgNachname"
+    type="text"
+    value="${mitarbeiter.nachname || ""}"
+    oninput="Mitarbeiter.avatarAktualisieren()">
 
     </div>
 

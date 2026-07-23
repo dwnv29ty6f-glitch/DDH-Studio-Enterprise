@@ -28,7 +28,7 @@ const Dialog = {
         inhalt
 
     );
-alert("HTML wurde eingefügt");
+
     DOM.anzeigen(
 
         "dialogOverlay"

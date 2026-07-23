@@ -333,7 +333,7 @@ const Mitarbeiter = {
     },
 
     neu() {
-
+alert("neu() wurde gestartet");
         Dialog.oeffnen(
 
             "Neuer Mitarbeiter",

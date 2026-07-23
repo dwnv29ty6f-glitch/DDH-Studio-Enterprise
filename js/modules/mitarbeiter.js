@@ -459,6 +459,52 @@ const Mitarbeiter = {
         type="date">
 
 </div>
+
+<div class="dialogLabel">
+
+    <label>Vertragsart</label>
+
+    <select id="dlgVertragsart">
+
+        <option value="Vollzeit" selected>
+
+            Vollzeit
+
+        </option>
+
+        <option value="Teilzeit">
+
+            Teilzeit
+
+        </option>
+
+        <option value="Minijob">
+
+            Minijob
+
+        </option>
+
+        <option value="Befristet">
+
+            Befristet
+
+        </option>
+
+        <option value="Ausbildung">
+
+            Ausbildung
+
+        </option>
+
+        <option value="Praktikum">
+
+            Praktikum
+
+        </option>
+
+    </select>
+
+</div>
 </div>
 
 `

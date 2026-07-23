@@ -389,7 +389,39 @@ const Mitarbeiter = {
         <input id="dlgVertragsstunden" type="number" value="39">
 
     </div>
+<div class="dialogLabel">
 
+    <label>Status</label>
+
+    <select id="dlgStatus">
+
+        <option value="Aktiv" selected>
+
+            🟢 Aktiv
+
+        </option>
+
+        <option value="Urlaub">
+
+            🟡 Urlaub
+
+        </option>
+
+        <option value="Krank">
+
+            🟠 Krank
+
+        </option>
+
+        <option value="Ausgeschieden">
+
+            🔴 Ausgeschieden
+
+        </option>
+
+    </select>
+
+</div>
 </div>
 
 `

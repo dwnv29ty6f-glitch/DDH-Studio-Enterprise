@@ -4,7 +4,6 @@
 ================================================
 DDH Studio Enterprise 10.0
 Mitarbeiterverwaltung
-Teil 1
 ================================================
 */
 
@@ -100,7 +99,11 @@ const Mitarbeiter = {
 
         let html = "";
 
-        if (this.daten.length === 0) {
+        if (
+
+            this.daten.length === 0
+
+        ) {
 
             html = `
 
@@ -154,35 +157,15 @@ const Mitarbeiter = {
 
             </h2>
 
-            <p>
+            <p>💼 ${mitarbeiter.position || "-"}</p>
 
-                💼 ${mitarbeiter.position || "-"}
+            <p>🏢 ${mitarbeiter.bereich || "-"}</p>
 
-            </p>
+            <p>🆔 ${mitarbeiter.personalnummer || "-"}</p>
 
-            <p>
+            <p>⏰ ${mitarbeiter.vertragsstunden || 0} Std.</p>
 
-                🏢 ${mitarbeiter.bereich || "-"}
-
-            </p>
-
-            <p>
-
-                🆔 ${mitarbeiter.personalnummer || "-"}
-
-            </p>
-
-            <p>
-
-                ⏰ ${mitarbeiter.vertragsstunden || 0} Std.
-
-            </p>
-
-            <p>
-
-                ✅ ${mitarbeiter.status || "Aktiv"}
-
-            </p>
+            <p>✅ ${mitarbeiter.status || "Aktiv"}</p>
 
         </div>
 
@@ -233,93 +216,91 @@ const Mitarbeiter = {
     },
         events() {
 
-    const neu = DOM.id(
+        const neu = DOM.id(
 
-        "btnMitarbeiterNeu"
+            "btnMitarbeiterNeu"
 
-    );
+        );
 
-    if (neu) {
+        if (neu) {
 
-        neu.onclick = () => {
+            neu.onclick = () => {
 
-            this.neu();
+                this.neu();
 
-        };
+            };
 
-    }
+        }
 
-    const suche = DOM.id(
+        const suche = DOM.id(
 
-        "mitarbeiterSuche"
+            "mitarbeiterSuche"
 
-    );
+        );
 
-    if (suche) {
+        if (suche) {
 
-        suche.oninput = () => {
+            suche.oninput = () => {
 
-            this.suchen(
+                this.suchen(
 
-                suche.value
-
-            );
-
-        };
-
-    }
-
-    document
-
-        .querySelectorAll(
-
-            ".bearbeiten"
-
-        )
-
-        .forEach(button => {
-
-            button.onclick = () => {
-
-                this.bearbeiten(
-
-                    button.dataset.id
+                    suche.value
 
                 );
 
             };
 
-        });
+        }
 
-    document
+        document
 
-        .querySelectorAll(
+            .querySelectorAll(
 
-            ".loeschen"
+                ".bearbeiten"
 
-        )
+            )
 
-        .forEach(button => {
+            .forEach(button => {
 
-            button.onclick = () => {
+                button.onclick = () => {
 
-                this.loeschen(
+                    this.bearbeiten(
 
-                    button.dataset.id
+                        button.dataset.id
 
-                );
+                    );
 
-            };
+                };
 
-        });
+            });
 
-},
+        document
+
+            .querySelectorAll(
+
+                ".loeschen"
+
+            )
+
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    this.loeschen(
+
+                        button.dataset.id
+
+                    );
+
+                };
+
+            });
+
+    },
 
     suchen(text) {
 
-        text =
-
-            text.toLowerCase();
+        text = text.toLowerCase();
 
         document
 
@@ -351,13 +332,13 @@ const Mitarbeiter = {
 
     },
 
-        neu() {
+    neu() {
 
-    Dialog.oeffnen(
+        Dialog.oeffnen(
 
-        "Neuer Mitarbeiter",
+            "Neuer Mitarbeiter",
 
-        `
+            `
 
 <div class="dialogGrid">
 
@@ -365,9 +346,7 @@ const Mitarbeiter = {
 
         <label>Vorname</label>
 
-        <input
-            id="dlgVorname"
-            type="text">
+        <input id="dlgVorname" type="text">
 
     </div>
 
@@ -375,9 +354,7 @@ const Mitarbeiter = {
 
         <label>Nachname</label>
 
-        <input
-            id="dlgNachname"
-            type="text">
+        <input id="dlgNachname" type="text">
 
     </div>
 
@@ -385,10 +362,7 @@ const Mitarbeiter = {
 
         <label>Bereich</label>
 
-        <input
-            id="dlgBereich"
-            type="text"
-            value="Küche">
+        <input id="dlgBereich" type="text" value="Küche">
 
     </div>
 
@@ -396,10 +370,7 @@ const Mitarbeiter = {
 
         <label>Position</label>
 
-        <input
-            id="dlgPosition"
-            type="text"
-            value="Mitarbeiter">
+        <input id="dlgPosition" type="text" value="Mitarbeiter">
 
     </div>
 
@@ -407,9 +378,7 @@ const Mitarbeiter = {
 
         <label>Personalnummer</label>
 
-        <input
-            id="dlgPersonalnummer"
-            type="text">
+        <input id="dlgPersonalnummer" type="text">
 
     </div>
 
@@ -417,10 +386,7 @@ const Mitarbeiter = {
 
         <label>Vertragsstunden</label>
 
-        <input
-            id="dlgVertragsstunden"
-            type="number"
-            value="39">
+        <input id="dlgVertragsstunden" type="number" value="39">
 
     </div>
 
@@ -428,61 +394,61 @@ const Mitarbeiter = {
 
 `
 
-    );
+        );
 
-    Dialog.abbrechen();
+        Dialog.abbrechen();
 
-    Dialog.speichern(() => {
+        Dialog.speichern(() => {
 
-        this.daten.push({
+            this.daten.push({
 
-            id: Date.now().toString(),
+                id: Date.now().toString(),
 
-            vorname: DOM.id("dlgVorname").value,
+                vorname: DOM.id("dlgVorname").value,
 
-            nachname: DOM.id("dlgNachname").value,
+                nachname: DOM.id("dlgNachname").value,
 
-            name:
+                name:
 
-                DOM.id("dlgVorname").value +
+                    DOM.id("dlgVorname").value +
 
-                " " +
+                    " " +
 
-                DOM.id("dlgNachname").value,
+                    DOM.id("dlgNachname").value,
 
-            bereich: DOM.id("dlgBereich").value,
+                bereich: DOM.id("dlgBereich").value,
 
-            position: DOM.id("dlgPosition").value,
+                position: DOM.id("dlgPosition").value,
 
-            personalnummer: DOM.id("dlgPersonalnummer").value,
+                personalnummer: DOM.id("dlgPersonalnummer").value,
 
-            vertragsstunden: Number(
+                vertragsstunden: Number(
 
-                DOM.id("dlgVertragsstunden").value
+                    DOM.id("dlgVertragsstunden").value
 
-            ),
+                ),
 
-            status: "Aktiv",
+                status: "Aktiv",
 
-            farbe: "#0077C8"
+                farbe: "#0077C8"
+
+            });
+
+            Speicher.speichern(
+
+                CONFIG.speicher.mitarbeiter,
+
+                this.daten
+
+            );
+
+            Dialog.schliessen();
+
+            this.anzeigen();
 
         });
 
-        Speicher.speichern(
-
-            CONFIG.speicher.mitarbeiter,
-
-            this.daten
-
-        );
-
-        Dialog.schliessen();
-
-        this.anzeigen();
-
-    });
-
-},
+    },
         bearbeiten(id) {
 
         const mitarbeiter = this.daten.find(
@@ -537,16 +503,6 @@ const Mitarbeiter = {
 
             nachname;
 
-        mitarbeiter.bereich =
-
-            prompt(
-
-                "Bereich",
-
-                mitarbeiter.bereich
-
-            ) || mitarbeiter.bereich;
-
         mitarbeiter.position =
 
             prompt(
@@ -556,6 +512,16 @@ const Mitarbeiter = {
                 mitarbeiter.position
 
             ) || mitarbeiter.position;
+
+        mitarbeiter.bereich =
+
+            prompt(
+
+                "Bereich",
+
+                mitarbeiter.bereich
+
+            ) || mitarbeiter.bereich;
 
         mitarbeiter.personalnummer =
 

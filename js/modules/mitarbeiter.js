@@ -624,6 +624,17 @@ telefon:
     </select>
 
 </div>
+
+<div class="dialogLabel">
+
+    <label>Telefon</label>
+
+    <input
+        id="dlgTelefon"
+        type="tel"
+        value="${mitarbeiter.telefon || ""}">
+
+</div>
 </div>
 
 `

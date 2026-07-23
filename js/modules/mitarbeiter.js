@@ -451,99 +451,135 @@ const Mitarbeiter = {
     },
         bearbeiten(id) {
 
-        const mitarbeiter = this.daten.find(
+    const mitarbeiter = this.daten.find(
 
-            m => m.id === id
+        m => m.id === id
 
-        );
+    );
 
-        if (!mitarbeiter) {
+    if (!mitarbeiter) {
 
-            return;
+        return;
 
-        }
+    }
 
-        const vorname = prompt(
+    Dialog.oeffnen(
 
-            "Vorname",
+        "Mitarbeiter bearbeiten",
 
-            mitarbeiter.vorname
+        `
 
-        );
+<div class="dialogGrid">
 
-        if (!vorname) {
+    <div class="dialogLabel">
 
-            return;
+        <label>Vorname</label>
 
-        }
+        <input
+            id="dlgVorname"
+            type="text"
+            value="${mitarbeiter.vorname || ""}">
 
-        const nachname = prompt(
+    </div>
 
-            "Nachname",
+    <div class="dialogLabel">
 
-            mitarbeiter.nachname
+        <label>Nachname</label>
 
-        );
+        <input
+            id="dlgNachname"
+            type="text"
+            value="${mitarbeiter.nachname || ""}">
 
-        if (!nachname) {
+    </div>
 
-            return;
+    <div class="dialogLabel">
 
-        }
+        <label>Bereich</label>
 
-        mitarbeiter.vorname = vorname;
+        <input
+            id="dlgBereich"
+            type="text"
+            value="${mitarbeiter.bereich || ""}">
 
-        mitarbeiter.nachname = nachname;
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Position</label>
+
+        <input
+            id="dlgPosition"
+            type="text"
+            value="${mitarbeiter.position || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Personalnummer</label>
+
+        <input
+            id="dlgPersonalnummer"
+            type="text"
+            value="${mitarbeiter.personalnummer || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Vertragsstunden</label>
+
+        <input
+            id="dlgVertragsstunden"
+            type="number"
+            value="${mitarbeiter.vertragsstunden || 39}">
+
+    </div>
+
+</div>
+
+`
+
+    );
+
+    Dialog.abbrechen();
+
+    Dialog.speichern(() => {
+
+        mitarbeiter.vorname =
+
+            DOM.id("dlgVorname").value;
+
+        mitarbeiter.nachname =
+
+            DOM.id("dlgNachname").value;
 
         mitarbeiter.name =
 
-            vorname +
+            mitarbeiter.vorname +
 
             " " +
 
-            nachname;
-
-        mitarbeiter.position =
-
-            prompt(
-
-                "Position",
-
-                mitarbeiter.position
-
-            ) || mitarbeiter.position;
+            mitarbeiter.nachname;
 
         mitarbeiter.bereich =
 
-            prompt(
+            DOM.id("dlgBereich").value;
 
-                "Bereich",
+        mitarbeiter.position =
 
-                mitarbeiter.bereich
-
-            ) || mitarbeiter.bereich;
+            DOM.id("dlgPosition").value;
 
         mitarbeiter.personalnummer =
 
-            prompt(
-
-                "Personalnummer",
-
-                mitarbeiter.personalnummer
-
-            ) || mitarbeiter.personalnummer;
+            DOM.id("dlgPersonalnummer").value;
 
         mitarbeiter.vertragsstunden = Number(
 
-            prompt(
+            DOM.id("dlgVertragsstunden").value
 
-                "Vertragsstunden",
-
-                mitarbeiter.vertragsstunden
-
-            )
-
-        ) || mitarbeiter.vertragsstunden;
+        );
 
         Speicher.speichern(
 
@@ -553,9 +589,13 @@ const Mitarbeiter = {
 
         );
 
+        Dialog.schliessen();
+
         this.anzeigen();
 
-    },
+    });
+
+},
 
     loeschen(id) {
 

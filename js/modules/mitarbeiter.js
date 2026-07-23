@@ -498,6 +498,14 @@ telefon:
         "dlgTelefon"
 
     ).value,
+    
+    email:
+
+    DOM.id(
+
+        "dlgEmail"
+
+    ).value,
                 farbe: "#0077C8"
 
             });

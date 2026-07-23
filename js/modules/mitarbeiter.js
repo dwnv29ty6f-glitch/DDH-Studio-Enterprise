@@ -478,6 +478,13 @@ const Mitarbeiter = {
 
     ).value,
 
+telefon:
+
+    DOM.id(
+
+        "dlgTelefon"
+
+    ).value,
                 farbe: "#0077C8"
 
             });

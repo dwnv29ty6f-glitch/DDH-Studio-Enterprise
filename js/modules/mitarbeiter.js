@@ -422,6 +422,16 @@ const Mitarbeiter = {
     </select>
 
 </div>
+<div class="dialogLabel">
+
+    <label>Telefon</label>
+
+    <input
+        id="dlgTelefon"
+        type="tel"
+        placeholder="040 1234567">
+
+</div>
 </div>
 
 `

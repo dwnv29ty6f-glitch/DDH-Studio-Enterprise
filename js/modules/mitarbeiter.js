@@ -755,6 +755,52 @@ telefon:
         value="${mitarbeiter.eintritt || ""}">
 
 </div>
+
+<div class="dialogLabel">
+
+    <label>Vertragsart</label>
+
+    <select id="dlgVertragsart">
+
+        <option value="Vollzeit" ${mitarbeiter.vertragsart === "Vollzeit" ? "selected" : ""}>
+
+            Vollzeit
+
+        </option>
+
+        <option value="Teilzeit" ${mitarbeiter.vertragsart === "Teilzeit" ? "selected" : ""}>
+
+            Teilzeit
+
+        </option>
+
+        <option value="Minijob" ${mitarbeiter.vertragsart === "Minijob" ? "selected" : ""}>
+
+            Minijob
+
+        </option>
+
+        <option value="Befristet" ${mitarbeiter.vertragsart === "Befristet" ? "selected" : ""}>
+
+            Befristet
+
+        </option>
+
+        <option value="Ausbildung" ${mitarbeiter.vertragsart === "Ausbildung" ? "selected" : ""}>
+
+            Ausbildung
+
+        </option>
+
+        <option value="Praktikum" ${mitarbeiter.vertragsart === "Praktikum" ? "selected" : ""}>
+
+            Praktikum
+
+        </option>
+
+    </select>
+
+</div>
 </div>
 
 `

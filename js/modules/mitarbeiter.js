@@ -168,6 +168,8 @@ const Mitarbeiter = {
             <p>✅ ${mitarbeiter.status || "Aktiv"}</p>
             
             <p>📞 ${mitarbeiter.telefon || "-"}</p>
+            
+            <p>📧 ${mitarbeiter.email || "-"}</p>
 
         </div>
 

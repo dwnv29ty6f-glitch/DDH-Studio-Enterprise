@@ -575,6 +575,14 @@ telefon:
 
     ).value,
     
+    vertragsart:
+
+    DOM.id(
+
+        "dlgVertragsart"
+
+    ).value,
+    
                 farbe: "#0077C8"
 
             });

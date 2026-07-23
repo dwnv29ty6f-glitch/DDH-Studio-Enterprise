@@ -350,6 +350,12 @@ const Mitarbeiter = {
 
 <div class="dialogGrid">
 
+    <h3 class="dialogGridVoll">
+
+        👤 Stammdaten
+
+    </h3>
+
     <div class="dialogLabel">
 
         <label>Vorname</label>
@@ -381,6 +387,12 @@ const Mitarbeiter = {
         <input id="dlgPosition" type="text" value="Mitarbeiter">
 
     </div>
+    
+    <h3 class="dialogGridVoll">
+
+    📄 Beschäftigung
+
+</h3>
 
     <div class="dialogLabel">
 
@@ -430,6 +442,13 @@ const Mitarbeiter = {
     </select>
 
 </div>
+
+<h3 class="dialogGridVoll">
+
+    📞 Kontakt
+
+</h3>
+
 <div class="dialogLabel">
 
     <label>Telefon</label>

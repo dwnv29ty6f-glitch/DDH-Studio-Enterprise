@@ -718,6 +718,10 @@ mitarbeiter.status =
 
     DOM.id("dlgTelefon").value;
     
+    mitarbeiter.email =
+
+    DOM.id("dlgEmail").value;
+    
         Speicher.speichern(
 
             CONFIG.speicher.mitarbeiter,

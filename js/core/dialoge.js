@@ -11,7 +11,7 @@ const Dialog = {
 
     oeffnen(titel, inhalt) {
 
-    alert("Dialog.oeffnen wurde aufgerufen");
+    
 
     DOM.text(
 

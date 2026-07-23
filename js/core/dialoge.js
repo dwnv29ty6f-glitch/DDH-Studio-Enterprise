@@ -11,29 +11,31 @@ const Dialog = {
 
     oeffnen(titel, inhalt) {
 
-        DOM.text(
+    alert("Dialog.oeffnen wurde aufgerufen");
 
-            "dialogTitel",
+    DOM.text(
 
-            titel
+        "dialogTitel",
 
-        );
+        titel
 
-        DOM.html(
+    );
 
-            "dialogInhalt",
+    DOM.html(
 
-            inhalt
+        "dialogInhalt",
 
-        );
+        inhalt
 
-        DOM.anzeigen(
+    );
 
-            "dialogOverlay"
+    DOM.anzeigen(
 
-        );
+        "dialogOverlay"
 
-    },
+    );
+
+},
 
     schliessen() {
 

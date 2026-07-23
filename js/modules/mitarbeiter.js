@@ -166,6 +166,8 @@ const Mitarbeiter = {
             <p>⏰ ${mitarbeiter.vertragsstunden || 0} Std.</p>
 
             <p>✅ ${mitarbeiter.status || "Aktiv"}</p>
+            
+            <p>📞 ${mitarbeiter.telefon || "-"}</p>
 
         </div>
 

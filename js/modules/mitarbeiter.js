@@ -856,6 +856,14 @@ mitarbeiter.status =
 
     DOM.id("dlgEmail").value;
     
+    mitarbeiter.eintritt =
+
+    DOM.id("dlgEintritt").value;
+
+mitarbeiter.vertragsart =
+
+    DOM.id("dlgVertragsart").value;
+    
         Speicher.speichern(
 
             CONFIG.speicher.mitarbeiter,

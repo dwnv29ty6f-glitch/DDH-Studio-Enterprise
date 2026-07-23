@@ -353,11 +353,11 @@ const Mitarbeiter = {
 
         neu() {
 
-        Dialog.oeffnen(
+    Dialog.oeffnen(
 
-            "Neuer Mitarbeiter",
+        "Neuer Mitarbeiter",
 
-            `
+        `
 
 <div class="dialogGrid">
 
@@ -428,68 +428,61 @@ const Mitarbeiter = {
 
 `
 
-        );
+    );
 
-        Dialog.abbrechen();
+    Dialog.abbrechen();
 
-        Dialog.speichern(
+    Dialog.speichern(() => {
 
-            () => {
+        this.daten.push({
 
-                this.daten.push({
+            id: Date.now().toString(),
 
-                    id: Date.now().toString(),
+            vorname: DOM.id("dlgVorname").value,
 
-                    vorname:
-                        DOM.id("dlgVorname").value,
+            nachname: DOM.id("dlgNachname").value,
 
-                    nachname:
-                        DOM.id("dlgNachname").value,
+            name:
 
-                    name:
-                        DOM.id("dlgVorname").value +
-                        " " +
-                        DOM.id("dlgNachname").value,
+                DOM.id("dlgVorname").value +
 
-                    bereich:
-                        DOM.id("dlgBereich").value,
+                " " +
 
-                    position:
-                        DOM.id("dlgPosition").value,
+                DOM.id("dlgNachname").value,
 
-                    personalnummer:
-                        DOM.id("dlgPersonalnummer").value,
+            bereich: DOM.id("dlgBereich").value,
 
-                    vertragsstunden:
-                        Number(
-                            DOM.id("dlgVertragsstunden").value
-                        ),
+            position: DOM.id("dlgPosition").value,
 
-                    status:
-                        "Aktiv",
+            personalnummer: DOM.id("dlgPersonalnummer").value,
 
-                    farbe:
-                        "#0077C8"
+            vertragsstunden: Number(
 
-                });
+                DOM.id("dlgVertragsstunden").value
 
-                Speicher.speichern(
+            ),
 
-                    CONFIG.speicher.mitarbeiter,
+            status: "Aktiv",
 
-                    this.daten
+            farbe: "#0077C8"
 
-                );
+        });
 
-                Dialog.schliessen();
+        Speicher.speichern(
 
-                this.anzeigen();
+            CONFIG.speicher.mitarbeiter,
 
-            }
+            this.daten
 
         );
 
-    },
+        Dialog.schliessen();
+
+        this.anzeigen();
+
+    });
+
+},
         bearbeiten(id) {
 
         const mitarbeiter = this.daten.find(

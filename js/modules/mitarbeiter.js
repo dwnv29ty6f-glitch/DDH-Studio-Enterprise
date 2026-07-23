@@ -656,6 +656,17 @@ telefon:
         value="${mitarbeiter.telefon || ""}">
 
 </div>
+
+<div class="dialogLabel">
+
+    <label>E-Mail</label>
+
+    <input
+        id="dlgEmail"
+        type="email"
+        value="${mitarbeiter.email || ""}">
+
+</div>
 </div>
 
 `

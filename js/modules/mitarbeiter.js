@@ -681,6 +681,11 @@ telefon:
 mitarbeiter.status =
 
     DOM.id("dlgStatus").value;
+    
+    mitarbeiter.telefon =
+
+    DOM.id("dlgTelefon").value;
+    
         Speicher.speichern(
 
             CONFIG.speicher.mitarbeiter,

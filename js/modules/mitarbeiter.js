@@ -355,6 +355,24 @@ const Mitarbeiter = {
         👤 Stammdaten
 
     </h3>
+    
+    <div class="dialogGridVoll profilBereich">
+
+    <div class="profilAvatar">
+
+        👤
+
+    </div>
+
+    <button
+        type="button"
+        class="sekundenButton">
+
+        📷 Profilbild auswählen
+
+    </button>
+
+</div>
 
     <div class="dialogLabel">
 

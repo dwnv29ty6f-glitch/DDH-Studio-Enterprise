@@ -172,6 +172,8 @@ const Mitarbeiter = {
             <p>📧 ${mitarbeiter.email || "-"}</p>
             
             <p>📅 Eintritt: ${mitarbeiter.eintritt || "-"}</p>
+            
+            <p>📄 ${mitarbeiter.vertragsart || "-"}</p>
 
         </div>
 

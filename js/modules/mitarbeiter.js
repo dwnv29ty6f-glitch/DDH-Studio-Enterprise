@@ -358,11 +358,13 @@ const Mitarbeiter = {
     
     <div class="dialogGridVoll profilBereich">
 
-    <div class="profilAvatar">
+  <div
+    id="profilAvatar"
+    class="profilAvatar">
 
-        👤
+    👤
 
-    </div>
+</div>
 
     <button
         type="button"
@@ -378,7 +380,10 @@ const Mitarbeiter = {
 
         <label>Vorname</label>
 
-        <input id="dlgVorname" type="text">
+       <input
+    id="dlgVorname"
+    type="text"
+    oninput="Mitarbeiter.avatarAktualisieren()">
 
     </div>
 
@@ -386,7 +391,10 @@ const Mitarbeiter = {
 
         <label>Nachname</label>
 
-        <input id="dlgNachname" type="text">
+       <input
+    id="dlgNachname"
+    type="text"
+    oninput="Mitarbeiter.avatarAktualisieren()">
 
     </div>
 

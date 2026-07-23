@@ -434,6 +434,17 @@ const Mitarbeiter = {
         placeholder="040 1234567">
 
 </div>
+
+<div class="dialogLabel">
+
+    <label>E-Mail</label>
+
+    <input
+        id="dlgEmail"
+        type="email"
+        placeholder="max.mustermann@ddh.de">
+
+</div>
 </div>
 
 `

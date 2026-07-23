@@ -170,6 +170,8 @@ const Mitarbeiter = {
             <p>📞 ${mitarbeiter.telefon || "-"}</p>
             
             <p>📧 ${mitarbeiter.email || "-"}</p>
+            
+            <p>📅 Eintritt: ${mitarbeiter.eintritt || "-"}</p>
 
         </div>
 

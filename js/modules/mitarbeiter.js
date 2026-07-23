@@ -518,6 +518,15 @@ telefon:
         "dlgEmail"
 
     ).value,
+    
+    eintritt:
+
+    DOM.id(
+
+        "dlgEintritt"
+
+    ).value,
+    
                 farbe: "#0077C8"
 
             });

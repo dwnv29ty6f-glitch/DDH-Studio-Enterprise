@@ -233,89 +233,87 @@ const Mitarbeiter = {
     },
         events() {
 
-        const neu = DOM.id(
+    const neu = DOM.id(
 
-            "btnMitarbeiterNeu"
+        "btnMitarbeiterNeu"
 
-        );
-
-        if (neu) {
-
-            neu.onclick = () => {
-
-    Dialog.oeffnen(
-        "Test",
-        "<h2 style='color:red'>Hallo DDH Studio</h2>"
     );
 
-};
-}
-}
-        const suche = DOM.id(
+    if (neu) {
 
-            "mitarbeiterSuche"
+        neu.onclick = () => {
 
-        );
+            this.neu();
 
-        if (suche) {
+        };
 
-            suche.oninput = () => {
+    }
 
-                this.suchen(
+    const suche = DOM.id(
 
-                    suche.value
+        "mitarbeiterSuche"
+
+    );
+
+    if (suche) {
+
+        suche.oninput = () => {
+
+            this.suchen(
+
+                suche.value
+
+            );
+
+        };
+
+    }
+
+    document
+
+        .querySelectorAll(
+
+            ".bearbeiten"
+
+        )
+
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                this.bearbeiten(
+
+                    button.dataset.id
 
                 );
 
             };
 
-        }
+        });
 
-        document
+    document
 
-            .querySelectorAll(
+        .querySelectorAll(
 
-                ".bearbeiten"
+            ".loeschen"
 
-            )
+        )
 
-            .forEach(button => {
+        .forEach(button => {
 
-                button.onclick = () => {
+            button.onclick = () => {
 
-                    this.bearbeiten(
+                this.loeschen(
 
-                        button.dataset.id
+                    button.dataset.id
 
-                    );
+                );
 
-                };
+            };
 
-            });
+        });
 
-        document
-
-            .querySelectorAll(
-
-                ".loeschen"
-
-            )
-
-            .forEach(button => {
-
-                button.onclick = () => {
-
-                    this.loeschen(
-
-                        button.dataset.id
-
-                    );
-
-                };
-
-            });
-
-    },
+},
 
     suchen(text) {
 

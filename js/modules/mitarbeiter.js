@@ -574,7 +574,39 @@ const Mitarbeiter = {
             value="${mitarbeiter.vertragsstunden || 39}">
 
     </div>
+<div class="dialogLabel">
 
+    <label>Status</label>
+
+    <select id="dlgStatus">
+
+        <option value="Aktiv" ${mitarbeiter.status === "Aktiv" ? "selected" : ""}>
+
+            🟢 Aktiv
+
+        </option>
+
+        <option value="Urlaub" ${mitarbeiter.status === "Urlaub" ? "selected" : ""}>
+
+            🟡 Urlaub
+
+        </option>
+
+        <option value="Krank" ${mitarbeiter.status === "Krank" ? "selected" : ""}>
+
+            🟠 Krank
+
+        </option>
+
+        <option value="Ausgeschieden" ${mitarbeiter.status === "Ausgeschieden" ? "selected" : ""}>
+
+            🔴 Ausgeschieden
+
+        </option>
+
+    </select>
+
+</div>
 </div>
 
 `
@@ -618,7 +650,9 @@ const Mitarbeiter = {
             DOM.id("dlgVertragsstunden").value
 
         );
+mitarbeiter.status =
 
+    DOM.id("dlgStatus").value;
         Speicher.speichern(
 
             CONFIG.speicher.mitarbeiter,

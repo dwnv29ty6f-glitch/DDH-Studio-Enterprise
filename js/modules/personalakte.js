@@ -170,9 +170,9 @@ const Personalakte = {
 
         this.tab("profil");
         
+            },
         
-
-    events() {
+        events() {
 
         document
 

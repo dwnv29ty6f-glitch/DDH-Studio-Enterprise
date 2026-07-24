@@ -2319,11 +2319,23 @@ DIALOG
 
     cursor:pointer;
 
+    font-weight:700;
+
+    font-size:15px;
+
+    border-radius:10px;
+
+    margin:2px;
+
     transition:.2s;
 
 }
 
 .schichtFeld:hover{
+
+    transform:scale(1.06);
+
+}
 
     background:#EEF4FA;
 

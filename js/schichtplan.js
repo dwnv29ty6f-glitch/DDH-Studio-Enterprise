@@ -44,21 +44,21 @@ const Schichtplan = {
 
     html() {
 
-        return `
+    return `
 
 <div class="schichtplan">
 
-    <div class="welcomeCard">
+    <div class="schichtHeader">
 
-        <h1>👷 Schichtplan</h1>
+        <div>
 
-        <p>Dienstplanung der DDH Service GmbH</p>
+            <h1>📅 Schichtplan</h1>
 
-    </div>
+            <p>Microsoft Teams Schichten – DDH Studio Enterprise</p>
 
-    <div class="karte">
+        </div>
 
-        <div class="toolbar">
+        <div class="schichtHeaderRechts">
 
             <button
                 id="btnMonatZurueck"
@@ -82,98 +82,123 @@ const Schichtplan = {
 
             </button>
 
-            <div class="toolbarSpacer"></div>
+        </div>
+
+    </div>
+
+    <div class="schichtDashboard">
+
+        <div class="dashboardCard">
+
+            <div class="dashboardIcon">👥</div>
+
+            <div class="dashboardText">
+
+                <span>Mitarbeiter</span>
+
+                <strong id="statMitarbeiter">
+
+                    0
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="dashboardCard">
+
+            <div class="dashboardIcon">📅</div>
+
+            <div class="dashboardText">
+
+                <span>Schichten</span>
+
+                <strong id="statSchichten">
+
+                    0
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="dashboardCard">
+
+            <div class="dashboardIcon">🏖</div>
+
+            <div class="dashboardText">
+
+                <span>Urlaub</span>
+
+                <strong id="statUrlaub">
+
+                    0
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="dashboardCard">
+
+            <div class="dashboardIcon">🤒</div>
+
+            <div class="dashboardText">
+
+                <span>Krank</span>
+
+                <strong id="statKrank">
+
+                    0
+
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="karte">
+
+        <div class="toolbar">
+
+            <input
+                id="schichtSuche"
+                type="text"
+                placeholder="🔍 Mitarbeiter suchen">
 
             <button
-                id="btnHeute"
-                class="sekundenButton">
+                class="hauptButton"
+                id="btnHeute">
 
                 Heute
 
             </button>
 
-        </div>
+            <button
+                class="hauptButton"
+                id="btnVorlage">
 
-    </div>
+                📋 Vorlage
 
-    <div id="schichtplanStatistik"></div>
+            </button>
 
-    <div id="schichtplanRaster"></div>
+            <button
+                class="hauptButton"
+                id="btnExport">
 
-</div>
+                🖨 Export
 
-`;
-
-    },
-
-    monatTitel() {
-
-        const monate = [
-
-            "Januar",
-            "Februar",
-            "März",
-            "April",
-            "Mai",
-            "Juni",
-            "Juli",
-            "August",
-            "September",
-            "Oktober",
-            "November",
-            "Dezember"
-
-        ];
-
-        DOM.text(
-
-            "monatTitel",
-
-            monate[
-                this.aktuellesDatum.getMonth()
-            ] +
-
-            " " +
-
-            this.aktuellesDatum.getFullYear()
-
-        );
-
-    },
-
-    statistik() {
-
-        DOM.html(
-
-            "schichtplanStatistik",
-
-            `
-
-<div class="dashboardGrid">
-
-    <div class="statCard">
-
-        <div class="statIcon">👥</div>
-
-        <div class="statTitel">Mitarbeiter</div>
-
-        <div class="statWert">
-
-            ${this.mitarbeiter.length}
+            </button>
 
         </div>
 
-    </div>
-
-    <div class="statCard">
-
-        <div class="statIcon">📅</div>
-
-        <div class="statTitel">Schichten</div>
-
-        <div class="statWert">
-
-            ${this.schichten.length}
+        <div
+            id="schichtRaster">
 
         </div>
 
@@ -181,54 +206,9 @@ const Schichtplan = {
 
 </div>
 
-`
-
-        );
-
-    },
-        raster() {
-
-        const jahr = this.aktuellesDatum.getFullYear();
-
-        const monat = this.aktuellesDatum.getMonth();
-
-        const tage = new Date(
-
-            jahr,
-
-            monat + 1,
-
-            0
-
-        ).getDate();
-
-        let html = `
-
-<div class="teamsPlan">
-
-    <div class="teamsHeader">
-
-        <div class="mitarbeiterSpalte">
-
-            Mitarbeiter
-
-        </div>
-
 `;
 
-        for (let tag = 1; tag <= tage; tag++) {
-
-            html += `
-
-<div class="tagKopf">
-
-    ${tag}
-
-</div>
-
-`;
-
-        }
+}
 
         html += `
 

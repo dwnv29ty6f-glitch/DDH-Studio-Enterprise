@@ -366,13 +366,20 @@ const Mitarbeiter = {
 
 </div>
 
-    <button
-        type="button"
-        class="sekundenButton">
+   <button
+    id="btnProfilbild"
+    type="button"
+    class="sekundenButton">
 
-        📷 Profilbild auswählen
+    📷 Profilbild auswählen
 
-    </button>
+</button>
+
+<input
+    id="dlgProfilbild"
+    type="file"
+    accept="image/*"
+    style="display:none">
 
 </div>
 

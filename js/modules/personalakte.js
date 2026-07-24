@@ -459,13 +459,500 @@ const Personalakte = {
 
     profilSpeichern() {
 
-        this.mitarbeiter.vorname =
+    this.mitarbeiter.vorname =
+        DOM.id("paVorname").value;
 
-            DOM.id("paVorname").value;
+    this.mitarbeiter.nachname =
+        DOM.id("paNachname").value;
 
-        this.mitarbeiter.nachname =
+    this.mitarbeiter.geburt =
+        DOM.id("paGeburt").value;
 
-            DOM.id("paNachname").value;
+    this.mitarbeiter.geschlecht =
+        DOM.id("paGeschlecht").value;
+
+    this.mitarbeiter.nationalitaet =
+        DOM.id("paNationalitaet").value;
+
+    this.mitarbeiter.familienstand =
+        DOM.id("paFamilienstand").value;
+
+    Speicher.speichern(
+
+        CONFIG.speicher.mitarbeiter,
+
+        Mitarbeiter.daten
+
+    );
+
+    this.oeffnen(
+
+        this.mitarbeiter
+
+    );
+
+},
+    
+        tabBeschaeftigung() {
+
+        DOM.html(
+
+            "personalContent",
+
+            `
+
+<div class="personalForm">
+
+    <div class="dialogLabel">
+
+        <label>Bereich</label>
+
+        <input
+            id="paBereich"
+            type="text"
+            value="${this.mitarbeiter.bereich || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Position</label>
+
+        <input
+            id="paPosition"
+            type="text"
+            value="${this.mitarbeiter.position || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Personalnummer</label>
+
+        <input
+            id="paPersonalnummer"
+            type="text"
+            value="${this.mitarbeiter.personalnummer || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Vertragsart</label>
+
+        <select id="paVertragsart">
+
+            <option value="Vollzeit" ${this.mitarbeiter.vertragsart==="Vollzeit"?"selected":""}>Vollzeit</option>
+
+            <option value="Teilzeit" ${this.mitarbeiter.vertragsart==="Teilzeit"?"selected":""}>Teilzeit</option>
+
+            <option value="Minijob" ${this.mitarbeiter.vertragsart==="Minijob"?"selected":""}>Minijob</option>
+
+            <option value="Befristet" ${this.mitarbeiter.vertragsart==="Befristet"?"selected":""}>Befristet</option>
+
+        </select>
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Wochenstunden</label>
+
+        <input
+            id="paStunden"
+            type="number"
+            value="${this.mitarbeiter.vertragsstunden || 0}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Status</label>
+
+        <select id="paStatus">
+
+            <option value="Aktiv" ${this.mitarbeiter.status==="Aktiv"?"selected":""}>🟢 Aktiv</option>
+
+            <option value="Urlaub" ${this.mitarbeiter.status==="Urlaub"?"selected":""}>🟡 Urlaub</option>
+
+            <option value="Krank" ${this.mitarbeiter.status==="Krank"?"selected":""}>🟠 Krank</option>
+
+            <option value="Ausgeschieden" ${this.mitarbeiter.status==="Ausgeschieden"?"selected":""}>🔴 Ausgeschieden</option>
+
+        </select>
+
+    </div>
+
+</div>
+
+<div style="margin-top:24px;text-align:right;">
+
+    <button
+        class="hauptButton"
+        onclick="Personalakte.beschaeftigungSpeichern()">
+
+        💾 Beschäftigung speichern
+
+    </button>
+
+</div>
+
+`
+
+        );
+
+    },
+
+    beschaeftigungSpeichern() {
+
+        this.mitarbeiter.bereich =
+            DOM.id("paBereich").value;
+
+        this.mitarbeiter.position =
+            DOM.id("paPosition").value;
+
+        this.mitarbeiter.personalnummer =
+            DOM.id("paPersonalnummer").value;
+
+        this.mitarbeiter.vertragsart =
+            DOM.id("paVertragsart").value;
+
+        this.mitarbeiter.vertragsstunden =
+            Number(DOM.id("paStunden").value);
+
+        this.mitarbeiter.status =
+            DOM.id("paStatus").value;
+
+        Speicher.speichern(
+            CONFIG.speicher.mitarbeiter,
+            Mitarbeiter.daten
+        );
+
+        this.oeffnen(this.mitarbeiter);
+
+    },
+
+    tabKontakt() {
+
+        DOM.html(
+
+            "personalContent",
+
+            `
+
+<div class="personalForm">
+
+    <div class="dialogLabel">
+
+        <label>Telefon</label>
+
+        <input
+            id="paTelefon"
+            type="tel"
+            value="${this.mitarbeiter.telefon || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>E-Mail</label>
+
+        <input
+            id="paEmail"
+            type="email"
+            value="${this.mitarbeiter.email || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Adresse</label>
+
+        <input
+            id="paAdresse"
+            type="text"
+            value="${this.mitarbeiter.adresse || ""}">
+
+    </div>
+
+</div>
+
+<div style="margin-top:24px;text-align:right;">
+
+    <button
+        class="hauptButton"
+        onclick="Personalakte.kontaktSpeichern()">
+
+        💾 Kontakt speichern
+
+    </button>
+
+</div>
+
+`
+
+        );
+
+    },
+
+    kontaktSpeichern() {
+
+        this.mitarbeiter.telefon =
+            DOM.id("paTelefon").value;
+
+        this.mitarbeiter.email =
+            DOM.id("paEmail").value;
+
+        this.mitarbeiter.adresse =
+            DOM.id("paAdresse").value;
+
+        Speicher.speichern(
+            CONFIG.speicher.mitarbeiter,
+            Mitarbeiter.daten
+        );
+
+        this.oeffnen(this.mitarbeiter);
+
+    },
+    
+        tabDokumente() {
+
+        DOM.html(
+
+            "personalContent",
+
+            `
+
+<div class="personalForm">
+
+    <div class="personalCard">
+
+        <h3>📁 Dokumente</h3>
+
+        <p>Noch keine Dokumente vorhanden.</p>
+
+        <button
+            class="hauptButton">
+
+            📤 Dokument hochladen
+
+        </button>
+
+    </div>
+
+    <div class="personalCard">
+
+        <h3>📄 Dokumentenarten</h3>
+
+        <ul class="personalListe">
+
+            <li>Arbeitsvertrag</li>
+
+            <li>Hygienebelehrung</li>
+
+            <li>Gesundheitszeugnis</li>
+
+            <li>Zeugnisse</li>
+
+            <li>Zertifikate</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+`
+
+        );
+
+    },
+
+    tabQualifikation() {
+
+        DOM.html(
+
+            "personalContent",
+
+            `
+
+<div class="personalForm">
+
+    <div class="personalCard">
+
+        <h3>🎓 Qualifikationen</h3>
+
+        <table class="personalTabelle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Qualifikation</th>
+
+                    <th>Gültig bis</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>Erste Hilfe</td>
+
+                    <td>-</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>HACCP</td>
+
+                    <td>-</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Brandschutzhelfer</td>
+
+                    <td>-</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Allergen-Schulung</td>
+
+                    <td>-</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div style="margin-top:24px;text-align:right;">
+
+        <button
+            class="hauptButton">
+
+            ➕ Qualifikation hinzufügen
+
+        </button>
+
+    </div>
+
+</div>
+
+`
+
+        );
+
+    },
+    
+        tabUrlaub() {
+
+        DOM.html(
+
+            "personalContent",
+
+            `
+
+<div class="personalForm">
+
+    <div class="personalCard">
+
+        <h3>📅 Urlaub & Abwesenheiten</h3>
+
+        <p><strong>Urlaubsanspruch:</strong> 30 Tage</p>
+
+        <p><strong>Genommen:</strong> 2 Tage</p>
+
+        <p><strong>Resturlaub:</strong> 28 Tage</p>
+
+        <hr>
+
+        <p><strong>Kranktage:</strong> 3</p>
+
+        <p><strong>Sonderurlaub:</strong> 0</p>
+
+    </div>
+
+    <div style="margin-top:24px;text-align:right;">
+
+        <button
+            class="hauptButton">
+
+            ➕ Urlaub eintragen
+
+        </button>
+
+    </div>
+
+</div>
+
+`
+
+        );
+
+    },
+
+    tabNotizen() {
+
+        DOM.html(
+
+            "personalContent",
+
+            `
+
+<div class="personalForm">
+
+    <div class="dialogLabel">
+
+        <label>Notizen</label>
+
+        <textarea
+
+            id="paNotizen"
+
+            rows="12"
+
+            placeholder="Interne Notizen zum Mitarbeiter...">${this.mitarbeiter.notizen || ""}</textarea>
+
+    </div>
+
+</div>
+
+<div style="margin-top:24px;text-align:right;">
+
+    <button
+
+        class="hauptButton"
+
+        onclick="Personalakte.notizenSpeichern()">
+
+        💾 Notizen speichern
+
+    </button>
+
+</div>
+
+`
+
+        );
+
+    },
+
+    notizenSpeichern() {
+
+        this.mitarbeiter.notizen =
+
+            DOM.id("paNotizen").value;
 
         Speicher.speichern(
 
@@ -475,8 +962,12 @@ const Personalakte = {
 
         );
 
-        Dialog.schliessen();
+        this.oeffnen(
 
-        Mitarbeiter.anzeigen();
+            this.mitarbeiter
 
-    },
+        );
+
+    }
+
+};

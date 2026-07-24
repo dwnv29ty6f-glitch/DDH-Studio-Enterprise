@@ -1599,3 +1599,79 @@ DIALOG
     }
 
 }
+
+.personalakte{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.personalakteDashboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+
+    gap:18px;
+
+}
+
+.personalCard{
+
+    background:#FFFFFF;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:0 12px 30px rgba(15,76,129,.12);
+
+    border:1px solid #E8EEF5;
+
+    transition:.25s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.personalCard:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 40px rgba(15,76,129,.20);
+
+}
+
+.personalIcon{
+
+    font-size:34px;
+
+}
+
+.personalTitel{
+
+    font-size:15px;
+
+    color:#6B7280;
+
+    font-weight:600;
+
+}
+
+.personalWert{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:#0F4C81;
+
+}

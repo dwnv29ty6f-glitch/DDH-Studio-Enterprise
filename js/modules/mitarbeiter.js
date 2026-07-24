@@ -788,6 +788,49 @@ telefon:
 
 <div class="dialogGrid">
 
+<div class="dialogGridVoll">
+
+    <div class="profilTabs">
+
+        <button
+            class="profilTab aktiv">
+
+            👤 Profil
+
+        </button>
+
+        <button
+            class="profilTab">
+
+            💼 Beschäftigung
+
+        </button>
+
+        <button
+            class="profilTab">
+
+            📞 Kontakt
+
+        </button>
+
+        <button
+            class="profilTab">
+
+            📁 Dokumente
+
+        </button>
+
+        <button
+            class="profilTab">
+
+            📝 Notizen
+
+        </button>
+
+    </div>
+
+</div>
+
     <div class="dialogLabel">
 
         <label>Vorname</label>
@@ -804,7 +847,7 @@ telefon:
 
         <label>Nachname</label>
 
-       <label>Nachname</label>
+       
 
 <input
     id="dlgNachname"

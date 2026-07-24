@@ -263,3 +263,220 @@ const Personalakte = {
         }
 
     },
+        tabProfil() {
+
+        DOM.html(
+
+            "personalContent",
+
+            `
+
+<div class="personalDashboard">
+
+    <div class="personalCard">
+
+        <div class="personalIcon">📅</div>
+
+        <div class="personalTitel">
+
+            Urlaub
+
+        </div>
+
+        <div class="personalWert">
+
+            28 / 30
+
+        </div>
+
+    </div>
+
+    <div class="personalCard">
+
+        <div class="personalIcon">🏥</div>
+
+        <div class="personalTitel">
+
+            Kranktage
+
+        </div>
+
+        <div class="personalWert">
+
+            3
+
+        </div>
+
+    </div>
+
+    <div class="personalCard">
+
+        <div class="personalIcon">⏰</div>
+
+        <div class="personalTitel">
+
+            Wochenstunden
+
+        </div>
+
+        <div class="personalWert">
+
+            ${this.mitarbeiter.vertragsstunden || 0}
+
+        </div>
+
+    </div>
+
+    <div class="personalCard">
+
+        <div class="personalIcon">📁</div>
+
+        <div class="personalTitel">
+
+            Dokumente
+
+        </div>
+
+        <div class="personalWert">
+
+            0
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="personalForm">
+
+    <div class="dialogLabel">
+
+        <label>Vorname</label>
+
+        <input
+
+            id="paVorname"
+
+            type="text"
+
+            value="${this.mitarbeiter.vorname || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Nachname</label>
+
+        <input
+
+            id="paNachname"
+
+            type="text"
+
+            value="${this.mitarbeiter.nachname || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Geburtsdatum</label>
+
+        <input
+
+            id="paGeburt"
+
+            type="date">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Geschlecht</label>
+
+        <select id="paGeschlecht">
+
+            <option>Männlich</option>
+
+            <option>Weiblich</option>
+
+            <option>Divers</option>
+
+        </select>
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Nationalität</label>
+
+        <input
+
+            id="paNationalitaet"
+
+            type="text">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Familienstand</label>
+
+        <select id="paFamilienstand">
+
+            <option>Ledig</option>
+
+            <option>Verheiratet</option>
+
+            <option>Geschieden</option>
+
+            <option>Verwitwet</option>
+
+        </select>
+
+    </div>
+
+</div>
+
+<div style="margin-top:24px;text-align:right;">
+
+    <button
+
+        class="hauptButton"
+
+        onclick="Personalakte.profilSpeichern()">
+
+        💾 Profil speichern
+
+    </button>
+
+</div>
+
+`
+
+        );
+
+    },
+
+    profilSpeichern() {
+
+        this.mitarbeiter.vorname =
+
+            DOM.id("paVorname").value;
+
+        this.mitarbeiter.nachname =
+
+            DOM.id("paNachname").value;
+
+        Speicher.speichern(
+
+            CONFIG.speicher.mitarbeiter,
+
+            Mitarbeiter.daten
+
+        );
+
+        Dialog.schliessen();
+
+        Mitarbeiter.anzeigen();
+
+    },

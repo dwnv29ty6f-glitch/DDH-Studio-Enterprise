@@ -459,9 +459,37 @@ const Personalakte = {
 
     profilSpeichern() {
 
-   profilSpeichern() {
+    this.mitarbeiter.vorname =
+        DOM.id("paVorname").value;
 
-    alert("Profil speichern funktioniert!");
+    this.mitarbeiter.nachname =
+        DOM.id("paNachname").value;
+
+    this.mitarbeiter.geburt =
+        DOM.id("paGeburt").value;
+
+    this.mitarbeiter.geschlecht =
+        DOM.id("paGeschlecht").value;
+
+    this.mitarbeiter.nationalitaet =
+        DOM.id("paNationalitaet").value;
+
+    this.mitarbeiter.familienstand =
+        DOM.id("paFamilienstand").value;
+
+    Speicher.speichern(
+
+        CONFIG.speicher.mitarbeiter,
+
+        Mitarbeiter.daten
+
+    );
+
+    this.oeffnen(
+
+        this.mitarbeiter
+
+    );
 
 },
 

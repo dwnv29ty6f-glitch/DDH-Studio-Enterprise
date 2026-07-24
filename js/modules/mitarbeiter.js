@@ -301,6 +301,8 @@ const Mitarbeiter = {
 
 };
 
+    });
+
         document
 
             .querySelectorAll(

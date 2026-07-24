@@ -283,15 +283,23 @@ const Mitarbeiter = {
 
                 button.onclick = () => {
 
-                    this.bearbeiten(
+    const mitarbeiter = this.daten.find(
 
-                        button.dataset.id
+        m => m.id === button.dataset.id
 
-                    );
+    );
 
-                };
+    if (mitarbeiter) {
 
-            });
+        Personalakte.oeffnen(
+
+            mitarbeiter
+
+        );
+
+    }
+
+};
 
         document
 

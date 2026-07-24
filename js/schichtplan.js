@@ -667,11 +667,89 @@ const Schichtplan = {
 
                 feld.onclick = () => {
 
-                    this.schichtBearbeiten(
+                    this.schichtDialog(
 
-                        feld
+    feld
 
-                    );
+);
+
+                };
+
+            });
+
+    },
+    
+        schichtDialog(feld) {
+
+        this.aktuelleZelle = feld;
+
+        Dialog.oeffnen(
+
+            "📅 Schicht auswählen",
+
+            `
+
+<div class="schichtDialog">
+
+    <div class="schichtAuswahl">
+
+        <button class="schichtOption" data-schicht="F1">🌅 F1</button>
+
+        <button class="schichtOption" data-schicht="F2">🌅 F2</button>
+
+        <button class="schichtOption" data-schicht="M1">☀️ M1</button>
+
+        <button class="schichtOption" data-schicht="M2">☀️ M2</button>
+
+        <button class="schichtOption" data-schicht="S1">🌙 S1</button>
+
+        <button class="schichtOption" data-schicht="S2">🌙 S2</button>
+
+        <button class="schichtOption" data-schicht="S3">🌙 S3</button>
+
+        <button class="schichtOption" data-schicht="U">🏖 Urlaub</button>
+
+        <button class="schichtOption" data-schicht="K">🤒 Krank</button>
+
+        <button class="schichtOption" data-schicht="F">🟢 Frei</button>
+
+        <button class="schichtOption loeschen" data-schicht="">
+            🗑 Schicht löschen
+        </button>
+
+    </div>
+
+</div>
+
+`
+
+        );
+
+        this.ausgewaehlteSchicht = "";
+
+        document
+
+            .querySelectorAll(".schichtOption")
+
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    document
+
+                        .querySelectorAll(".schichtOption")
+
+                        .forEach(b =>
+
+                            b.classList.remove("aktiv")
+
+                        );
+
+                    button.classList.add("aktiv");
+
+                    this.ausgewaehlteSchicht =
+
+                        button.dataset.schicht;
 
                 };
 

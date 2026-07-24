@@ -566,6 +566,24 @@ const Mitarbeiter = {
         );
 
         Dialog.abbrechen();
+        
+        const profilButton =
+
+    DOM.id("btnProfilbild");
+
+const profilDatei =
+
+    DOM.id("dlgProfilbild");
+
+if (profilButton && profilDatei) {
+
+    profilButton.onclick = () => {
+
+        profilDatei.click();
+
+    };
+
+}
 
         Dialog.speichern(() => {
 

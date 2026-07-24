@@ -68,21 +68,39 @@ const Personalakte = {
 
 </div>
 
-    <div class="profilTabs">
+   <div class="profilTabs">
 
-        <button class="profilTab aktiv">
+    <button class="profilTab aktiv" data-tab="profil">
 
-            👤 Profil
+        👤 Profil
 
-        </button>
+    </button>
 
-        <button class="profilTab">
+    <button class="profilTab" data-tab="beschaeftigung">
 
-            💼 Beschäftigung
+        💼 Beschäftigung
 
-        </button>
+    </button>
 
-        <button class="profilTab">
+    <button class="profilTab" data-tab="kontakt">
+
+        📞 Kontakt
+
+    </button>
+
+    <button class="profilTab" data-tab="dokumente">
+
+        📁 Dokumente
+
+    </button>
+
+    <button class="profilTab" data-tab="notizen">
+
+        📝 Notizen
+
+    </button>
+
+</div>
 
             📞 Kontakt
 

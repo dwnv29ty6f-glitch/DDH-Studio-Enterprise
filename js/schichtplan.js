@@ -8,6 +8,138 @@ Schichtplan V2
 */
 
 const Schichtplan = {
+    
+        schichtTypen: {
+
+        F1: {
+
+            name: "Frühdienst 1",
+
+            von: "07:00",
+
+            bis: "14:00",
+
+            stunden: 7,
+
+            farbe: "#2563EB"
+
+        },
+
+        F2: {
+
+            name: "Frühdienst 2",
+
+            von: "08:00",
+
+            bis: "14:00",
+
+            stunden: 6,
+
+            farbe: "#60A5FA"
+
+        },
+
+        M1: {
+
+            name: "Mitteldienst 1",
+
+            von: "10:00",
+
+            bis: "15:00",
+
+            stunden: 5,
+
+            farbe: "#16A34A"
+
+        },
+
+        M2: {
+
+            name: "Mitteldienst 2",
+
+            von: "09:00",
+
+            bis: "15:00",
+
+            stunden: 6,
+
+            farbe: "#22C55E"
+
+        },
+
+        S1: {
+
+            name: "Spätdienst 1",
+
+            von: "15:00",
+
+            bis: "20:00",
+
+            stunden: 5,
+
+            farbe: "#F59E0B"
+
+        },
+
+        S2: {
+
+            name: "Spätdienst 2",
+
+            von: "14:00",
+
+            bis: "20:00",
+
+            stunden: 6,
+
+            farbe: "#EA580C"
+
+        },
+
+        S3: {
+
+            name: "Spätdienst 3",
+
+            von: "16:00",
+
+            bis: "20:00",
+
+            stunden: 4,
+
+            farbe: "#9333EA"
+
+        },
+
+        U: {
+
+            name: "Urlaub",
+
+            stunden: 0,
+
+            farbe: "#06B6D4"
+
+        },
+
+        K: {
+
+            name: "Krank",
+
+            stunden: 0,
+
+            farbe: "#DC2626"
+
+        },
+
+        F: {
+
+            name: "Frei",
+
+            stunden: 0,
+
+            farbe: "#9CA3AF"
+
+        }
+
+    },
 
     aktuellesDatum: new Date(),
 

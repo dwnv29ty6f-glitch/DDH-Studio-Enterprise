@@ -139,15 +139,24 @@ const Mitarbeiter = {
 
     <div class="mitarbeiterLinks">
 
-        <div
+      <div
 
-            class="avatar"
+    class="avatar"
 
-            style="background:${mitarbeiter.farbe || "#0077C8"};">
+    style="background:${mitarbeiter.farbe || "#0077C8"}; overflow:hidden;">
 
-            ${((mitarbeiter.vorname || "?").charAt(0)).toUpperCase()}
+    ${mitarbeiter.profilbild
+        ? `<img
+                src="${mitarbeiter.profilbild}"
+                style="
+                    width:100%;
+                    height:100%;
+                    object-fit:cover;
+                ">`
+        : ((mitarbeiter.vorname || "?").charAt(0)).toUpperCase()
+    }
 
-        </div>
+</div>
 
         <div class="mitarbeiterInfos">
 

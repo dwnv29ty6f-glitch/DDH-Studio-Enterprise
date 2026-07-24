@@ -10,17 +10,63 @@ const Personalakte = {
 
 <div class="personalakte">
 
-    <h2>
+   <div class="personalHeader">
 
-        ${mitarbeiter.vorname} ${mitarbeiter.nachname}
+    <div class="personalAvatar">
 
-    </h2>
+        ${mitarbeiter.profilbild
+            ? `<img
+                src="${mitarbeiter.profilbild}"
+                style="
+                    width:100%;
+                    height:100%;
+                    object-fit:cover;
+                    border-radius:50%;
+                ">`
+            : "👤"
+        }
 
-    <p>
+    </div>
 
-        ${mitarbeiter.position || "-"}
+    <div class="personalInfo">
 
-    </p>
+        <h2>
+
+            ${mitarbeiter.vorname} ${mitarbeiter.nachname}
+
+        </h2>
+
+        <p>
+
+            ${mitarbeiter.position || "-"} • ${mitarbeiter.bereich || "-"}
+
+        </p>
+
+        <div class="personalBadges">
+
+            <span class="personalBadge">
+
+                ${mitarbeiter.status || "Aktiv"}
+
+            </span>
+
+            <span class="personalBadge">
+
+                📄 ${mitarbeiter.vertragsart || "-"}
+
+            </span>
+
+            <span class="personalBadge">
+
+                ⏰ ${mitarbeiter.vertragsstunden || 0} Std.
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
 
     <div class="profilTabs">
 

@@ -10,6 +10,8 @@ Mitarbeiterverwaltung
 const Mitarbeiter = {
 
     daten: [],
+    
+    profilbildTemp: "",
 
     anzeigen() {
 
@@ -603,22 +605,24 @@ profilDatei.onchange = () => {
 
     reader.onload = e => {
 
-        const avatar =
+    this.profilbildTemp = e.target.result;
 
-            DOM.id("profilAvatar");
+    const avatar =
 
-        avatar.innerHTML =
+        DOM.id("profilAvatar");
 
-            `<img
-                src="${e.target.result}"
-                style="
-                    width:100%;
-                    height:100%;
-                    object-fit:cover;
-                    border-radius:50%;
-                ">`;
+    avatar.innerHTML =
 
-    };
+        `<img
+            src="${this.profilbildTemp}"
+            style="
+                width:100%;
+                height:100%;
+                object-fit:cover;
+                border-radius:50%;
+            ">`;
+
+};
 
     reader.readAsDataURL(datei);
 
@@ -644,8 +648,8 @@ profilDatei.onchange = () => {
                     
                     profilbild:
 
-    DOM.id("profilAvatar").innerHTML,
-
+    this.profilbildTemp,
+    
                 bereich: DOM.id("dlgBereich").value,
 
                 position: DOM.id("dlgPosition").value,

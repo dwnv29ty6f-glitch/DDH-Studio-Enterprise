@@ -726,6 +726,20 @@ const Schichtplan = {
         );
 
         this.ausgewaehlteSchicht = "";
+        
+        Dialog.abbrechen();
+
+Dialog.speichern(() => {
+
+    this.schichtBearbeiten(
+
+        this.aktuelleZelle,
+
+        this.ausgewaehlteSchicht
+
+    );
+
+});
 
         document
 
@@ -757,32 +771,9 @@ const Schichtplan = {
 
     },
 
-    schichtBearbeiten(feld) {
+    schichtBearbeiten(feld, schicht) {
 
-        const eingabe = prompt(
-
-`Schicht eingeben:
-
-F1
-F2
-M1
-M2
-S1
-S2
-S3
-U
-K
-F
-
-Leer = löschen`
-
-        );
-
-        if (eingabe === null) {
-
-            return;
-
-        }
+        
 
         const mitarbeiterId =
 
@@ -810,7 +801,7 @@ Leer = löschen`
 
         if (
 
-            eingabe.trim() === ""
+            schicht.trim() === ""
 
         ) {
 
@@ -840,7 +831,7 @@ Leer = löschen`
 
                 schicht:
 
-                    eingabe.toUpperCase()
+                    schicht.toUpperCase()
 
             };
 
@@ -870,9 +861,13 @@ Leer = löschen`
 
         );
 
-        this.raster();
+        Dialog.schliessen();
 
-        this.events();
+this.raster();
+
+this.events();
+
+this.statistik();
 
     }
 

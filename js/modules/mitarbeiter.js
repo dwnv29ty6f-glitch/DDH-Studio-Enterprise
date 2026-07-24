@@ -641,6 +641,10 @@ profilDatei.onchange = () => {
                     " " +
 
                     DOM.id("dlgNachname").value,
+                    
+                    profilbild:
+
+    DOM.id("profilAvatar").innerHTML,
 
                 bereich: DOM.id("dlgBereich").value,
 

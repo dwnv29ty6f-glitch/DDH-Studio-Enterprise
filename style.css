@@ -2009,3 +2009,390 @@ DIALOG
     margin-bottom:10px;
 
 }
+/* ==========================================
+   DDH STUDIO ENTERPRISE - SCHICHTPLAN V2
+========================================== */
+
+.schichtplan{
+
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+
+}
+
+.schichtHeader{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+
+    padding:28px;
+
+    border-radius:22px;
+
+    background:linear-gradient(
+        135deg,
+        #0F4C81,
+        #2563EB
+    );
+
+    color:#fff;
+
+    box-shadow:0 18px 40px rgba(15,76,129,.25);
+
+}
+
+.schichtHeader h1{
+
+    margin:0;
+    font-size:34px;
+    font-weight:800;
+
+}
+
+.schichtHeader p{
+
+    margin-top:6px;
+    opacity:.9;
+
+}
+
+.schichtHeaderRechts{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+}
+
+.monatTitel{
+
+    min-width:180px;
+
+    text-align:center;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+/* Dashboard */
+
+.dashboardGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.statCard{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:
+        0 12px 30px rgba(15,76,129,.08);
+
+    transition:.25s;
+
+}
+
+.statCard:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 20px 40px rgba(15,76,129,.16);
+
+}
+
+.statIcon{
+
+    width:58px;
+    height:58px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#EEF4FA;
+
+    font-size:28px;
+
+}
+
+.statTitel{
+
+    color:#6B7280;
+
+    font-size:14px;
+
+}
+
+.statWert{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:#0F4C81;
+
+}
+
+/* Teams Plan */
+
+.teamsPlan{
+
+    overflow:auto;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:0 12px 30px rgba(15,76,129,.08);
+
+}
+
+.teamsHeader{
+
+    display:grid;
+
+    grid-auto-flow:column;
+
+    grid-auto-columns:70px;
+
+    position:sticky;
+
+    top:0;
+
+    background:#F8FAFC;
+
+    z-index:5;
+
+}
+
+.mitarbeiterSpalte{
+
+    width:260px;
+
+    position:sticky;
+
+    left:0;
+
+    background:#F8FAFC;
+
+    padding:16px;
+
+    font-weight:700;
+
+    border-right:1px solid #E5E7EB;
+
+    z-index:6;
+
+}
+
+.tagKopf{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:60px;
+
+    font-weight:700;
+
+    border-left:1px solid #EEF2F7;
+
+}
+
+/* Mitarbeiter */
+
+.teamsZeile{
+
+    display:grid;
+
+    grid-auto-flow:column;
+
+    grid-auto-columns:70px;
+
+}
+
+.teamsMitarbeiter{
+
+    width:260px;
+
+    position:sticky;
+
+    left:0;
+
+    background:#fff;
+
+    padding:12px;
+
+    border-right:1px solid #E5E7EB;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    z-index:4;
+
+}
+
+.teamsAvatar{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    object-fit:cover;
+
+}
+
+.teamsAvatarLeer{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:50%;
+
+    background:#0F4C81;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:700;
+
+}
+
+.schichtFeld{
+
+    height:62px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-left:1px solid #EEF2F7;
+
+    border-top:1px solid #EEF2F7;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.schichtFeld:hover{
+
+    background:#EEF4FA;
+
+}
+
+/* Farben der Schichten */
+
+.schicht-F1{background:#2563EB;color:#fff;}
+.schicht-F2{background:#60A5FA;color:#fff;}
+.schicht-M1{background:#16A34A;color:#fff;}
+.schicht-M2{background:#22C55E;color:#fff;}
+.schicht-S1{background:#F59E0B;color:#fff;}
+.schicht-S2{background:#EA580C;color:#fff;}
+.schicht-S3{background:#9333EA;color:#fff;}
+.schicht-U{background:#06B6D4;color:#fff;}
+.schicht-K{background:#DC2626;color:#fff;}
+.schicht-F{background:#9CA3AF;color:#fff;}
+
+/* Toolbar */
+
+.toolbar{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+.toolbar input{
+
+    min-width:260px;
+
+    padding:12px 14px;
+
+    border-radius:12px;
+
+    border:1px solid #D1D5DB;
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    .schichtHeader{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .schichtHeaderRechts{
+
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+    .mitarbeiterSpalte,
+    .teamsMitarbeiter{
+
+        width:190px;
+
+    }
+
+}

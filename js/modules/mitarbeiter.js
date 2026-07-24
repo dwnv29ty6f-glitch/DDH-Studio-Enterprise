@@ -585,6 +585,45 @@ if (profilButton && profilDatei) {
 
 }
 
+profilDatei.onchange = () => {
+
+    const datei =
+
+        profilDatei.files[0];
+
+    if (!datei) {
+
+        return;
+
+    }
+
+    const reader =
+
+        new FileReader();
+
+    reader.onload = e => {
+
+        const avatar =
+
+            DOM.id("profilAvatar");
+
+        avatar.innerHTML =
+
+            `<img
+                src="${e.target.result}"
+                style="
+                    width:100%;
+                    height:100%;
+                    object-fit:cover;
+                    border-radius:50%;
+                ">`;
+
+    };
+
+    reader.readAsDataURL(datei);
+
+};
+
         Dialog.speichern(() => {
 
             this.daten.push({

@@ -520,7 +520,11 @@ const Schichtplan = {
 
 <div
 
-    class="schichtFeld"
+    class="schichtFeld ${
+    schicht
+        ? "schicht-" + schicht.schicht
+        : ""
+}"
 
     data-mitarbeiter="${mitarbeiter.id}"
 

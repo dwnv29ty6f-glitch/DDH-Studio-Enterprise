@@ -492,14 +492,6 @@ const Personalakte = {
     );
 
 },
-
-    this.oeffnen(
-
-        this.mitarbeiter
-
-    );
-
-},
     
         tabBeschaeftigung() {
 

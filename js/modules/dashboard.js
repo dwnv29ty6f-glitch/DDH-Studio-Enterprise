@@ -83,61 +83,73 @@ html() {
 
     </div>
 
-    <div class="dashboardInfo">
+<div class="dashboardInfo">
 
-        <div class="infoCard">
+    <div class="infoCard">
 
-            <div class="infoIcon">
+        <div class="infoIcon">
 
-                🏢
-
-            </div>
-
-            <div>
-
-                <div class="infoTitel">
-
-                    DDH Service GmbH
-
-                </div>
-
-                <div class="infoText">
-
-                    Enterprise Management System
-
-                </div>
-
-            </div>
+            🏢
 
         </div>
 
-        <div class="infoCard">
+        <div class="infoInhalt">
 
-            <div class="infoIcon">
+            <div class="infoTitel">
 
-                🕒
+                DDH Service GmbH
 
             </div>
 
-            <div>
+            <div class="infoText">
 
-                <div class="infoTitel">
+                Enterprise Management System
 
-                    Live-System
+            </div>
 
-                </div>
+            <div class="infoStatus">
 
-                <div class="infoText">
-
-                    Alle Daten werden automatisch gespeichert.
-
-                </div>
+                🟢 Betriebsbereit
 
             </div>
 
         </div>
 
     </div>
+
+    <div class="infoCard">
+
+        <div class="infoIcon">
+
+            🕒
+
+        </div>
+
+        <div class="infoInhalt">
+
+            <div class="infoTitel">
+
+                Live-System
+
+            </div>
+
+            <div class="infoText">
+
+                Automatische Speicherung aktiv
+
+            </div>
+
+            <div class="infoStatus">
+
+                💾 Lokale Datenbank verbunden
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
     <div class="dashboardGrid">
 

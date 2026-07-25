@@ -429,10 +429,6 @@ STATISTIKKARTEN PREMIUM
 
 .statCard{
 
-    position:relative;
-
-    overflow:hidden;
-
     display:flex;
 
     align-items:center;
@@ -443,47 +439,31 @@ STATISTIKKARTEN PREMIUM
 
     background:#FFFFFF;
 
-    border-radius:24px;
+    border-radius:26px;
 
     box-shadow:0 15px 40px rgba(15,76,129,.10);
+
+    border-left:6px solid #23A8F2;
 
     transition:.30s;
 
 }
 
-.statCard::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    width:6px;
-
-    height:100%;
-
-    background:var(--gradient);
-
-}
-
 .statCard:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(-6px);
 
-    box-shadow:0 25px 60px rgba(15,76,129,.20);
+    box-shadow:0 25px 60px rgba(15,76,129,.18);
 
 }
 
 .statIcon{
 
-    width:72px;
+    width:82px;
 
-    height:72px;
+    height:82px;
 
-    border-radius:22px;
+    border-radius:24px;
 
     display:flex;
 
@@ -495,7 +475,7 @@ STATISTIKKARTEN PREMIUM
 
     color:#FFFFFF;
 
-    font-size:34px;
+    font-size:38px;
 
     flex-shrink:0;
 
@@ -503,11 +483,11 @@ STATISTIKKARTEN PREMIUM
 
 .statTitel{
 
-    font-size:15px;
+    font-size:18px;
 
-    font-weight:600;
+    font-weight:700;
 
-    color:var(--textLight);
+    color:#7C879C;
 
     margin-bottom:8px;
 
@@ -515,9 +495,9 @@ STATISTIKKARTEN PREMIUM
 
 .statWert{
 
-    font-size:38px;
+    font-size:52px;
 
-    font-weight:800;
+    font-weight:900;
 
     color:var(--primary);
 

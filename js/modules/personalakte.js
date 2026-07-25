@@ -1074,63 +1074,26 @@ Dialog.speichern(() => {
 
         <h3>🎓 Qualifikationen</h3>
 
-        <table class="personalTabelle">
+        <div id="qualifikationListe">
 
-            <thead>
+            <p>
 
-                <tr>
+                Noch keine Qualifikationen vorhanden.
 
-                    <th>Qualifikation</th>
+            </p>
 
-                    <th>Gültig bis</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <tr>
-
-                    <td>Erste Hilfe</td>
-
-                    <td>-</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>HACCP</td>
-
-                    <td>-</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>Brandschutzhelfer</td>
-
-                    <td>-</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>Allergen-Schulung</td>
-
-                    <td>-</td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
+        </div>
 
     </div>
 
-    <div style="margin-top:24px;text-align:right;">
+    <div class="personalCard">
+
+        <h3>➕ Neue Qualifikation</h3>
 
         <button
+
+            id="btnNeueQualifikation"
+
             class="hauptButton">
 
             ➕ Qualifikation hinzufügen

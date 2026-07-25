@@ -612,10 +612,8 @@ html() {
         );
 
         DOM.html(
-
-            "dashboardHeute",
-
-            `
+    "dashboardHeute",
+    `
 
 <div>👥 Mitarbeiter: ${mitarbeiter.length}</div>
 
@@ -628,8 +626,7 @@ html() {
 <div>📦 Bestellungen: ${bestellungen.length}</div>
 
 `
-
-        );
+);
 
     },
         events() {

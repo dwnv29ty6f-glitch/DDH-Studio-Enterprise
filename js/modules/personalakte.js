@@ -962,36 +962,43 @@ Dialog.speichern(() => {
 
     <div class="personalCard">
 
-        <h3>📁 Dokumente</h3>
+        <h3>📁 Personaldokumente</h3>
 
-        <p>Noch keine Dokumente vorhanden.</p>
+        <p>
+
+            Hier können Dokumente des Mitarbeiters gespeichert werden.
+
+        </p>
 
         <button
-            class="hauptButton">
+            class="hauptButton"
+            id="btnDokumentHochladen">
 
             📤 Dokument hochladen
 
         </button>
 
+        <input
+            id="paDokument"
+            type="file"
+            style="display:none"
+            accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+
     </div>
 
     <div class="personalCard">
 
-        <h3>📄 Dokumentenarten</h3>
+        <h3>📂 Dokumentenübersicht</h3>
 
-        <ul class="personalListe">
+        <div id="dokumentListe">
 
-            <li>Arbeitsvertrag</li>
+            <p>
 
-            <li>Hygienebelehrung</li>
+                Noch keine Dokumente vorhanden.
 
-            <li>Gesundheitszeugnis</li>
+            </p>
 
-            <li>Zeugnisse</li>
-
-            <li>Zertifikate</li>
-
-        </ul>
+        </div>
 
     </div>
 
@@ -1000,6 +1007,62 @@ Dialog.speichern(() => {
 `
 
         );
+        
+        const button = DOM.id("btnDokumentHochladen");
+
+const datei = DOM.id("paDokument");
+
+if (button && datei) {
+
+    button.onclick = () => {
+
+        datei.click();
+
+    };
+
+    datei.onchange = () => {
+
+        const dokument = datei.files[0];
+
+        if (!dokument) {
+
+            return;
+
+        }
+
+        if (!this.mitarbeiter.dokumente) {
+
+            this.mitarbeiter.dokumente = [];
+
+        }
+
+        this.mitarbeiter.dokumente.push({
+
+            name: dokument.name,
+
+            groesse: dokument.size,
+
+            typ: dokument.type,
+
+            datum: new Date().toLocaleDateString("de-DE")
+
+        });
+
+        Speicher.speichern(
+
+            CONFIG.speicher.mitarbeiter,
+
+            Mitarbeiter.daten
+
+        );
+
+        this.tabDokumente();
+
+    };
+
+}
+
+this.dokumentListeAktualisieren();
 
     },
 

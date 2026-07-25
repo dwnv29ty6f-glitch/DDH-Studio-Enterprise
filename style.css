@@ -2125,3 +2125,60 @@ DASHBOARD WELCOME
     box-shadow:0 22px 50px rgba(0,156,156,.18);
 
 }
+.mitarbeiterKarte{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:28px;
+
+    padding:28px;
+
+    margin-bottom:24px;
+
+    border-radius:24px;
+
+    background:#FFFFFF;
+
+    border:1px solid rgba(0,156,156,.12);
+
+    box-shadow:0 12px 35px rgba(0,156,156,.10);
+
+    transition:.30s;
+
+}
+
+.mitarbeiterKarte:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 22px 50px rgba(0,156,156,.18);
+
+}
+
+.mitarbeiterLinks{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:24px;
+
+    flex:1;
+
+}
+
+.mitarbeiterRechts{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    align-items:flex-end;
+
+}

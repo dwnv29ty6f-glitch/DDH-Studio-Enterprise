@@ -1649,11 +1649,24 @@ RESPONSIVE
     }
 
 }
+
 /*
 ================================================
-SCHNELLZUGRIFF ENTERPRISE
+SCHNELLZUGRIFF PREMIUM
 ================================================
 */
+
+.schnellzugriff{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:22px;
+
+    margin-top:24px;
+
+}
 
 .schnellButton{
 
@@ -1663,59 +1676,67 @@ SCHNELLZUGRIFF ENTERPRISE
 
     justify-content:center;
 
-    align-items:flex-start;
+    align-items:center;
 
-    gap:10px;
+    gap:12px;
 
-    min-height:170px;
+    min-height:180px;
 
     padding:24px;
 
     border:none;
 
-    border-radius:24px;
+    border-radius:26px;
 
-    background:linear-gradient(
-        135deg,
-        #0F4C81,
-        #2563EB
-    );
+    background:#FFFFFF;
 
-    color:#FFFFFF;
+    box-shadow:0 15px 40px rgba(15,76,129,.10);
 
     cursor:pointer;
 
-    transition:.25s;
-
-    box-shadow:
-        0 18px 40px rgba(15,76,129,.20);
+    transition:.30s;
 
 }
 
 .schnellButton:hover{
 
-    transform:
-        translateY(-8px)
-        scale(1.02);
+    transform:translateY(-8px);
 
-    box-shadow:
-        0 28px 55px rgba(15,76,129,.30);
+    box-shadow:0 25px 60px rgba(15,76,129,.22);
 
 }
 
 .schnellIcon{
 
-    font-size:42px;
+    width:78px;
 
-    line-height:1;
+    height:78px;
+
+    border-radius:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+    font-size:36px;
 
 }
 
 .schnellTitel{
 
-    font-size:24px;
+    font-size:22px;
 
     font-weight:800;
+
+    color:var(--primary);
+
+    text-align:center;
 
 }
 
@@ -1723,11 +1744,14 @@ SCHNELLZUGRIFF ENTERPRISE
 
     font-size:15px;
 
-    color:rgba(255,255,255,.82);
+    color:var(--textLight);
+
+    text-align:center;
 
     line-height:1.5;
 
 }
+
 /*
 ================================================
 DASHBOARD WELCOME

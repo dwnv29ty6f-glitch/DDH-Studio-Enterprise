@@ -2188,9 +2188,15 @@ DASHBOARD WELCOME
 
     height:96px;
 
-    min-width:96px;
-
     border-radius:50%;
+
+    background:var(--gradient);
+
+    color:#fff;
+
+    font-size:42px;
+
+    font-weight:800;
 
     display:flex;
 
@@ -2198,20 +2204,11 @@ DASHBOARD WELCOME
 
     align-items:center;
 
-    overflow:hidden;
-
-    color:#FFFFFF;
-
-    font-size:34px;
-
-    font-weight:800;
-
-    background:var(--gradient);
-
     box-shadow:0 12px 30px rgba(0,156,156,.25);
 
-}
+    border:4px solid #fff;
 
+}
 .avatar img{
 
     width:100%;

@@ -170,6 +170,14 @@ const Personalakte = {
 
         this.tab("profil");
         
+        Dialog.abbrechen();
+
+Dialog.speichern(() => {
+
+    Personalakte.profilSpeichern();
+
+});
+        
             },
         
         events() {

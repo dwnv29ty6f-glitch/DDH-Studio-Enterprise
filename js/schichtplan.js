@@ -827,32 +827,30 @@ const Schichtplan = {
 
 <div class="schichtDialog">
 
-    <div class="schichtAuswahl">
+   <div class="schichtAuswahl">
 
-        <button class="schichtOption" data-schicht="F1">🌅 F1</button>
+    <div class="schichtOption schicht-F1" data-schicht="F1">🌅 F1</div>
 
-        <button class="schichtOption" data-schicht="F2">🌅 F2</button>
+    <div class="schichtOption schicht-F2" data-schicht="F2">🌅 F2</div>
 
-        <button class="schichtOption" data-schicht="M1">☀️ M1</button>
+    <div class="schichtOption schicht-M1" data-schicht="M1">☀️ M1</div>
 
-        <button class="schichtOption" data-schicht="M2">☀️ M2</button>
+    <div class="schichtOption schicht-M2" data-schicht="M2">☀️ M2</div>
 
-        <button class="schichtOption" data-schicht="S1">🌙 S1</button>
+    <div class="schichtOption schicht-S1" data-schicht="S1">🌙 S1</div>
 
-        <button class="schichtOption" data-schicht="S2">🌙 S2</button>
+    <div class="schichtOption schicht-S2" data-schicht="S2">🌙 S2</div>
 
-        <button class="schichtOption" data-schicht="S3">🌙 S3</button>
+    <div class="schichtOption schicht-S3" data-schicht="S3">🌙 S3</div>
 
-        <button class="schichtOption" data-schicht="U">🏖 Urlaub</button>
+    <div class="schichtOption schicht-U" data-schicht="U">🏖 Urlaub</div>
 
-        <button class="schichtOption" data-schicht="K">🤒 Krank</button>
+    <div class="schichtOption schicht-K" data-schicht="K">🤒 Krank</div>
 
-        <button class="schichtOption" data-schicht="F">🟢 Frei</button>
+    <div class="schichtOption schicht-F" data-schicht="F">🟢 Frei</div>
 
-        <button class="schichtOption loeschen" data-schicht="">
-            🗑 Schicht löschen
-        </button>
-
+    <div class="schichtOption loeschen" data-schicht="">
+        🗑 Schicht löschen
     </div>
 
 </div>

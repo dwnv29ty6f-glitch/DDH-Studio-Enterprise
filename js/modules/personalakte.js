@@ -362,11 +362,8 @@ Dialog.speichern(() => {
         <label>Vorname</label>
 
         <input
-
             id="paVorname"
-
             type="text"
-
             value="${this.mitarbeiter.vorname || ""}">
 
     </div>
@@ -376,11 +373,8 @@ Dialog.speichern(() => {
         <label>Nachname</label>
 
         <input
-
             id="paNachname"
-
             type="text"
-
             value="${this.mitarbeiter.nachname || ""}">
 
     </div>
@@ -390,10 +384,9 @@ Dialog.speichern(() => {
         <label>Geburtsdatum</label>
 
         <input
-
             id="paGeburt"
-
-            type="date">
+            type="date"
+            value="${this.mitarbeiter.geburt || ""}">
 
     </div>
 
@@ -403,11 +396,29 @@ Dialog.speichern(() => {
 
         <select id="paGeschlecht">
 
-            <option>Männlich</option>
+            <option
+                value="Männlich"
+                ${this.mitarbeiter.geschlecht==="Männlich"?"selected":""}>
 
-            <option>Weiblich</option>
+                Männlich
 
-            <option>Divers</option>
+            </option>
+
+            <option
+                value="Weiblich"
+                ${this.mitarbeiter.geschlecht==="Weiblich"?"selected":""}>
+
+                Weiblich
+
+            </option>
+
+            <option
+                value="Divers"
+                ${this.mitarbeiter.geschlecht==="Divers"?"selected":""}>
+
+                Divers
+
+            </option>
 
         </select>
 
@@ -418,10 +429,9 @@ Dialog.speichern(() => {
         <label>Nationalität</label>
 
         <input
-
             id="paNationalitaet"
-
-            type="text">
+            type="text"
+            value="${this.mitarbeiter.nationalitaet || ""}">
 
     </div>
 
@@ -431,20 +441,43 @@ Dialog.speichern(() => {
 
         <select id="paFamilienstand">
 
-            <option>Ledig</option>
+            <option
+                value="Ledig"
+                ${this.mitarbeiter.familienstand==="Ledig"?"selected":""}>
 
-            <option>Verheiratet</option>
+                Ledig
 
-            <option>Geschieden</option>
+            </option>
 
-            <option>Verwitwet</option>
+            <option
+                value="Verheiratet"
+                ${this.mitarbeiter.familienstand==="Verheiratet"?"selected":""}>
+
+                Verheiratet
+
+            </option>
+
+            <option
+                value="Geschieden"
+                ${this.mitarbeiter.familienstand==="Geschieden"?"selected":""}>
+
+                Geschieden
+
+            </option>
+
+            <option
+                value="Verwitwet"
+                ${this.mitarbeiter.familienstand==="Verwitwet"?"selected":""}>
+
+                Verwitwet
+
+            </option>
 
         </select>
 
     </div>
 
 </div>
-
 <div style="margin-top:24px;text-align:right;">
 
     <button

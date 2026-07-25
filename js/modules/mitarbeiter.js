@@ -184,17 +184,81 @@ const Mitarbeiter = {
 
         </div>
 
-            <p>🆔 ${mitarbeiter.personalnummer || "-"}</p>
+           <div class="mitarbeiterDetails">
 
-            <p>⏰ ${mitarbeiter.vertragsstunden || 0} Std.</p>
-            
-            <p>📞 ${mitarbeiter.telefon || "-"}</p>
-            
-            <p>📧 ${mitarbeiter.email || "-"}</p>
-            
-            <p>📅 Eintritt: ${mitarbeiter.eintritt || "-"}</p>
-            
-            <p>📄 ${mitarbeiter.vertragsart || "-"}</p>
+    <div class="detailKarte">
+
+        <div class="detailTitel">
+            🆔 Personalnummer
+        </div>
+
+        <div class="detailWert">
+            ${mitarbeiter.personalnummer || "-"}
+        </div>
+
+    </div>
+
+    <div class="detailKarte">
+
+        <div class="detailTitel">
+            ⏰ Wochenstunden
+        </div>
+
+        <div class="detailWert">
+            ${mitarbeiter.vertragsstunden || 0} Std.
+        </div>
+
+    </div>
+
+    <div class="detailKarte">
+
+        <div class="detailTitel">
+            📞 Telefon
+        </div>
+
+        <div class="detailWert">
+            ${mitarbeiter.telefon || "-"}
+        </div>
+
+    </div>
+
+    <div class="detailKarte">
+
+        <div class="detailTitel">
+            📧 E-Mail
+        </div>
+
+        <div class="detailWert">
+            ${mitarbeiter.email || "-"}
+        </div>
+
+    </div>
+
+    <div class="detailKarte">
+
+        <div class="detailTitel">
+            📅 Eintritt
+        </div>
+
+        <div class="detailWert">
+            ${mitarbeiter.eintritt || "-"}
+        </div>
+
+    </div>
+
+    <div class="detailKarte">
+
+        <div class="detailTitel">
+            📄 Vertragsart
+        </div>
+
+        <div class="detailWert">
+            ${mitarbeiter.vertragsart || "-"}
+        </div>
+
+    </div>
+
+</div>
 
         </div>
 

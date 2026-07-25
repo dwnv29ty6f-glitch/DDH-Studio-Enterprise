@@ -397,7 +397,9 @@ html() {
 
 `;
 
-        aktualisieren() {
+    },
+
+    aktualisieren() {
 
         const mitarbeiter = Speicher.laden(
 

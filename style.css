@@ -1213,25 +1213,46 @@ SCHICHTPLAN
 
     grid-auto-flow:column;
 
-    grid-auto-columns:70px;
-
-}
+    grid-auto-columns:
 
 .tagKopf{
 
     display:flex;
 
-    align-items:center;
+    flex-direction:column;
 
     justify-content:center;
 
-    height:72px;
+    align-items:center;
+
+    gap:4px;
+
+    height:70px;
+
+    border-left:1px solid #EEF2F7;
+
+    background:#F8FAFC;
+
+}
+.tagWochentag{
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:#6B7280;
+
+    text-transform:uppercase;
+
+}
+
+.tagDatum{
+
+    font-size:18px;
 
     font-weight:700;
 
-    border-right:1px solid var(--border);
-
-    background:#F8FBFF;
+    color:#18324B;
 
 }
 

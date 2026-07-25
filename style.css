@@ -2303,19 +2303,13 @@ DASHBOARD WELCOME
 
     gap:8px;
 
-    margin-top:18px;
+    padding:8px 16px;
 
-    padding:10px 22px;
-
-    border-radius:999px;
+    border-radius:12px;
 
     background:rgba(255,255,255,.18);
 
-    backdrop-filter:blur(10px);
-
-    -webkit-backdrop-filter:blur(10px);
-
-    border:1px solid rgba(255,255,255,.35);
+    border:1px solid rgba(255,255,255,.25);
 
     color:#FFFFFF;
 
@@ -2323,9 +2317,7 @@ DASHBOARD WELCOME
 
     font-weight:700;
 
-    letter-spacing:.3px;
-
-    box-shadow:0 8px 24px rgba(0,0,0,.12);
+    width:max-content;
 
 }
 .mitarbeiterDetails{

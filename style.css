@@ -2354,6 +2354,68 @@ DIALOG
 .schicht-K{background:#DC2626;color:#fff;}
 .schicht-F{background:#9CA3AF;color:#fff;}
 
+.schichtAuswahl{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:14px;
+
+    margin-top:12px;
+
+}
+
+.schichtOption{
+
+    min-height:70px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:16px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.10);
+
+    user-select:none;
+
+}
+
+.schichtOption:hover{
+
+    transform:scale(1.05);
+
+}
+
+.schichtOption.aktiv{
+
+    outline:4px solid #0F4C81;
+
+    transform:scale(1.05);
+
+}
+
+.schichtOption.loeschen{
+
+    background:#F3F4F6;
+
+    color:#DC2626;
+
+    border:2px dashed #DC2626;
+
+}
+
 /* Toolbar */
 
 .toolbar{

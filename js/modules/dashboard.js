@@ -2,7 +2,7 @@
 
 /*
 ================================================
-DDH Studio Enterprise 10.0
+DDH Studio Enterprise 11
 Dashboard
 ================================================
 */
@@ -19,34 +19,63 @@ const Dashboard = {
 
         );
 
+        this.aktualisieren();
+
         this.events();
 
-        this.aktualisieren();
+        this.uhrStarten();
 
     },
 
     html() {
 
-    return `
+        return `
 
 <div class="dashboard">
 
     <div class="welcomeCard">
 
-        <div>
+        <div class="welcomeLinks">
+
+            <div
+                id="dashboardBegruessung"
+                class="welcomeBegruessung">
+
+                👋 Willkommen
+
+            </div>
 
             <h1>
 
-                👋 Willkommen bei DDH Studio Enterprise
+                DDH Studio Enterprise
 
             </h1>
 
             <p>
 
-                Personal, Schichtplanung, Speisepläne, Bestellungen und Dokumente –
-                alles zentral an einem Ort.
+                Personal • Schichtplanung • Speisepläne • Bestellungen • Dokumente
 
             </p>
+
+        </div>
+
+        <div class="welcomeRechts">
+
+            <div
+                id="dashboardUhr"
+                class="welcomeUhr">
+
+                00:00
+
+            </div>
+
+            <div
+                id="dashboardDatum"
+                class="welcomeDatum">
+
+                --
+
+            </div>
 
         </div>
 
@@ -56,7 +85,11 @@ const Dashboard = {
 
         <div class="statCard">
 
-            <div class="statIcon">👥</div>
+            <div class="statIcon">
+
+                👥
+
+            </div>
 
             <div>
 
@@ -80,31 +113,11 @@ const Dashboard = {
 
         <div class="statCard">
 
-            <div class="statIcon">📅</div>
+            <div class="statIcon">
 
-            <div>
-
-                <div class="statTitel">
-
-                    Termine
-
-                </div>
-
-                <div
-                    class="statWert"
-                    id="dashboardTermine">
-
-                    0
-
-                </div>
+                👷
 
             </div>
-
-        </div>
-
-        <div class="statCard">
-
-            <div class="statIcon">👷</div>
 
             <div>
 
@@ -128,7 +141,39 @@ const Dashboard = {
 
         <div class="statCard">
 
-            <div class="statIcon">✅</div>
+            <div class="statIcon">
+
+                📅
+
+            </div>
+
+            <div>
+
+                <div class="statTitel">
+
+                    Termine
+
+                </div>
+
+                <div
+                    class="statWert"
+                    id="dashboardTermine">
+
+                    0
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="statCard">
+
+            <div class="statIcon">
+
+                ✅
+
+            </div>
 
             <div>
 
@@ -152,77 +197,152 @@ const Dashboard = {
 
     </div>
 
+`;
     <div class="karte">
 
         <h2>
 
-            Schnellzugriff
+            🚀 Schnellzugriff
 
         </h2>
 
-      <div class="schnellzugriff">
+        <div class="schnellzugriff">
 
-    <button class="schnellButton" id="btnDashboardMitarbeiter">
+            <button
 
-        <div class="schnellIcon">👥</div>
+                class="schnellButton"
 
-        <div class="schnellTitel">Mitarbeiter</div>
+                id="btnDashboardMitarbeiter">
 
-        <div class="schnellText">Personal verwalten</div>
+                <div class="schnellIcon">👥</div>
 
-    </button>
+                <div class="schnellTitel">
 
-    <button class="schnellButton" id="btnDashboardKalender">
+                    Mitarbeiter
 
-        <div class="schnellIcon">📅</div>
+                </div>
 
-        <div class="schnellTitel">Kalender</div>
+                <div class="schnellText">
 
-        <div class="schnellText">Termine anzeigen</div>
+                    Personal verwalten
 
-    </button>
+                </div>
 
-    <button class="schnellButton" id="btnDashboardSchichtplan">
+            </button>
 
-        <div class="schnellIcon">👷</div>
+            <button
 
-        <div class="schnellTitel">Schichtplan</div>
+                class="schnellButton"
 
-        <div class="schnellText">Dienstplan bearbeiten</div>
+                id="btnDashboardKalender">
 
-    </button>
+                <div class="schnellIcon">📅</div>
 
-    <button class="schnellButton" id="btnDashboardSpeiseplan">
+                <div class="schnellTitel">
 
-        <div class="schnellIcon">🍽</div>
+                    Kalender
 
-        <div class="schnellTitel">Speiseplan</div>
+                </div>
 
-        <div class="schnellText">Menüplanung</div>
+                <div class="schnellText">
 
-    </button>
+                    Termine verwalten
 
-    <button class="schnellButton">
+                </div>
 
-        <div class="schnellIcon">📦</div>
+            </button>
 
-        <div class="schnellTitel">Bestellung</div>
+            <button
 
-        <div class="schnellText">Artikel bestellen</div>
+                class="schnellButton"
 
-    </button>
+                id="btnDashboardSchichtplan">
 
-    <button class="schnellButton">
+                <div class="schnellIcon">👷</div>
 
-        <div class="schnellIcon">📄</div>
+                <div class="schnellTitel">
 
-        <div class="schnellTitel">Dokumente</div>
+                    Schichtplan
 
-        <div class="schnellText">Dateien verwalten</div>
+                </div>
 
-    </button>
+                <div class="schnellText">
 
-</div>
+                    Dienstpläne bearbeiten
+
+                </div>
+
+            </button>
+
+            <button
+
+                class="schnellButton"
+
+                id="btnDashboardSpeiseplan">
+
+                <div class="schnellIcon">🍽</div>
+
+                <div class="schnellTitel">
+
+                    Speisepläne
+
+                </div>
+
+                <div class="schnellText">
+
+                    Menüs verwalten
+
+                </div>
+
+            </button>
+
+            <button
+
+                class="schnellButton"
+
+                id="btnDashboardBestellung">
+
+                <div class="schnellIcon">📦</div>
+
+                <div class="schnellTitel">
+
+                    Bestellungen
+
+                </div>
+
+                <div class="schnellText">
+
+                    Artikel bestellen
+
+                </div>
+
+            </button>
+
+            <button
+
+                class="schnellButton"
+
+                id="btnDashboardDokumente">
+
+                <div class="schnellIcon">📄</div>
+
+                <div class="schnellTitel">
+
+                    Dokumente
+
+                </div>
+
+                <div class="schnellText">
+
+                    Dateien verwalten
+
+                </div>
+
+            </button>
+
+        </div>
+
+    </div>
 
     <div class="dashboardGrid">
 
@@ -234,19 +354,13 @@ const Dashboard = {
 
             </h2>
 
-            <p>
+            <div
 
-                Willkommen im DDH Studio Enterprise.
+                id="dashboardHeute"
 
-            </p>
+                class="dashboardHeute">
 
-            <p>
-
-                Hier erscheinen später automatisch
-                Geburtstage, Termine, Urlaub,
-                Krankmeldungen und Erinnerungen.
-
-            </p>
+            </div>
 
         </div>
 
@@ -262,17 +376,23 @@ const Dashboard = {
 
                 <div class="statCard">
 
-                    <div class="statTitel">
+                    <div>
 
-                        📦 Bestellungen
+                        <div class="statTitel">
 
-                    </div>
+                            📦 Bestellungen
 
-                    <div
-                        class="statWert"
-                        id="dashboardBestellungen">
+                        </div>
 
-                        0
+                        <div
+
+                            class="statWert"
+
+                            id="dashboardBestellungen">
+
+                            0
+
+                        </div>
 
                     </div>
 
@@ -280,17 +400,23 @@ const Dashboard = {
 
                 <div class="statCard">
 
-                    <div class="statTitel">
+                    <div>
 
-                        📄 Dokumente
+                        <div class="statTitel">
 
-                    </div>
+                            📄 Dokumente
 
-                    <div
-                        class="statWert"
-                        id="dashboardDokumente">
+                        </div>
 
-                        0
+                        <div
+
+                            class="statWert"
+
+                            id="dashboardDokumente">
+
+                            0
+
+                        </div>
 
                     </div>
 
@@ -306,73 +432,181 @@ const Dashboard = {
 
 `;
 
-},
-
-    aktualisieren() {
+    },
+        aktualisieren() {
 
         const mitarbeiter = Speicher.laden(
+
             CONFIG.speicher.mitarbeiter,
+
             []
+
         );
 
         const kalender = Speicher.laden(
+
             CONFIG.speicher.kalender,
+
             []
+
         );
 
         const aufgaben = Speicher.laden(
+
             CONFIG.speicher.aufgaben,
+
             []
+
         );
 
         const schichtplan = Speicher.laden(
+
             CONFIG.speicher.schichtplan,
+
             []
+
         );
 
         const bestellungen = Speicher.laden(
+
             CONFIG.speicher.bestellungen,
+
             []
+
         );
 
         const dokumente = Speicher.laden(
+
             CONFIG.speicher.dokumente,
+
             []
+
         );
 
         DOM.text(
+
             "dashboardMitarbeiter",
+
             mitarbeiter.length
+
         );
 
         DOM.text(
+
             "dashboardTermine",
+
             kalender.length
+
         );
 
         DOM.text(
+
             "dashboardAufgaben",
+
             aufgaben.length
+
         );
 
         DOM.text(
+
             "dashboardSchichten",
+
             schichtplan.length
+
         );
 
         DOM.text(
+
             "dashboardBestellungen",
+
             bestellungen.length
+
         );
 
         DOM.text(
+
             "dashboardDokumente",
+
             dokumente.length
+
+        );
+
+        const jetzt = new Date();
+
+        const stunde = jetzt.getHours();
+
+        let begruessung = "👋 Willkommen";
+
+        if (stunde < 12) {
+
+            begruessung = "☀️ Guten Morgen";
+
+        } else if (stunde < 18) {
+
+            begruessung = "🌤 Guten Tag";
+
+        } else {
+
+            begruessung = "🌙 Guten Abend";
+
+        }
+
+        DOM.text(
+
+            "dashboardBegruessung",
+
+            begruessung
+
+        );
+
+        const datum = jetzt.toLocaleDateString(
+
+            "de-DE",
+
+            {
+
+                weekday:"long",
+
+                day:"2-digit",
+
+                month:"long",
+
+                year:"numeric"
+
+            }
+
+        );
+
+        DOM.text(
+
+            "dashboardDatum",
+
+            datum
+
+        );
+
+        DOM.html(
+
+            "dashboardHeute",
+
+            `
+
+<div>👥 Mitarbeiter: ${mitarbeiter.length}</div>
+
+<div>👷 Schichten: ${schichtplan.length}</div>
+
+<div>📅 Termine: ${kalender.length}</div>
+
+<div>📄 Dokumente: ${dokumente.length}</div>
+
+<div>📦 Bestellungen: ${bestellungen.length}</div>
+
+`
+
         );
 
     },
-
-    events() {
+        events() {
 
         const navigation = {
 
@@ -386,40 +620,298 @@ const Dashboard = {
                 "schichtplan",
 
             btnDashboardSpeiseplan:
-                "speiseplaene"
+                "speiseplaene",
+
+            btnDashboardBestellung:
+                "bestellungen",
+
+            btnDashboardDokumente:
+                "dokumente"
 
         };
 
-        Object.entries(navigation).forEach(
+        Object.entries(
+
+            navigation
+
+        ).forEach(
 
             ([id, seite]) => {
 
-                const button = DOM.id(id);
+                const button =
 
-                if (button) {
+                    DOM.id(id);
 
-                    button.addEventListener(
+                if (!button) {
 
-                        "click",
-
-                        () => {
-
-                            Navigation.oeffnen(
-
-                                seite
-
-                            );
-
-                        }
-
-                    );
+                    return;
 
                 }
 
+                button.onclick = () => {
+
+                    Navigation.oeffnen(
+
+                        seite
+
+                    );
+
+                };
+
             }
+
+        );
+
+    },
+
+    uhrStarten() {
+
+        const aktualisieren = () => {
+
+            const jetzt = new Date();
+
+            const zeit =
+
+                jetzt.toLocaleTimeString(
+
+                    "de-DE",
+
+                    {
+
+                        hour:"2-digit",
+
+                        minute:"2-digit"
+
+                    }
+
+                );
+
+            DOM.text(
+
+                "dashboardUhr",
+
+                zeit
+
+            );
+
+        };
+
+        aktualisieren();
+
+        if (
+
+            this.uhrTimer
+
+        ) {
+
+            clearInterval(
+
+                this.uhrTimer
+
+            );
+
+        }
+
+        this.uhrTimer =
+
+            setInterval(
+
+                aktualisieren,
+
+                1000
+
+            );
+
+    },
+        statistik() {
+
+        const mitarbeiter = Speicher.laden(
+
+            CONFIG.speicher.mitarbeiter,
+
+            []
+
+        );
+
+        const schichten = Speicher.laden(
+
+            CONFIG.speicher.schichtplan,
+
+            []
+
+        );
+
+        const kalender = Speicher.laden(
+
+            CONFIG.speicher.kalender,
+
+            []
+
+        );
+
+        const aufgaben = Speicher.laden(
+
+            CONFIG.speicher.aufgaben,
+
+            []
+
+        );
+
+        return {
+
+            mitarbeiter:
+
+                mitarbeiter.length,
+
+            schichten:
+
+                schichten.length,
+
+            termine:
+
+                kalender.length,
+
+            aufgaben:
+
+                aufgaben.length
+
+        };
+
+    },
+
+    heute() {
+
+        const heute = new Date();
+
+        return heute.toLocaleDateString(
+
+            "de-DE",
+
+            {
+
+                weekday: "long",
+
+                day: "2-digit",
+
+                month: "long",
+
+                year: "numeric"
+
+            }
+
+        );
+
+    },
+
+    begruessung() {
+
+        const stunde =
+
+            new Date().getHours();
+
+        if (stunde < 12) {
+
+            return "☀️ Guten Morgen";
+
+        }
+
+        if (stunde < 18) {
+
+            return "🌤 Guten Tag";
+
+        }
+
+        return "🌙 Guten Abend";
+
+    },
+        zeit() {
+
+        return new Date().toLocaleTimeString(
+
+            "de-DE",
+
+            {
+
+                hour: "2-digit",
+
+                minute: "2-digit",
+
+                second: "2-digit"
+
+            }
+
+        );
+
+    },
+
+    datum() {
+
+        return new Date().toLocaleDateString(
+
+            "de-DE",
+
+            {
+
+                weekday: "long",
+
+                day: "2-digit",
+
+                month: "long",
+
+                year: "numeric"
+
+            }
+
+        );
+
+    },
+
+    aktualisierenLive() {
+
+        DOM.text(
+
+            "dashboardUhr",
+
+            this.zeit()
+
+        );
+
+        DOM.text(
+
+            "dashboardDatum",
+
+            this.datum()
+
+        );
+
+        DOM.text(
+
+            "dashboardBegruessung",
+
+            this.begruessung()
 
         );
 
     }
 
 };
+
+window.addEventListener(
+
+    "load",
+
+    () => {
+
+        if (
+
+            typeof Dashboard !== "undefined"
+
+        ) {
+
+            Dashboard.aktualisierenLive();
+
+        }
+
+    }
+
+);

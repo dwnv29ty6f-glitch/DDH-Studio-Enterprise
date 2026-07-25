@@ -968,25 +968,43 @@ PERSONAL DASHBOARD
 
 .personalIcon{
 
-    font-size:34px;
+    width:64px;
+
+    height:64px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:30px;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+    margin-bottom:16px;
 
 }
 
 .personalTitel{
 
-    margin-top:10px;
+    font-size:15px;
 
     color:var(--textLight);
+
+    margin-bottom:8px;
 
 }
 
 .personalWert{
 
-    margin-top:8px;
+    font-size:34px;
 
-    font-size:30px;
-
-    font-weight:800;
+    font-weight:700;
 
     color:var(--primary);
 

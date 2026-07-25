@@ -964,9 +964,8 @@ Dialog.speichern(() => {
                 datum,
 
                 schicht:
-
-                    schicht.toUpperCase()
-
+    schicht.toUpperCase().trim()
+    
             };
 
             if (index >= 0) {

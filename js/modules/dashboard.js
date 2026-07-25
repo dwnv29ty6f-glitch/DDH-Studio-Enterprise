@@ -195,9 +195,6 @@ const Dashboard = {
 
         </div>
 
-    </div>
-
-`;
     <div class="karte">
 
         <h2>

@@ -615,15 +615,30 @@ html() {
     "dashboardHeute",
     `
 
-<div>👥 Mitarbeiter: ${mitarbeiter.length}</div>
+<div class="heuteZeile">
+    <span>👥 Mitarbeiter</span>
+    <strong>${mitarbeiter.length}</strong>
+</div>
 
-<div>👷 Schichten: ${schichtplan.length}</div>
+<div class="heuteZeile">
+    <span>👷 Schichten</span>
+    <strong>${schichtplan.length}</strong>
+</div>
 
-<div>📅 Termine: ${kalender.length}</div>
+<div class="heuteZeile">
+    <span>📅 Termine</span>
+    <strong>${kalender.length}</strong>
+</div>
 
-<div>📄 Dokumente: ${dokumente.length}</div>
+<div class="heuteZeile">
+    <span>📄 Dokumente</span>
+    <strong>${dokumente.length}</strong>
+</div>
 
-<div>📦 Bestellungen: ${bestellungen.length}</div>
+<div class="heuteZeile">
+    <span>📦 Bestellungen</span>
+    <strong>${bestellungen.length}</strong>
+</div>
 
 `
 );

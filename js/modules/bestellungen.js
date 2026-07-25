@@ -13,48 +13,57 @@ const Bestellungen = {
 
     anzeigen() {
 
-        this.daten = Speicher.laden(
+    const lieferanten = [
 
-            "ddh_bestellungen",
+        {
+            id: "selly",
+            icon: "🍽",
+            name: "Selly",
+            beschreibung: "Digitales Bestellsystem",
+            url: "https://app.selly.biz"
+        },
 
-            []
+        {
+            id: "chefsculinar",
+            icon: "🥩",
+            name: "CHEFS CULINAR",
+            beschreibung: "Lebensmittelgroßhandel",
+            url: "https://www.chefsculinar.de"
+        },
 
-        );
+        {
+            id: "transgourmet",
+            icon: "🥬",
+            name: "Transgourmet",
+            beschreibung: "Lebensmittelgroßhandel",
+            url: "https://shop.transgourmet.de"
+        },
 
-        let html = `
+        {
+            id: "edeka",
+            icon: "🛒",
+            name: "EDEKA Foodservice",
+            beschreibung: "Lebensmittelgroßhandel",
+            url: "https://www.edeka-foodservice.de"
+        }
 
-<div
-    id="seite-bestellungen"
-    class="seite aktiv">
+    ];
 
-    <div class="karte">
+    let html = `
 
-        <h1>
+<div class="bestellungen">
 
-            Bestellungen
+    <div class="welcomeCard">
 
-        </h1>
+        <div>
 
-        <p>
+            <h1>🛒 Bestellungen</h1>
 
-            Verwaltung aller Bestellungen
+            <p>
 
-        </p>
+                Bestellsysteme der DDH Service GmbH
 
-        <div class="toolbar">
-
-            <input
-                id="bestellungSuche"
-                type="text"
-                placeholder="Bestellung suchen...">
-
-            <button
-                id="btnNeueBestellung"
-                class="hauptButton">
-
-                ➕ Neue Bestellung
-
-            </button>
+            </p>
 
         </div>
 
@@ -62,80 +71,93 @@ const Bestellungen = {
 
     <div class="karte">
 
-        <table>
+        <div class="toolbar">
 
-            <thead>
+            <input
 
-                <tr>
+                id="lieferantSuche"
 
-                    <th>Datum</th>
+                type="text"
 
-                    <th>Lieferant</th>
+                placeholder="🔍 Lieferant suchen...">
 
-                    <th>Status</th>
+            <button
 
-                    <th>Aktion</th>
+                id="btnLieferantNeu"
 
-                </tr>
+                class="hauptButton">
 
-            </thead>
+                ➕ Lieferant
 
-            <tbody>
+            </button>
 
-`;
+        </div>
 
-        if (this.daten.length === 0) {
+    </div>
 
-            html += `
+    <div
 
-<tr>
+        id="lieferantenListe"
 
-<td colspan="4">
-
-Keine Bestellungen vorhanden.
-
-</td>
-
-</tr>
+        class="lieferantenGrid">
 
 `;
 
-        }
-
-        this.daten.forEach(bestellung => {
-
-            html += `
-
-<tr>
-
-<td>${bestellung.datum || "-"}</td>
-
-<td>${bestellung.lieferant || "-"}</td>
-
-<td>${bestellung.status || "Offen"}</td>
-
-<td>
-
-<button
-class="sekundenButton">
-
-Öffnen
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-        });
+    lieferanten.forEach(lieferant => {
 
         html += `
 
-            </tbody>
+<div
 
-        </table>
+    class="lieferantenKarte"
+
+    data-name="${lieferant.name.toLowerCase()}">
+
+    <div class="lieferantenIcon">
+
+        ${lieferant.icon}
+
+    </div>
+
+    <div class="lieferantenInfo">
+
+        <div class="lieferantenName">
+
+            ${lieferant.name}
+
+        </div>
+
+        <div class="lieferantenText">
+
+            ${lieferant.beschreibung}
+
+        </div>
+
+        <div class="lieferantenStatus">
+
+            🟢 Online
+
+        </div>
+
+    </div>
+
+    <button
+
+        class="hauptButton btnLieferant"
+
+        data-url="${lieferant.url}">
+
+        ➜ Öffnen
+
+    </button>
+
+</div>
+
+`;
+
+    });
+
+    html += `
 
     </div>
 
@@ -143,15 +165,65 @@ class="sekundenButton">
 
 `;
 
-        DOM.html(
+    DOM.html(
 
-            "inhalt",
+        "inhalt",
 
-            html
+        html
 
-        );
+    );
 
-    },
+    document
+
+        .querySelectorAll(".btnLieferant")
+
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                window.open(
+
+                    button.dataset.url,
+
+                    "_blank"
+
+                );
+
+            };
+
+        });
+
+    const suche = DOM.id("lieferantSuche");
+
+    if (suche) {
+
+        suche.oninput = () => {
+
+            const text =
+
+                suche.value.toLowerCase();
+
+            document
+
+                .querySelectorAll(".lieferantenKarte")
+
+                .forEach(karte => {
+
+                    karte.style.display =
+
+                        karte.dataset.name.includes(text)
+
+                        ? ""
+
+                        : "none";
+
+                });
+
+        };
+
+    }
+
+},
 
     speichern() {
 

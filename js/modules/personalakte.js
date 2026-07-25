@@ -785,6 +785,17 @@ Dialog.speichern(() => {
 
     <div class="dialogLabel">
 
+        <label>Mobiltelefon</label>
+
+        <input
+            id="paMobil"
+            type="tel"
+            value="${this.mitarbeiter.mobil || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
         <label>E-Mail</label>
 
         <input
@@ -796,12 +807,78 @@ Dialog.speichern(() => {
 
     <div class="dialogLabel">
 
-        <label>Adresse</label>
+        <label>Dienst-E-Mail</label>
 
         <input
-            id="paAdresse"
+            id="paDienstEmail"
+            type="email"
+            value="${this.mitarbeiter.dienstEmail || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Straße</label>
+
+        <input
+            id="paStrasse"
             type="text"
-            value="${this.mitarbeiter.adresse || ""}">
+            value="${this.mitarbeiter.strasse || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Hausnummer</label>
+
+        <input
+            id="paHausnummer"
+            type="text"
+            value="${this.mitarbeiter.hausnummer || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>PLZ</label>
+
+        <input
+            id="paPlz"
+            type="text"
+            value="${this.mitarbeiter.plz || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Ort</label>
+
+        <input
+            id="paOrt"
+            type="text"
+            value="${this.mitarbeiter.ort || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Notfallkontakt</label>
+
+        <input
+            id="paNotfallKontakt"
+            type="text"
+            value="${this.mitarbeiter.notfallKontakt || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Notfalltelefon</label>
+
+        <input
+            id="paNotfallTelefon"
+            type="tel"
+            value="${this.mitarbeiter.notfallTelefon || ""}">
 
     </div>
 

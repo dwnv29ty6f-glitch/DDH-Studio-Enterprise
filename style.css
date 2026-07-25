@@ -2402,6 +2402,8 @@ DIALOG
 
     outline:4px solid #0F4C81;
 
+    box-shadow:0 0 0 4px rgba(15,76,129,.20);
+
     transform:scale(1.05);
 
 }

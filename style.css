@@ -2033,3 +2033,62 @@ DASHBOARD WELCOME
     font-size:15px;
 
 }
+.mitarbeiterDetails{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:16px;
+
+    margin-top:24px;
+
+}
+
+.detailKarte{
+
+    background:#F8FBFD;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    transition:.25s;
+
+}
+
+.detailKarte:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+.detailTitel{
+
+    font-size:13px;
+
+    font-weight:700;
+
+    color:var(--textLight);
+
+    margin-bottom:8px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+
+.detailWert{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}

@@ -2221,3 +2221,68 @@ DASHBOARD WELCOME
     object-fit:cover;
 
 }
+.mitarbeiterInfos{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.mitarbeiterName{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+    line-height:1.2;
+
+}
+
+.mitarbeiterPosition{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+}
+
+.mitarbeiterBereich{
+
+    font-size:16px;
+
+    color:var(--textLight);
+
+}
+
+.mitarbeiterStatusBadge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    width:max-content;
+
+    margin-top:8px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:rgba(34,197,94,.12);
+
+    color:#16A34A;
+
+    font-size:14px;
+
+    font-weight:700;
+
+}

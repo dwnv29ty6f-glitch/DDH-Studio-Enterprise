@@ -225,6 +225,68 @@ const Bestellungen = {
 
 },
 
+lieferantOeffnen(name, url) {
+
+    DOM.html(
+
+        "inhalt",
+
+        `
+
+<div class="bestellungStart">
+
+    <div class="bestellungStartLogo">
+
+        🛒
+
+    </div>
+
+    <h1>
+
+        ${name}
+
+    </h1>
+
+    <p>
+
+        Verbindung wird hergestellt...
+
+    </p>
+
+    <div class="ladebalken">
+
+        <div class="ladebalkenFuellung"></div>
+
+    </div>
+
+    <div class="ladeText">
+
+        DDH Studio Enterprise startet den Lieferanten.
+
+    </div>
+
+</div>
+
+`
+
+    );
+
+    setTimeout(() => {
+
+        window.open(
+
+            url,
+
+            "_blank"
+
+        );
+
+        this.anzeigen();
+
+    }, 1200);
+
+},
+
     speichern() {
 
         Speicher.speichern(

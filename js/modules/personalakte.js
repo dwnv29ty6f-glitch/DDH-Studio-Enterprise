@@ -714,32 +714,53 @@ Dialog.speichern(() => {
 
     beschaeftigungSpeichern() {
 
-        this.mitarbeiter.bereich =
-            DOM.id("paBereich").value;
+    this.mitarbeiter.bereich =
+        DOM.id("paBereich").value;
 
-        this.mitarbeiter.position =
-            DOM.id("paPosition").value;
+    this.mitarbeiter.position =
+        DOM.id("paPosition").value;
 
-        this.mitarbeiter.personalnummer =
-            DOM.id("paPersonalnummer").value;
+    this.mitarbeiter.personalnummer =
+        DOM.id("paPersonalnummer").value;
 
-        this.mitarbeiter.vertragsart =
-            DOM.id("paVertragsart").value;
+    this.mitarbeiter.vertragsart =
+        DOM.id("paVertragsart").value;
 
-        this.mitarbeiter.vertragsstunden =
-            Number(DOM.id("paStunden").value);
-
-        this.mitarbeiter.status =
-            DOM.id("paStatus").value;
-
-        Speicher.speichern(
-            CONFIG.speicher.mitarbeiter,
-            Mitarbeiter.daten
+    this.mitarbeiter.vertragsstunden =
+        Number(
+            DOM.id("paStunden").value
         );
 
-        this.oeffnen(this.mitarbeiter);
+    this.mitarbeiter.status =
+        DOM.id("paStatus").value;
 
-    },
+    this.mitarbeiter.eintritt =
+        DOM.id("paEintritt").value;
+
+    this.mitarbeiter.vertragsbeginn =
+        DOM.id("paVertragsbeginn").value;
+
+    this.mitarbeiter.vertragsende =
+        DOM.id("paVertragsende").value;
+
+    this.mitarbeiter.vorgesetzter =
+        DOM.id("paVorgesetzter").value;
+
+    Speicher.speichern(
+
+        CONFIG.speicher.mitarbeiter,
+
+        Mitarbeiter.daten
+
+    );
+
+    this.oeffnen(
+
+        this.mitarbeiter
+
+    );
+
+},
 
     tabKontakt() {
 

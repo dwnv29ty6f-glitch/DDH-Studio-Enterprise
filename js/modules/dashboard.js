@@ -949,5 +949,7 @@ window.addEventListener(
             Dashboard.aktualisierenLive();
 
         }
+        
+        }
 
 );

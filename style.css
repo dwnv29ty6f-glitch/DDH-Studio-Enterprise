@@ -75,14 +75,14 @@ FARBEN
         0 10px 30px rgba(0,156,156,.15);
 
    --gradient:
-radial-gradient(circle at 15% 25%, rgba(255,255,255,.18) 0 55px, transparent 56px),
-radial-gradient(circle at 80% 20%, rgba(255,255,255,.10) 0 80px, transparent 81px),
-radial-gradient(circle at 65% 85%, rgba(255,255,255,.12) 0 60px, transparent 61px),
+radial-gradient(circle at 20% 20%, rgba(255,255,255,.15) 0 120px, transparent 121px),
+radial-gradient(circle at 85% 15%, rgba(255,255,255,.08) 0 160px, transparent 161px),
+radial-gradient(circle at 70% 90%, rgba(255,255,255,.10) 0 140px, transparent 141px),
 linear-gradient(
     135deg,
-    #00D7C8 0%,
-    #00B8C4 45%,
-    #009C9C 100%
+    #00D7C8,
+    #00B8C4,
+    #009C9C
 );
 
 }

@@ -2726,3 +2726,96 @@ Bestellungen
     display:inline-flex;
 
     align
+    .bestellungStart{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:70vh;
+
+    text-align:center;
+
+}
+
+.bestellungStartLogo{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:32px;
+
+    background:var(--gradient);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:60px;
+
+    color:#FFFFFF;
+
+    margin-bottom:30px;
+
+    box-shadow:
+
+        0 18px 45px rgba(0,156,156,.20);
+
+}
+
+.ladebalken{
+
+    width:320px;
+
+    height:12px;
+
+    background:#E8ECEF;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    margin:28px 0;
+
+}
+
+.ladebalkenFuellung{
+
+    width:100%;
+
+    height:100%;
+
+    background:var(--gradient);
+
+    animation:laden 1.2s linear;
+
+}
+
+.ladeText{
+
+    color:var(--textLight);
+
+}
+
+@keyframes laden{
+
+    from{
+
+        width:0;
+
+    }
+
+    to{
+
+        width:100%;
+
+    }
+
+}

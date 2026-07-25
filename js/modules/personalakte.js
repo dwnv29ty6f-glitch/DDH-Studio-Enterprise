@@ -1062,33 +1062,139 @@ Dialog.speichern(() => {
 
     tabQualifikation() {
 
-        DOM.html(
+    if (!this.mitarbeiter.qualifikationen) {
 
-            "personalContent",
+        this.mitarbeiter.qualifikationen = [];
 
-            `
+    }
 
-<div class="personalForm">
+    let liste = "";
 
-    <div class="personalCard">
+    if (this.mitarbeiter.qualifikationen.length === 0) {
 
-        <h3>🎓 Qualifikationen</h3>
+        liste = `
 
-        <div id="qualifikationListe">
+<div class="personalCard">
+
+    <p>
+
+        Noch keine Qualifikationen vorhanden.
+
+    </p>
+
+</div>
+
+`;
+
+    } else {
+
+        this.mitarbeiter.qualifikationen.forEach((q,index)=>{
+
+            let status = "🟢 Gültig";
+
+            if(q.gueltig){
+
+                const heute = new Date();
+
+                const gueltig = new Date(q.gueltig);
+
+                const tage =
+
+                    Math.ceil(
+
+                        (gueltig-heute)
+
+                        /86400000
+
+                    );
+
+                if(tage < 0){
+
+                    status = "🔴 Abgelaufen";
+
+                }
+
+                else if(tage <= 30){
+
+                    status = "🟡 Läuft bald ab";
+
+                }
+
+            }
+
+            liste += `
+
+<div class="personalCard qualifikationCard">
+
+    <div class="qualifikationHeader">
+
+        <div>
+
+            <h3>
+
+                🎓 ${q.name || "-"}
+
+            </h3>
 
             <p>
 
-                Noch keine Qualifikationen vorhanden.
+                🏢 ${q.aussteller || "-"}
 
             </p>
 
         </div>
 
+        <div class="qualifikationStatus">
+
+            ${status}
+
+        </div>
+
     </div>
 
-    <div class="personalCard">
+    <div class="qualifikationInfo">
 
-        <h3>➕ Neue Qualifikation</h3>
+        <p>
+
+            📅 Schulung:
+            ${q.datum || "-"}
+
+        </p>
+
+        <p>
+
+            ⏳ Gültig bis:
+            ${q.gueltig || "-"}
+
+        </p>
+
+        <p>
+
+            📝 ${q.notiz || "-"}
+
+        </p>
+
+    </div>
+
+</div>
+
+`;
+
+        });
+
+    }
+
+    DOM.html(
+
+        "personalContent",
+
+        `
+
+<div class="personalForm">
+
+    ${liste}
+
+    <div class="personalCard">
 
         <button
 
@@ -1106,19 +1212,21 @@ Dialog.speichern(() => {
 
 `
 
-        );
-        
-        const button = DOM.id("btnNeueQualifikation");
+    );
 
-if (button) {
+    const button =
 
-    button.onclick = () => {
+        DOM.id("btnNeueQualifikation");
 
-        Dialog.oeffnen(
+    if(button){
 
-            "🎓 Neue Qualifikation",
+        button.onclick = ()=>{
 
-            `
+            Dialog.oeffnen(
+
+                "🎓 Neue Qualifikation",
+
+                `
 
 <div class="dialogGrid">
 
@@ -1127,9 +1235,8 @@ if (button) {
         <label>Qualifikation</label>
 
         <input
-            id="qualifikationName"
-            type="text"
-            placeholder="z.B. HACCP">
+            id="qualName"
+            type="text">
 
     </div>
 
@@ -1138,9 +1245,8 @@ if (button) {
         <label>Aussteller</label>
 
         <input
-            id="qualifikationAussteller"
-            type="text"
-            placeholder="z.B. DEHOGA">
+            id="qualAussteller"
+            type="text">
 
     </div>
 
@@ -1149,7 +1255,7 @@ if (button) {
         <label>Schulungsdatum</label>
 
         <input
-            id="qualifikationDatum"
+            id="qualDatum"
             type="date">
 
     </div>
@@ -1159,7 +1265,7 @@ if (button) {
         <label>Gültig bis</label>
 
         <input
-            id="qualifikationGueltig"
+            id="qualGueltig"
             type="date">
 
     </div>
@@ -1169,7 +1275,7 @@ if (button) {
         <label>Bemerkung</label>
 
         <textarea
-            id="qualifikationNotiz"
+            id="qualNotiz"
             rows="4"></textarea>
 
     </div>
@@ -1178,53 +1284,55 @@ if (button) {
 
 `
 
-        );
+            );
 
-        Dialog.abbrechen();
+            Dialog.abbrechen();
 
-        const speichern = () => {
+            Dialog.speichern(()=>{
 
-    if (!this.mitarbeiter.qualifikationen) {
+                this.mitarbeiter.qualifikationen.push({
 
-        this.mitarbeiter.qualifikationen = [];
+                    name:
+
+                        DOM.id("qualName").value,
+
+                    aussteller:
+
+                        DOM.id("qualAussteller").value,
+
+                    datum:
+
+                        DOM.id("qualDatum").value,
+
+                    gueltig:
+
+                        DOM.id("qualGueltig").value,
+
+                    notiz:
+
+                        DOM.id("qualNotiz").value
+
+                });
+
+                Speicher.speichern(
+
+                    CONFIG.speicher.mitarbeiter,
+
+                    Mitarbeiter.daten
+
+                );
+
+                Dialog.schliessen();
+
+                this.tabQualifikation();
+
+            });
+
+        };
 
     }
 
-    this.mitarbeiter.qualifikationen.push({
-
-        name: DOM.id("qualifikationName").value,
-
-        aussteller: DOM.id("qualifikationAussteller").value,
-
-        datum: DOM.id("qualifikationDatum").value,
-
-        gueltig: DOM.id("qualifikationGueltig").value,
-
-        notiz: DOM.id("qualifikationNotiz").value
-
-    });
-
-    Speicher.speichern(
-
-        CONFIG.speicher.mitarbeiter,
-
-        Mitarbeiter.daten
-
-    );
-
-    Dialog.schliessen();
-
-    this.tabQualifikation();
-
-};
-
-Dialog.speichern(speichern);
-
-    };
-
-}
-
-    },
+},
     
         tabUrlaub() {
 

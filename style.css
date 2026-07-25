@@ -600,3 +600,404 @@ textarea:focus{
         0 0 0 4px rgba(37,99,235,.15);
 
 }
+/*
+================================================
+DIALOG
+================================================
+*/
+
+.dialogOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(15,23,42,.45);
+
+    backdrop-filter:blur(8px);
+
+    z-index:9999;
+
+}
+
+.dialogFenster{
+
+    width:min(1100px,95vw);
+
+    max-height:92vh;
+
+    overflow:auto;
+
+    background:#FFFFFF;
+
+    border-radius:24px;
+
+    box-shadow:0 30px 80px rgba(0,0,0,.25);
+
+}
+
+.dialogKopf{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px 28px;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+}
+
+.dialogKopf h2{
+
+    font-size:28px;
+
+    font-weight:800;
+
+}
+
+.dialogSchliessen{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    color:#FFFFFF;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+}
+
+.dialogInhalt{
+
+    padding:28px;
+
+}
+
+.dialogFuss{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:14px;
+
+    padding:22px 28px;
+
+    border-top:1px solid var(--border);
+
+}
+
+/*
+================================================
+PERSONALAKTE
+================================================
+*/
+
+.personalakte{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+
+}
+
+.personalHeader{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+}
+
+.personalAvatar{
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:#FFFFFF;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:60px;
+
+    color:var(--primary);
+
+    flex-shrink:0;
+
+}
+
+.personalAvatarBild{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.personalHeaderInfo{
+
+    flex:1;
+
+}
+
+.personalHeaderInfo h1{
+
+    font-size:38px;
+
+    font-weight:800;
+
+}
+
+.personalUntertitel{
+
+    margin-top:8px;
+
+    font-size:18px;
+
+    opacity:.9;
+
+}
+
+.personalBadges{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+.personalBadge{
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.18);
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+/*
+================================================
+TABS
+================================================
+*/
+
+.profilTabs{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.profilTab{
+
+    border:none;
+
+    background:#EEF4FA;
+
+    padding:12px 20px;
+
+    border-radius:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.profilTab:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.profilTab.aktiv{
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+}
+
+/*
+================================================
+PERSONAL DASHBOARD
+================================================
+*/
+
+.personalDashboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:18px;
+
+}
+
+.personalCard{
+
+    background:#FFFFFF;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    box-shadow:var(--shadow);
+
+    transition:.25s;
+
+}
+
+.personalCard:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.personalIcon{
+
+    font-size:34px;
+
+}
+
+.personalTitel{
+
+    margin-top:10px;
+
+    color:var(--textLight);
+
+}
+
+.personalWert{
+
+    margin-top:8px;
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+}
+
+/*
+================================================
+FORMULAR
+================================================
+*/
+
+.personalForm{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:20px;
+
+}
+
+.dialogLabel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    font-weight:700;
+
+}
+
+.personalTabelle{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.personalTabelle th{
+
+    background:var(--primary);
+
+    color:#FFFFFF;
+
+    padding:12px;
+
+}
+
+.personalTabelle td{
+
+    padding:12px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.personalListe{
+
+    padding-left:20px;
+
+}
+
+.personalListe li{
+
+    margin-bottom:10px;
+
+}

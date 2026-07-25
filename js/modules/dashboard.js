@@ -1006,6 +1006,4 @@ window.addEventListener(
 
 }
 
-    }
-
 );

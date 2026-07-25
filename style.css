@@ -1846,3 +1846,106 @@ DASHBOARD WELCOME
     opacity:.9;
 
 }
+.dashboardInfo{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:20px;
+
+    margin:24px 0;
+
+}
+
+.infoCard{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:24px;
+
+    background:#FFFFFF;
+
+    border-radius:22px;
+
+    box-shadow:0 15px 40px rgba(15,76,129,.10);
+
+    transition:.30s;
+
+}
+
+.infoCard:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 25px 60px rgba(15,76,129,.18);
+
+}
+
+.infoIcon{
+
+    width:74px;
+
+    height:74px;
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+    font-size:34px;
+
+    flex-shrink:0;
+
+}
+
+.infoInhalt{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.infoTitel{
+
+    font-size:22px;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+}
+
+.infoText{
+
+    font-size:15px;
+
+    color:var(--textLight);
+
+}
+
+.infoStatus{
+
+    margin-top:6px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#16A34A;
+
+}

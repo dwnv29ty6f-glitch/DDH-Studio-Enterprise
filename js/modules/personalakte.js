@@ -1182,46 +1182,43 @@ if (button) {
 
         Dialog.abbrechen();
 
-        Dialog.speichern(() => {
+        const speichern = () => {
 
-            if (!this.mitarbeiter.qualifikationen) {
+    if (!this.mitarbeiter.qualifikationen) {
 
-                this.mitarbeiter.qualifikationen = [];
+        this.mitarbeiter.qualifikationen = [];
 
-            }
+    }
 
-            this.mitarbeiter.qualifikationen.push({
+    this.mitarbeiter.qualifikationen.push({
 
-                name:
-                    DOM.id("qualifikationName").value,
+        name: DOM.id("qualifikationName").value,
 
-                aussteller:
-                    DOM.id("qualifikationAussteller").value,
+        aussteller: DOM.id("qualifikationAussteller").value,
 
-                datum:
-                    DOM.id("qualifikationDatum").value,
+        datum: DOM.id("qualifikationDatum").value,
 
-                gueltig:
-                    DOM.id("qualifikationGueltig").value,
+        gueltig: DOM.id("qualifikationGueltig").value,
 
-                notiz:
-                    DOM.id("qualifikationNotiz").value
+        notiz: DOM.id("qualifikationNotiz").value
 
-            });
+    });
 
-            Speicher.speichern(
+    Speicher.speichern(
 
-                CONFIG.speicher.mitarbeiter,
+        CONFIG.speicher.mitarbeiter,
 
-                Mitarbeiter.daten
+        Mitarbeiter.daten
 
-            );
+    );
 
-            Dialog.schliessen();
+    Dialog.schliessen();
 
-            this.tabQualifikation();
+    this.tabQualifikation();
 
-        });
+};
+
+Dialog.speichern(speichern);
 
     };
 

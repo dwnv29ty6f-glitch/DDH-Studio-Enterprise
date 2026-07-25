@@ -1001,3 +1001,380 @@ FORMULAR
     margin-bottom:10px;
 
 }
+/*
+================================================
+SCHICHTPLAN
+================================================
+*/
+
+.schichtplan{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+/* Kopf */
+
+.schichtHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:28px;
+
+    border-radius:24px;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+    box-shadow:var(--shadow);
+
+}
+
+.schichtHeader h1{
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+.schichtHeader p{
+
+    margin-top:6px;
+
+    opacity:.9;
+
+}
+
+.schichtHeaderRechts{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.monatTitel{
+
+    min-width:180px;
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+/* Toolbar */
+
+.toolbar{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:20px;
+
+}
+
+.toolbarSpacer{
+
+    flex:1;
+
+}
+
+.toolbar input{
+
+    width:280px;
+
+}
+
+/* Plan */
+
+.teamsPlan{
+
+    overflow:auto;
+
+    background:#FFFFFF;
+
+    border-radius:22px;
+
+    box-shadow:var(--shadow);
+
+}
+
+/* Kopfzeile */
+
+.teamsHeader{
+
+    display:grid;
+
+    grid-auto-flow:column;
+
+    grid-auto-columns:72px;
+
+    position:sticky;
+
+    top:0;
+
+    background:#F8FBFE;
+
+    z-index:20;
+
+}
+
+.mitarbeiterSpalte{
+
+    width:280px;
+
+    position:sticky;
+
+    left:0;
+
+    z-index:30;
+
+    background:#F8FBFE;
+
+    border-right:1px solid var(--border);
+
+}
+
+/* Tage */
+
+.tagKopf{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:4px;
+
+    height:64px;
+
+    border-left:1px solid var(--border);
+
+}
+
+.tagWochentag{
+
+    font-size:12px;
+
+    color:var(--textLight);
+
+    font-weight:700;
+
+}
+
+.tagDatum{
+
+    font-size:18px;
+
+    font-weight:800;
+
+}
+
+/* Zeilen */
+
+.teamsZeile{
+
+    display:grid;
+
+    grid-auto-flow:column;
+
+    grid-auto-columns:72px;
+
+}
+
+/* Mitarbeiter */
+
+.teamsMitarbeiter{
+
+    width:280px;
+
+    position:sticky;
+
+    left:0;
+
+    background:#FFFFFF;
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:12px;
+
+    z-index:10;
+
+}
+
+.teamsAvatar{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+.teamsAvatarLeer{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:700;
+
+}
+
+/* Schichten */
+
+.schichtFeld{
+
+    width:72px;
+
+    height:64px;
+
+    margin:2px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.18s;
+
+    border:1px solid #EEF2F7;
+
+}
+
+.schichtFeld:hover{
+
+    transform:scale(1.06);
+
+    box-shadow:0 8px 18px rgba(15,76,129,.18);
+
+}
+
+/* Farben */
+
+.schicht-F1{background:#2563EB;color:#fff;}
+.schicht-F2{background:#60A5FA;color:#fff;}
+
+.schicht-M1{background:#16A34A;color:#fff;}
+.schicht-M2{background:#22C55E;color:#fff;}
+
+.schicht-S1{background:#F59E0B;color:#fff;}
+.schicht-S2{background:#EA580C;color:#fff;}
+.schicht-S3{background:#9333EA;color:#fff;}
+
+.schicht-U{background:#06B6D4;color:#fff;}
+
+.schicht-K{background:#DC2626;color:#fff;}
+
+.schicht-F{background:#9CA3AF;color:#fff;}
+
+/* Dialog */
+
+.schichtAuswahl{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+}
+
+.schichtOption{
+
+    min-height:70px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.schichtOption:hover{
+
+    transform:scale(1.04);
+
+}
+
+.schichtOption.aktiv{
+
+    outline:4px solid var(--primary);
+
+}
+
+.schichtOption.loeschen{
+
+    background:#F3F4F6;
+
+    color:#DC2626;
+
+    border:2px dashed #DC2626;
+
+}

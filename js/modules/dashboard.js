@@ -160,57 +160,69 @@ const Dashboard = {
 
         </h2>
 
-        <div class="schnellzugriff">
+      <div class="schnellzugriff">
 
-            <button
-                class="schnellButton"
-                id="btnDashboardMitarbeiter">
+    <button class="schnellButton" id="btnDashboardMitarbeiter">
 
-                👥 Mitarbeiter
+        <div class="schnellIcon">👥</div>
 
-            </button>
+        <div class="schnellTitel">Mitarbeiter</div>
 
-            <button
-                class="schnellButton"
-                id="btnDashboardKalender">
+        <div class="schnellText">Personal verwalten</div>
 
-                📅 Kalender
+    </button>
 
-            </button>
+    <button class="schnellButton" id="btnDashboardKalender">
 
-            <button
-                class="schnellButton"
-                id="btnDashboardSchichtplan">
+        <div class="schnellIcon">📅</div>
 
-                👷 Schichtplan
+        <div class="schnellTitel">Kalender</div>
 
-            </button>
+        <div class="schnellText">Termine anzeigen</div>
 
-            <button
-                class="schnellButton"
-                id="btnDashboardSpeiseplan">
+    </button>
 
-                🍽 Speiseplan
+    <button class="schnellButton" id="btnDashboardSchichtplan">
 
-            </button>
+        <div class="schnellIcon">👷</div>
 
-            <button
-                class="schnellButton">
+        <div class="schnellTitel">Schichtplan</div>
 
-                📦 Bestellung
+        <div class="schnellText">Dienstplan bearbeiten</div>
 
-            </button>
+    </button>
 
-            <button
-                class="schnellButton">
+    <button class="schnellButton" id="btnDashboardSpeiseplan">
 
-                📄 Dokumente
+        <div class="schnellIcon">🍽</div>
 
-            </button>
+        <div class="schnellTitel">Speiseplan</div>
 
-        </div>
+        <div class="schnellText">Menüplanung</div>
 
-    </div>
+    </button>
+
+    <button class="schnellButton">
+
+        <div class="schnellIcon">📦</div>
+
+        <div class="schnellTitel">Bestellung</div>
+
+        <div class="schnellText">Artikel bestellen</div>
+
+    </button>
+
+    <button class="schnellButton">
+
+        <div class="schnellIcon">📄</div>
+
+        <div class="schnellTitel">Dokumente</div>
+
+        <div class="schnellText">Dateien verwalten</div>
+
+    </button>
+
+</div>
 
     <div class="dashboardGrid">
 

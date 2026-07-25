@@ -1056,6 +1056,54 @@ if (button && datei) {
 
         );
 
+        const button = DOM.id("btnDokumentHochladen");
+
+const datei = DOM.id("paDokument");
+
+if (button && datei) {
+
+    button.onclick = () => {
+
+        datei.click();
+
+    };
+
+    datei.onchange = () => {
+
+        const dokument = datei.files[0];
+
+        if (!dokument) {
+
+            return;
+
+        }
+
+        if (!this.mitarbeiter.dokumente) {
+
+            this.mitarbeiter.dokumente = [];
+
+        }
+
+        this.mitarbeiter.dokumente.push({
+
+            name: dokument.name,
+
+            groesse: dokument.size,
+
+            typ: dokument.type,
+
+            datum: new Date().toLocaleDateString("de-DE")
+
+        });
+
+        Speicher.speichern(
+
+            CONFIG.speicher.mitarbeiter,
+
+            Mitarbeiter.daten
+
+        );
+
         this.tabDokumente();
 
     };

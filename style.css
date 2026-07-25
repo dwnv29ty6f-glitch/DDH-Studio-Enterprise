@@ -2561,3 +2561,32 @@ DASHBOARD WELCOME
     color:#FFECEC;
 
 }
+@media (max-width:768px){
+
+    .mitarbeiterKarte{
+
+        flex-direction:column;
+
+        padding:22px;
+
+    }
+
+    .mitarbeiterLinks{
+
+        width:100%;
+
+    }
+
+    .mitarbeiterRechts{
+
+        width:100%;
+
+        flex-direction:row;
+
+        justify-content:flex-end;
+
+        margin-top:20px;
+
+    }
+
+}

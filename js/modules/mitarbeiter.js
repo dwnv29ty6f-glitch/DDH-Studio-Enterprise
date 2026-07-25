@@ -137,46 +137,56 @@ const Mitarbeiter = {
 
 <div class="karte mitarbeiterKarte">
 
-    <div class="mitarbeiterLinks">
+   <div class="mitarbeiterLinks">
 
-      <div
+    <div
+        class="avatar"
+        style="background:${mitarbeiter.farbe || "#009C9C"}; overflow:hidden;">
 
-    class="avatar"
+        ${mitarbeiter.profilbild
+            ? `<img
+                    src="${mitarbeiter.profilbild}"
+                    style="
+                        width:100%;
+                        height:100%;
+                        object-fit:cover;
+                    ">`
+            : ((mitarbeiter.vorname || "?").charAt(0)).toUpperCase()
+        }
 
-    style="background:${mitarbeiter.farbe || "#0077C8"}; overflow:hidden;">
+    </div>
 
-    ${mitarbeiter.profilbild
-        ? `<img
-                src="${mitarbeiter.profilbild}"
-                style="
-                    width:100%;
-                    height:100%;
-                    object-fit:cover;
-                ">`
-        : ((mitarbeiter.vorname || "?").charAt(0)).toUpperCase()
-    }
+    <div class="mitarbeiterInfos">
 
-</div>
+        <div class="mitarbeiterName">
 
-        <div class="mitarbeiterInfos">
+            ${mitarbeiter.vorname || ""}
 
-            <h2>
+            ${mitarbeiter.nachname || ""}
 
-                ${mitarbeiter.vorname || ""}
+        </div>
 
-                ${mitarbeiter.nachname || ""}
+        <div class="mitarbeiterPosition">
 
-            </h2>
+            💼 ${mitarbeiter.position || "Mitarbeiter"}
 
-            <p>💼 ${mitarbeiter.position || "-"}</p>
+        </div>
 
-            <p>🏢 ${mitarbeiter.bereich || "-"}</p>
+        <div class="mitarbeiterBereich">
+
+            📍 ${mitarbeiter.bereich || "-"}
+
+        </div>
+
+        <div class="mitarbeiterStatusBadge">
+
+            🟢 ${mitarbeiter.status || "Aktiv"}
+
+        </div>
 
             <p>🆔 ${mitarbeiter.personalnummer || "-"}</p>
 
             <p>⏰ ${mitarbeiter.vertragsstunden || 0} Std.</p>
-
-            <p>✅ ${mitarbeiter.status || "Aktiv"}</p>
             
             <p>📞 ${mitarbeiter.telefon || "-"}</p>
             

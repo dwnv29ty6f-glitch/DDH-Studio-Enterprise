@@ -1107,6 +1107,125 @@ Dialog.speichern(() => {
 `
 
         );
+        
+        const button = DOM.id("btnNeueQualifikation");
+
+if (button) {
+
+    button.onclick = () => {
+
+        Dialog.oeffnen(
+
+            "🎓 Neue Qualifikation",
+
+            `
+
+<div class="dialogGrid">
+
+    <div class="dialogLabel">
+
+        <label>Qualifikation</label>
+
+        <input
+            id="qualifikationName"
+            type="text"
+            placeholder="z.B. HACCP">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Aussteller</label>
+
+        <input
+            id="qualifikationAussteller"
+            type="text"
+            placeholder="z.B. DEHOGA">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Schulungsdatum</label>
+
+        <input
+            id="qualifikationDatum"
+            type="date">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Gültig bis</label>
+
+        <input
+            id="qualifikationGueltig"
+            type="date">
+
+    </div>
+
+    <div class="dialogLabel dialogGridVoll">
+
+        <label>Bemerkung</label>
+
+        <textarea
+            id="qualifikationNotiz"
+            rows="4"></textarea>
+
+    </div>
+
+</div>
+
+`
+
+        );
+
+        Dialog.abbrechen();
+
+        Dialog.speichern(() => {
+
+            if (!this.mitarbeiter.qualifikationen) {
+
+                this.mitarbeiter.qualifikationen = [];
+
+            }
+
+            this.mitarbeiter.qualifikationen.push({
+
+                name:
+                    DOM.id("qualifikationName").value,
+
+                aussteller:
+                    DOM.id("qualifikationAussteller").value,
+
+                datum:
+                    DOM.id("qualifikationDatum").value,
+
+                gueltig:
+                    DOM.id("qualifikationGueltig").value,
+
+                notiz:
+                    DOM.id("qualifikationNotiz").value
+
+            });
+
+            Speicher.speichern(
+
+                CONFIG.speicher.mitarbeiter,
+
+                Mitarbeiter.daten
+
+            );
+
+            Dialog.schliessen();
+
+            this.tabQualifikation();
+
+        });
+
+    };
+
+}
 
     },
     

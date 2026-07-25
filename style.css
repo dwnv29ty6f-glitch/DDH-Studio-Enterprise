@@ -53,40 +53,33 @@ FARBEN
 
 :root{
 
-    --primary:#0F4C81;
-    --primaryLight:#2563EB;
-    --secondary:#00B8D9;
+    --primary:#009C9C;
+    --primaryLight:#3FCFCF;
+    --secondary:#00C2B8;
 
     --success:#22C55E;
     --warning:#F59E0B;
     --danger:#DC2626;
 
-    --background:#F3F7FB;
+    --background:#F5FBFB;
     --surface:#FFFFFF;
 
     --text:#1F2937;
     --textLight:#6B7280;
 
-    --border:#E5E7EB;
+    --border:#DDEEEE;
 
     --radius:18px;
 
     --shadow:
-
-        0 10px 30px rgba(15,76,129,.10);
+        0 10px 30px rgba(0,156,156,.15);
 
     --gradient:
-
         linear-gradient(
-
             135deg,
-
-            #0F4C81,
-
-            #2563EB,
-
-            #00B8D9
-
+            #00D7C8 0%,
+            #00B8C4 45%,
+            #009C9C 100%
         );
 
 }

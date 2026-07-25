@@ -27,9 +27,7 @@ const Dashboard = {
 
     },
 
-    html() {
-
-        return `
+    return `
 
 <div class="dashboard">
 
@@ -85,11 +83,7 @@ const Dashboard = {
 
         <div class="statCard">
 
-            <div class="statIcon">
-
-                👥
-
-            </div>
+            <div class="statIcon">👥</div>
 
             <div>
 
@@ -113,11 +107,7 @@ const Dashboard = {
 
         <div class="statCard">
 
-            <div class="statIcon">
-
-                👷
-
-            </div>
+            <div class="statIcon">👷</div>
 
             <div>
 
@@ -141,11 +131,7 @@ const Dashboard = {
 
         <div class="statCard">
 
-            <div class="statIcon">
-
-                📅
-
-            </div>
+            <div class="statIcon">📅</div>
 
             <div>
 
@@ -169,11 +155,7 @@ const Dashboard = {
 
         <div class="statCard">
 
-            <div class="statIcon">
-
-                ✅
-
-            </div>
+            <div class="statIcon">✅</div>
 
             <div>
 
@@ -195,6 +177,8 @@ const Dashboard = {
 
         </div>
 
+    </div>
+
     <div class="karte">
 
         <h2>
@@ -206,9 +190,7 @@ const Dashboard = {
         <div class="schnellzugriff">
 
             <button
-
                 class="schnellButton"
-
                 id="btnDashboardMitarbeiter">
 
                 <div class="schnellIcon">👥</div>
@@ -228,9 +210,7 @@ const Dashboard = {
             </button>
 
             <button
-
                 class="schnellButton"
-
                 id="btnDashboardKalender">
 
                 <div class="schnellIcon">📅</div>
@@ -250,9 +230,7 @@ const Dashboard = {
             </button>
 
             <button
-
                 class="schnellButton"
-
                 id="btnDashboardSchichtplan">
 
                 <div class="schnellIcon">👷</div>
@@ -272,9 +250,7 @@ const Dashboard = {
             </button>
 
             <button
-
                 class="schnellButton"
-
                 id="btnDashboardSpeiseplan">
 
                 <div class="schnellIcon">🍽</div>
@@ -294,9 +270,7 @@ const Dashboard = {
             </button>
 
             <button
-
                 class="schnellButton"
-
                 id="btnDashboardBestellung">
 
                 <div class="schnellIcon">📦</div>
@@ -316,9 +290,7 @@ const Dashboard = {
             </button>
 
             <button
-
                 class="schnellButton"
-
                 id="btnDashboardDokumente">
 
                 <div class="schnellIcon">📄</div>
@@ -352,9 +324,7 @@ const Dashboard = {
             </h2>
 
             <div
-
                 id="dashboardHeute"
-
                 class="dashboardHeute">
 
             </div>
@@ -382,9 +352,7 @@ const Dashboard = {
                         </div>
 
                         <div
-
                             class="statWert"
-
                             id="dashboardBestellungen">
 
                             0
@@ -406,9 +374,7 @@ const Dashboard = {
                         </div>
 
                         <div
-
                             class="statWert"
-
                             id="dashboardDokumente">
 
                             0
@@ -429,7 +395,6 @@ const Dashboard = {
 
 `;
 
-    },
         aktualisieren() {
 
         const mitarbeiter = Speicher.laden(

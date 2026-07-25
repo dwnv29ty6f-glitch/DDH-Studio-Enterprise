@@ -8,6 +8,8 @@ Dashboard
 */
 
 const Dashboard = {
+    
+    uhrTimer: null,
 
     anzeigen() {
 

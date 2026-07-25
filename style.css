@@ -2620,3 +2620,109 @@ DASHBOARD WELCOME
     }
 
 }
+/*
+=========================================
+Bestellungen
+=========================================
+*/
+
+.lieferantenGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(340px,1fr));
+
+    gap:24px;
+
+    margin-top:24px;
+
+}
+
+.lieferantenKarte{
+
+    background:#FFFFFF;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    border:1px solid rgba(0,156,156,.12);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+}
+
+.lieferantenKarte:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(0,156,156,.15);
+
+}
+
+.lieferantenIcon{
+
+    width:78px;
+
+    height:78px;
+
+    border-radius:22px;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:38px;
+
+    flex-shrink:0;
+
+}
+
+.lieferantenInfo{
+
+    flex:1;
+
+}
+
+.lieferantenName{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+    margin-bottom:8px;
+
+}
+
+.lieferantenText{
+
+    color:var(--textLight);
+
+    margin-bottom:14px;
+
+}
+
+.lieferantenStatus{
+
+    display:inline-flex;
+
+    align

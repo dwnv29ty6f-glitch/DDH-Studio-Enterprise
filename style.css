@@ -1378,3 +1378,236 @@ SCHICHTPLAN
     border:2px dashed #DC2626;
 
 }
+/*
+================================================
+SCHICHTPLAN PRO
+================================================
+*/
+
+/* Heute */
+
+.tagHeute{
+
+    background:#DBEAFE !important;
+
+    color:#0F4C81;
+
+    font-weight:800;
+
+    border:2px solid #2563EB;
+
+}
+
+/* Wochenende */
+
+.tagWochenende{
+
+    background:#F3F4F6;
+
+}
+
+.schichtWochenende{
+
+    background:#FAFAFA;
+
+}
+
+/* Feiertage */
+
+.tagFeiertag{
+
+    background:#FEE2E2;
+
+    color:#B91C1C;
+
+}
+
+/* Überstunden */
+
+.stundenPositiv{
+
+    color:#16A34A;
+
+    font-weight:800;
+
+}
+
+.stundenNegativ{
+
+    color:#DC2626;
+
+    font-weight:800;
+
+}
+
+.stundenNeutral{
+
+    color:#6B7280;
+
+    font-weight:700;
+
+}
+
+/* Mitarbeiterstunden */
+
+.teamsStunden{
+
+    width:90px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    border-left:1px solid var(--border);
+
+    background:#FFFFFF;
+
+    position:sticky;
+
+    right:0;
+
+    z-index:10;
+
+}
+
+/* Aktive Zelle */
+
+.schichtFeld.aktiv{
+
+    outline:3px solid var(--primary);
+
+    transform:scale(1.08);
+
+    z-index:2;
+
+}
+
+/* Leere Zelle */
+
+.schichtLeer{
+
+    color:#D1D5DB;
+
+}
+
+/* Animation */
+
+.schichtFeld{
+
+    transition:
+
+        transform .15s,
+
+        box-shadow .15s,
+
+        background .15s;
+
+}
+
+.schichtFeld:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+
+        0 8px 20px rgba(15,76,129,.18);
+
+}
+
+/* Scrollbar */
+
+.teamsPlan::-webkit-scrollbar{
+
+    height:12px;
+
+}
+
+.teamsPlan::-webkit-scrollbar-thumb{
+
+    background:#CBD5E1;
+
+    border-radius:999px;
+
+}
+
+.teamsPlan::-webkit-scrollbar-track{
+
+    background:#F8FAFC;
+
+}
+
+/*
+================================================
+RESPONSIVE
+================================================
+*/
+
+@media(max-width:1100px){
+
+    .schichtHeader{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .schichtHeaderRechts{
+
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+    .toolbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .toolbar input{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:700px){
+
+    #app{
+
+        grid-template-columns:1fr;
+
+    }
+
+    #sidebar{
+
+        display:none;
+
+    }
+
+    #inhalt{
+
+        padding:16px;
+
+    }
+
+    .mitarbeiterSpalte,
+
+    .teamsMitarbeiter{
+
+        width:220px;
+
+    }
+
+}

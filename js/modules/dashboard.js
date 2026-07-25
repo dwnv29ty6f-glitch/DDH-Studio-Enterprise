@@ -27,368 +27,275 @@ const Dashboard = {
 
     html() {
 
-        return `
+    return `
 
 <div class="dashboard">
 
-<div class="welcomeCard">
+    <div class="welcomeCard">
 
-<div>
+        <div>
 
-<h1>
+            <h1>
 
-Willkommen zurück 👋
+                👋 Willkommen bei DDH Studio Enterprise
 
-</h1>
+            </h1>
 
-<p>
+            <p>
 
-DDH Studio Enterprise unterstützt dich bei der Verwaltung von Mitarbeitern, Schichtplänen, Speiseplänen, Bestellungen und Dokumenten.
+                Personal, Schichtplanung, Speisepläne, Bestellungen und Dokumente –
+                alles zentral an einem Ort.
 
-</p>
+            </p>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
-<div class="dashboardGrid">
+    <div class="dashboardGrid">
 
-<div class="statCard">
+        <div class="statCard">
 
-<div class="statIcon">
+            <div class="statIcon">👥</div>
 
-👥
+            <div>
 
-</div>
+                <div class="statTitel">
 
-<div class="statTitel">
+                    Mitarbeiter
 
-Mitarbeiter
+                </div>
 
-</div>
+                <div
+                    class="statWert"
+                    id="dashboardMitarbeiter">
 
-<div
-class="statWert"
-id="dashboardMitarbeiter">
+                    0
 
-0
+                </div>
 
-</div>
+            </div>
 
-<div class="statText">
+        </div>
 
-Aktive Mitarbeiter
+        <div class="statCard">
 
-</div>
+            <div class="statIcon">📅</div>
 
-</div>
+            <div>
 
-<div class="statCard">
+                <div class="statTitel">
 
-<div class="statIcon">
+                    Termine
 
-📅
+                </div>
 
-</div>
+                <div
+                    class="statWert"
+                    id="dashboardTermine">
 
-<div class="statTitel">
+                    0
 
-Termine
+                </div>
 
-</div>
+            </div>
 
-<div
-class="statWert"
-id="dashboardTermine">
+        </div>
 
-0
+        <div class="statCard">
 
-</div>
+            <div class="statIcon">👷</div>
 
-<div class="statText">
+            <div>
 
-Geplante Termine
+                <div class="statTitel">
 
-</div>
+                    Schichten
 
-</div>
+                </div>
 
-<div class="statCard">
+                <div
+                    class="statWert"
+                    id="dashboardSchichten">
 
-<div class="statIcon">
+                    0
 
-✅
+                </div>
 
-</div>
+            </div>
 
-<div class="statTitel">
+        </div>
 
-Aufgaben
+        <div class="statCard">
 
-</div>
+            <div class="statIcon">✅</div>
 
-<div
-class="statWert"
-id="dashboardAufgaben">
+            <div>
 
-0
+                <div class="statTitel">
 
-</div>
+                    Aufgaben
 
-<div class="statText">
+                </div>
 
-Offene Aufgaben
+                <div
+                    class="statWert"
+                    id="dashboardAufgaben">
 
-</div>
+                    0
 
-</div>
+                </div>
 
-<div class="statCard">
+            </div>
 
-<div class="statIcon">
+        </div>
 
-👷
+    </div>
 
-</div>
+    <div class="karte">
 
-<div class="statTitel">
+        <h2>
 
-Schichten
+            Schnellzugriff
 
-</div>
+        </h2>
 
-<div
-class="statWert"
-id="dashboardSchichten">
+        <div class="schnellzugriff">
 
-0
+            <button
+                class="schnellButton"
+                id="btnDashboardMitarbeiter">
 
-</div>
+                👥 Mitarbeiter
 
-<div class="statText">
+            </button>
 
-Geplante Schichten
+            <button
+                class="schnellButton"
+                id="btnDashboardKalender">
 
-</div>
+                📅 Kalender
 
-</div>
+            </button>
 
-</div>
+            <button
+                class="schnellButton"
+                id="btnDashboardSchichtplan">
 
-<div class="karte">
+                👷 Schichtplan
 
-<h2>
+            </button>
 
-Schnellzugriff
+            <button
+                class="schnellButton"
+                id="btnDashboardSpeiseplan">
 
-</h2>
+                🍽 Speiseplan
 
-<div class="schnellzugriff">
-<div class="schnellButton"
-id="btnDashboardMitarbeiter">
+            </button>
 
-<div class="schnellLinks">
+            <button
+                class="schnellButton">
 
-<div class="schnellIcon">
+                📦 Bestellung
 
-👥
+            </button>
 
-</div>
+            <button
+                class="schnellButton">
 
-<div>
+                📄 Dokumente
 
-<div class="schnellTitel">
+            </button>
 
-Mitarbeiter
+        </div>
 
-</div>
+    </div>
 
-<div class="statText">
+    <div class="dashboardGrid">
 
-Mitarbeiter verwalten
+        <div class="karte">
 
-</div>
+            <h2>
 
-</div>
+                📌 Heute
 
-</div>
+            </h2>
 
-<div class="schnellPfeil">
+            <p>
 
-→
+                Willkommen im DDH Studio Enterprise.
 
-</div>
+            </p>
 
-</div>
+            <p>
 
-<div class="schnellButton"
-id="btnDashboardKalender">
+                Hier erscheinen später automatisch
+                Geburtstage, Termine, Urlaub,
+                Krankmeldungen und Erinnerungen.
 
-<div class="schnellLinks">
+            </p>
 
-<div class="schnellIcon">
+        </div>
 
-🗓
+        <div class="karte">
 
-</div>
+            <h2>
 
-<div>
+                📊 Übersicht
 
-<div class="schnellTitel">
+            </h2>
 
-Kalender
+            <div class="dashboardGrid">
 
-</div>
+                <div class="statCard">
 
-<div class="statText">
+                    <div class="statTitel">
 
-Termine anzeigen
+                        📦 Bestellungen
 
-</div>
+                    </div>
 
-</div>
+                    <div
+                        class="statWert"
+                        id="dashboardBestellungen">
 
-</div>
+                        0
 
-<div class="schnellPfeil">
+                    </div>
 
-→
+                </div>
 
-</div>
+                <div class="statCard">
 
-</div>
+                    <div class="statTitel">
 
-<div class="schnellButton"
-id="btnDashboardSchichtplan">
+                        📄 Dokumente
 
-<div class="schnellLinks">
+                    </div>
 
-<div class="schnellIcon">
+                    <div
+                        class="statWert"
+                        id="dashboardDokumente">
 
-👷
+                        0
 
-</div>
+                    </div>
 
-<div>
+                </div>
 
-<div class="schnellTitel">
+            </div>
 
-Schichtplan
+        </div>
 
-</div>
-
-<div class="statText">
-
-Teams Schichten
-
-</div>
-
-</div>
-
-</div>
-
-<div class="schnellPfeil">
-
-→
-
-</div>
-
-</div>
-
-<div class="schnellButton"
-id="btnDashboardSpeiseplan">
-
-<div class="schnellLinks">
-
-<div class="schnellIcon">
-
-🍽
-
-</div>
-
-<div>
-
-<div class="schnellTitel">
-
-Speisepläne
-
-</div>
-
-<div class="statText">
-
-Speisepläne bearbeiten
-
-</div>
-
-</div>
-
-</div>
-
-<div class="schnellPfeil">
-
-→
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="karte">
-
-<h2>
-
-Heute im Überblick
-
-</h2>
-
-<div class="dashboardGrid">
-
-<div class="statCard">
-
-<div class="statTitel">
-
-📦 Bestellungen
-
-</div>
-
-<div
-class="statWert"
-id="dashboardBestellungen">
-
-0
-
-</div>
-
-</div>
-
-<div class="statCard">
-
-<div class="statTitel">
-
-📄 Dokumente
-
-</div>
-
-<div
-class="statWert"
-id="dashboardDokumente">
-
-0
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
 `;
 
 },
+
     aktualisieren() {
 
         const mitarbeiter = Speicher.laden(

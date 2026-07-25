@@ -181,15 +181,23 @@ const Bestellungen = {
 
             button.onclick = () => {
 
-                window.open(
+    const karte =
 
-                    button.dataset.url,
+        button.closest(".lieferantenKarte");
 
-                    "_blank"
+    const name =
 
-                );
+        karte.querySelector(".lieferantenName").textContent;
 
-            };
+    this.lieferantOeffnen(
+
+        name,
+
+        button.dataset.url
+
+    );
+
+};
 
         });
 

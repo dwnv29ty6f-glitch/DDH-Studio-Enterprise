@@ -583,13 +583,29 @@ Dialog.speichern(() => {
 
         <select id="paVertragsart">
 
-            <option value="Vollzeit" ${this.mitarbeiter.vertragsart==="Vollzeit"?"selected":""}>Vollzeit</option>
+            <option value="Vollzeit" ${this.mitarbeiter.vertragsart==="Vollzeit"?"selected":""}>
+                Vollzeit
+            </option>
 
-            <option value="Teilzeit" ${this.mitarbeiter.vertragsart==="Teilzeit"?"selected":""}>Teilzeit</option>
+            <option value="Teilzeit" ${this.mitarbeiter.vertragsart==="Teilzeit"?"selected":""}>
+                Teilzeit
+            </option>
 
-            <option value="Minijob" ${this.mitarbeiter.vertragsart==="Minijob"?"selected":""}>Minijob</option>
+            <option value="Minijob" ${this.mitarbeiter.vertragsart==="Minijob"?"selected":""}>
+                Minijob
+            </option>
 
-            <option value="Befristet" ${this.mitarbeiter.vertragsart==="Befristet"?"selected":""}>Befristet</option>
+            <option value="Befristet" ${this.mitarbeiter.vertragsart==="Befristet"?"selected":""}>
+                Befristet
+            </option>
+
+            <option value="Ausbildung" ${this.mitarbeiter.vertragsart==="Ausbildung"?"selected":""}>
+                Ausbildung
+            </option>
+
+            <option value="Praktikum" ${this.mitarbeiter.vertragsart==="Praktikum"?"selected":""}>
+                Praktikum
+            </option>
 
         </select>
 
@@ -612,15 +628,67 @@ Dialog.speichern(() => {
 
         <select id="paStatus">
 
-            <option value="Aktiv" ${this.mitarbeiter.status==="Aktiv"?"selected":""}>🟢 Aktiv</option>
+            <option value="Aktiv" ${this.mitarbeiter.status==="Aktiv"?"selected":""}>
+                🟢 Aktiv
+            </option>
 
-            <option value="Urlaub" ${this.mitarbeiter.status==="Urlaub"?"selected":""}>🟡 Urlaub</option>
+            <option value="Urlaub" ${this.mitarbeiter.status==="Urlaub"?"selected":""}>
+                🟡 Urlaub
+            </option>
 
-            <option value="Krank" ${this.mitarbeiter.status==="Krank"?"selected":""}>🟠 Krank</option>
+            <option value="Krank" ${this.mitarbeiter.status==="Krank"?"selected":""}>
+                🟠 Krank
+            </option>
 
-            <option value="Ausgeschieden" ${this.mitarbeiter.status==="Ausgeschieden"?"selected":""}>🔴 Ausgeschieden</option>
+            <option value="Ausgeschieden" ${this.mitarbeiter.status==="Ausgeschieden"?"selected":""}>
+                🔴 Ausgeschieden
+            </option>
 
         </select>
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Eintrittsdatum</label>
+
+        <input
+            id="paEintritt"
+            type="date"
+            value="${this.mitarbeiter.eintritt || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Vertragsbeginn</label>
+
+        <input
+            id="paVertragsbeginn"
+            type="date"
+            value="${this.mitarbeiter.vertragsbeginn || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Vertragsende</label>
+
+        <input
+            id="paVertragsende"
+            type="date"
+            value="${this.mitarbeiter.vertragsende || ""}">
+
+    </div>
+
+    <div class="dialogLabel">
+
+        <label>Vorgesetzter</label>
+
+        <input
+            id="paVorgesetzter"
+            type="text"
+            value="${this.mitarbeiter.vorgesetzter || ""}">
 
     </div>
 

@@ -904,23 +904,51 @@ Dialog.speichern(() => {
 
     kontaktSpeichern() {
 
-        this.mitarbeiter.telefon =
-            DOM.id("paTelefon").value;
+    this.mitarbeiter.telefon =
+        DOM.id("paTelefon").value;
 
-        this.mitarbeiter.email =
-            DOM.id("paEmail").value;
+    this.mitarbeiter.mobil =
+        DOM.id("paMobil").value;
 
-        this.mitarbeiter.adresse =
-            DOM.id("paAdresse").value;
+    this.mitarbeiter.email =
+        DOM.id("paEmail").value;
 
-        Speicher.speichern(
-            CONFIG.speicher.mitarbeiter,
-            Mitarbeiter.daten
-        );
+    this.mitarbeiter.dienstEmail =
+        DOM.id("paDienstEmail").value;
 
-        this.oeffnen(this.mitarbeiter);
+    this.mitarbeiter.strasse =
+        DOM.id("paStrasse").value;
 
-    },
+    this.mitarbeiter.hausnummer =
+        DOM.id("paHausnummer").value;
+
+    this.mitarbeiter.plz =
+        DOM.id("paPlz").value;
+
+    this.mitarbeiter.ort =
+        DOM.id("paOrt").value;
+
+    this.mitarbeiter.notfallKontakt =
+        DOM.id("paNotfallKontakt").value;
+
+    this.mitarbeiter.notfallTelefon =
+        DOM.id("paNotfallTelefon").value;
+
+    Speicher.speichern(
+
+        CONFIG.speicher.mitarbeiter,
+
+        Mitarbeiter.daten
+
+    );
+
+    this.oeffnen(
+
+        this.mitarbeiter
+
+    );
+
+},
     
         tabDokumente() {
 

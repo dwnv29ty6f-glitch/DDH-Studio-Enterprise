@@ -263,59 +263,105 @@ html() {
 
         </h2>
 
-        <div class="schnellzugriff">
+      <div class="schnellzugriff">
 
-            <button
-                class="schnellButton"
-                id="btnDashboardMitarbeiter">
+    <button
+        class="schnellButton"
+        id="btnDashboardMitarbeiter">
 
-                👥 Mitarbeiter
+        <div class="schnellIcon">👥</div>
 
-            </button>
-
-            <button
-                class="schnellButton"
-                id="btnDashboardKalender">
-
-                📅 Kalender
-
-            </button>
-
-            <button
-                class="schnellButton"
-                id="btnDashboardSchichtplan">
-
-                👷 Schichtplan
-
-            </button>
-
-            <button
-                class="schnellButton"
-                id="btnDashboardSpeiseplan">
-
-                🍽 Speisepläne
-
-            </button>
-
-            <button
-                class="schnellButton"
-                id="btnDashboardBestellung">
-
-                📦 Bestellungen
-
-            </button>
-
-            <button
-                class="schnellButton"
-                id="btnDashboardDokumente">
-
-                📄 Dokumente
-
-            </button>
-
+        <div class="schnellTitel">
+            Mitarbeiter
         </div>
 
-    </div>
+        <div class="schnellText">
+            Personal verwalten
+        </div>
+
+    </button>
+
+    <button
+        class="schnellButton"
+        id="btnDashboardKalender">
+
+        <div class="schnellIcon">📅</div>
+
+        <div class="schnellTitel">
+            Kalender
+        </div>
+
+        <div class="schnellText">
+            Termine verwalten
+        </div>
+
+    </button>
+
+    <button
+        class="schnellButton"
+        id="btnDashboardSchichtplan">
+
+        <div class="schnellIcon">👷</div>
+
+        <div class="schnellTitel">
+            Schichtplan
+        </div>
+
+        <div class="schnellText">
+            Dienstpläne bearbeiten
+        </div>
+
+    </button>
+
+    <button
+        class="schnellButton"
+        id="btnDashboardSpeiseplan">
+
+        <div class="schnellIcon">🍽</div>
+
+        <div class="schnellTitel">
+            Speisepläne
+        </div>
+
+        <div class="schnellText">
+            Menüs verwalten
+        </div>
+
+    </button>
+
+    <button
+        class="schnellButton"
+        id="btnDashboardBestellung">
+
+        <div class="schnellIcon">📦</div>
+
+        <div class="schnellTitel">
+            Bestellungen
+        </div>
+
+        <div class="schnellText">
+            Artikel bestellen
+        </div>
+
+    </button>
+
+    <button
+        class="schnellButton"
+        id="btnDashboardDokumente">
+
+        <div class="schnellIcon">📄</div>
+
+        <div class="schnellTitel">
+            Dokumente
+        </div>
+
+        <div class="schnellText">
+            Dateien verwalten
+        </div>
+
+    </button>
+
+</div>
 
     <div class="dashboardGrid">
 

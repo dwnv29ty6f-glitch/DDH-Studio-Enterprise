@@ -490,27 +490,67 @@ const Schichtplan = {
 
 `;
 
-        for (
+        const wochentage = [
 
-            let tag = 1;
+    "So",
+    "Mo",
+    "Di",
+    "Mi",
+    "Do",
+    "Fr",
+    "Sa"
 
-            tag <= tage;
+];
 
-            tag++
+for (
 
-        ) {
+    let tag = 1;
 
-            html += `
+    tag <= tage;
+
+    tag++
+
+) {
+
+    const datum = new Date(
+
+        jahr,
+
+        monat,
+
+        tag
+
+    );
+
+    const wochentag =
+
+        wochentage[
+
+            datum.getDay()
+
+        ];
+
+    html += `
 
 <div class="tagKopf">
 
-    ${tag}
+    <div class="tagWochentag">
+
+        ${wochentag}
+
+    </div>
+
+    <div class="tagDatum">
+
+        ${tag}
+
+    </div>
 
 </div>
 
 `;
 
-        }
+}
 
         html += `
 

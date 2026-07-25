@@ -1690,3 +1690,97 @@ SCHNELLZUGRIFF ENTERPRISE
     line-height:1.5;
 
 }
+/*
+================================================
+DASHBOARD WELCOME
+================================================
+*/
+
+.welcomeCard{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:40px;
+
+    padding:40px;
+
+    border-radius:28px;
+
+    background:linear-gradient(
+        135deg,
+        #0F4C81,
+        #2563EB,
+        #00B8D9
+    );
+
+    color:#FFFFFF;
+
+    box-shadow:0 20px 50px rgba(15,76,129,.25);
+
+}
+
+.welcomeLinks{
+
+    flex:1;
+
+}
+
+.welcomeBegruessung{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    opacity:.95;
+
+    margin-bottom:12px;
+
+}
+
+.welcomeCard h1{
+
+    font-size:42px;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+}
+
+.welcomeCard p{
+
+    font-size:18px;
+
+    opacity:.92;
+
+    line-height:1.6;
+
+}
+
+.welcomeRechts{
+
+    text-align:right;
+
+}
+
+.welcomeUhr{
+
+    font-size:48px;
+
+    font-weight:800;
+
+}
+
+.welcomeDatum{
+
+    margin-top:10px;
+
+    font-size:18px;
+
+    opacity:.9;
+
+}

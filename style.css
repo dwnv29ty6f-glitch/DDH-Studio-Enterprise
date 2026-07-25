@@ -2369,3 +2369,80 @@ DASHBOARD WELCOME
     word-break:break-word;
 
 }
+.mitarbeiterKarte{
+
+    padding:0;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+}
+
+.mitarbeiterLinks{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:24px;
+
+    padding:30px;
+
+    background:var(--gradient);
+
+    color:#FFFFFF;
+
+}
+
+.mitarbeiterInfos{
+
+    flex:1;
+
+}
+
+.mitarbeiterName{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:#FFFFFF;
+
+    margin-bottom:8px;
+
+}
+
+.mitarbeiterPosition{
+
+    color:rgba(255,255,255,.95);
+
+    font-size:18px;
+
+    margin-bottom:6px;
+
+}
+
+.mitarbeiterBereich{
+
+    color:rgba(255,255,255,.85);
+
+    margin-bottom:18px;
+
+}
+
+.mitarbeiterStatusBadge{
+
+    display:inline-block;
+
+    background:#FFFFFF;
+
+    color:#009C9C;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+}

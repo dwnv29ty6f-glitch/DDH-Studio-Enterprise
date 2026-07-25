@@ -178,11 +178,12 @@ const Mitarbeiter = {
 
         </div>
 
-        <div class="mitarbeiterStatusBadge">
+      <div
+    class="mitarbeiterStatusBadge status${(mitarbeiter.status || "Aktiv").replace(/\s+/g,"")}">
 
-            🟢 ${mitarbeiter.status || "Aktiv"}
+    ${mitarbeiter.status || "Aktiv"}
 
-        </div>
+</div>
 
            <div class="mitarbeiterDetails">
 

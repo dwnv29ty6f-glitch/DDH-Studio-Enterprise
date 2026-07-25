@@ -154,3 +154,194 @@ body{
     padding:32px;
 
 }
+/*
+================================================
+SIDEBAR
+================================================
+*/
+
+#sidebar{
+
+    background:var(--gradient);
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+#logo{
+
+    padding:40px 30px;
+
+}
+
+#logo h1{
+
+    color:#FFFFFF;
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+#logo span{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:rgba(255,255,255,.85);
+
+    font-size:15px;
+
+}
+
+#navigation{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    padding:20px;
+
+    overflow:auto;
+
+}
+
+.navButton{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:16px 18px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:transparent;
+
+    color:#FFFFFF;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.navButton:hover{
+
+    background:rgba(255,255,255,.14);
+
+    transform:translateX(6px);
+
+}
+
+.navButton.aktiv{
+
+    background:#FFFFFF;
+
+    color:var(--primary);
+
+}
+
+/*
+================================================
+HEADER
+================================================
+*/
+
+#kopfbereich{
+
+    height:90px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 32px;
+
+    background:#FFFFFF;
+
+    border-bottom:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+}
+
+#kopfLinks h2{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+}
+
+#seitenPfad{
+
+    margin-top:6px;
+
+    color:var(--textLight);
+
+    font-size:15px;
+
+}
+
+#kopfRechts{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+#kopfRechts button{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#FFFFFF;
+
+    box-shadow:var(--shadow);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:20px;
+
+}
+
+#kopfRechts button:hover{
+
+    transform:translateY(-2px);
+
+}

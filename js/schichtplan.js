@@ -654,7 +654,7 @@ const Schichtplan = {
 
     class="schichtFeld ${
     schicht
-        ? "schicht-" + schicht.schicht
+        ? "schicht-" + schicht.schicht.trim()
         : ""
 }"
 
@@ -662,11 +662,11 @@ const Schichtplan = {
 
     data-datum="${datum}">
 
-    ${schicht
+  ${schicht
 
-        ? schicht.schicht
+    ? schicht.schicht.trim()
 
-        : ""}
+    : ""}
 
 </div>
 

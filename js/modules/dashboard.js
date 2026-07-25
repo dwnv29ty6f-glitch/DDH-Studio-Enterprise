@@ -27,6 +27,8 @@ const Dashboard = {
 
     },
 
+html() {
+
     return `
 
 <div class="dashboard">

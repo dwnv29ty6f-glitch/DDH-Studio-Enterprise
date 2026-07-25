@@ -83,11 +83,71 @@ html() {
 
     </div>
 
+    <div class="dashboardInfo">
+
+        <div class="infoCard">
+
+            <div class="infoIcon">
+
+                🏢
+
+            </div>
+
+            <div>
+
+                <div class="infoTitel">
+
+                    DDH Service GmbH
+
+                </div>
+
+                <div class="infoText">
+
+                    Enterprise Management System
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="infoCard">
+
+            <div class="infoIcon">
+
+                🕒
+
+            </div>
+
+            <div>
+
+                <div class="infoTitel">
+
+                    Live-System
+
+                </div>
+
+                <div class="infoText">
+
+                    Alle Daten werden automatisch gespeichert.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
     <div class="dashboardGrid">
 
         <div class="statCard">
 
-            <div class="statIcon">👥</div>
+            <div class="statIcon">
+
+                👥
+
+            </div>
 
             <div>
 
@@ -111,7 +171,11 @@ html() {
 
         <div class="statCard">
 
-            <div class="statIcon">👷</div>
+            <div class="statIcon">
+
+                👷
+
+            </div>
 
             <div>
 
@@ -135,7 +199,11 @@ html() {
 
         <div class="statCard">
 
-            <div class="statIcon">📅</div>
+            <div class="statIcon">
+
+                📅
+
+            </div>
 
             <div>
 
@@ -159,7 +227,11 @@ html() {
 
         <div class="statCard">
 
-            <div class="statIcon">✅</div>
+            <div class="statIcon">
+
+                ✅
+
+            </div>
 
             <div>
 
@@ -197,19 +269,7 @@ html() {
                 class="schnellButton"
                 id="btnDashboardMitarbeiter">
 
-                <div class="schnellIcon">👥</div>
-
-                <div class="schnellTitel">
-
-                    Mitarbeiter
-
-                </div>
-
-                <div class="schnellText">
-
-                    Personal verwalten
-
-                </div>
+                👥 Mitarbeiter
 
             </button>
 
@@ -217,19 +277,7 @@ html() {
                 class="schnellButton"
                 id="btnDashboardKalender">
 
-                <div class="schnellIcon">📅</div>
-
-                <div class="schnellTitel">
-
-                    Kalender
-
-                </div>
-
-                <div class="schnellText">
-
-                    Termine verwalten
-
-                </div>
+                📅 Kalender
 
             </button>
 
@@ -237,19 +285,7 @@ html() {
                 class="schnellButton"
                 id="btnDashboardSchichtplan">
 
-                <div class="schnellIcon">👷</div>
-
-                <div class="schnellTitel">
-
-                    Schichtplan
-
-                </div>
-
-                <div class="schnellText">
-
-                    Dienstpläne bearbeiten
-
-                </div>
+                👷 Schichtplan
 
             </button>
 
@@ -257,19 +293,7 @@ html() {
                 class="schnellButton"
                 id="btnDashboardSpeiseplan">
 
-                <div class="schnellIcon">🍽</div>
-
-                <div class="schnellTitel">
-
-                    Speisepläne
-
-                </div>
-
-                <div class="schnellText">
-
-                    Menüs verwalten
-
-                </div>
+                🍽 Speisepläne
 
             </button>
 
@@ -277,19 +301,7 @@ html() {
                 class="schnellButton"
                 id="btnDashboardBestellung">
 
-                <div class="schnellIcon">📦</div>
-
-                <div class="schnellTitel">
-
-                    Bestellungen
-
-                </div>
-
-                <div class="schnellText">
-
-                    Artikel bestellen
-
-                </div>
+                📦 Bestellungen
 
             </button>
 
@@ -297,19 +309,7 @@ html() {
                 class="schnellButton"
                 id="btnDashboardDokumente">
 
-                <div class="schnellIcon">📄</div>
-
-                <div class="schnellTitel">
-
-                    Dokumente
-
-                </div>
-
-                <div class="schnellText">
-
-                    Dateien verwalten
-
-                </div>
+                📄 Dokumente
 
             </button>
 

@@ -952,11 +952,11 @@ Dialog.speichern(() => {
     
         tabDokumente() {
 
-        DOM.html(
+    DOM.html(
 
-            "personalContent",
+        "personalContent",
 
-            `
+        `
 
 <div class="personalForm">
 
@@ -992,11 +992,7 @@ Dialog.speichern(() => {
 
         <div id="dokumentListe">
 
-            <p>
-
-                Noch keine Dokumente vorhanden.
-
-            </p>
+            <p>Noch keine Dokumente vorhanden.</p>
 
         </div>
 
@@ -1006,113 +1002,63 @@ Dialog.speichern(() => {
 
 `
 
-        );
-        
-        const button = DOM.id("btnDokumentHochladen");
+    );
 
-const datei = DOM.id("paDokument");
+    const button = DOM.id("btnDokumentHochladen");
 
-if (button && datei) {
+    const datei = DOM.id("paDokument");
 
-    button.onclick = () => {
+    if (button && datei) {
 
-        datei.click();
+        button.onclick = () => {
 
-    };
+            datei.click();
 
-    datei.onchange = () => {
+        };
 
-        const dokument = datei.files[0];
+        datei.onchange = () => {
 
-        if (!dokument) {
+            const dokument = datei.files[0];
 
-            return;
+            if (!dokument) {
 
-        }
+                return;
 
-        if (!this.mitarbeiter.dokumente) {
+            }
 
-            this.mitarbeiter.dokumente = [];
+            if (!this.mitarbeiter.dokumente) {
 
-        }
+                this.mitarbeiter.dokumente = [];
 
-        this.mitarbeiter.dokumente.push({
+            }
 
-            name: dokument.name,
+            this.mitarbeiter.dokumente.push({
 
-            groesse: dokument.size,
+                name: dokument.name,
 
-            typ: dokument.type,
+                groesse: dokument.size,
 
-            datum: new Date().toLocaleDateString("de-DE")
+                typ: dokument.type,
 
-        });
+                datum: new Date().toLocaleDateString("de-DE")
 
-        Speicher.speichern(
+            });
 
-            CONFIG.speicher.mitarbeiter,
+            Speicher.speichern(
 
-            Mitarbeiter.daten
+                CONFIG.speicher.mitarbeiter,
 
-        );
+                Mitarbeiter.daten
 
-        const button = DOM.id("btnDokumentHochladen");
+            );
 
-const datei = DOM.id("paDokument");
+            this.tabDokumente();
 
-if (button && datei) {
+        };
 
-    button.onclick = () => {
+    }
 
-        datei.click();
-
-    };
-
-    datei.onchange = () => {
-
-        const dokument = datei.files[0];
-
-        if (!dokument) {
-
-            return;
-
-        }
-
-        if (!this.mitarbeiter.dokumente) {
-
-            this.mitarbeiter.dokumente = [];
-
-        }
-
-        this.mitarbeiter.dokumente.push({
-
-            name: dokument.name,
-
-            groesse: dokument.size,
-
-            typ: dokument.type,
-
-            datum: new Date().toLocaleDateString("de-DE")
-
-        });
-
-        Speicher.speichern(
-
-            CONFIG.speicher.mitarbeiter,
-
-            Mitarbeiter.daten
-
-        );
-
-        this.tabDokumente();
-
-    };
-
-}
-
-this.dokumentListeAktualisieren();
-
-    },
+},
 
     tabQualifikation() {
 

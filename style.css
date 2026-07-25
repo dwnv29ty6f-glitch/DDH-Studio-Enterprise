@@ -1980,3 +1980,56 @@ DASHBOARD WELCOME
     color:var(--primary);
 
 }
+.mitarbeiterName{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+    margin-bottom:8px;
+
+}
+
+.mitarbeiterPosition{
+
+    font-size:17px;
+
+    color:var(--text);
+
+    margin-bottom:6px;
+
+}
+
+.mitarbeiterBereich{
+
+    font-size:16px;
+
+    color:var(--textLight);
+
+    margin-bottom:12px;
+
+}
+
+.mitarbeiterStatusBadge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    background:rgba(34,197,94,.12);
+
+    color:#16A34A;
+
+    font-weight:700;
+
+    font-size:15px;
+
+}

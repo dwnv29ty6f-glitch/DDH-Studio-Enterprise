@@ -223,66 +223,25 @@ status.innerHTML =
                 pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
 
-            const dokument =
-                await pdfjsLib.getDocument({
+            const bild = pdf.files[0];
 
-                    data: daten
+const worker = await Tesseract.createWorker("deu");
 
-                }).promise;
+const ergebnis = await worker.recognize(bild);
 
-            let text = "";
+await worker.terminate();
 
-            for (
+status.innerHTML =
 
-                let seite = 1;
+    "✅ OCR erfolgreich abgeschlossen.<br><br>" +
 
-                seite <= dokument.numPages;
+    "<h3>Erkannter Text</h3>" +
 
-                seite++
+    "<textarea style='width:100%;height:350px'>" +
 
-            ) {
+    ergebnis.data.text +
 
-                const pdfSeite =
-                    await dokument.getPage(seite);
-
-                const inhalt =
-                    await pdfSeite.getTextContent();
-
-                text +=
-
-                    inhalt.items
-
-                        .map(item => item.str)
-
-                        .join(" ")
-
-                    + "\n\n";
-
-            }
-
-            status.innerHTML = `
-
-<div class="erfolg">
-
-    ✅ PDF erfolgreich gelesen.
-
-</div>
-
-<h3>
-
-    Erkannter Text
-
-</h3>
-
-<textarea
-    style="
-        width:100%;
-        height:350px;
-        margin-top:10px;
-        font-family:monospace;
-    ">${text}</textarea>
-
-`;
+    "</textarea>";
 
         }
 

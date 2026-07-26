@@ -183,6 +183,78 @@ if (monatTitel) {
         aktuellesJahr;
 
 }
+
+const btnZurueck = DOM.id(
+
+    "monatZurueck"
+
+);
+
+const btnWeiter = DOM.id(
+
+    "monatWeiter"
+
+);
+
+if (btnZurueck) {
+
+    btnZurueck.onclick = () => {
+
+        aktuellerMonat--;
+
+        if (
+
+            aktuellerMonat < 0
+
+        ) {
+
+            aktuellerMonat = 11;
+
+            aktuellesJahr--;
+
+        }
+
+        monatTitel.textContent =
+
+            monate[aktuellerMonat] +
+
+            " " +
+
+            aktuellesJahr;
+
+    };
+
+}
+
+if (btnWeiter) {
+
+    btnWeiter.onclick = () => {
+
+        aktuellerMonat++;
+
+        if (
+
+            aktuellerMonat > 11
+
+        ) {
+
+            aktuellerMonat = 0;
+
+            aktuellesJahr++;
+
+        }
+
+        monatTitel.textContent =
+
+            monate[aktuellerMonat] +
+
+            " " +
+
+            aktuellesJahr;
+
+    };
+
+}
         
         const raster = DOM.id(
 

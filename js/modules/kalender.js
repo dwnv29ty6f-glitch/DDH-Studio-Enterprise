@@ -60,122 +60,57 @@ const Kalender = {
 
     </div>
 
-    <div class="karte">
+   html += `
 
-        <table>
+<div class="karte">
 
-            <thead>
-
-                <tr>
-
-                    <th>
-
-                        Datum
-
-                    </th>
-
-                    <th>
-
-                        Uhrzeit
-
-                    </th>
-
-                    <th>
-
-                        Termin
-
-                    </th>
-
-                    <th>
-
-                        Ort
-
-                    </th>
-
-                    <th>
-
-                        Aktionen
-
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-`;
-
-        if(this.daten.length===0){
-
-            html += `
-
-<tr>
-
-    <td colspan="5">
-
-        Keine Termine vorhanden.
-
-    </td>
-
-</tr>
-
-`;
-
-        }
-
-        this.daten.forEach(termin=>{
-
-            html += `
-
-<tr>
-
-    <td>
-
-        ${termin.datum || "-"}
-
-    </td>
-
-    <td>
-
-        ${termin.uhrzeit || "-"}
-
-    </td>
-
-    <td>
-
-        ${termin.titel || "-"}
-
-    </td>
-
-    <td>
-
-        ${termin.ort || "-"}
-
-    </td>
-
-    <td>
+    <div class="kalenderKopf">
 
         <button
+            id="monatZurueck"
             class="sekundenButton">
 
-            Bearbeiten
+            ◀
 
         </button>
 
-    </td>
+        <h2
+            id="kalenderMonat">
 
-</tr>
+            Juli 2026
 
-`;
+        </h2>
 
-        });
+        <button
+            id="monatWeiter"
+            class="sekundenButton">
 
-        html += `
+            ▶
 
-            </tbody>
+        </button>
 
-        </table>
+    </div>
+
+    <div
+        id="kalenderRaster"
+        class="kalenderRaster">
+
+    </div>
+
+</div>
+
+<div class="karte">
+
+    <h2>
+
+        Termine
+
+    </h2>
+
+    <div
+        id="terminListe">
+
+        Kein Tag ausgewählt.
 
     </div>
 

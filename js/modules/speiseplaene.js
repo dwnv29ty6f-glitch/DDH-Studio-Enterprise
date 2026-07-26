@@ -11,17 +11,17 @@ const Speiseplaene = {
 
     daten: [],
 
-    anzeigen() {
+anzeigen() {
 
-        this.daten = Speicher.laden(
+    this.daten = Speicher.laden(
 
-            "ddh_speiseplaene",
+        "ddh_speiseplaene",
 
-            []
+        []
 
-        );
+    );
 
-        let html = `
+    let html = `
 
 <div
     id="seite-speiseplaene"
@@ -60,46 +60,46 @@ const Speiseplaene = {
 
     </div>
 
-<div class="karte">
+    <div class="karte">
 
-    <h2>
+        <h2>
 
-        📥 Selly-Speiseplan importieren
+            📥 Selly-Speiseplan importieren
 
-    </h2>
+        </h2>
 
-    <p>
+        <p>
 
-        Importiere einen mit Selly erstellten Speiseplan als PDF.
+            Importiere einen mit Selly erstellten Speiseplan als PDF.
 
-    </p>
+        </p>
 
-    <div class="toolbar">
+        <div class="toolbar">
 
-        <input
-            id="sellyPdf"
-            type="file"
-            accept=".pdf">
+            <input
+                id="sellyPdf"
+                type="file"
+                accept=".pdf">
 
-        <button
-            id="btnImportSelly"
-            class="hauptButton">
+            <button
+                id="btnImportSelly"
+                class="hauptButton">
 
-            📥 Importieren
+                📥 Importieren
 
-        </button>
+            </button>
+
+        </div>
+
+        <div
+            id="sellyStatus"
+            class="infoBox">
+
+            Keine PDF ausgewählt.
+
+        </div>
 
     </div>
-
-    <div
-        id="sellyStatus"
-        class="infoBox">
-
-        Keine PDF ausgewählt.
-
-    </div>
-
-</div>
 
     <div class="karte">
 
@@ -109,29 +109,13 @@ const Speiseplaene = {
 
                 <tr>
 
-                    <th>
+                    <th>Zeitraum</th>
 
-                        Zeitraum
+                    <th>Bezeichnung</th>
 
-                    </th>
+                    <th>Erstellt am</th>
 
-                    <th>
-
-                        Bezeichnung
-
-                    </th>
-
-                    <th>
-
-                        Erstellt am
-
-                    </th>
-
-                    <th>
-
-                        Aktionen
-
-                    </th>
+                    <th>Aktionen</th>
 
                 </tr>
 
@@ -141,9 +125,9 @@ const Speiseplaene = {
 
 `;
 
-        if (this.daten.length === 0) {
+    if (this.daten.length === 0) {
 
-            html += `
+        html += `
 
 <tr>
 
@@ -157,31 +141,19 @@ const Speiseplaene = {
 
 `;
 
-        }
+    }
 
-        this.daten.forEach(plan => {
+    this.daten.forEach(plan => {
 
-            html += `
+        html += `
 
 <tr>
 
-    <td>
+    <td>${plan.zeitraum || "-"}</td>
 
-        ${plan.zeitraum || "-"}
+    <td>${plan.name || "-"}</td>
 
-    </td>
-
-    <td>
-
-        ${plan.name || "-"}
-
-    </td>
-
-    <td>
-
-        ${plan.datum || "-"}
-
-    </td>
+    <td>${plan.datum || "-"}</td>
 
     <td>
 
@@ -198,9 +170,9 @@ const Speiseplaene = {
 
 `;
 
-        });
+    });
 
-        html += `
+    html += `
 
             </tbody>
 
@@ -212,41 +184,40 @@ const Speiseplaene = {
 
 `;
 
-        DOM.html(
+    DOM.html(
 
-            "inhalt",
+        "inhalt",
 
-            html
+        html
 
-        );
-        
-        const pdf = DOM.id("sellyPdf");
-const status = DOM.id("sellyStatus");
-const button = DOM.id("btnImportSelly");
+    );
 
-if (button) {
+    const pdf = DOM.id("sellyPdf");
+    const status = DOM.id("sellyStatus");
+    const button = DOM.id("btnImportSelly");
 
-    button.onclick = () => {
+    if (button) {
 
-        if (!pdf.files.length) {
+        button.onclick = () => {
+
+            if (!pdf.files.length) {
+
+                status.innerHTML =
+                    "⚠️ Bitte zuerst eine PDF auswählen.";
+
+                return;
+
+            }
 
             status.innerHTML =
-                "⚠️ Bitte zuerst eine PDF auswählen.";
+                "✅ PDF ausgewählt: " +
+                pdf.files[0].name;
 
-            return;
+        };
 
-        }
+    }
 
-        status.innerHTML =
-            "✅ PDF ausgewählt: " +
-            pdf.files[0].name;
-
-    };
-
-}
-
-    },
-
+},
     speichern() {
 
         Speicher.speichern(

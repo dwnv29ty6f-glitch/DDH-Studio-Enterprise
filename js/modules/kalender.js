@@ -127,6 +127,96 @@ const Kalender = {
             html
 
         );
+        
+        const raster = DOM.id(
+
+    "kalenderRaster"
+
+);
+
+if (raster) {
+
+    const wochentage = [
+
+        "Mo",
+
+        "Di",
+
+        "Mi",
+
+        "Do",
+
+        "Fr",
+
+        "Sa",
+
+        "So"
+
+    ];
+
+    wochentage.forEach(tag => {
+
+        const kopf = document.createElement(
+
+            "div"
+
+        );
+
+        kopf.className =
+
+            "kalenderTag kalHeader";
+
+        kopf.textContent =
+
+            tag;
+
+        raster.appendChild(
+
+            kopf
+
+        );
+
+    });
+
+    for (
+
+        let tag = 1;
+
+        tag <= 31;
+
+        tag++
+
+    ) {
+
+        const feld =
+
+            document.createElement(
+
+                "div"
+
+            );
+
+        feld.className =
+
+            "kalenderTag";
+
+        feld.innerHTML =
+
+            "<span>" +
+
+            tag +
+
+            "</span>";
+
+        raster.appendChild(
+
+            feld
+
+        );
+
+    }
+
+}
 
     },
 

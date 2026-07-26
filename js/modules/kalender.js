@@ -203,12 +203,11 @@ if (raster) {
             "kalenderTag";
 
         feld.innerHTML =
+    "<span>" + tag + "</span>";
 
-            "<span>" +
-
-            tag +
-
-            "</span>";
+feld.style.background = "red";
+feld.style.color = "white";
+feld.style.minHeight = "100px";
 
         raster.appendChild(
 

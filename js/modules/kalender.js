@@ -129,6 +129,14 @@ const Kalender = {
         );
         
         const heute = new Date();
+        
+        let aktuellerMonat =
+
+    heute.getMonth();
+
+let aktuellesJahr =
+
+    heute.getFullYear();
 
 const monatTitel = DOM.id(
 
@@ -168,11 +176,11 @@ if (monatTitel) {
 
     monatTitel.textContent =
 
-        monate[heute.getMonth()] +
+        monate[aktuellerMonat] +
 
         " " +
 
-        heute.getFullYear();
+        aktuellesJahr;
 
 }
         

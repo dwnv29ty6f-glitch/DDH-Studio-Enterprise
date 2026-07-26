@@ -102,6 +102,18 @@ const Navigation = {
                 Bestellungen.anzeigen();
 
                 break;
+                
+                case "dienstprogramme":
+
+    Dienstprogramme.anzeigen();
+
+    break;
+
+case "kommunikation":
+
+    Kommunikation.anzeigen();
+
+    break;
 
             case "dokumente":
 

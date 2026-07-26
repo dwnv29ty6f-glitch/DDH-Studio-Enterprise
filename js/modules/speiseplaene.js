@@ -219,6 +219,31 @@ const Speiseplaene = {
             html
 
         );
+        
+        const pdf = DOM.id("sellyPdf");
+const status = DOM.id("sellyStatus");
+const button = DOM.id("btnImportSelly");
+
+if (button) {
+
+    button.onclick = () => {
+
+        if (!pdf.files.length) {
+
+            status.innerHTML =
+                "⚠️ Bitte zuerst eine PDF auswählen.";
+
+            return;
+
+        }
+
+        status.innerHTML =
+            "✅ PDF ausgewählt: " +
+            pdf.files[0].name;
+
+    };
+
+}
 
     },
 

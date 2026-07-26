@@ -256,6 +256,14 @@ if (raster) {
     function kalenderZeichnen(){
 
     raster.innerHTML = "";
+    
+    monatTitel.textContent =
+
+    monate[aktuellerMonat] +
+
+    " " +
+
+    aktuellesJahr;
 
     const wochentage = [
 

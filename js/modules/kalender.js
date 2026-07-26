@@ -128,6 +128,54 @@ const Kalender = {
 
         );
         
+        const heute = new Date();
+
+const monatTitel = DOM.id(
+
+    "kalenderMonat"
+
+);
+
+const monate = [
+
+    "Januar",
+
+    "Februar",
+
+    "März",
+
+    "April",
+
+    "Mai",
+
+    "Juni",
+
+    "Juli",
+
+    "August",
+
+    "September",
+
+    "Oktober",
+
+    "November",
+
+    "Dezember"
+
+];
+
+if (monatTitel) {
+
+    monatTitel.textContent =
+
+        monate[heute.getMonth()] +
+
+        " " +
+
+        heute.getFullYear();
+
+}
+        
         const raster = DOM.id(
 
     "kalenderRaster"

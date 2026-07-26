@@ -198,24 +198,89 @@ anzeigen() {
 
     if (button) {
 
-        button.onclick = () => {
+    button.onclick = async () => {
 
-            if (!pdf.files.length) {
+        if (!pdf.files.length) {
 
-                status.innerHTML =
-                    "⚠️ Bitte zuerst eine PDF auswählen.";
+            status.innerHTML =
+                "⚠️ Bitte zuerst eine PDF auswählen.";
 
-                return;
+            return;
+
+        }
+
+        status.innerHTML =
+            "⏳ PDF wird analysiert...";
+
+        try {
+
+            const datei = pdf.files[0];
+
+            const daten =
+                await datei.arrayBuffer();
+
+            const dokument =
+                await pdfjsLib.getDocument({
+
+                    data: daten
+
+                }).promise;
+
+            let text = "";
+
+            for (
+
+                let seite = 1;
+
+                seite <= dokument.numPages;
+
+                seite++
+
+            ) {
+
+                const pdfSeite =
+                    await dokument.getPage(seite);
+
+                const inhalt =
+                    await pdfSeite.getTextContent();
+
+                text +=
+
+                    inhalt.items
+
+                        .map(item => item.str)
+
+                        .join(" ")
+
+                    + "\n\n";
 
             }
 
             status.innerHTML =
-                "✅ PDF ausgewählt: " +
-                pdf.files[0].name;
 
-        };
+                "✅ PDF erfolgreich gelesen.<br><br>" +
 
-    }
+                "<textarea style='width:100%;height:300px'>" +
+
+                text +
+
+                "</textarea>";
+
+        }
+
+        catch (fehler) {
+
+            status.innerHTML =
+
+                "❌ Fehler:<br><br>" +
+
+                fehler;
+
+        }
+
+    };
+
+}
 
 },
     speichern() {

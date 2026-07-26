@@ -14,11 +14,11 @@ const Kommunikation = {
         const programme = [
 
             {
-                icon: "📊",
-                name: "Überblick",
-                text: "Interne Kommunikation",
-                url: "https://ueberblick.de"
-            },
+    icon: "📊",
+    name: "Überblick",
+    text: "Interne Kommunikation",
+    url: "https://app.uberblick.io"
+},
 
             {
                 icon: "📧",

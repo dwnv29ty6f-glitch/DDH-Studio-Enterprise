@@ -216,12 +216,7 @@ if (btnZurueck) {
 
         kalenderZeichnen();
 
-            monate[aktuellerMonat] +
-
-            " " +
-
-            aktuellesJahr;
-
+            
     };
 
 }
@@ -245,12 +240,6 @@ if (btnWeiter) {
         }
 
         kalenderZeichnen();
-
-            monate[aktuellerMonat] +
-
-            " " +
-
-            aktuellesJahr;
 
     };
 
@@ -335,6 +324,11 @@ if (raster) {
     }
 
 }
+
+kalenderZeichnen();
+
+}
+
     },
 
     speichern(){

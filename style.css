@@ -2725,7 +2725,12 @@ Bestellungen
 
     display:inline-flex;
 
-    align
+    align-items:center;
+
+    gap:8px;
+
+}
+
     .bestellungStart{
 
     display:flex;

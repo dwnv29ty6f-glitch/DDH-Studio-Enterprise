@@ -264,6 +264,10 @@ if (btnWeiter) {
 
 if (raster) {
 
+    function kalenderZeichnen(){
+
+    raster.innerHTML = "";
+
     const wochentage = [
 
         "Mo",
@@ -282,65 +286,55 @@ if (raster) {
 
     ];
 
-    wochentage.forEach(tag => {
+    wochentage.forEach(tag=>{
 
-        const kopf = document.createElement(
+        const kopf=document.createElement("div");
 
-            "div"
+        kopf.className="kalenderTag kalHeader";
 
-        );
+        kopf.textContent=tag;
 
-        kopf.className =
-
-            "kalenderTag kalHeader";
-
-        kopf.textContent =
-
-            tag;
-
-        raster.appendChild(
-
-            kopf
-
-        );
+        raster.appendChild(kopf);
 
     });
 
-    for (
+    const tageImMonat =
 
-        let tag = 1;
+        new Date(
 
-        tag <= 31;
+            aktuellesJahr,
+
+            aktuellerMonat+1,
+
+            0
+
+        ).getDate();
+
+    for(
+
+        let tag=1;
+
+        tag<=tageImMonat;
 
         tag++
 
-    ) {
+    ){
 
-        const feld =
+        const feld=
 
-            document.createElement(
+            document.createElement("div");
 
-                "div"
+        feld.className="kalenderTag";
 
-            );
+        feld.innerHTML=
 
-        feld.className =
+            "<span>"+tag+"</span>";
 
-            "kalenderTag";
-
-        feld.innerHTML =
-    "<span>" + tag + "</span>";
-
-        raster.appendChild(
-
-            feld
-
-        );
+        raster.appendChild(feld);
 
     }
 
 }
-
     },
 
     speichern(){

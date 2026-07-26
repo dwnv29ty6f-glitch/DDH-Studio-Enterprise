@@ -214,7 +214,8 @@ if (btnZurueck) {
 
         }
 
-        kalenderZeichnen();
+        alert("Zurück");
+kalenderZeichnen();
 
             
     };
@@ -333,6 +334,7 @@ if (raster) {
 
 }
 
+alert("Weiter");
 kalenderZeichnen();
 
 }

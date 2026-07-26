@@ -216,8 +216,9 @@ anzeigen() {
 
             const datei = pdf.files[0];
 
-            const daten =
-                await datei.arrayBuffer();
+status.innerHTML =
+
+    "⏳ PDF wird in ein Bild umgewandelt...";
                 
                 pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";

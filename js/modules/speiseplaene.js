@@ -60,6 +60,47 @@ const Speiseplaene = {
 
     </div>
 
+<div class="karte">
+
+    <h2>
+
+        📥 Selly-Speiseplan importieren
+
+    </h2>
+
+    <p>
+
+        Importiere einen mit Selly erstellten Speiseplan als PDF.
+
+    </p>
+
+    <div class="toolbar">
+
+        <input
+            id="sellyPdf"
+            type="file"
+            accept=".pdf">
+
+        <button
+            id="btnImportSelly"
+            class="hauptButton">
+
+            📥 Importieren
+
+        </button>
+
+    </div>
+
+    <div
+        id="sellyStatus"
+        class="infoBox">
+
+        Keine PDF ausgewählt.
+
+    </div>
+
+</div>
+
     <div class="karte">
 
         <table>

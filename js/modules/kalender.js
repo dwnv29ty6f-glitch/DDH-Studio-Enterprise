@@ -214,7 +214,7 @@ if (btnZurueck) {
 
         }
 
-        monatTitel.textContent =
+        kalenderZeichnen();
 
             monate[aktuellerMonat] +
 
@@ -244,7 +244,7 @@ if (btnWeiter) {
 
         }
 
-        monatTitel.textContent =
+        kalenderZeichnen();
 
             monate[aktuellerMonat] +
 

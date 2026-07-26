@@ -259,15 +259,29 @@ anzeigen() {
 
             }
 
-            status.innerHTML =
+            status.innerHTML = `
 
-                "✅ PDF erfolgreich gelesen.<br><br>" +
+<div class="erfolg">
 
-                "<textarea style='width:100%;height:300px'>" +
+    ✅ PDF erfolgreich gelesen.
 
-                text +
+</div>
 
-                "</textarea>";
+<h3>
+
+    Erkannter Text
+
+</h3>
+
+<textarea
+    style="
+        width:100%;
+        height:350px;
+        margin-top:10px;
+        font-family:monospace;
+    ">${text}</textarea>
+
+`;
 
         }
 

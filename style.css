@@ -2833,56 +2833,22 @@ margin-bottom:20px;
 
 .kalenderRaster{
 
-display:grid;
+display:grid !important;
 
-grid-template-columns:repeat(7,1fr);
+grid-template-columns:repeat(7,minmax(0,1fr)) !important;
 
 gap:10px;
 
-}
-
-.kalHeader{
-
-font-weight:bold;
-
-text-align:center;
-
-background:#f4f4f4;
+width:100%;
 
 }
 
-.kalenderTag{
-
-min-height:90px;
-
-border:1px solid #dcdcdc;
-
-border-radius:10px;
-
-padding:10px;
-
-background:#ffffff;
-
-cursor:pointer;
-
-transition:0.2s;
-
-}
-
-.kalenderTag:hover{
-
-background:#eef8ff;
-
-border-color:#2aa7df;
-
-}
-
-.kalenderTag span{
-
-font-weight:bold;
+.kalenderRaster > div{
 
 display:block;
 
-margin-bottom:8px;
+width:100%;
+
+box-sizing:border-box;
 
 }

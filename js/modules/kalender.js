@@ -134,8 +134,6 @@ const Kalender = {
 
 );
 
-alert(raster);
-
 if (raster) {
 
     const wochentage = [
@@ -204,10 +202,6 @@ if (raster) {
 
         feld.innerHTML =
     "<span>" + tag + "</span>";
-
-feld.style.background = "red";
-feld.style.color = "white";
-feld.style.minHeight = "100px";
 
         raster.appendChild(
 

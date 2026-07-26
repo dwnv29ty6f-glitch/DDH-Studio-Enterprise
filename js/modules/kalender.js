@@ -134,6 +134,8 @@ const Kalender = {
 
 );
 
+alert(raster);
+
 if (raster) {
 
     const wochentage = [

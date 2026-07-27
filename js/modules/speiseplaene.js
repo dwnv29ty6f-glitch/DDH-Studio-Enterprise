@@ -234,21 +234,6 @@ const inhalt =
 
 );
 
-const titel =
-
-    dokument.querySelector("h1");
-
-let name =
-
-    "Speiseplan";
-
-if (titel) {
-
-    name =
-
-        titel.textContent.trim();
-
-}
 
 let zeitraum =
 
@@ -362,19 +347,6 @@ this.speichern();
 
 this.anzeigen();
 
-this.daten.push({
-
-    name: bezeichnung,
-
-    zeitraum: "KW ?",
-
-    datum: new Date().toLocaleDateString(),
-
-    tage: speiseplan
-
-});
-
-this.speichern();
 
 }
 

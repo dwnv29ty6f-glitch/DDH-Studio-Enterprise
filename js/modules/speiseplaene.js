@@ -239,12 +239,32 @@ const tabellen = dokument.querySelectorAll("table");
 const zeilen =
 
     tabellen[0].querySelectorAll("tr");
+    
+    const ersteZeile =
+
+    zeilen[1].querySelectorAll("td");
+    
+    const ersteZeile =
+
+    zeilen[1].querySelectorAll("td");
 
 status.innerHTML =
 
-    "Gefundene Zeilen: " +
+    "Tag: " +
 
-    zeilen.length;
+    ersteZeile[0].textContent +
+
+    "<br>Menü 1: " +
+
+    ersteZeile[1].textContent +
+
+    "<br>Menü 2: " +
+
+    ersteZeile[2].textContent +
+
+    "<br>Dessert: " +
+
+    ersteZeile[3].textContent;
     
      }
 

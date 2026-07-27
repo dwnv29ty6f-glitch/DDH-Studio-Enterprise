@@ -212,7 +212,6 @@ if (btnZurueck) {
 
         }
 
-        alert("Zurück");
 kalenderZeichnen();
 
             
@@ -298,15 +297,15 @@ if (raster) {
 
     const tageImMonat =
 
-        new Date(
+    new Date(
 
-            aktuellesJahr,
+        this.aktuellesJahr,
 
-            aktuellerMonat+1,
+        this.aktuellerMonat + 1,
 
-            0
+        0
 
-        ).getDate();
+    ).getDate();
 
     for(
 
@@ -334,7 +333,6 @@ if (raster) {
 
 }
 
-alert("Weiter");
 kalenderZeichnen();
 
 }

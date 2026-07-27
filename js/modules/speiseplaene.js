@@ -392,9 +392,71 @@ oeffnen(index) {
 
         this.daten[index];
 
-    alert(
+    let html = `
 
-        plan.name
+<div class="karte">
+
+<h1>${plan.name}</h1>
+
+<table>
+
+<tr>
+
+<th>Tag</th>
+
+<th>Menü 1</th>
+
+<th>Menü 2</th>
+
+<th>Dessert</th>
+
+</tr>
+
+`;
+
+    plan.tage.forEach(tag => {
+
+        html += `
+
+<tr>
+
+<td>${tag.tag}</td>
+
+<td>${tag.menue1}</td>
+
+<td>${tag.menue2}</td>
+
+<td>${tag.dessert}</td>
+
+</tr>
+
+`;
+
+    });
+
+    html += `
+
+</table>
+
+<br>
+
+<button
+class="hauptButton"
+onclick="Speiseplaene.anzeigen()">
+
+⬅ Zurück
+
+</button>
+
+</div>
+
+`;
+
+    DOM.html(
+
+        "inhalt",
+
+        html
 
     );
 

@@ -298,6 +298,8 @@ speiseplan.forEach(tag => {
 
 });
 
+}
+
         catch (fehler) {
 
             status.innerHTML =

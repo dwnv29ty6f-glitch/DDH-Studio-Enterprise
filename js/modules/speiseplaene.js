@@ -242,9 +242,9 @@ const zeilen =
 
 status.innerHTML =
 
-    "Gefundene Tabellen: " +
+    "Gefundene Zeilen: " +
 
-    tabellen.length;
+    zeilen.length;
     
      }
 

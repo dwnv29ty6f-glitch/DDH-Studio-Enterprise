@@ -244,25 +244,61 @@ const zeilen =
 
     zeilen[1].querySelectorAll("td");
     
-status.innerHTML =
+    const speiseplan = [];
 
-    "Tag: " +
+for (
 
-    ersteZeile[0].textContent +
+    let i = 1;
 
-    "<br>Menü 1: " +
+    i < zeilen.length;
 
-    ersteZeile[1].textContent +
+    i++
 
-    "<br>Menü 2: " +
+) {
 
-    ersteZeile[2].textContent +
+    const spalten =
 
-    "<br>Dessert: " +
+        zeilen[i].querySelectorAll("td");
 
-    ersteZeile[3].textContent;
+    speiseplan.push({
+
+        tag:
+
+            spalten[0].textContent.trim(),
+
+        menue1:
+
+            spalten[1].textContent.trim(),
+
+        menue2:
+
+            spalten[2].textContent.trim(),
+
+        dessert:
+
+            spalten[3].textContent.trim()
+
+    });
+
+}
     
      }
+    
+    status.innerHTML = "";
+
+speiseplan.forEach(tag => {
+
+    status.innerHTML +=
+
+        "<b>" + tag.tag + "</b><br>" +
+
+        tag.menue1 + "<br>" +
+
+        tag.menue2 + "<br>" +
+
+        tag.dessert + "<hr>";
+
+});
 
         catch (fehler) {
 

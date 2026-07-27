@@ -491,9 +491,9 @@ bearbeiten(index) {
 
     const plan =
 
-    this.daten[index];
+        this.daten[index];
 
-let html = `
+    let html = `
 
 <div class="karte">
 
@@ -501,7 +501,23 @@ let html = `
 
 <p><strong>${plan.name}</strong></p>
 
+<button
+class="hauptButton"
+onclick="Speiseplaene.oeffnen(${index})">
+
+⬅ Zurück
+
+</button>
+
 `;
+
+    DOM.html(
+
+        "inhalt",
+
+        html
+
+    );
 
 }
 

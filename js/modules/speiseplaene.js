@@ -486,4 +486,21 @@ class="hauptButton">
     );
 
 }
+
+bearbeiten(index) {
+
+    const plan =
+
+        this.daten[index];
+
+    alert(
+
+        "Bearbeiten von:\n\n" +
+
+        plan.name
+
+    );
+
+}
+
 };

@@ -376,14 +376,16 @@ this.anzeigen();
 },
     speichern() {
 
-        Speicher.speichern(
+    Speicher.speichern(
 
-            "ddh_speiseplaene",
+        "ddh_speiseplaene",
 
-            this.daten
-            
-            },
-            
+        this.daten
+
+    );
+
+},
+
 oeffnen(index) {
 
     const plan =
@@ -394,8 +396,8 @@ oeffnen(index) {
 
         plan.name
 
-        );
+    );
 
-    }
+}
 
 };

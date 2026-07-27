@@ -192,7 +192,7 @@ anzeigen() {
 
     );
 
-    const pdf = DOM.id("sellyPdf");
+    const htmlDatei = DOM.id("sellyHtml");
     const status = DOM.id("sellyStatus");
     const button = DOM.id("btnImportSelly");
 

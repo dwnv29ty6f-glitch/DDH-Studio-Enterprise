@@ -236,18 +236,6 @@ DOM.id(
 
     inhalt;
     
-status.innerHTML =
-
-    "✅ OCR erfolgreich abgeschlossen.<br><br>" +
-
-    "<h3>Erkannter Text</h3>" +
-
-    "<textarea style='width:100%;height:350px'>" +
-
-    ergebnis.data.text +
-
-    "</textarea>";
-
         }
 
         catch (fehler) {

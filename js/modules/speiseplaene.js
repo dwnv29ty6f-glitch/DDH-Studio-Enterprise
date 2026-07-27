@@ -238,6 +238,38 @@ const titel =
 
     dokument.querySelector("h1");
 
+let name =
+
+    "Speiseplan";
+
+if (titel) {
+
+    name =
+
+        titel.textContent.trim();
+
+}
+
+let zeitraum =
+
+    "KW ?";
+
+const treffer =
+
+    name.match(/KW\s*\d+/i);
+
+if (treffer) {
+
+    zeitraum =
+
+        treffer[0];
+
+}
+
+const titel =
+
+    dokument.querySelector("h1");
+
 let bezeichnung =
 
     "Importierter Speiseplan";
@@ -313,6 +345,22 @@ speiseplan.forEach(tag => {
         tag.dessert + "<hr>";
 
 });
+
+this.daten.push({
+
+    zeitraum: zeitraum,
+
+    name: name,
+
+    datum: new Date().toLocaleDateString("de-DE"),
+
+    tage: speiseplan
+
+});
+
+this.speichern();
+
+this.anzeigen();
 
 this.daten.push({
 

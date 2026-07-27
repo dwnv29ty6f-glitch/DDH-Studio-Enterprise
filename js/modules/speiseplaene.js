@@ -239,12 +239,6 @@ const tabellen = dokument.querySelectorAll("table");
 const zeilen =
 
     tabellen[0].querySelectorAll("tr");
-    
-    status.innerHTML =
-
-    "Gefundene Zeilen: " +
-
-    zeilen.length;
 
 status.innerHTML =
 

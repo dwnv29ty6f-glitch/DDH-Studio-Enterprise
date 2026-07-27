@@ -225,8 +225,8 @@ const inhalt =
     await datei.text();
     
     const parser = new DOMParser();
-    
-    const dokument = parser.parseFromString(
+
+const dokument = parser.parseFromString(
 
     inhalt,
 
@@ -234,6 +234,21 @@ const inhalt =
 
 );
 
+const titel =
+
+    dokument.querySelector("h1");
+
+let name =
+
+    "Importierter Speiseplan";
+
+if (titel) {
+
+    name =
+
+        titel.textContent.trim();
+
+}
 
 let zeitraum =
 
@@ -251,33 +266,21 @@ if (treffer) {
 
 }
 
-const titel =
+const tabellen =
 
-    dokument.querySelector("h1");
+    dokument.querySelectorAll("table");
 
-let bezeichnung =
+if (tabellen.length === 0) {
 
-    "Importierter Speiseplan";
-
-if (titel) {
-
-    bezeichnung =
-
-        titel.textContent.trim();
+    throw "Keine Tabelle gefunden.";
 
 }
-
-const tabellen = dokument.querySelectorAll("table");
 
 const zeilen =
 
     tabellen[0].querySelectorAll("tr");
-    
-    const ersteZeile =
 
-    zeilen[1].querySelectorAll("td");
-    
-    const speiseplan = [];
+const speiseplan = [];
 
 for (
 
@@ -292,6 +295,12 @@ for (
     const spalten =
 
         zeilen[i].querySelectorAll("td");
+
+    if (spalten.length < 4) {
+
+        continue;
+
+    }
 
     speiseplan.push({
 
@@ -314,8 +323,8 @@ for (
     });
 
 }
-    
-    status.innerHTML = "";
+
+status.innerHTML = "";
 
 speiseplan.forEach(tag => {
 
@@ -346,7 +355,6 @@ this.daten.push({
 this.speichern();
 
 this.anzeigen();
-
 
 }
 

@@ -244,10 +244,6 @@ const zeilen =
 
     zeilen[1].querySelectorAll("td");
     
-    const ersteZeile =
-
-    zeilen[1].querySelectorAll("td");
-
 status.innerHTML =
 
     "Tag: " +

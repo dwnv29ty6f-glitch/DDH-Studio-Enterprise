@@ -194,54 +194,7 @@ const btnWeiter = DOM.id(
 
 );
 
-if (btnZurueck) {
 
-    btnZurueck.onclick = () => {
-
-        this.aktuellerMonat--;
-
-        if (
-
-            this.aktuellerMonat < 0
-
-        ) {
-
-            this.aktuellerMonat = 11;
-
-            this.aktuellesJahr--;
-
-        }
-
-kalenderZeichnen();
-
-            
-    };
-
-}
-
-if (btnWeiter) {
-
-    btnWeiter.onclick = () => {
-
-        this.aktuellerMonat++;
-
-        if (
-
-            this.aktuellerMonat > 11
-
-        ) {
-
-            this.aktuellerMonat = 0;
-
-            this.aktuellesJahr++;
-
-        }
-
-        kalenderZeichnen();
-
-    };
-
-}
         
         const raster = DOM.id(
 
@@ -249,19 +202,27 @@ if (btnWeiter) {
 
 );
 
-if (raster) {
+if (!raster) {
 
-    function kalenderZeichnen(){
+    return;
+
+}
+
+const kalenderZeichnen = () => {
+
+    const aktuellerMonat = this.aktuellerMonat;
+
+    const aktuellesJahr = this.aktuellesJahr;
 
     raster.innerHTML = "";
-    
+
     monatTitel.textContent =
 
-    monate[this.aktuellerMonat] +
+        monate[this.aktuellerMonat] +
 
-    " " +
+        " " +
 
-    this.aktuellesJahr;
+        this.aktuellesJahr;
 
     const wochentage = [
 
@@ -281,21 +242,19 @@ if (raster) {
 
     ];
 
-    wochentage.forEach(tag=>{
+    wochentage.forEach(tag => {
 
-        const kopf=document.createElement("div");
+        const kopf = document.createElement("div");
 
-        kopf.className="kalenderTag kalHeader";
+        kopf.className = "kalenderTag kalHeader";
 
-        kopf.textContent=tag;
+        kopf.textContent = tag;
 
         raster.appendChild(kopf);
 
     });
 
-    const tageImMonat =
-
-    new Date(
+    const tageImMonat = new Date(
 
         this.aktuellesJahr,
 
@@ -305,35 +264,69 @@ if (raster) {
 
     ).getDate();
 
-    for(
+    for (
 
-        let tag=1;
+        let tag = 1;
 
-        tag<=tageImMonat;
+        tag <= tageImMonat;
 
         tag++
 
-    ){
+    ) {
 
-        const feld=
+        const feld = document.createElement("div");
 
-            document.createElement("div");
+        feld.className = "kalenderTag";
 
-        feld.className="kalenderTag";
-
-        feld.innerHTML=
-
-            "<span>"+tag+"</span>";
+        feld.innerHTML = "<span>" + tag + "</span>";
 
         raster.appendChild(feld);
 
     }
 
+};
+
+if (btnZurueck) {
+
+    btnZurueck.onclick = () => {
+
+        this.aktuellerMonat--;
+
+        if (this.aktuellerMonat < 0) {
+
+            this.aktuellerMonat = 11;
+
+            this.aktuellesJahr--;
+
+        }
+
+        kalenderZeichnen();
+
+    };
+
+}
+
+if (btnWeiter) {
+
+    btnWeiter.onclick = () => {
+
+        this.aktuellerMonat++;
+
+        if (this.aktuellerMonat > 11) {
+
+            this.aktuellerMonat = 0;
+
+            this.aktuellesJahr++;
+
+        }
+
+        kalenderZeichnen();
+
+    };
+
 }
 
 kalenderZeichnen();
-
-}
 
     },
 

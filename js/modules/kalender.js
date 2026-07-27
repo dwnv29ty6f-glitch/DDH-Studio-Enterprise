@@ -263,6 +263,24 @@ const kalenderZeichnen = () => {
         0
 
     ).getDate();
+    
+    let ersterTag = new Date(
+
+    aktuellesJahr,
+
+    aktuellerMonat,
+
+    1
+
+).getDay();
+
+ersterTag =
+
+    ersterTag === 0
+
+        ? 6
+
+        : ersterTag - 1;
 
     for (
 

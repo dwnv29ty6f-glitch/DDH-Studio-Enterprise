@@ -460,31 +460,17 @@ const Speiseplaene = {
 
 bearbeiten(index) {
 
-    const plan =
-
-        this.daten[index];
+    const plan = this.daten[index];
 
     let html = `
 
 <div class="karte">
 
-<h1>
+<h1>✏ Speiseplan bearbeiten</h1>
 
-✏ Speiseplan bearbeiten
+<p><strong>${plan.name}</strong></p>
 
-</h1>
-
-<p>
-
-<strong>${plan.name}</strong>
-
-</p>
-
-<p>
-
-${plan.zeitraum}
-
-</p>
+<p>${plan.zeitraum}</p>
 
 <div class="toolbar">
 
@@ -564,25 +550,19 @@ onclick="Speiseplaene.neuerTag(${index})">
 
 <td>
 
-<input
-id="menue1_${i}"
-value="${tag.menue1}">
+<input id="menue1_${i}" value="${tag.menue1}">
 
 </td>
 
 <td>
 
-<input
-id="menue2_${i}"
-value="${tag.menue2}">
+<input id="menue2_${i}" value="${tag.menue2}">
 
 </td>
 
 <td>
 
-<input
-id="dessert_${i}"
-value="${tag.dessert}">
+<input id="dessert_${i}" value="${tag.dessert}">
 
 </td>
 
@@ -614,11 +594,7 @@ onclick="Speiseplaene.tagLoeschen(${index},${i})">
 
 `;
 
-    DOM.html(
-
-        "inhalt",
-
-        html
+    DOM.html("inhalt", html);
 
     );
 

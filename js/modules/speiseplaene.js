@@ -282,8 +282,6 @@ for (
 
 }
     
-     }
-    
     status.innerHTML = "";
 
 speiseplan.forEach(tag => {

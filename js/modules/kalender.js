@@ -325,6 +325,22 @@ ersterTag =
         feld.innerHTML = "<span>" + tag + "</span>";
         
         feld.dataset.tag = tag;
+        
+        const heute = new Date();
+
+if (
+
+    tag === heute.getDate()
+
+    && this.aktuellerMonat === heute.getMonth()
+
+    && this.aktuellesJahr === heute.getFullYear()
+
+) {
+
+    feld.classList.add("tagHeute");
+
+}
 
         raster.appendChild(feld);
 

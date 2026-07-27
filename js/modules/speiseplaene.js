@@ -2,8 +2,8 @@
 
 /*
 ================================================
-DDH Studio Enterprise 10.0
-Speisepläne
+DDH Studio Enterprise 11.0
+Modul: Speisepläne
 ================================================
 */
 
@@ -11,17 +11,14 @@ const Speiseplaene = {
 
     daten: [],
 
-anzeigen() {
+    anzeigen() {
 
-    this.daten = Speicher.laden(
+        this.daten = Speicher.laden(
+            "ddh_speiseplaene",
+            []
+        );
 
-        "ddh_speiseplaene",
-
-        []
-
-    );
-
-    let html = `
+        let html = `
 
 <div
     id="seite-speiseplaene"
@@ -37,7 +34,7 @@ anzeigen() {
 
         <p>
 
-            Verwaltung aller Speisepläne
+            Verwaltung aller importierten Speisepläne.
 
         </p>
 
@@ -70,16 +67,16 @@ anzeigen() {
 
         <p>
 
-            Importiere einen mit Selly erstellten Speiseplan als PDF.
+            Importiere einen Speiseplan als HTML-Datei.
 
         </p>
 
         <div class="toolbar">
 
-          <input
-    id="sellyHtml"
-    type="file"
-    accept=".html,.htm">
+            <input
+                id="sellyHtml"
+                type="file"
+                accept=".html,.htm">
 
             <button
                 id="btnImportSelly"
@@ -95,7 +92,7 @@ anzeigen() {
             id="sellyStatus"
             class="infoBox">
 
-            Keine PDF ausgewählt.
+            Keine HTML-Datei ausgewählt.
 
         </div>
 
@@ -125,9 +122,9 @@ anzeigen() {
 
 `;
 
-    if (this.daten.length === 0) {
+        if (this.daten.length === 0) {
 
-        html += `
+            html += `
 
 <tr>
 
@@ -141,11 +138,11 @@ anzeigen() {
 
 `;
 
-    }
+        }
 
-    this.daten.forEach(plan => {
+        this.daten.forEach((plan, index) => {
 
-        html += `
+            html += `
 
 <tr>
 
@@ -157,13 +154,13 @@ anzeigen() {
 
     <td>
 
-       <button
-    class="sekundenButton"
-    onclick="Speiseplaene.oeffnen(${this.daten.indexOf(plan)})">
+        <button
+            class="sekundenButton"
+            onclick="Speiseplaene.oeffnen(${index})">
 
-    Öffnen
+            Öffnen
 
-</button>
+        </button>
 
     </td>
 
@@ -171,9 +168,9 @@ anzeigen() {
 
 `;
 
-    });
+        });
 
-    html += `
+        html += `
 
             </tbody>
 
@@ -185,196 +182,283 @@ anzeigen() {
 
 `;
 
-    DOM.html(
+        DOM.html(
+            "inhalt",
+            html
+        );
 
-        "inhalt",
+        const htmlDatei = DOM.id("sellyHtml");
+        const status = DOM.id("sellyStatus");
+        const button = DOM.id("btnImportSelly");
+                if (button) {
 
-        html
+            button.onclick = async () => {
 
-    );
+                try {
 
-    const htmlDatei = DOM.id("sellyHtml");
-    const status = DOM.id("sellyStatus");
-    const button = DOM.id("btnImportSelly");
+                    if (!htmlDatei.files.length) {
 
-    if (button) {
+                        status.innerHTML =
+                            "⚠️ Bitte zuerst eine HTML-Datei auswählen.";
 
-    button.onclick = async () => {
-        
-        try {
+                        return;
 
-        if (!htmlDatei.files.length) {
+                    }
 
-    status.innerHTML =
+                    status.innerHTML =
+                        "⏳ HTML wird importiert...";
 
-        "⚠️ Bitte zuerst eine HTML-Datei auswählen.";
+                    const datei =
+                        htmlDatei.files[0];
 
-    return;
+                    const inhalt =
+                        await datei.text();
 
-}
+                    const parser =
+                        new DOMParser();
 
-        status.innerHTML =
+                    const dokument =
+                        parser.parseFromString(
+                            inhalt,
+                            "text/html"
+                        );
 
-    "⏳ HTML wird geladen...";
+                    const titel =
+                        dokument.querySelector("h1");
 
-const datei =
+                    let name =
+                        "Importierter Speiseplan";
 
-    htmlDatei.files[0];
+                    if (titel) {
 
-const inhalt =
+                        name =
+                            titel.textContent.trim();
 
-    await datei.text();
-    
-    const parser = new DOMParser();
+                    }
 
-const dokument = parser.parseFromString(
+                    let zeitraum =
+                        "KW ?";
 
-    inhalt,
+                    const treffer =
+                        name.match(/KW\s*\d+/i);
 
-    "text/html"
+                    if (treffer) {
 
-);
+                        zeitraum =
+                            treffer[0];
 
-const titel =
+                    }
 
-    dokument.querySelector("h1");
+                    const tabellen =
+                        dokument.querySelectorAll("table");
 
-let name =
+                    if (tabellen.length === 0) {
 
-    "Importierter Speiseplan";
+                        throw new Error(
+                            "Keine Tabelle gefunden."
+                        );
 
-if (titel) {
+                    }
 
-    name =
+                    const zeilen =
+                        tabellen[0].querySelectorAll("tr");
 
-        titel.textContent.trim();
+                    const speiseplan = [];
 
-}
+                    for (
 
-let zeitraum =
+                        let i = 1;
 
-    "KW ?";
+                        i < zeilen.length;
 
-const treffer =
+                        i++
 
-    name.match(/KW\s*\d+/i);
+                    ) {
 
-if (treffer) {
+                        const spalten =
+                            zeilen[i].querySelectorAll("td");
 
-    zeitraum =
+                        if (spalten.length < 4) {
 
-        treffer[0];
+                            continue;
 
-}
+                        }
 
-const tabellen =
+                        speiseplan.push({
 
-    dokument.querySelectorAll("table");
+                            tag:
+                                spalten[0].textContent.trim(),
 
-if (tabellen.length === 0) {
+                            menue1:
+                                spalten[1].textContent.trim(),
 
-    throw "Keine Tabelle gefunden.";
+                            menue2:
+                                spalten[2].textContent.trim(),
 
-}
+                            dessert:
+                                spalten[3].textContent.trim()
 
-const zeilen =
+                        });
 
-    tabellen[0].querySelectorAll("tr");
+                    }
 
-const speiseplan = [];
+                    this.daten.push({
 
-for (
+                        name: name,
 
-    let i = 1;
+                        zeitraum: zeitraum,
 
-    i < zeilen.length;
+                        datum:
+                            new Date().toLocaleDateString("de-DE"),
 
-    i++
+                        tage: speiseplan
 
-) {
+                    });
 
-    const spalten =
+                    this.speichern();
 
-        zeilen[i].querySelectorAll("td");
+                    this.anzeigen();
 
-    if (spalten.length < 4) {
+                }
 
-        continue;
+                catch (fehler) {
 
-    }
+                    status.innerHTML =
 
-    speiseplan.push({
+                        "❌ " +
 
-        tag:
+                        fehler.message;
 
-            spalten[0].textContent.trim(),
+                }
 
-        menue1:
-
-            spalten[1].textContent.trim(),
-
-        menue2:
-
-            spalten[2].textContent.trim(),
-
-        dessert:
-
-            spalten[3].textContent.trim()
-
-    });
-
-}
-
-status.innerHTML = "";
-
-speiseplan.forEach(tag => {
-
-    status.innerHTML +=
-
-        "<b>" + tag.tag + "</b><br>" +
-
-        tag.menue1 + "<br>" +
-
-        tag.menue2 + "<br>" +
-
-        tag.dessert + "<hr>";
-
-});
-
-this.daten.push({
-
-    zeitraum: zeitraum,
-
-    name: name,
-
-    datum: new Date().toLocaleDateString("de-DE"),
-
-    tage: speiseplan
-
-});
-
-this.speichern();
-
-this.anzeigen();
-
-}
-
-        catch (fehler) {
-
-            status.innerHTML =
-
-                "❌ Fehler:<br><br>" +
-
-                fehler;
+            };
 
         }
 
-    };
+    },
+        oeffnen(index) {
 
-}
+        const plan =
 
-},
-    oeffnen(index) {
+            this.daten[index];
+
+        let html = `
+
+<div class="karte">
+
+    <h1>
+
+        ${plan.name}
+
+    </h1>
+
+    <p>
+
+        <strong>${plan.zeitraum}</strong>
+
+    </p>
+
+    <div class="toolbar">
+
+        <button
+            class="hauptButton"
+            onclick="Speiseplaene.anzeigen()">
+
+            ⬅ Zurück
+
+        </button>
+
+        <button
+            class="hauptButton"
+            onclick="window.print()">
+
+            🖨 Drucken
+
+        </button>
+
+        <button
+            class="hauptButton"
+            onclick="Speiseplaene.bearbeiten(${index})">
+
+            ✏ Bearbeiten
+
+        </button>
+
+        <button
+            class="hauptButton"
+            onclick="Speiseplaene.loeschen(${index})">
+
+            🗑 Löschen
+
+        </button>
+
+    </div>
+
+    <br>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Tag</th>
+
+                <th>Menü 1</th>
+
+                <th>Menü 2</th>
+
+                <th>Dessert</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+`;
+
+        plan.tage.forEach(tag => {
+
+            html += `
+
+<tr>
+
+    <td>${tag.tag}</td>
+
+    <td>${tag.menue1}</td>
+
+    <td>${tag.menue2}</td>
+
+    <td>${tag.dessert}</td>
+
+</tr>
+
+`;
+
+        });
+
+        html += `
+
+        </tbody>
+
+    </table>
+
+</div>
+
+`;
+
+        DOM.html(
+
+            "inhalt",
+
+            html
+
+        );
+
+    },
+
+bearbeiten(index) {
 
     const plan =
 
@@ -384,15 +468,29 @@ this.anzeigen();
 
 <div class="karte">
 
-<h1>${plan.name}</h1>
+<h1>
 
-<p><strong>${plan.zeitraum}</strong></p>
+✏ Speiseplan bearbeiten
+
+</h1>
+
+<p>
+
+<strong>${plan.name}</strong>
+
+</p>
+
+<p>
+
+${plan.zeitraum}
+
+</p>
 
 <div class="toolbar">
 
 <button
 class="hauptButton"
-onclick="Speiseplaene.anzeigen()">
+onclick="Speiseplaene.oeffnen(${index})">
 
 ⬅ Zurück
 
@@ -400,24 +498,17 @@ onclick="Speiseplaene.anzeigen()">
 
 <button
 class="hauptButton"
-onclick="window.print()">
+onclick="Speiseplaene.speichernBearbeitung(${index})">
 
-🖨 Drucken
+💾 Speichern
 
 </button>
 
 <button
 class="hauptButton"
-onclick="Speiseplaene.bearbeiten(${index})">
+onclick="Speiseplaene.neuerTag(${index})">
 
-✏ Bearbeiten
-
-</button>
-
-<button
-class="hauptButton">
-
-🗑 Löschen
+➕ Neuer Tag
 
 </button>
 
@@ -439,6 +530,8 @@ class="hauptButton">
 
 <th>Dessert</th>
 
+<th>Aktion</th>
+
 </tr>
 
 </thead>
@@ -447,19 +540,63 @@ class="hauptButton">
 
 `;
 
-    plan.tage.forEach(tag => {
+    plan.tage.forEach((tag, i) => {
 
         html += `
 
 <tr>
 
-<td>${tag.tag}</td>
+<td>
 
-<td>${tag.menue1}</td>
+<select id="tag_${i}">
 
-<td>${tag.menue2}</td>
+<option ${tag.tag==="Montag"?"selected":""}>Montag</option>
+<option ${tag.tag==="Dienstag"?"selected":""}>Dienstag</option>
+<option ${tag.tag==="Mittwoch"?"selected":""}>Mittwoch</option>
+<option ${tag.tag==="Donnerstag"?"selected":""}>Donnerstag</option>
+<option ${tag.tag==="Freitag"?"selected":""}>Freitag</option>
+<option ${tag.tag==="Samstag"?"selected":""}>Samstag</option>
+<option ${tag.tag==="Sonntag"?"selected":""}>Sonntag</option>
 
-<td>${tag.dessert}</td>
+</select>
+
+</td>
+
+<td>
+
+<input
+id="menue1_${i}"
+value="${tag.menue1}">
+
+</td>
+
+<td>
+
+<input
+id="menue2_${i}"
+value="${tag.menue2}">
+
+</td>
+
+<td>
+
+<input
+id="dessert_${i}"
+value="${tag.dessert}">
+
+</td>
+
+<td>
+
+<button
+class="sekundenButton"
+onclick="Speiseplaene.tagLoeschen(${index},${i})">
+
+🗑
+
+</button>
+
+</td>
 
 </tr>
 
@@ -487,38 +624,144 @@ class="hauptButton">
 
 },
 
-bearbeiten(index) {
+speichernBearbeitung(index) {
 
     const plan =
 
         this.daten[index];
 
-    let html = `
+    plan.tage.forEach((tag, i) => {
 
-<div class="karte">
+        tag.menue1 =
 
-<h1>Speiseplan bearbeiten</h1>
+            DOM.id(
 
-<p><strong>${plan.name}</strong></p>
+                "menue1_" + i
 
-<button
-class="hauptButton"
-onclick="Speiseplaene.oeffnen(${index})">
+            ).value;
 
-⬅ Zurück
+        tag.menue2 =
 
-</button>
+            DOM.id(
 
-`;
+                "menue2_" + i
 
-    DOM.html(
+            ).value;
 
-        "inhalt",
+        tag.dessert =
 
-        html
+            DOM.id(
+
+                "dessert_" + i
+
+            ).value;
+            
+            tag.tag =
+
+    DOM.id(
+
+        "tag_" + i
+
+    ).value;
+
+    });
+
+    this.speichern();
+
+    this.oeffnen(index);
+
+},
+
+neuerTag(index) {
+
+    this.daten[index].tage.push({
+
+        tag: "Neuer Tag",
+
+        menue1: "",
+
+        menue2: "",
+
+        dessert: ""
+
+    });
+
+    this.speichern();
+
+    this.bearbeiten(index);
+
+},
+
+tagLoeschen(index, tagIndex) {
+
+    if (
+
+        !confirm(
+
+            "Diesen Tag wirklich löschen?"
+
+        )
+
+    ) {
+
+        return;
+
+    }
+
+    this.daten[index].tage.splice(
+
+        tagIndex,
+
+        1
 
     );
 
-}
+    this.speichern();
+
+    this.bearbeiten(index);
+
+},
+
+    loeschen(index) {
+
+        if (
+
+            !confirm(
+
+                "Speiseplan wirklich löschen?"
+
+            )
+
+        ) {
+
+            return;
+
+        }
+
+        this.daten.splice(
+
+            index,
+
+            1
+
+        );
+
+        this.speichern();
+
+        this.anzeigen();
+
+    },
+
+    speichern() {
+
+        Speicher.speichern(
+
+            "ddh_speiseplaene",
+
+            this.daten
+
+        );
+
+    }
 
 };

@@ -249,8 +249,6 @@ if (btnWeiter) {
 
 );
 
-alert(raster);
-
 if (raster) {
 
     function kalenderZeichnen(){

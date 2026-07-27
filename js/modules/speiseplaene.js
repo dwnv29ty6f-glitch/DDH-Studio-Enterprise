@@ -76,10 +76,10 @@ anzeigen() {
 
         <div class="toolbar">
 
-            <input
-                id="sellyPdf"
-                type="file"
-                accept=".pdf">
+          <input
+    id="sellyHtml"
+    type="file"
+    accept=".html,.htm">
 
             <button
                 id="btnImportSelly"

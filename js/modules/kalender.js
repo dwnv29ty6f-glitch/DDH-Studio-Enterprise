@@ -10,6 +10,14 @@ Kalender
 const Kalender = {
 
     daten: [],
+    
+    aktuellerMonat:
+
+    new Date().getMonth(),
+
+aktuellesJahr:
+
+    new Date().getFullYear(),
 
     anzeigen() {
 
@@ -127,16 +135,6 @@ const Kalender = {
             html
 
         );
-        
-        const heute = new Date();
-        
-        let aktuellerMonat =
-
-    heute.getMonth();
-
-let aktuellesJahr =
-
-    heute.getFullYear();
 
 const monatTitel = DOM.id(
 
@@ -176,11 +174,11 @@ if (monatTitel) {
 
     monatTitel.textContent =
 
-        monate[aktuellerMonat] +
+        monate[this.aktuellerMonat] +
 
         " " +
 
-        aktuellesJahr;
+        this.aktuellesJahr;
 
 }
 
@@ -200,17 +198,17 @@ if (btnZurueck) {
 
     btnZurueck.onclick = () => {
 
-        aktuellerMonat--;
+        this.aktuellerMonat--;
 
         if (
 
-            aktuellerMonat < 0
+            this.aktuellerMonat < 0
 
         ) {
 
-            aktuellerMonat = 11;
+            this.aktuellerMonat = 11;
 
-            aktuellesJahr--;
+            this.aktuellesJahr--;
 
         }
 
@@ -226,17 +224,17 @@ if (btnWeiter) {
 
     btnWeiter.onclick = () => {
 
-        aktuellerMonat++;
+        this.aktuellerMonat++;
 
         if (
 
-            aktuellerMonat > 11
+            this.aktuellerMonat > 11
 
         ) {
 
-            aktuellerMonat = 0;
+            this.aktuellerMonat = 0;
 
-            aktuellesJahr++;
+            this.aktuellesJahr++;
 
         }
 
@@ -262,11 +260,11 @@ if (raster) {
     
     monatTitel.textContent =
 
-    monate[aktuellerMonat] +
+    monate[this.aktuellerMonat] +
 
     " " +
 
-    aktuellesJahr;
+    this.aktuellesJahr;
 
     const wochentage = [
 

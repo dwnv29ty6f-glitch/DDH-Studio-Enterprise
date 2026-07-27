@@ -241,20 +241,6 @@ status.innerHTML =
     "Gefundene Tabellen: " +
 
     tabellen.length;
-
-status.innerHTML =
-
-    "<h3>✅ Vorschau</h3>" +
-
-    "<div id='htmlVorschau'></div>";
-
-DOM.id(
-
-    "htmlVorschau"
-
-).innerHTML =
-
-    inhalt;
     
      }
 

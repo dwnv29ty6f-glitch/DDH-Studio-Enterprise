@@ -234,6 +234,22 @@ const inhalt =
 
 );
 
+const titel =
+
+    dokument.querySelector("h1");
+
+let bezeichnung =
+
+    "Importierter Speiseplan";
+
+if (titel) {
+
+    bezeichnung =
+
+        titel.textContent.trim();
+
+}
+
 const tabellen = dokument.querySelectorAll("table");
 
 const zeilen =
@@ -300,7 +316,7 @@ speiseplan.forEach(tag => {
 
 this.daten.push({
 
-    name: "Importierter Speiseplan",
+    name: bezeichnung,
 
     zeitraum: "KW ?",
 

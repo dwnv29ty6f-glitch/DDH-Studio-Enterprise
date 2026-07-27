@@ -374,19 +374,7 @@ this.anzeigen();
 }
 
 },
-    speichern() {
-
-    Speicher.speichern(
-
-        "ddh_speiseplaene",
-
-        this.daten
-
-    );
-
-},
-
-oeffnen(index) {
+    oeffnen(index) {
 
     const plan =
 
@@ -398,7 +386,47 @@ oeffnen(index) {
 
 <h1>${plan.name}</h1>
 
+<p><strong>${plan.zeitraum}</strong></p>
+
+<div class="toolbar">
+
+<button
+class="hauptButton"
+onclick="Speiseplaene.anzeigen()">
+
+⬅ Zurück
+
+</button>
+
+<button
+class="hauptButton"
+onclick="window.print()">
+
+🖨 Drucken
+
+</button>
+
+<button
+class="hauptButton">
+
+✏ Bearbeiten
+
+</button>
+
+<button
+class="hauptButton">
+
+🗑 Löschen
+
+</button>
+
+</div>
+
+<br>
+
 <table>
+
+<thead>
 
 <tr>
 
@@ -411,6 +439,10 @@ oeffnen(index) {
 <th>Dessert</th>
 
 </tr>
+
+</thead>
+
+<tbody>
 
 `;
 
@@ -436,17 +468,9 @@ oeffnen(index) {
 
     html += `
 
+</tbody>
+
 </table>
-
-<br>
-
-<button
-class="hauptButton"
-onclick="Speiseplaene.anzeigen()">
-
-⬅ Zurück
-
-</button>
 
 </div>
 
@@ -461,5 +485,3 @@ onclick="Speiseplaene.anzeigen()">
     );
 
 }
-
-};

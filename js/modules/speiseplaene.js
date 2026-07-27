@@ -157,12 +157,13 @@ anzeigen() {
 
     <td>
 
-        <button
-            class="sekundenButton">
+       <button
+    class="sekundenButton"
+    onclick="Speiseplaene.oeffnen(${this.daten.indexOf(plan)})">
 
-            Öffnen
+    Öffnen
 
-        </button>
+</button>
 
     </td>
 
@@ -380,6 +381,18 @@ this.anzeigen();
             "ddh_speiseplaene",
 
             this.daten
+            
+            },
+            
+oeffnen(index) {
+
+    const plan =
+
+        this.daten[index];
+
+    alert(
+
+        plan.name
 
         );
 

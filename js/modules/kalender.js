@@ -323,6 +323,8 @@ ersterTag =
         feld.className = "kalenderTag";
 
         feld.innerHTML = "<span>" + tag + "</span>";
+        
+        feld.dataset.tag = tag;
 
         raster.appendChild(feld);
 

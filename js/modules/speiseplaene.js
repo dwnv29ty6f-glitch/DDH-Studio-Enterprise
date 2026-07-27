@@ -200,7 +200,7 @@ anzeigen() {
 
     button.onclick = async () => {
 
-        if (!pdf.files.length) {
+        if (!htmlDatei.files.length)
 
             status.innerHTML =
                 "⚠️ Bitte zuerst eine PDF auswählen.";

@@ -298,6 +298,20 @@ speiseplan.forEach(tag => {
 
 });
 
+this.daten.push({
+
+    name: "Importierter Speiseplan",
+
+    zeitraum: "KW ?",
+
+    datum: new Date().toLocaleDateString(),
+
+    tage: speiseplan
+
+});
+
+this.speichern();
+
 }
 
         catch (fehler) {

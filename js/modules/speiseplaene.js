@@ -223,6 +223,24 @@ const datei =
 const inhalt =
 
     await datei.text();
+    
+    const parser = new DOMParser();
+    
+    const dokument = parser.parseFromString(
+
+    inhalt,
+
+    "text/html"
+
+);
+
+const tabellen = dokument.querySelectorAll("table");
+
+status.innerHTML =
+
+    "Gefundene Tabellen: " +
+
+    tabellen.length;
 
 status.innerHTML =
 

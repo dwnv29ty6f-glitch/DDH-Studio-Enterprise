@@ -491,15 +491,17 @@ bearbeiten(index) {
 
     const plan =
 
-        this.daten[index];
+    this.daten[index];
 
-    alert(
+let html = `
 
-        "Bearbeiten von:\n\n" +
+<div class="karte">
 
-        plan.name
+<h1>Speiseplan bearbeiten</h1>
 
-    );
+<p><strong>${plan.name}</strong></p>
+
+`;
 
 }
 

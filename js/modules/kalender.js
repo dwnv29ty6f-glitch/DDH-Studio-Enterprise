@@ -281,6 +281,32 @@ ersterTag =
         ? 6
 
         : ersterTag - 1;
+        
+        for (
+
+    let i = 0;
+
+    i < ersterTag;
+
+    i++
+
+) {
+
+    const leer =
+
+        document.createElement("div");
+
+    leer.className =
+
+        "kalenderLeer";
+
+    raster.appendChild(
+
+        leer
+
+    );
+
+}
 
     for (
 

@@ -216,19 +216,18 @@ anzeigen() {
 
             const datei = htmlDatei.files[0];
 
+const inhalt = await datei.text();
+
 status.innerHTML =
 
-    "⏳ PDF wird in ein Bild umgewandelt...";
-                
-                pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+    "<h3>HTML erfolgreich geladen</h3>" +
 
-const worker = await Tesseract.createWorker("deu");
+    "<textarea style='width:100%;height:350px'>" +
 
-const ergebnis = await worker.recognize(bild);
+    inhalt +
 
-await worker.terminate();
-
+    "</textarea>";
+    
 status.innerHTML =
 
     "✅ OCR erfolgreich abgeschlossen.<br><br>" +

@@ -342,6 +342,30 @@ if (
 
 }
 
+feld.onclick = () => {
+
+    DOM.id(
+
+        "terminListe"
+
+    ).innerHTML =
+
+        "<h3>" +
+
+        tag +
+
+        "." +
+
+        (this.aktuellerMonat + 1) +
+
+        "." +
+
+        this.aktuellesJahr +
+
+        "</h3>";
+
+};
+
         raster.appendChild(feld);
 
     }

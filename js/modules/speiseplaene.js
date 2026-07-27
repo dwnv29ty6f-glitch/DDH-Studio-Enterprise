@@ -214,7 +214,7 @@ anzeigen() {
 
         try {
 
-            const datei = pdf.files[0];
+            const datei = htmlDatei.files[0];
 
 status.innerHTML =
 
@@ -222,8 +222,6 @@ status.innerHTML =
                 
                 pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
-
-            const bild = pdf.files[0];
 
 const worker = await Tesseract.createWorker("deu");
 

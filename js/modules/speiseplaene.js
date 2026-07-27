@@ -407,7 +407,8 @@ onclick="window.print()">
 </button>
 
 <button
-class="hauptButton">
+class="hauptButton"
+onclick="Speiseplaene.bearbeiten(${index})">
 
 ✏ Bearbeiten
 

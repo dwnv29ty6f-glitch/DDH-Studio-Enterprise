@@ -485,7 +485,7 @@ class="hauptButton">
 
     );
 
-}
+},
 
 bearbeiten(index) {
 

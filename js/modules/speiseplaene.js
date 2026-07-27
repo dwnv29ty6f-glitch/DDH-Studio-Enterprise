@@ -199,6 +199,8 @@ anzeigen() {
     if (button) {
 
     button.onclick = async () => {
+        
+        try {
 
         if (!htmlDatei.files.length) {
 
@@ -236,7 +238,7 @@ DOM.id(
 
     inhalt;
     
-        }
+     }
 
         catch (fehler) {
 

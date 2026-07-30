@@ -408,20 +408,19 @@ Speiseplaene.events = function(){
 
     if(this.dom.btnDrucken){
 
-        this.dom.btnDrucken.addEventListener(
+    this.dom.btnDrucken.addEventListener(
 
-            "click",
+        "click",
 
-            ()=>{
+        ()=>{
 
-                window.print();
+            this.drucken();
 
-            }
+        }
 
-        );
+    );
 
-    }
-
+}
 };
 /* ==========================================================
    Datei auswählen

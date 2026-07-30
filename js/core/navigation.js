@@ -87,9 +87,9 @@ const Navigation = {
 
             case "speiseplaene":
 
-                Speiseplaene.anzeigen();
+    Speiseplaene.init();
 
-                break;
+    break;
 
             case "schichtplan":
 

@@ -756,6 +756,14 @@ Speiseplaene.pruefeZeitraum = function(text){
 ========================================================== */
 
 Speiseplaene.pruefeGericht = function(tag, text, zeile){
+    
+    console.log(
+    zeile[0],
+    "|",
+    zeile[1],
+    "|",
+    zeile[2]
+);
 
     const typ = String(zeile[0] || "")
         .trim()

@@ -709,22 +709,16 @@ Speiseplaene.neuerTag = function(name){
 
 Speiseplaene.istWochentag = function(text){
 
+    text = text.trim().toUpperCase();
+
     return [
-
         "MONTAG",
-
         "DIENSTAG",
-
         "MITTWOCH",
-
         "DONNERSTAG",
-
         "FREITAG",
-
         "SAMSTAG",
-
         "SONNTAG"
-
     ].includes(text);
 
 };
@@ -761,92 +755,50 @@ Speiseplaene.pruefeZeitraum = function(text){
    Gericht erkennen
 ========================================================== */
 
-Speiseplaene.pruefeGericht = function(
+Speiseplaene.pruefeGericht = function(tag, text, zeile){
 
-    tag,
+    const typ = String(zeile[0] || "")
+        .trim()
+        .toUpperCase();
 
-    text,
+    const gericht = String(zeile[1] || "")
+        .trim();
 
-    zeile
+    const allergene = String(zeile[2] || "")
+        .trim();
 
-){
-
-    const gericht =
-
-        String(
-
-            zeile[1] || ""
-
-        ).trim();
-
-    const allergene =
-
-        String(
-
-            zeile[2] || ""
-
-        ).trim();
-
-    if(
-
-        text.includes("MENÜ I")
-
-        ||
-
-        text.includes("MENU I")
-
-    ){
-
+    if (
+        typ.startsWith("MENÜ I") ||
+        typ.startsWith("MENU I")
+    ) {
         tag.menue1 = gericht;
-
         tag.allergene1 = allergene;
-
         return;
-
     }
 
-    if(
-
-        text.includes("MENÜ II")
-
-        ||
-
-        text.includes("MENU II")
-
-    ){
-
+    if (
+        typ.startsWith("MENÜ II") ||
+        typ.startsWith("MENU II")
+    ) {
         tag.menue2 = gericht;
-
         tag.allergene2 = allergene;
-
         return;
-
     }
 
-    if(
-
-        text.includes("SUPPE")
-
-    ){
-
+    if (
+        typ.startsWith("SUPPE")
+    ) {
         tag.suppe = gericht;
-
         tag.allergeneSuppe = allergene;
-
         return;
-
     }
 
-    if(
-
-        text.includes("DESSERT")
-
-    ){
-
+    if (
+        typ.startsWith("DESSERT")
+    ) {
         tag.dessert = gericht;
-
         tag.allergeneDessert = allergene;
-
+        return;
     }
 
 };

@@ -1,13 +1,46 @@
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 1/20
+   Datei: core.js
+   Teil: 1/4
+   Version: 2.0
 ========================================================== */
+
+"use strict";
 
 const Speiseplaene = {
 
-    version: "1.0",
+    /* ======================================================
+       Informationen
+    ====================================================== */
+
+    version: "2.0",
+
+    appName: "DDH Studio Enterprise",
+
+    modulName: "Speisepläne",
+
+    /* ======================================================
+       DOM
+    ====================================================== */
+
+    dom: {
+
+        root: null,
+
+        container: null,
+
+        excelInput: null,
+
+        btnExcel: null,
+
+        btnDrucken: null
+
+    },
+
+    /* ======================================================
+       Daten
+    ====================================================== */
 
     daten: [],
 
@@ -15,40 +48,212 @@ const Speiseplaene = {
 
     excelDatei: null,
 
-    layout: "A4",
+    arbeitsmappe: null,
 
-    init() {
+    aktivesBlatt: null,
 
-        this.render();
+    /* ======================================================
+       Zeitraum
+    ====================================================== */
 
-        this.events();
+    zeitraum: {
+
+        start: "",
+
+        ende: "",
+
+        kalenderwoche: ""
 
     },
 
-    render() {
+    /* ======================================================
+       Einstellungen
+    ====================================================== */
 
-        const inhalt = document.getElementById("inhalt");
+    settings: {
 
-        inhalt.innerHTML = `
+        papier: "A4",
 
-<div class="ddhSpeiseplanModul">
+        orientierung: "landscape",
+
+        schriftart: "Arial",
+
+        hauptfarbe: "#0F4C81"
+
+    },
+
+    /* ======================================================
+       Status
+    ====================================================== */
+
+    status: {
+
+        gestartet: false,
+
+        importiert: false,
+
+        analysiert: false,
+
+        layoutErstellt: false,
+
+        druckBereit: false
+
+    },
+
+    /* ======================================================
+       Initialisierung
+    ====================================================== */
+
+    init() {
+
+        this.log("Initialisierung...");
+
+        this.dom.root = document.getElementById("inhalt");
+
+        if (!this.dom.root) {
+
+            this.error(
+
+                "Container #inhalt wurde nicht gefunden."
+
+            );
+
+            return;
+
+        }
+
+        this.render();
+
+        this.cacheDOM();
+
+        this.events();
+
+        this.status.gestartet = true;
+
+        this.log("Modul gestartet.");
+
+    },
+
+    /* ======================================================
+       DOM Elemente merken
+    ====================================================== */
+
+    cacheDOM() {
+
+        this.dom.container =
+
+            document.getElementById(
+
+                "speiseplanContainer"
+
+            );
+
+        this.dom.excelInput =
+
+            document.getElementById(
+
+                "excelDatei"
+
+            );
+
+        this.dom.btnExcel =
+
+            document.getElementById(
+
+                "btnExcel"
+
+            );
+
+        this.dom.btnDrucken =
+
+            document.getElementById(
+
+                "btnDrucken"
+
+            );
+
+    },
+
+    /* ======================================================
+       Hilfsfunktion
+    ====================================================== */
+
+    element(id) {
+
+        return document.getElementById(id);
+
+    },
+
+    /* ======================================================
+       Logging
+    ====================================================== */
+
+    log(text) {
+
+        console.log(
+
+            "[DDH Speisepläne]",
+
+            text
+
+        );
+
+    },
+
+    /* ======================================================
+       Fehler
+    ====================================================== */
+
+    error(text) {
+
+        console.error(
+
+            "[DDH Speisepläne]",
+
+            text
+
+        );
+
+        alert(text);
+
+    }
+
+};
+
+/* ==========================================================
+   Navigation registrieren
+========================================================== */
+
+if (typeof Seiten !== "undefined") {
+
+    Seiten.speiseplaene = () => {
+
+        Speiseplaene.init();
+
+    };
+
+}
+/* ==========================================================
+   DDH Studio Enterprise
+   Modul: Speisepläne
+   Version: 2.0
+   Teil 2
+   Oberfläche
+========================================================== */
+
+Speiseplaene.render = function () {
+
+    this.dom.root.innerHTML = `
+
+<div class="ddhSpeiseplaene">
 
     <div class="ddhHeader">
 
         <div>
 
-            <h1>
+            <h1>🍽️ Speisepläne</h1>
 
-                🍽️ Speisepläne
-
-            </h1>
-
-            <p>
-
-                Selly-Speiseplan importieren
-                und automatisch drucken.
-
-            </p>
+            <p>Selly-Excel importieren und professionell drucken</p>
 
         </div>
 
@@ -82,29 +287,26 @@ const Speiseplaene = {
         hidden>
 
     <div
-        id="speiseplanContainer">
+        id="speiseplanContainer"
+        class="ddhLeer">
 
-        <div class="ddhLeer">
+        <div class="ddhLeerIcon">
 
-            <div class="icon">
-
-                🍽️
-
-            </div>
-
-            <h2>
-
-                Noch kein Speiseplan geladen
-
-            </h2>
-
-            <p>
-
-                Wähle eine Selly-Excel-Datei aus.
-
-            </p>
+            🍽️
 
         </div>
+
+        <h2>
+
+            Noch kein Speiseplan geladen
+
+        </h2>
+
+        <p>
+
+            Bitte eine Selly-Excel-Datei auswählen.
+
+        </p>
 
     </div>
 
@@ -112,113 +314,219 @@ const Speiseplaene = {
 
 `;
 
-    },
+};
+/* ==========================================================
+   Druckbutton
+========================================================== */
 
-    events() {
+Speiseplaene.druckButton = function(status){
 
-        const btnExcel =
-            document.getElementById("btnExcel");
+    if(this.dom.btnDrucken){
 
-        const btnDrucken =
-            document.getElementById("btnDrucken");
-
-        const excelDatei =
-            document.getElementById("excelDatei");
-
-        btnExcel.onclick = () => {
-
-            excelDatei.click();
-
-        };
-
-        btnDrucken.onclick = () => {
-
-            this.drucken();
-
-        };
-
-    },
-
-    drucken() {
-
-        window.print();
+        this.dom.btnDrucken.disabled = !status;
 
     }
 
 };
-
 /* ==========================================================
-   Navigation registrieren
+   Meldung anzeigen
 ========================================================== */
 
-if (typeof Seiten !== "undefined") {
+Speiseplaene.meldung = function(text){
 
-    Seiten.speiseplaene = () => {
+    if(!this.dom.container){
 
-        Speiseplaene.init();
+        return;
 
-    };
+    }
 
-}
+    this.dom.container.innerHTML = `
+
+<div class="ddhInfo">
+
+    <h2>${text}</h2>
+
+</div>
+
+`;
+
+};
+/* ==========================================================
+   Container leeren
+========================================================== */
+
+Speiseplaene.leeren = function(){
+
+    if(this.dom.container){
+
+        this.dom.container.innerHTML = "";
+
+    }
+
+};
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 2/20
-   Excel Import
+   Version: 2.0
+   Teil 3
+   Events & Excel-Import
 ========================================================== */
 
-Speiseplaene.excelImportieren = function(datei){
+Speiseplaene.events = function(){
+
+    if(this.dom.btnExcel){
+
+        this.dom.btnExcel.addEventListener(
+
+            "click",
+
+            ()=>{
+
+                this.dom.excelInput.click();
+
+            }
+
+        );
+
+    }
+
+    if(this.dom.excelInput){
+
+        this.dom.excelInput.addEventListener(
+
+            "change",
+
+            (event)=>{
+
+                this.dateiAusgewaehlt(event);
+
+            }
+
+        );
+
+    }
+
+    if(this.dom.btnDrucken){
+
+        this.dom.btnDrucken.addEventListener(
+
+            "click",
+
+            ()=>{
+
+                window.print();
+
+            }
+
+        );
+
+    }
+
+};
+/* ==========================================================
+   Datei auswählen
+========================================================== */
+
+Speiseplaene.dateiAusgewaehlt = function(event){
+
+    const datei = event.target.files[0];
+
+    if(!datei){
+
+        return;
+
+    }
+
+    this.excelDatei = datei;
+
+    this.importiereExcel(datei);
+
+};
+/* ==========================================================
+   Excel importieren
+========================================================== */
+
+Speiseplaene.importiereExcel = function(datei){
+
+    this.log(
+
+        "Importiere: " +
+
+        datei.name
+
+    );
 
     const reader = new FileReader();
 
-    reader.onload = (event)=>{
+    reader.onload = (e)=>{
 
         try{
 
-            const daten = new Uint8Array(event.target.result);
+            const daten =
 
-            const arbeitsmappe = XLSX.read(daten,{
-                type:"array"
-            });
+                new Uint8Array(
 
-            const erstesBlatt = arbeitsmappe.SheetNames[0];
+                    e.target.result
 
-            const tabelle =
-                arbeitsmappe.Sheets[erstesBlatt];
+                );
 
-            this.daten = XLSX.utils.sheet_to_json(
-                tabelle,
-                {
-                    header:1,
-                    blankrows:false,
-                    defval:""
-                }
-            );
+            this.arbeitsmappe =
 
-            console.clear();
+                XLSX.read(
 
-            console.log(
-                "DDH Studio Enterprise"
-            );
+                    daten,
 
-            console.log(
-                "Selly-Datei erfolgreich importiert."
-            );
+                    {
 
-            console.table(this.daten);
+                        type:"array"
 
-            this.analysieren();
+                    }
+
+                );
+
+            this.aktivesBlatt =
+
+                this.arbeitsmappe.SheetNames[0];
+
+            this.daten =
+
+                XLSX.utils.sheet_to_json(
+
+                    this.arbeitsmappe.Sheets[
+
+                        this.aktivesBlatt
+
+                    ],
+
+                    {
+
+                        header:1,
+
+                        blankrows:false,
+
+                        defval:""
+
+                    }
+
+                );
+
+            this.status.importiert = true;
+
+this.importFertig();
+
+this.analysieren();
 
         }
 
         catch(fehler){
 
-            console.error(fehler);
+            this.error(
 
-            alert(
-                "Die Excel-Datei konnte nicht gelesen werden."
+                "Excel konnte nicht gelesen werden."
+
             );
+
+            console.error(fehler);
 
         }
 
@@ -227,381 +535,529 @@ Speiseplaene.excelImportieren = function(datei){
     reader.readAsArrayBuffer(datei);
 
 };
-
 /* ==========================================================
-   Dateiauswahl
+   Daten anzeigen
 ========================================================== */
 
-Speiseplaene.dateiAuswaehlen = function(){
+Speiseplaene.debug = function(){
 
-    const feld =
-        document.getElementById("excelDatei");
+    console.clear();
 
-    feld.onchange = ()=>{
+    console.table(
 
-        if(!feld.files.length){
+        this.daten
 
-            return;
-
-        }
-
-        this.excelDatei =
-            feld.files[0];
-
-        this.excelImportieren(
-            this.excelDatei
-        );
-
-    };
+    );
 
 };
-
 /* ==========================================================
-   Events erweitern
+   Import abgeschlossen
 ========================================================== */
 
-const _eventsBlock1 =
-    Speiseplaene.events;
+Speiseplaene.importFertig = function(){
 
-Speiseplaene.events = function(){
+    this.debug();
 
-    _eventsBlock1.call(this);
+    this.log(
 
-    this.dateiAuswaehlen();
+        "Import abgeschlossen."
+
+    );
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 3/20
-   Selly Analyse
+   Version: 2.0
+   Teil 4
+   Selly Parser
 ========================================================== */
 
 Speiseplaene.analysieren = function(){
 
     this.tage = [];
 
-    const WOCHENTAGE = [
-        "MONTAG",
-        "DIENSTAG",
-        "MITTWOCH",
-        "DONNERSTAG",
-        "FREITAG",
-        "SAMSTAG",
-        "SONNTAG"
-    ];
+    this.zeitraum.start = "";
+this.zeitraum.ende = "";
+this.zeitraum.kalenderwoche = "";
 
-    let tag = null;
+    
+
+    let aktuellerTag = null;
 
     for(const zeile of this.daten){
 
-        if(!zeile) continue;
+        aktuellerTag =
 
-        const text = String(zeile[0] || "")
-            .trim()
-            .toUpperCase();
+            this.analysiereZeile(
 
-        /* ------------------------------------
-           Wochentag gefunden
-        ------------------------------------ */
+                zeile,
 
-        if(WOCHENTAGE.includes(text)){
+                aktuellerTag
 
-            tag = {
-
-                name:text,
-
-                datum:"",
-
-                menue1:"",
-                menue2:"",
-                suppe:"",
-                dessert:"",
-
-                allergene1:"",
-                allergene2:"",
-                allergeneSuppe:"",
-                allergeneDessert:""
-
-            };
-
-            this.tage.push(tag);
-
-            continue;
-
-        }
-
-        if(!tag) continue;
-
-        /* ------------------------------------
-           Menü I
-        ------------------------------------ */
-
-        if(text.startsWith("MENÜ I")){
-
-            tag.menue1 = zeile[1] || "";
-
-            tag.allergene1 = zeile[2] || "";
-
-            continue;
-
-        }
-
-        /* ------------------------------------
-           Menü II
-        ------------------------------------ */
-
-        if(text.startsWith("MENÜ II")){
-
-            tag.menue2 = zeile[1] || "";
-
-            tag.allergene2 = zeile[2] || "";
-
-            continue;
-
-        }
-
-        /* ------------------------------------
-           Suppe
-        ------------------------------------ */
-
-        if(text.startsWith("SUPPE")){
-
-            tag.suppe = zeile[1] || "";
-
-            tag.allergeneSuppe = zeile[2] || "";
-
-            continue;
-
-        }
-
-        /* ------------------------------------
-           Dessert
-        ------------------------------------ */
-
-        if(text.startsWith("DESSERT")){
-
-            tag.dessert = zeile[1] || "";
-
-            tag.allergeneDessert = zeile[2] || "";
-
-            continue;
-
-        }
+            );
 
     }
 
-    console.log("Analyse abgeschlossen");
-
-    console.table(this.tage);
+    this.status.analysiert = true;
 
     this.layoutErzeugen();
 
 };
 /* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 4/20
-   Vorschau erzeugen
+   Einzelne Zeile auswerten
 ========================================================== */
 
-Speiseplaene.layoutErzeugen = function(){
+Speiseplaene.analysiereZeile = function(
 
-    const container =
-        document.getElementById("speiseplanContainer");
+    zeile,
 
-    if(!container) return;
+    aktuellerTag
 
-    if(this.tage.length === 0){
+){
 
-        container.innerHTML = `
+    if(!zeile){
 
-        <div class="ddhLeer">
+        return aktuellerTag;
 
-            <div class="icon">
+    }
 
-                ⚠️
+    const text =
 
-            </div>
+        zeile
 
-            <h2>
+        .join(" ")
 
-                Kein Speiseplan gefunden
+        .replace(/\s+/g," ")
 
-            </h2>
+        .trim()
 
-            <p>
+        .toUpperCase();
 
-                Die Selly-Datei konnte
-                nicht ausgewertet werden.
+    if(text===""){
 
-            </p>
+        return aktuellerTag;
 
-        </div>
+    }
 
-        `;
+    this.pruefeZeitraum(text);
+
+    if(this.istWochentag(text)){
+
+        aktuellerTag =
+
+            this.neuerTag(text);
+
+        return aktuellerTag;
+
+    }
+
+    if(aktuellerTag){
+
+        this.pruefeGericht(
+
+            aktuellerTag,
+
+            text,
+
+            zeile
+
+        );
+
+    }
+
+    return aktuellerTag;
+
+};
+/* ==========================================================
+   Neuen Tag anlegen
+========================================================== */
+
+Speiseplaene.neuerTag = function(name){
+
+    const tag = {
+
+        name,
+
+        datum:"",
+
+        menue1:"",
+
+        menue2:"",
+
+        suppe:"",
+
+        dessert:"",
+
+        allergene1:"",
+
+        allergene2:"",
+
+        allergeneSuppe:"",
+
+        allergeneDessert:""
+
+    };
+
+    this.tage.push(tag);
+
+    return tag;
+
+};
+/* ==========================================================
+   Wochentag erkennen
+========================================================== */
+
+Speiseplaene.istWochentag = function(text){
+
+    return [
+
+        "MONTAG",
+
+        "DIENSTAG",
+
+        "MITTWOCH",
+
+        "DONNERSTAG",
+
+        "FREITAG",
+
+        "SAMSTAG",
+
+        "SONNTAG"
+
+    ].includes(text);
+
+};
+/* ==========================================================
+   Zeitraum erkennen
+========================================================== */
+
+Speiseplaene.pruefeZeitraum = function(text){
+
+    const treffer =
+
+        text.match(
+
+            /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+
+        );
+
+    if(!treffer){
 
         return;
 
     }
 
-    let html = `
+    this.zeitraum.start =
 
-<div class="ddhSpeiseplan">
+        treffer[1];
 
-    <div class="ddhTitel">
+    this.zeitraum.ende =
 
-        <div class="ddhLogo">
+        treffer[2];
 
-            DDH SERVICE GMBH
+};
+/* ==========================================================
+   Gericht erkennen
+========================================================== */
 
-        </div>
+Speiseplaene.pruefeGericht = function(
 
-        <h1>
+    tag,
 
-            WOCHENSPEISEPLAN
+    text,
 
-        </h1>
+    zeile
 
-        <div id="ddhZeitraum">
+){
 
-            Zeitraum wird ermittelt...
+    const gericht =
 
-        </div>
+        String(
 
-    </div>
+            zeile[1] || ""
 
-`;
+        ).trim();
 
-    this.tage.forEach(tag=>{
+    const allergene =
 
-        html += `
+        String(
 
-<section class="ddhTag">
+            zeile[2] || ""
 
-    <h2>
+        ).trim();
 
-        ${tag.name}
+    if(
 
-    </h2>
+        text.includes("MENÜ I")
 
-    <div class="ddhGericht">
+        ||
 
-        <div class="ddhGerichtTitel">
+        text.includes("MENU I")
 
-            🍽 Menü I
+    ){
 
-        </div>
+        tag.menue1 = gericht;
 
-        <div class="ddhGerichtText">
+        tag.allergene1 = allergene;
 
-            ${tag.menue1}
+        return;
 
-        </div>
+    }
 
-        <div class="ddhAllergene">
+    if(
 
-            ${tag.allergene1}
+        text.includes("MENÜ II")
 
-        </div>
+        ||
 
-    </div>
+        text.includes("MENU II")
 
-    <div class="ddhGericht">
+    ){
 
-        <div class="ddhGerichtTitel">
+        tag.menue2 = gericht;
 
-            🥗 Menü II
+        tag.allergene2 = allergene;
 
-        </div>
+        return;
 
-        <div class="ddhGerichtText">
+    }
 
-            ${tag.menue2}
+    if(
 
-        </div>
+        text.includes("SUPPE")
 
-        <div class="ddhAllergene">
+    ){
 
-            ${tag.allergene2}
+        tag.suppe = gericht;
 
-        </div>
+        tag.allergeneSuppe = allergene;
 
-    </div>
+        return;
 
-    <div class="ddhGericht">
+    }
 
-        <div class="ddhGerichtTitel">
+    if(
 
-            🍲 Suppe
+        text.includes("DESSERT")
 
-        </div>
+    ){
 
-        <div class="ddhGerichtText">
+        tag.dessert = gericht;
 
-            ${tag.suppe}
+        tag.allergeneDessert = allergene;
 
-        </div>
-
-        <div class="ddhAllergene">
-
-            ${tag.allergeneSuppe}
-
-        </div>
-
-    </div>
-
-    <div class="ddhGericht">
-
-        <div class="ddhGerichtTitel">
-
-            🍮 Dessert
-
-        </div>
-
-        <div class="ddhGerichtText">
-
-            ${tag.dessert}
-
-        </div>
-
-        <div class="ddhAllergene">
-
-            ${tag.allergeneDessert}
-
-        </div>
-
-    </div>
-
-</section>
-
-`;
-
-    });
-
-    html += `
-
-</div>
-
-`;
-
-    container.innerHTML = html;
-
-    document
-        .getElementById("btnDrucken")
-        .disabled = false;
-
-    this.allergeneErzeugen();
+    }
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 5/20
-   DDH Design
+   Version: 2.0
+   Teil 5
+   Layout erzeugen
+========================================================== */
+
+Speiseplaene.layoutErzeugen = function(){
+
+    if(!this.dom.container){
+
+        return;
+
+    }
+
+    this.leeren();
+
+    let html = "";
+
+    html += this.renderKopf();
+
+    html += '<div class="ddhWochenplan">';
+
+    for(const tag of this.tage){
+
+        html += this.renderTag(tag);
+
+    }
+
+    html += "</div>";
+
+    this.dom.container.innerHTML = html;
+
+    this.status.layoutErstellt = true;
+
+    this.druckButton(true);
+
+};
+/* ==========================================================
+   Kopfbereich
+========================================================== */
+
+Speiseplaene.renderKopf = function(){
+
+    return `
+
+<div class="ddhTitel">
+
+    <div class="ddhLogo">
+
+        DDH SERVICE GMBH
+
+    </div>
+
+    <h1>
+
+        WOCHENSPEISEPLAN
+
+    </h1>
+
+    <div class="ddhZeitraum">
+
+        ${this.zeitraum.start}
+
+        ${this.zeitraum.start ? " – " : ""}
+
+        ${this.zeitraum.ende}
+
+    </div>
+
+</div>
+
+`;
+
+};
+/* ==========================================================
+   Wochentag darstellen
+========================================================== */
+
+Speiseplaene.renderTag = function(tag){
+
+    return `
+
+<section class="ddhTag">
+
+<h2>${tag.name}</h2>
+
+${this.renderGericht("🍽 Menü I",tag.menue1,tag.allergene1)}
+
+${this.renderGericht("🥗 Menü II",tag.menue2,tag.allergene2)}
+
+${this.renderGericht("🍲 Suppe",tag.suppe,tag.allergeneSuppe)}
+
+${this.renderGericht("🍮 Dessert",tag.dessert,tag.allergeneDessert)}
+
+</section>
+
+`;
+
+};
+/* ==========================================================
+   Gericht darstellen
+========================================================== */
+
+Speiseplaene.renderGericht = function(
+
+titel,
+
+gericht,
+
+allergene
+
+){
+
+    if(!gericht){
+
+        return "";
+
+    }
+
+    return `
+
+<div class="ddhGericht">
+
+    <div class="ddhGerichtTitel">
+
+        ${titel}
+
+    </div>
+
+    <div class="ddhGerichtText">
+
+        ${gericht}
+
+    </div>
+
+    <div class="ddhAllergene">
+
+        ${allergene}
+
+    </div>
+
+</div>
+
+`;
+
+};
+/* ==========================================================
+   Kalenderwoche berechnen
+========================================================== */
+
+Speiseplaene.kalenderwoche = function(){
+
+    if(!this.zeitraum.start){
+
+        return "";
+
+    }
+
+    const teile = this.zeitraum.start.split(".");
+
+    const datum = new Date(
+
+        Number(teile[2]),
+
+        Number(teile[1])-1,
+
+        Number(teile[0])
+
+    );
+
+    datum.setDate(
+
+        datum.getDate()
+
+        +4
+
+        -(datum.getDay()||7)
+
+    );
+
+    const jahrStart =
+
+        new Date(
+
+            datum.getFullYear(),
+
+            0,
+
+            1
+
+        );
+
+    return Math.ceil(
+
+        (((datum-jahrStart)/86400000)+1)/7
+
+    );
+
+};
+/* ==========================================================
+   DDH Studio Enterprise
+   Modul: Speisepläne
+   Version: 2.0
+   Teil 6
+   Design laden
 ========================================================== */
 
 Speiseplaene.designLaden = function(){
@@ -618,32 +1074,73 @@ Speiseplaene.designLaden = function(){
 
     style.innerHTML = `
 
-.ddhSpeiseplan{
+body{
 
-    width:100%;
-    max-width:1500px;
+    background:#f5f7fa;
+
+}
+
+.ddhSpeiseplaene{
+
+    max-width:1400px;
+
     margin:30px auto;
+
     font-family:Arial,Helvetica,sans-serif;
+
+}
+
+.ddhHeader{
+
+    margin-bottom:25px;
+
+}
+
+.ddhHeader h1{
+
+    margin:0;
+
+    color:#0F4C81;
+
+}
+
+.ddhHeader p{
+
+    margin-top:8px;
+
+    color:#666;
+
+}
+
+.ddhToolbar{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-bottom:25px;
 
 }
 
 .ddhTitel{
 
-    background:white;
+    background:#fff;
+
     border:3px solid #0F4C81;
-    border-radius:14px;
 
-    padding:30px;
+    border-radius:12px;
 
-    margin-bottom:30px;
+    padding:25px;
 
     text-align:center;
+
+    margin-bottom:25px;
 
 }
 
 .ddhLogo{
 
-    font-size:28px;
+    font-size:26px;
 
     font-weight:bold;
 
@@ -651,23 +1148,17 @@ Speiseplaene.designLaden = function(){
 
     letter-spacing:2px;
 
-    margin-bottom:12px;
-
 }
 
 .ddhTitel h1{
 
-    margin:0;
-
-    font-size:40px;
+    margin:12px 0;
 
     color:#0F4C81;
 
 }
 
-#ddhZeitraum{
-
-    margin-top:12px;
+.ddhZeitraum{
 
     color:#666;
 
@@ -675,17 +1166,25 @@ Speiseplaene.designLaden = function(){
 
 }
 
-.ddhTag{
+.ddhWochenplan{
 
-    margin-bottom:30px;
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+    gap:20px;
+
+}
+
+.ddhTag{
 
     background:white;
 
-    border-radius:14px;
+    border-radius:12px;
 
     overflow:hidden;
 
-    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
 
 }
 
@@ -693,21 +1192,19 @@ Speiseplaene.designLaden = function(){
 
     margin:0;
 
+    padding:16px;
+
     background:#0F4C81;
 
     color:white;
-
-    padding:16px 22px;
-
-    font-size:28px;
 
 }
 
 .ddhGericht{
 
-    padding:18px 24px;
+    padding:18px;
 
-    border-bottom:1px solid #ECECEC;
+    border-bottom:1px solid #ececec;
 
 }
 
@@ -719,23 +1216,19 @@ Speiseplaene.designLaden = function(){
 
 .ddhGerichtTitel{
 
-    font-size:22px;
-
     font-weight:bold;
 
     color:#0F4C81;
 
-    margin-bottom:8px;
+    margin-bottom:6px;
 
 }
 
 .ddhGerichtText{
 
-    font-size:20px;
+    font-size:18px;
 
-    line-height:1.5;
-
-    color:#222;
+    line-height:1.45;
 
 }
 
@@ -745,7 +1238,7 @@ Speiseplaene.designLaden = function(){
 
     color:#888;
 
-    font-size:15px;
+    font-size:13px;
 
 }
 
@@ -753,166 +1246,53 @@ Speiseplaene.designLaden = function(){
 
     text-align:center;
 
-    padding:90px;
+    padding:80px;
 
     color:#777;
 
 }
 
-.ddhLeer .icon{
+.ddhLeerIcon{
 
-    font-size:70px;
+    font-size:60px;
 
     margin-bottom:20px;
-
-}
-
-@media print{
-
-    body{
-
-        background:white;
-
-    }
-
-    #sidebar,
-    #kopfbereich,
-    .ddhToolbar{
-
-        display:none !important;
-
-    }
-
-    #hauptbereich{
-
-        margin:0 !important;
-
-        padding:0 !important;
-
-    }
-
-    .ddhSpeiseplan{
-
-        margin:0;
-
-        width:100%;
-
-    }
 
 }
 
 `;
 
     document.head.appendChild(style);
-    
-    this.allergeneDesign();
-
-this.druckSeitenDesign();
 
 };
-
 /* ==========================================================
    Design automatisch laden
 ========================================================== */
 
-const _initBlock1 = Speiseplaene.init;
+const _initOriginal = Speiseplaene.init;
 
 Speiseplaene.init = function(){
 
     this.designLaden();
 
-    _initBlock1.call(this);
+    _initOriginal.call(this);
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 6/20
+   Version: 2.0
+   Teil 7
    Drucklayout
-========================================================== */
-
-Speiseplaene.zeitraum = {
-
-    start: "",
-
-    ende: "",
-
-    kw: ""
-
-};
-
-Speiseplaene.zeitraumErmitteln = function(){
-
-    if(this.daten.length < 2){
-
-        return;
-
-    }
-
-    for(const zeile of this.daten){
-
-        if(!zeile) continue;
-
-        const text = zeile.join(" ");
-
-        const treffer =
-            text.match(
-                /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-            );
-
-        if(treffer){
-
-            this.zeitraum.start = treffer[1];
-
-            this.zeitraum.ende = treffer[2];
-
-            break;
-
-        }
-
-    }
-
-    const feld =
-        document.getElementById("ddhZeitraum");
-
-    if(feld){
-
-        if(this.zeitraum.start){
-
-            feld.innerHTML =
-
-                this.zeitraum.start +
-
-                " – " +
-
-                this.zeitraum.ende;
-
-        }
-
-    }
-
-};
-
-/* ==========================================================
-   Drucklayout vorbereiten
 ========================================================== */
 
 Speiseplaene.druckVorbereiten = function(){
 
-    document.body.classList.add(
-        "ddhPrint"
-    );
+    document.body.classList.add("ddhPrint");
 
 };
 
-/* ==========================================================
-   Drucken
-========================================================== */
-
 Speiseplaene.drucken = function(){
-
-    this.zeitraumErmitteln();
 
     this.druckVorbereiten();
 
@@ -920,268 +1300,26 @@ Speiseplaene.drucken = function(){
 
         window.print();
 
-        document.body.classList.remove(
-            "ddhPrint"
-        );
+        document.body.classList.remove("ddhPrint");
 
-    },300);
-
-};
-
-/* ==========================================================
-   Druckbutton aktualisieren
-========================================================== */
-
-const _eventsBlock5 =
-    Speiseplaene.events;
-
-Speiseplaene.events = function(){
-
-    _eventsBlock5.call(this);
-
-    document
-        .getElementById("btnDrucken")
-        .onclick = ()=>{
-
-            this.drucken();
-
-        };
+    },200);
 
 };
 /* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 7/20
-   Professionelles Layout
+   Druck CSS
 ========================================================== */
 
-Speiseplaene.karteErzeugen = function(tag){
+Speiseplaene.druckDesign = function(){
 
-    return `
-
-<div class="ddhTagKarte">
-
-    <div class="ddhTagHeader">
-
-        ${tag.name}
-
-    </div>
-
-    <div class="ddhEintrag">
-
-        <div class="ddhIcon">
-
-            🍽
-
-        </div>
-
-        <div class="ddhInhalt">
-
-            <div class="ddhUeberschrift">
-
-                Menü I
-
-            </div>
-
-            <div class="ddhText">
-
-                ${tag.menue1}
-
-            </div>
-
-            <div class="ddhAllergene">
-
-                ${tag.allergene1}
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="ddhEintrag">
-
-        <div class="ddhIcon">
-
-            🥗
-
-        </div>
-
-        <div class="ddhInhalt">
-
-            <div class="ddhUeberschrift">
-
-                Menü II
-
-            </div>
-
-            <div class="ddhText">
-
-                ${tag.menue2}
-
-            </div>
-
-            <div class="ddhAllergene">
-
-                ${tag.allergene2}
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="ddhEintrag">
-
-        <div class="ddhIcon">
-
-            🍲
-
-        </div>
-
-        <div class="ddhInhalt">
-
-            <div class="ddhUeberschrift">
-
-                Suppe
-
-            </div>
-
-            <div class="ddhText">
-
-                ${tag.suppe}
-
-            </div>
-
-            <div class="ddhAllergene">
-
-                ${tag.allergeneSuppe}
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="ddhEintrag">
-
-        <div class="ddhIcon">
-
-            🍮
-
-        </div>
-
-        <div class="ddhInhalt">
-
-            <div class="ddhUeberschrift">
-
-                Dessert
-
-            </div>
-
-            <div class="ddhText">
-
-                ${tag.dessert}
-
-            </div>
-
-            <div class="ddhAllergene">
-
-                ${tag.allergeneDessert}
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-`;
-
-};
-
-/* ==========================================================
-   Layout ersetzen
-========================================================== */
-
-const _layoutBlock4 =
-    Speiseplaene.layoutErzeugen;
-
-Speiseplaene.layoutErzeugen = function(){
-
-    const container =
-        document.getElementById("speiseplanContainer");
-
-    if(!container){
+    if(document.getElementById("ddhPrintStyle")){
 
         return;
 
     }
 
-    let html = `
-
-<div class="ddhSpeiseplan">
-
-    <div class="ddhTitel">
-
-        <div class="ddhLogo">
-
-            DDH SERVICE GMBH
-
-        </div>
-
-        <h1>
-
-            WOCHENSPEISEPLAN
-
-        </h1>
-
-        <div id="ddhZeitraum">
-
-            Zeitraum wird geladen...
-
-        </div>
-
-    </div>
-
-`;
-
-    this.tage.forEach(tag=>{
-
-        html += this.karteErzeugen(tag);
-
-    });
-
-    html += `
-
-</div>
-
-`;
-
-    container.innerHTML = html;
-
-    document
-        .getElementById("btnDrucken")
-        .disabled = false;
-
-};
-/* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 8/20
-   A4 Querformat
-========================================================== */
-
-Speiseplaene.druckFormat = "A4-Landscape";
-
-Speiseplaene.seitenFormat = function(){
-
     const style = document.createElement("style");
 
-    style.id = "ddhPrintLayout";
+    style.id = "ddhPrintStyle";
 
     style.innerHTML = `
 
@@ -1189,148 +1327,115 @@ Speiseplaene.seitenFormat = function(){
 
     size:A4 landscape;
 
-    margin:12mm;
+    margin:10mm;
 
 }
 
-.ddhPrint .ddhSpeiseplan{
+@media print{
 
-    width:100%;
+body{
 
-    max-width:none;
-
-    margin:0;
+    background:white !important;
 
 }
 
-.ddhPrint .ddhTitel{
+.ddhToolbar{
 
-    border:2px solid #0F4C81;
-
-    margin-bottom:18px;
+    display:none !important;
 
 }
 
-.ddhPrint .ddhTagKarte{
+.ddhHeader{
+
+    display:none !important;
+
+}
+
+.ddhWochenplan{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12mm;
+
+}
+
+.ddhTag{
+
+    break-inside:avoid;
 
     page-break-inside:avoid;
 
-    margin-bottom:14px;
+    box-shadow:none;
 
-    border:1px solid #D8D8D8;
-
-    border-radius:10px;
-
-    overflow:hidden;
+    border:1px solid #cfcfcf;
 
 }
 
-.ddhPrint .ddhTagHeader{
+.ddhTitel{
 
-    background:#0F4C81;
-
-    color:white;
-
-    padding:8px 16px;
-
-    font-size:20px;
-
-    font-weight:bold;
+    margin-bottom:10mm;
 
 }
 
-.ddhPrint .ddhEintrag{
+.ddhGericht{
 
-    display:flex;
-
-    gap:16px;
-
-    padding:12px 18px;
+    padding:10px;
 
 }
 
-.ddhPrint .ddhIcon{
+.ddhGerichtText{
 
-    font-size:24px;
-
-    width:40px;
-
-    text-align:center;
+    font-size:14px;
 
 }
 
-.ddhPrint .ddhUeberschrift{
+.ddhAllergene{
 
-    font-weight:bold;
-
-    color:#0F4C81;
-
-    margin-bottom:4px;
+    font-size:11px;
 
 }
-
-.ddhPrint .ddhText{
-
-    font-size:17px;
-
-    line-height:1.45;
-
-}
-
-.ddhPrint .ddhAllergene{
-
-    margin-top:6px;
-
-    font-size:13px;
-
-    color:#777;
 
 }
 
 `;
 
-    const alt =
-        document.getElementById(
-            "ddhPrintLayout"
-        );
-
-    if(alt){
-
-        alt.remove();
-
-    }
-
     document.head.appendChild(style);
 
 };
-
 /* ==========================================================
-   Layout vorbereiten
+   Druckdesign automatisch laden
 ========================================================== */
 
-const _druckVorbereiten =
-    Speiseplaene.druckVorbereiten;
+const _initTeil7 = Speiseplaene.init;
 
-Speiseplaene.druckVorbereiten = function(){
+Speiseplaene.init = function(){
 
-    this.seitenFormat();
+    this.druckDesign();
 
-    _druckVorbereiten.call(this);
+    _initTeil7.call(this);
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 9/20
+   Version: 2.0
+   Teil 8
    Allergenseite
 ========================================================== */
 
-Speiseplaene.allergeneErzeugen = function(){
+Speiseplaene.allergenseiteErzeugen = function(){
+
+    if(!this.tage.length){
+
+        return "";
+
+    }
 
     let html = `
 
-<div id="ddhAllergeneSeite" class="ddhAllergeneSeite">
+<div class="ddhAllergenSeite">
 
     <div class="ddhTitel">
 
@@ -1346,9 +1451,9 @@ Speiseplaene.allergeneErzeugen = function(){
 
         </h1>
 
-        <div>
+        <div class="ddhZeitraum">
 
-            Übersicht aller Menüs
+            ${this.zeitraum.start} - ${this.zeitraum.ende}
 
         </div>
 
@@ -1360,33 +1465,45 @@ Speiseplaene.allergeneErzeugen = function(){
 
         html += `
 
-<div class="ddhAllergeneTag">
+<div class="ddhAllergenTag">
 
-<h2>${tag.name}</h2>
+    <h2>${tag.name}</h2>
 
-<table class="ddhAllergeneTabelle">
+    <table>
 
-<tr>
-<th>Menü I</th>
-<td>${tag.allergene1}</td>
-</tr>
+        <tr>
 
-<tr>
-<th>Menü II</th>
-<td>${tag.allergene2}</td>
-</tr>
+            <th>Menü I</th>
 
-<tr>
-<th>Suppe</th>
-<td>${tag.allergeneSuppe}</td>
-</tr>
+            <td>${tag.allergene1 || "-"}</td>
 
-<tr>
-<th>Dessert</th>
-<td>${tag.allergeneDessert}</td>
-</tr>
+        </tr>
 
-</table>
+        <tr>
+
+            <th>Menü II</th>
+
+            <td>${tag.allergene2 || "-"}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Suppe</th>
+
+            <td>${tag.allergeneSuppe || "-"}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Dessert</th>
+
+            <td>${tag.allergeneDessert || "-"}</td>
+
+        </tr>
+
+    </table>
 
 </div>
 
@@ -1400,22 +1517,36 @@ Speiseplaene.allergeneErzeugen = function(){
 
 `;
 
-    document
-        .getElementById("speiseplanContainer")
-        .insertAdjacentHTML(
-            "beforeend",
-            html
-        );
+    return html;
 
 };
 /* ==========================================================
-   Block 9a
-   Allergen CSS
+   Allergenseite anfügen
 ========================================================== */
 
-Speiseplaene.allergeneDesign = function(){
+const _layoutTeil8 =
+    Speiseplaene.layoutErzeugen;
 
-    if(document.getElementById("ddhAllergeneStyle")){
+Speiseplaene.layoutErzeugen = function(){
+
+    _layoutTeil8.call(this);
+
+    this.dom.container.insertAdjacentHTML(
+
+        "beforeend",
+
+        this.allergenseiteErzeugen()
+
+    );
+
+};
+/* ==========================================================
+   CSS Allergenseite
+========================================================== */
+
+Speiseplaene.allergenDesign = function(){
+
+    if(document.getElementById("ddhAllergenStyle")){
 
         return;
 
@@ -1423,33 +1554,33 @@ Speiseplaene.allergeneDesign = function(){
 
     const style = document.createElement("style");
 
-    style.id = "ddhAllergeneStyle";
+    style.id = "ddhAllergenStyle";
 
     style.innerHTML = `
 
-.ddhAllergeneSeite{
+.ddhAllergenSeite{
 
     page-break-before:always;
 
-    margin-top:30px;
+    margin-top:40px;
 
 }
 
-.ddhAllergeneTag{
+.ddhAllergenTag{
 
-    margin-bottom:28px;
+    margin-bottom:25px;
 
 }
 
-.ddhAllergeneTag h2{
+.ddhAllergenTag h2{
 
     color:#0F4C81;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
 }
 
-.ddhAllergeneTabelle{
+.ddhAllergenTag table{
 
     width:100%;
 
@@ -1457,25 +1588,25 @@ Speiseplaene.allergeneDesign = function(){
 
 }
 
-.ddhAllergeneTabelle th{
+.ddhAllergenTag th{
 
     width:180px;
+
+    background:#F3F5F7;
 
     text-align:left;
 
     padding:10px;
 
-    background:#F4F6F8;
-
-    border-bottom:1px solid #DDD;
+    border:1px solid #DDD;
 
 }
 
-.ddhAllergeneTabelle td{
+.ddhAllergenTag td{
 
     padding:10px;
 
-    border-bottom:1px solid #DDD;
+    border:1px solid #DDD;
 
 }
 
@@ -1485,361 +1616,106 @@ Speiseplaene.allergeneDesign = function(){
 
 };
 /* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 9b/20
-   Vorschau abschließen
+   Allergen CSS automatisch laden
 ========================================================== */
 
-const _layoutBlock7 =
-    Speiseplaene.layoutErzeugen;
+const _initTeil8 =
+    Speiseplaene.init;
 
-Speiseplaene.layoutErzeugen = function(){
+Speiseplaene.init = function(){
 
-    _layoutBlock7.call(this);
+    this.allergenDesign();
 
-    /* Zeitraum einsetzen */
-
-    this.zeitraumErmitteln();
-
-    /* Allergenseite erzeugen */
-
-    this.allergeneErzeugen();
+    _initTeil8.call(this);
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 10/20
-   Kalenderwoche & Kopfbereich
+   Version: 2.0
+   Teil 9
+   Professioneller Kopfbereich
 ========================================================== */
 
-Speiseplaene.kalenderwocheBerechnen = function(datum){
+Speiseplaene.kalenderwoche = function(datum){
 
-    if(!datum) return "";
+    if(!datum){
+
+        return "";
+
+    }
 
     const teile = datum.split(".");
 
-    if(teile.length !== 3) return "";
+    if(teile.length !== 3){
+
+        return "";
+
+    }
 
     const d = new Date(
+
         Number(teile[2]),
-        Number(teile[1])-1,
+
+        Number(teile[1]) - 1,
+
         Number(teile[0])
+
     );
 
     d.setHours(0,0,0,0);
 
     d.setDate(
+
         d.getDate() + 4 - (d.getDay() || 7)
+
     );
 
     const jahrStart =
+
         new Date(d.getFullYear(),0,1);
 
     return Math.ceil(
 
-        (
-
-            (
-
-                (d - jahrStart)
-
-                / 86400000
-
-            ) + 1
-
-        ) / 7
+        (((d - jahrStart) / 86400000) + 1) / 7
 
     );
 
 };
 
 /* ==========================================================
-   Kopf aktualisieren
+   Kopfbereich aktualisieren
 ========================================================== */
 
 Speiseplaene.kopfAktualisieren = function(){
 
-    const feld =
-        document.getElementById(
-            "ddhZeitraum"
-        );
+    const titel =
 
-    if(!feld) return;
-
-    let text = "";
-
-    if(this.zeitraum.start){
-
-        const kw =
-            this.kalenderwocheBerechnen(
-                this.zeitraum.start
-            );
-
-        text =
-            "KW " +
-
-            kw +
-
-            " • " +
-
-            this.zeitraum.start +
-
-            " - " +
-
-            this.zeitraum.ende;
-
-    }
-
-    else{
-
-        text =
-            "Zeitraum unbekannt";
-
-    }
-
-    feld.innerHTML = text;
-
-};
-
-/* ==========================================================
-   Zeitraum erweitern
-========================================================== */
-
-const _zeitraumErmitteln =
-    Speiseplaene.zeitraumErmitteln;
-
-Speiseplaene.zeitraumErmitteln = function(){
-
-    _zeitraumErmitteln.call(this);
-
-    this.kopfAktualisieren();
-
-};
-/* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 11/20
-   Druckseiten vorbereiten
-========================================================== */
-
-Speiseplaene.druckSeitenVorbereiten = function(){
-
-    const speiseplan =
-        document.querySelector(".ddhSpeiseplan");
-
-    const allergene =
-        document.getElementById(
-            "ddhAllergeneSeite"
-        );
-
-    if(speiseplan){
-
-        speiseplan.classList.add(
-            "ddhSeiteSpeiseplan"
-        );
-
-    }
-
-    if(allergene){
-
-        allergene.classList.add(
-            "ddhSeiteAllergene"
-        );
-
-    }
-
-};
-
-/* ==========================================================
-   Drucklayout erweitern
-========================================================== */
-
-const _druckVorbereitenBlock8 =
-    Speiseplaene.druckVorbereiten;
-
-Speiseplaene.druckVorbereiten = function(){
-
-    _druckVorbereitenBlock8.call(this);
-
-    this.druckSeitenVorbereiten();
-
-};
-/* ==========================================================
-   Block 11a
-   Druckseiten CSS
-========================================================== */
-
-Speiseplaene.druckSeitenDesign = function(){
-
-    if(document.getElementById(
-        "ddhPrintPagesStyle"
-    )){
-
-        return;
-
-    }
-
-    const style =
-        document.createElement("style");
-
-    style.id =
-        "ddhPrintPagesStyle";
-
-    style.innerHTML = `
-
-.ddhSeiteSpeiseplan{
-
-    width:100%;
-
-}
-
-.ddhSeiteAllergene{
-
-    page-break-before:always;
-
-    width:100%;
-
-}
-
-@media print{
-
-.ddhSeiteSpeiseplan{
-
-    page-break-after:always;
-
-}
-
-.ddhSeiteAllergene{
-
-    page-break-before:always;
-
-}
-
-}
-
-`;
-
-    document.head.appendChild(style);
-
-};
-/* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 12/20
-   Automatische Größenanpassung
-========================================================== */
-
-Speiseplaene.layoutOptimieren = function(){
-
-    const texte = document.querySelectorAll(
-        ".ddhText"
-    );
-
-    texte.forEach(text=>{
-
-        const laenge =
-            text.innerText.trim().length;
-
-        if(laenge < 40){
-
-            text.style.fontSize = "22px";
-            text.style.lineHeight = "1.4";
-
-        }
-
-        else if(laenge < 80){
-
-            text.style.fontSize = "19px";
-            text.style.lineHeight = "1.45";
-
-        }
-
-        else if(laenge < 120){
-
-            text.style.fontSize = "17px";
-            text.style.lineHeight = "1.5";
-
-        }
-
-        else{
-
-            text.style.fontSize = "15px";
-            text.style.lineHeight = "1.55";
-
-        }
-
-    });
-
-};
-/* ==========================================================
-   Block 12a
-   Kartenhöhe angleichen
-========================================================== */
-
-Speiseplaene.kartenOptimieren = function(){
-
-    const karten =
-        document.querySelectorAll(
-            ".ddhTagKarte"
-        );
-
-    karten.forEach(karte=>{
-
-        karte.style.minHeight =
-            "320px";
-
-    });
-
-};
-/* ==========================================================
-   Block 12b
-   Layout abschließen
-========================================================== */
-
-const _layoutBlock9 =
-    Speiseplaene.layoutErzeugen;
-
-Speiseplaene.layoutErzeugen = function(){
-
-    _layoutBlock9.call(this);
-
-    this.layoutOptimieren();
-
-    this.kartenOptimieren();
-
-};
-/* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 13/20
-   Professioneller Kopfbereich
-========================================================== */
-
-Speiseplaene.kopfbereichErzeugen = function(){
-
-    const kopf =
         document.querySelector(".ddhTitel");
 
-    if(!kopf){
+    if(!titel){
 
         return;
 
     }
 
-    kopf.innerHTML = `
+    const kw =
+
+        this.kalenderwoche(
+
+            this.zeitraum.start
+
+        );
+
+    this.zeitraum.kalenderwoche = kw;
+
+    titel.innerHTML = `
 
 <div class="ddhKopf">
 
-    <div class="ddhKopfLinks">
+    <div class="ddhLinks">
 
-        <div class="ddhFirmenname">
+        <div class="ddhLogo">
 
             DDH SERVICE GMBH
 
@@ -1853,11 +1729,11 @@ Speiseplaene.kopfbereichErzeugen = function(){
 
     </div>
 
-    <div class="ddhKopfRechts">
+    <div class="ddhRechts">
 
         <div class="ddhKW">
 
-            ${this.zeitraum.kw ? "KW " + this.zeitraum.kw : ""}
+            KW ${kw}
 
         </div>
 
@@ -1865,7 +1741,7 @@ Speiseplaene.kopfbereichErzeugen = function(){
 
             ${this.zeitraum.start}
 
-            ${this.zeitraum.start ? " - " : ""}
+            -
 
             ${this.zeitraum.ende}
 
@@ -1879,11 +1755,25 @@ Speiseplaene.kopfbereichErzeugen = function(){
 
 };
 /* ==========================================================
-   Block 13a
+   Kopfbereich nach Layout erzeugen
+========================================================== */
+
+const _layoutTeil9 =
+
+    Speiseplaene.layoutErzeugen;
+
+Speiseplaene.layoutErzeugen = function(){
+
+    _layoutTeil9.call(this);
+
+    this.kopfAktualisieren();
+
+};
+/* ==========================================================
    Kopfbereich Design
 ========================================================== */
 
-Speiseplaene.kopfbereichDesign = function(){
+Speiseplaene.kopfDesign = function(){
 
     if(document.getElementById("ddhHeaderStyle")){
 
@@ -1891,8 +1781,7 @@ Speiseplaene.kopfbereichDesign = function(){
 
     }
 
-    const style =
-        document.createElement("style");
+    const style = document.createElement("style");
 
     style.id = "ddhHeaderStyle";
 
@@ -1906,11 +1795,9 @@ Speiseplaene.kopfbereichDesign = function(){
 
     align-items:center;
 
-    gap:20px;
-
 }
 
-.ddhKopfLinks{
+.ddhLinks{
 
     display:flex;
 
@@ -1918,29 +1805,7 @@ Speiseplaene.kopfbereichDesign = function(){
 
 }
 
-.ddhFirmenname{
-
-    font-size:28px;
-
-    font-weight:bold;
-
-    color:#0F4C81;
-
-    letter-spacing:2px;
-
-}
-
-.ddhUntertitel{
-
-    font-size:18px;
-
-    color:#666;
-
-    margin-top:6px;
-
-}
-
-.ddhKopfRechts{
+.ddhRechts{
 
     text-align:right;
 
@@ -1948,7 +1813,7 @@ Speiseplaene.kopfbereichDesign = function(){
 
 .ddhKW{
 
-    font-size:24px;
+    font-size:26px;
 
     font-weight:bold;
 
@@ -1960,9 +1825,7 @@ Speiseplaene.kopfbereichDesign = function(){
 
     margin-top:6px;
 
-    color:#555;
-
-    font-size:17px;
+    color:#666;
 
 }
 
@@ -1971,158 +1834,174 @@ Speiseplaene.kopfbereichDesign = function(){
     document.head.appendChild(style);
 
 };
-/* ==========================================================
-   Block 13b
-   Kopfbereich automatisch erzeugen
-========================================================== */
 
-const _layoutBlock12 =
-    Speiseplaene.layoutErzeugen;
+const _initTeil9 =
 
-Speiseplaene.layoutErzeugen = function(){
+    Speiseplaene.init;
 
-    _layoutBlock12.call(this);
+Speiseplaene.init = function(){
 
-    this.kopfbereichDesign();
+    this.kopfDesign();
 
-    this.kopfbereichErzeugen();
+    _initTeil9.call(this);
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 14/20
-   Druckoptimierung
+   Version: 2.0
+   Teil 10
+   Automatische Größenanpassung
 ========================================================== */
 
-Speiseplaene.druckOptimieren = function(){
+Speiseplaene.layoutOptimieren = function(){
 
-    const karten =
-        document.querySelectorAll(".ddhTagKarte");
+    const texte = document.querySelectorAll(
+
+        ".ddhGerichtText"
+
+    );
+
+    texte.forEach(text=>{
+
+        const laenge =
+
+            text.textContent.trim().length;
+
+        if(laenge < 45){
+
+            text.style.fontSize = "22px";
+            text.style.lineHeight = "1.35";
+
+        }
+
+        else if(laenge < 80){
+
+            text.style.fontSize = "19px";
+            text.style.lineHeight = "1.40";
+
+        }
+
+        else if(laenge < 120){
+
+            text.style.fontSize = "17px";
+            text.style.lineHeight = "1.45";
+
+        }
+
+        else{
+
+            text.style.fontSize = "15px";
+            text.style.lineHeight = "1.50";
+
+        }
+
+    });
+
+};
+
+/* ==========================================================
+   Kartenhöhe angleichen
+========================================================== */
+
+Speiseplaene.kartenOptimieren = function(){
+
+    const karten = document.querySelectorAll(
+
+        ".ddhTag"
+
+    );
 
     karten.forEach(karte=>{
 
-        karte.style.pageBreakInside = "avoid";
-        karte.style.breakInside = "avoid";
-
-    });
-
-    const eintraege =
-        document.querySelectorAll(".ddhEintrag");
-
-    eintraege.forEach(eintrag=>{
-
-        eintrag.style.pageBreakInside = "avoid";
-        eintrag.style.breakInside = "avoid";
+        karte.style.minHeight = "360px";
 
     });
 
 };
+
 /* ==========================================================
-   Block 14a
-   Druck CSS
+   Leere Gerichte ausblenden
 ========================================================== */
 
-Speiseplaene.druckCSS = function(){
+Speiseplaene.leereGerichteEntfernen = function(){
 
-    if(document.getElementById("ddhDruckOptimierung")){
+    document
 
-        return;
+        .querySelectorAll(".ddhGericht")
 
-    }
+        .forEach(gericht=>{
 
-    const style =
-        document.createElement("style");
+            const text =
 
-    style.id = "ddhDruckOptimierung";
+                gericht.querySelector(
 
-    style.innerHTML = `
+                    ".ddhGerichtText"
 
-@media print{
+                );
 
-body{
+            if(!text){
 
-    -webkit-print-color-adjust:exact;
-    print-color-adjust:exact;
+                return;
 
-}
+            }
 
-.ddhTagKarte{
+            if(text.textContent.trim()===""){
 
-    break-inside:avoid;
+                gericht.style.display="none";
 
-    page-break-inside:avoid;
+            }
 
-}
-
-.ddhEintrag{
-
-    break-inside:avoid;
-
-    page-break-inside:avoid;
-
-}
-
-.ddhGerichtText{
-
-    word-break:break-word;
-
-}
-
-.ddhAllergene{
-
-    font-size:12px;
-
-}
-
-}
-
-`;
-
-    document.head.appendChild(style);
+        });
 
 };
+
 /* ==========================================================
-   Block 14b
-   Druckoptimierung aktivieren
+   Layout automatisch optimieren
 ========================================================== */
 
-const _layoutBlock13 =
+const _layoutTeil10 =
+
     Speiseplaene.layoutErzeugen;
 
 Speiseplaene.layoutErzeugen = function(){
 
-    _layoutBlock13.call(this);
+    _layoutTeil10.call(this);
 
-    this.druckCSS();
+    this.leereGerichteEntfernen();
 
-    this.druckOptimieren();
+    this.layoutOptimieren();
+
+    this.kartenOptimieren();
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 15/20
-   Fußzeile
+   Version: 2.0
+   Teil 11
+   Fußzeile & Seitennummern
 ========================================================== */
 
 Speiseplaene.fusszeileErzeugen = function(){
 
-    const speiseplan =
-        document.querySelector(".ddhSpeiseplan");
+    /* Alte Fußzeile entfernen */
 
-    if(!speiseplan){
+    document
+        .querySelectorAll(".ddhFusszeile")
+        .forEach(e => e.remove());
+
+    const plan =
+        document.querySelector(".ddhWochenplan");
+
+    if(!plan){
 
         return;
 
     }
 
-    const heute = new Date();
-
-    const datum =
-        heute.toLocaleDateString("de-DE");
+    const heute =
+        new Date().toLocaleDateString("de-DE");
 
     const html = `
 
@@ -2130,14 +2009,13 @@ Speiseplaene.fusszeileErzeugen = function(){
 
     <div>
 
-        DDH Studio Enterprise
-        · Speisepläne v1.0
+        DDH Studio Enterprise · Speisepläne ${this.version}
 
     </div>
 
     <div>
 
-        Erstellt am ${datum}
+        Erstellt am ${heute}
 
     </div>
 
@@ -2145,139 +2023,48 @@ Speiseplaene.fusszeileErzeugen = function(){
 
 `;
 
-    speiseplan.insertAdjacentHTML(
-
-        "beforeend",
-
+    plan.insertAdjacentHTML(
+        "afterend",
         html
-
     );
 
 };
+
 /* ==========================================================
-   Block 15a
-   Fußzeile Design
+   Seitennummern
 ========================================================== */
 
-Speiseplaene.fusszeileDesign = function(){
+Speiseplaene.seitenNummern = function(){
 
-    if(document.getElementById(
-        "ddhFooterStyle"
-    )){
+    document
+        .querySelectorAll(".ddhSeitenInfo")
+        .forEach(e => e.remove());
 
-        return;
+    const plan =
+        document.querySelector(".ddhWochenplan");
 
-    }
+    if(plan){
 
-    const style =
-        document.createElement("style");
+        plan.insertAdjacentHTML(
 
-    style.id = "ddhFooterStyle";
+            "beforeend",
 
-    style.innerHTML = `
-
-.ddhFusszeile{
-
-    margin-top:40px;
-
-    padding-top:15px;
-
-    border-top:2px solid #0F4C81;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    font-size:13px;
-
-    color:#666;
-
-}
-
-@media print{
-
-.ddhFusszeile{
-
-    position:fixed;
-
-    left:0;
-
-    right:0;
-
-    bottom:8mm;
-
-    font-size:11px;
-
-}
-
-}
-
-`;
-
-    document.head.appendChild(style);
-
-};
-/* ==========================================================
-   Block 15b
-   Fußzeile automatisch erzeugen
-========================================================== */
-
-const _layoutBlock14 =
-    Speiseplaene.layoutErzeugen;
-
-Speiseplaene.layoutErzeugen = function(){
-
-    _layoutBlock14.call(this);
-
-    this.fusszeileDesign();
-
-    this.fusszeileErzeugen();
-
-};
-/* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 16/20
-   Seitennummern & Druckkompatibilität
-========================================================== */
-
-Speiseplaene.seitenInformation = function(){
-
-    const speiseplan =
-        document.querySelector(".ddhSpeiseplan");
-
-    if(!speiseplan){
-
-        return;
-
-    }
-
-    const html = `
+            `
 
 <div class="ddhSeitenInfo">
 
-    <div>
-
-        Seite 1 von 2
-
-    </div>
+    Seite 1 von 2
 
 </div>
 
-`;
+`
 
-    speiseplan.insertAdjacentHTML(
-        "beforeend",
-        html
-    );
+        );
+
+    }
 
     const allergene =
-        document.getElementById(
-            "ddhAllergeneSeite"
-        );
+        document.querySelector(".ddhAllergenSeite");
 
     if(allergene){
 
@@ -2289,11 +2076,7 @@ Speiseplaene.seitenInformation = function(){
 
 <div class="ddhSeitenInfo">
 
-    <div>
-
-        Seite 2 von 2
-
-    </div>
+    Seite 2 von 2
 
 </div>
 
@@ -2304,48 +2087,76 @@ Speiseplaene.seitenInformation = function(){
     }
 
 };
+
 /* ==========================================================
-   Block 16a
-   Seiteninfo Design
+   CSS
 ========================================================== */
 
-Speiseplaene.seitenInfoDesign = function(){
+Speiseplaene.footerDesign = function(){
 
-    if(document.getElementById(
-        "ddhSeitenInfoStyle"
-    )){
+    if(document.getElementById("ddhFooterStyle")){
 
         return;
 
     }
 
-    const style =
-        document.createElement("style");
+    const style = document.createElement("style");
 
-    style.id =
-        "ddhSeitenInfoStyle";
+    style.id = "ddhFooterStyle";
 
     style.innerHTML = `
 
+.ddhFusszeile{
+
+    margin-top:30px;
+
+    padding-top:15px;
+
+    border-top:2px solid #0F4C81;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#666;
+
+    font-size:13px;
+
+}
+
 .ddhSeitenInfo{
 
-    margin-top:20px;
+    margin-top:25px;
 
     text-align:right;
 
-    color:#777;
-
     font-size:12px;
+
+    color:#888;
 
 }
 
 @media print{
 
+.ddhFusszeile{
+
+    position:fixed;
+
+    left:10mm;
+
+    right:10mm;
+
+    bottom:8mm;
+
+    font-size:11px;
+
+}
+
 .ddhSeitenInfo{
 
     position:fixed;
 
-    right:8mm;
+    right:10mm;
 
     bottom:3mm;
 
@@ -2360,326 +2171,151 @@ Speiseplaene.seitenInfoDesign = function(){
     document.head.appendChild(style);
 
 };
+
 /* ==========================================================
-   Block 16b
-   Browser-Kompatibilität
-========================================================== */
-
-Speiseplaene.browserVorbereiten = function(){
-
-    document.body.classList.add(
-        "ddhBrowserPrint"
-    );
-
-};
-/* ==========================================================
-   Block 16c
    Automatisch ausführen
 ========================================================== */
 
-const _layoutBlock15 =
+const _layoutTeil11 =
     Speiseplaene.layoutErzeugen;
 
 Speiseplaene.layoutErzeugen = function(){
 
-    _layoutBlock15.call(this);
+    _layoutTeil11.call(this);
 
-    this.seitenInfoDesign();
+    this.footerDesign();
 
-    this.seitenInformation();
+    this.fusszeileErzeugen();
 
-    this.browserVorbereiten();
+    this.seitenNummern();
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 17/20
-   Druckvorschau optimieren
+   Version: 2.0
+   Teil 12
+   Intelligente Druckoptimierung
 ========================================================== */
 
-Speiseplaene.vorschauOptimieren = function(){
+Speiseplaene.druckOptimieren = function(){
 
-    const karten =
-        document.querySelectorAll(".ddhTagKarte");
+    /* Karten niemals trennen */
 
-    karten.forEach(karte=>{
+    document.querySelectorAll(".ddhTag").forEach(tag=>{
 
-        /* gleiche Innenabstände */
-
-        karte.style.padding = "0";
-
-        /* Kartenbreite */
-
-        karte.style.width = "100%";
-
-        /* runde Ecken */
-
-        karte.style.borderRadius = "12px";
+        tag.style.breakInside = "avoid";
+        tag.style.pageBreakInside = "avoid";
 
     });
 
-    const texte =
-        document.querySelectorAll(".ddhText");
+    /* Gerichte niemals trennen */
 
-    texte.forEach(text=>{
+    document.querySelectorAll(".ddhGericht").forEach(gericht=>{
 
-        /* überlange Wörter umbrechen */
-
-        text.style.wordBreak = "break-word";
-
-        text.style.hyphens = "auto";
+        gericht.style.breakInside = "avoid";
+        gericht.style.pageBreakInside = "avoid";
 
     });
+
+    /* Allergenseite immer neue Seite */
+
+    const allergene =
+
+        document.querySelector(".ddhAllergenSeite");
+
+    if(allergene){
+
+        allergene.style.pageBreakBefore = "always";
+        allergene.style.breakBefore = "page";
+
+    }
 
 };
+
 /* ==========================================================
-   Block 17a
-   Druckvorschau CSS
+   Druck CSS erweitern
 ========================================================== */
 
-Speiseplaene.vorschauDesign = function(){
+Speiseplaene.druckCSSOptimierung = function(){
 
-    if(document.getElementById(
-        "ddhPreviewStyle"
-    )){
+    if(document.getElementById("ddhPrintOptimierung")){
 
         return;
 
     }
 
-    const style =
-        document.createElement("style");
+    const style = document.createElement("style");
 
-    style.id = "ddhPreviewStyle";
+    style.id = "ddhPrintOptimierung";
 
     style.innerHTML = `
-
-.ddhTagKarte{
-
-    transition:.25s;
-
-}
-
-.ddhTagKarte:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:0 10px 24px rgba(0,0,0,.10);
-
-}
-
-.ddhText{
-
-    white-space:pre-line;
-
-}
-
-.ddhEintrag{
-
-    align-items:flex-start;
-
-}
-
-`;
-
-    document.head.appendChild(style);
-
-};
-/* ==========================================================
-   Block 17b
-   Automatisch aktivieren
-========================================================== */
-
-const _layoutBlock16 =
-    Speiseplaene.layoutErzeugen;
-
-Speiseplaene.layoutErzeugen = function(){
-
-    _layoutBlock16.call(this);
-
-    this.vorschauDesign();
-
-    this.vorschauOptimieren();
-
-};
-/* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 18/20
-   Intelligente Menüdarstellung
-========================================================== */
-
-Speiseplaene.leereElementeEntfernen = function(){
-
-    document
-        .querySelectorAll(".ddhGericht, .ddhEintrag")
-        .forEach(eintrag=>{
-
-            const text =
-                eintrag.querySelector(".ddhText");
-
-            if(!text){
-
-                return;
-
-            }
-
-            const inhalt =
-                text.textContent.trim();
-
-            if(inhalt === ""){
-
-                eintrag.style.display = "none";
-
-            }
-
-        });
-
-};
-/* ==========================================================
-   Block 18a
-   Gerichte optisch ausgleichen
-========================================================== */
-
-Speiseplaene.gerichteOptimieren = function(){
-
-    document
-        .querySelectorAll(".ddhTagKarte")
-        .forEach(karte=>{
-
-            const sichtbar =
-                karte.querySelectorAll(
-                    ".ddhEintrag:not([style*='display: none'])"
-                );
-
-            if(sichtbar.length <= 2){
-
-                karte.style.minHeight = "220px";
-
-            }
-
-            else if(sichtbar.length == 3){
-
-                karte.style.minHeight = "280px";
-
-            }
-
-            else{
-
-                karte.style.minHeight = "340px";
-
-            }
-
-        });
-
-};
-/* ==========================================================
-   Block 18b
-   Automatisch aktivieren
-========================================================== */
-
-const _layoutBlock17 =
-    Speiseplaene.layoutErzeugen;
-
-Speiseplaene.layoutErzeugen = function(){
-
-    _layoutBlock17.call(this);
-
-    this.leereElementeEntfernen();
-
-    this.gerichteOptimieren();
-
-};
-/* ==========================================================
-   DDH Studio Enterprise
-   Modul: Speisepläne
-   Version: 1.0
-   Block: 19/20
-   Finale Druckvorbereitung
-========================================================== */
-
-Speiseplaene.finalisieren = function(){
-
-    /* Versionsnummer */
-
-    const version =
-        document.createElement("div");
-
-    version.className =
-        "ddhVersion";
-
-    version.innerHTML =
-
-        "DDH Studio Enterprise · Speisepläne v1.0";
-
-    const speiseplan =
-        document.querySelector(".ddhSpeiseplan");
-
-    if(speiseplan){
-
-        speiseplan.appendChild(version);
-
-    }
-
-    /* Druckbutton aktivieren */
-
-    const btn =
-        document.getElementById(
-            "btnDrucken"
-        );
-
-    if(btn){
-
-        btn.disabled = false;
-
-    }
-
-};
-/* ==========================================================
-   Block 19a
-   Versionsanzeige
-========================================================== */
-
-Speiseplaene.versionDesign = function(){
-
-    if(document.getElementById(
-        "ddhVersionStyle"
-    )){
-
-        return;
-
-    }
-
-    const style =
-        document.createElement("style");
-
-    style.id =
-        "ddhVersionStyle";
-
-    style.innerHTML = `
-
-.ddhVersion{
-
-    margin-top:30px;
-
-    text-align:center;
-
-    font-size:12px;
-
-    color:#999;
-
-}
 
 @media print{
 
-.ddhVersion{
+*{
+
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+
+    box-sizing:border-box;
+
+}
+
+html,
+body{
+
+    width:297mm;
+
+    height:210mm;
+
+    overflow:hidden;
+
+}
+
+.ddhWochenplan{
+
+    gap:8mm;
+
+}
+
+.ddhTag{
+
+    margin:0;
+
+}
+
+.ddhGericht{
+
+    padding:8px 10px;
+
+}
+
+.ddhGerichtTitel{
+
+    font-size:14px;
+
+}
+
+.ddhGerichtText{
+
+    font-size:13px;
+
+    line-height:1.30;
+
+}
+
+.ddhAllergene{
 
     font-size:10px;
 
-    color:#777;
+}
+
+.ddhAllergenSeite{
+
+    page-break-before:always;
+
+    break-before:page;
 
 }
 
@@ -2690,110 +2326,407 @@ Speiseplaene.versionDesign = function(){
     document.head.appendChild(style);
 
 };
+
 /* ==========================================================
-   Block 19b
-   Abschluss
+   Automatisch aktivieren
 ========================================================== */
 
-const _layoutBlock18 =
+const _layoutTeil12 =
     Speiseplaene.layoutErzeugen;
 
 Speiseplaene.layoutErzeugen = function(){
 
-    _layoutBlock18.call(this);
+    _layoutTeil12.call(this);
 
-    this.versionDesign();
+    this.druckCSSOptimierung();
 
-    this.finalisieren();
+    this.druckOptimieren();
 
 };
 /* ==========================================================
    DDH Studio Enterprise
    Modul: Speisepläne
-   Version: 1.0
-   Block: 20/20
+   Version: 2.0
+   Teil 13
+   Versions- & Statusanzeige
+========================================================== */
+
+Speiseplaene.versionAnzeigen = function(){
+
+    /* Bereits vorhanden? */
+
+    document
+        .querySelectorAll(".ddhVersion")
+        .forEach(e => e.remove());
+
+    const footer =
+
+        document.querySelector(".ddhFusszeile");
+
+    if(!footer){
+
+        return;
+
+    }
+
+    footer.insertAdjacentHTML(
+
+        "beforeend",
+
+        `
+
+<div class="ddhVersion">
+
+    Version ${this.version}
+
+</div>
+
+`
+
+    );
+
+};
+
+/* ==========================================================
+   Status anzeigen
+========================================================== */
+
+Speiseplaene.statusAnzeigen = function(){
+
+    document
+        .querySelectorAll(".ddhStatus")
+        .forEach(e => e.remove());
+
+    const titel =
+
+        document.querySelector(".ddhTitel");
+
+    if(!titel){
+
+        return;
+
+    }
+
+    const status =
+
+        this.status.importiert
+
+        &&
+
+        this.status.analysiert
+
+            ? "Bereit"
+
+            : "Nicht bereit";
+
+    titel.insertAdjacentHTML(
+
+        "beforeend",
+
+        `
+
+<div class="ddhStatus">
+
+    Status: ${status}
+
+</div>
+
+`
+
+    );
+
+};
+
+/* ==========================================================
+   Design
+========================================================== */
+
+Speiseplaene.statusDesign = function(){
+
+    if(document.getElementById("ddhStatusStyle")){
+
+        return;
+
+    }
+
+    const style = document.createElement("style");
+
+    style.id = "ddhStatusStyle";
+
+    style.innerHTML = `
+
+.ddhStatus{
+
+    margin-top:12px;
+
+    font-size:13px;
+
+    color:#0F4C81;
+
+    font-weight:bold;
+
+}
+
+.ddhVersion{
+
+    margin-left:auto;
+
+    font-size:11px;
+
+    color:#888;
+
+}
+
+`;
+
+    document.head.appendChild(style);
+
+};
+
+/* ==========================================================
+   Automatisch ausführen
+========================================================== */
+
+const _layoutTeil13 =
+    Speiseplaene.layoutErzeugen;
+
+Speiseplaene.layoutErzeugen = function(){
+
+    _layoutTeil13.call(this);
+
+    this.statusDesign();
+
+    this.statusAnzeigen();
+
+    this.versionAnzeigen();
+
+};
+/* ==========================================================
+   DDH Studio Enterprise
+   Modul: Speisepläne
+   Version: 2.0
+   Teil 14
+   Stabilität & Bereinigung
+========================================================== */
+
+Speiseplaene.bereinigen = function(){
+
+    [
+
+        ".ddhAllergenSeite",
+
+        ".ddhFusszeile",
+
+        ".ddhSeitenInfo",
+
+        ".ddhVersion",
+
+        ".ddhStatus"
+
+    ].forEach(selector=>{
+
+        document
+            .querySelectorAll(selector)
+            .forEach(element=>element.remove());
+
+    });
+
+};
+
+/* ==========================================================
+   Sichere Ausführung
+========================================================== */
+
+Speiseplaene.sicher = function(funktion){
+
+    try{
+
+        if(typeof funktion==="function"){
+
+            funktion();
+
+        }
+
+    }
+
+    catch(fehler){
+
+        console.error(
+
+            "[DDH Speisepläne]",
+
+            fehler
+
+        );
+
+    }
+
+};
+
+/* ==========================================================
+   Modul zurücksetzen
+========================================================== */
+
+Speiseplaene.reset = function(){
+
+    this.tage = [];
+
+    this.daten = [];
+
+    this.excelDatei = null;
+
+    this.arbeitsmappe = null;
+
+    this.aktivesBlatt = null;
+
+    this.zeitraum = {
+
+        start:"",
+
+        ende:"",
+
+        kalenderwoche:""
+
+    };
+
+    this.status.importiert = false;
+
+    this.status.analysiert = false;
+
+    this.status.layoutErstellt = false;
+
+    this.status.druckBereit = false;
+
+};
+
+/* ==========================================================
+   Layout sicher erzeugen
+========================================================== */
+
+const _layoutTeil14 =
+
+    Speiseplaene.layoutErzeugen;
+
+Speiseplaene.layoutErzeugen = function(){
+
+    this.bereinigen();
+
+    this.sicher(()=>{
+
+        _layoutTeil14.call(this);
+
+    });
+
+    this.status.layoutErstellt = true;
+
+    this.status.druckBereit = true;
+
+    this.druckButton(true);
+
+};
+/* ==========================================================
+   DDH Studio Enterprise
+   Modul: Speisepläne
+   Version: 2.0
+   Teil 15
    Finalisierung
 ========================================================== */
 
 Speiseplaene.aktualisieren = function(){
 
-    try{
-
-        this.zeitraumErmitteln();
-
-    }catch(e){}
-
-    try{
-
-        this.kopfAktualisieren();
-
-    }catch(e){}
-
-    try{
+    this.sicher(()=>{
 
         this.layoutOptimieren();
 
-    }catch(e){}
+    });
 
-    try{
+    this.sicher(()=>{
 
         this.kartenOptimieren();
 
-    }catch(e){}
+    });
 
-    try{
+    this.sicher(()=>{
 
-        this.leereElementeEntfernen();
+        this.leereGerichteEntfernen();
 
-    }catch(e){}
+    });
 
-    try{
-
-        this.gerichteOptimieren();
-
-    }catch(e){}
-
-    try{
+    this.sicher(()=>{
 
         this.druckOptimieren();
 
-    }catch(e){}
+    });
 
-    try{
+    this.sicher(()=>{
+
+        this.kopfAktualisieren();
+
+    });
+
+    this.sicher(()=>{
 
         this.fusszeileErzeugen();
 
-    }catch(e){}
+    });
 
-    try{
+    this.sicher(()=>{
 
-        this.seitenInformation();
+        this.seitenNummern();
 
-    }catch(e){}
+    });
 
-    try{
+    this.sicher(()=>{
 
-        this.finalisieren();
+        this.versionAnzeigen();
 
-    }catch(e){}
+    });
+
+    this.sicher(()=>{
+
+        this.statusAnzeigen();
+
+    });
+
+    this.status.layoutErstellt = true;
+
+    this.status.druckBereit = true;
+
+    this.druckButton(true);
+
+    this.log("Speiseplan vollständig aufgebaut.");
 
 };
 
 /* ==========================================================
-   Layout endgültig abschließen
+   Layout final erweitern
 ========================================================== */
 
-const _layoutBlock19 =
+const _layoutTeil15 =
     Speiseplaene.layoutErzeugen;
 
 Speiseplaene.layoutErzeugen = function(){
 
-    _layoutBlock19.call(this);
+    _layoutTeil15.call(this);
 
     this.aktualisieren();
 
 };
 
-console.log(
-    "DDH Studio Enterprise - Speisepläne Version 1.0 geladen."
-);
+/* ==========================================================
+   Version ausgeben
+========================================================== */
+
+console.clear();
+
+console.log("==========================================");
+
+console.log("DDH Studio Enterprise");
+
+console.log("Modul: Speisepläne");
+
+console.log("Version: 2.0");
+
+console.log("Status: Bereit");
+
+console.log("==========================================");

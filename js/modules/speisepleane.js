@@ -771,23 +771,17 @@ Speiseplaene.pruefeGericht = function(tag, text, zeile){
     const allergene = String(zeile[2] || "")
         .trim();
 
-    if (
-        typ.startsWith("MENÜ I") ||
-        typ.startsWith("MENU I")
-    ) {
-        tag.menue1 = gericht;
-        tag.allergene1 = allergene;
-        return;
-    }
+    if (typ.includes("MENÜ I") || typ.includes("MENU I")) {
+    tag.menue1 = gericht;
+    tag.allergene1 = allergene;
+    return;
+}
 
-    if (
-        if (typ.includes("MENÜ I")) {
-        if (typ.includes("MENÜ II")) {
-    ) {
-        tag.menue2 = gericht;
-        tag.allergene2 = allergene;
-        return;
-    }
+if (typ.includes("MENÜ II") || typ.includes("MENU II")) {
+    tag.menue2 = gericht;
+    tag.allergene2 = allergene;
+    return;
+}
 
     if (
         typ.startsWith("SUPPE")

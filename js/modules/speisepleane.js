@@ -49,7 +49,8 @@ const Speiseplaene = {
     allergene: true,
     zusatzstoffe: true,
     dessert: true,
-    suppe: true
+    suppe: true,
+    menue2: true
 
 },
 
@@ -182,6 +183,17 @@ this.dom.btnDialogSchliessen =
         <input type="checkbox" id="chkDessert" checked>
         Dessert anzeigen
     </label>
+    
+    <label>
+
+    <input
+        type="checkbox"
+        id="chkMenue2"
+        checked>
+
+    Menü II anzeigen
+
+</label>
 
     <label>
         <input type="checkbox" id="chkSuppe" checked>
@@ -288,6 +300,8 @@ const cbAllergene = document.getElementById("chkAllergene");
 const cbZusatzstoffe = document.getElementById("chkZusatzstoffe");
 const cbDessert = document.getElementById("chkDessert");
 const cbSuppe = document.getElementById("chkSuppe");
+const cbMenue2 =
+    document.getElementById("chkMenue2");
 
 if (cbAllergene) {
 
@@ -337,6 +351,17 @@ if (cbSuppe) {
 
 }
 
+if(cbMenue2){
+
+    cbMenue2.onchange = () => {
+
+        this.einstellungen.menue2 = cbMenue2.checked;
+
+        this.layoutErzeugen();
+
+    };
+
+}
 };
 
 /* ==========================================================
@@ -691,6 +716,17 @@ allergene
         return "";
 
     }
+
+if(
+
+    titel.includes("Menü II") &&
+    !this.einstellungen.menue2
+
+){
+
+    return "";
+
+}
 
     return `
 

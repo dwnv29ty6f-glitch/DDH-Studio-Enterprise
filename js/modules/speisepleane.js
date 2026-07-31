@@ -998,11 +998,13 @@ body{
 
 .ddhGerichtText{
 
-    font-size:20px;
+    font-size:24px;
 
-    line-height:1.45;
+    font-weight:500;
 
-    color:#333;
+    color:#2C2C2C;
+
+    line-height:1.55;
 
 }
 

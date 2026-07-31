@@ -835,11 +835,26 @@ body{
 
 .ddhTitel{
 
-    background:white;
-    border:2px solid #0F4C81;
-    border-radius:12px;
-    padding:12px 20px;
-    margin-bottom:15px;
+    background:
+    linear-gradient(
+        135deg,
+        #00BCD4,
+        #0097A7,
+        #006C84
+    );
+
+    color:white;
+
+    border:none;
+
+    border-radius:24px;
+
+    padding:28px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 18px 40px rgba(0,151,167,.30);
 
 }
 

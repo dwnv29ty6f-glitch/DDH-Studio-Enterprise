@@ -296,7 +296,10 @@ Speiseplaene.analysieren = function(){
             .replace(/\s+/g," ")
             .trim();
 
-        const gross = typ.toUpperCase();
+        const gross = typ
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase();
         if (gross.includes("MENÜ II") || gross.includes("VEG")) {
     console.log(JSON.stringify(zeile));
 }
@@ -369,13 +372,15 @@ Speiseplaene.analysieren = function(){
         ).trim();
         console.log("ZEILE:", zeile);
 
-        if(gross.includes("MENÜ I") ||
-           gross.includes("MENU I")){
+        if (gross.includes("MENU II")) {
 
-            tag.menue1 = gericht;
-            tag.allergene1 = allergene;
+    console.log("MENÜ II GEFUNDEN");
 
-            continue;
+    tag.menue2 = gericht;
+    tag.allergene2 = allergene;
+
+    continue;
+}
 
         }
 

@@ -264,7 +264,7 @@ Speiseplaene.importiereExcel = function(datei){
 
             );
 
-        console.table(this.daten);
+        console.log(this.daten);
 
         this.analysieren();
 

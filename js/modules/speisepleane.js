@@ -117,6 +117,14 @@ const Speiseplaene = {
             🖨️ Drucken
 
         </button>
+        
+        <button
+    id="btnEinstellungen"
+    class="sekundenButton">
+
+    ⚙️ Einstellungen
+
+</button>
 
     </div>
 
@@ -137,6 +145,38 @@ const Speiseplaene = {
         </h2>
 
     </div>
+    
+    <div id="ddhEinstellungen" class="ddhDialog">
+
+    <h2>Einstellungen</h2>
+
+    <label>
+        <input type="checkbox" id="chkAllergene" checked>
+        Allergene anzeigen
+    </label>
+
+    <label>
+        <input type="checkbox" id="chkZusatzstoffe" checked>
+        Zusatzstoffe anzeigen
+    </label>
+
+    <label>
+        <input type="checkbox" id="chkDessert" checked>
+        Dessert anzeigen
+    </label>
+
+    <label>
+        <input type="checkbox" id="chkSuppe" checked>
+        Suppe anzeigen
+    </label>
+
+    <button id="btnDialogSchliessen">
+
+        Schließen
+
+    </button>
+
+</div>
 
 </div>
 

@@ -82,6 +82,15 @@ const Speiseplaene = {
 
         this.dom.btnDrucken =
             document.getElementById("btnDrucken");
+            
+            this.dom.btnEinstellungen =
+    document.getElementById("btnEinstellungen");
+
+this.dom.dialog =
+    document.getElementById("ddhEinstellungen");
+
+this.dom.btnDialogSchliessen =
+    document.getElementById("btnDialogSchliessen");
 
     },
 
@@ -245,6 +254,26 @@ Speiseplaene.events = function(){
         };
 
     }
+    
+    if(this.dom.btnEinstellungen){
+
+    this.dom.btnEinstellungen.onclick = () => {
+
+        this.dom.dialog.style.display = "block";
+
+    };
+
+}
+
+if(this.dom.btnDialogSchliessen){
+
+    this.dom.btnDialogSchliessen.onclick = () => {
+
+        this.dom.dialog.style.display = "none";
+
+    };
+
+}
 
 };
 

@@ -297,7 +297,9 @@ Speiseplaene.analysieren = function(){
             .trim();
 
         const gross = typ.toUpperCase();
-        console.log(zeile);
+        if (gross.includes("MENÜ II") || gross.includes("VEG")) {
+    console.log(JSON.stringify(zeile));
+}
         console.log(gross);
 
         /* Zeitraum */

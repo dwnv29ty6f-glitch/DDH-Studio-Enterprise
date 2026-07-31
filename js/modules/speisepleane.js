@@ -1331,48 +1331,52 @@ Speiseplaene.init = function(){
 
 Speiseplaene.layoutOptimieren = function(){
 
-    document.querySelectorAll(
+    document.querySelectorAll(".ddhTag").forEach(tag=>{
 
-        ".ddhGerichtText"
+        const gerichte = tag.querySelectorAll(".ddhGericht");
 
-    ).forEach(text=>{
+        const anzahl = gerichte.length;
 
-        const laenge =
+        if(anzahl === 1){
 
-            text.textContent.trim().length;
-
-        if(laenge <= 40){
-
-            text.style.fontSize = "22px";
-            text.style.lineHeight = "1.35";
+            gerichte[0].style.flex = "1";
+            gerichte[0].style.justifyContent = "center";
 
         }
 
-        else if(laenge <= 80){
+        if(anzahl === 2){
 
-            text.style.fontSize = "19px";
-            text.style.lineHeight = "1.40";
+            gerichte.forEach(g=>{
 
-        }
+                g.style.flex = "1";
 
-        else if(laenge <= 120){
-
-            text.style.fontSize = "17px";
-            text.style.lineHeight = "1.45";
+            });
 
         }
 
-        else{
+        if(anzahl === 3){
 
-            text.style.fontSize = "15px";
-            text.style.lineHeight = "1.50";
+            gerichte.forEach(g=>{
+
+                g.style.flex = "1";
+
+            });
+
+        }
+
+        if(anzahl >= 4){
+
+            gerichte.forEach(g=>{
+
+                g.style.flex = "1";
+
+            });
 
         }
 
     });
 
 };
-
 /* ==========================================================
    Karten gleich hoch
 ========================================================== */

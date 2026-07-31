@@ -278,137 +278,114 @@ Speiseplaene.importiereExcel = function(datei){
    Selly Parser
 ========================================================== */
 
-Speiseplaene.analysieren = function(){
+Speiseplaene.analysieren = function () {
 
     this.tage = [];
 
     let tag = null;
 
-    for(const zeile of this.daten){
+    const wochentage = [
+        "MONTAG",
+        "DIENSTAG",
+        "MITTWOCH",
+        "DONNERSTAG",
+        "FREITAG",
+        "SAMSTAG",
+        "SONNTAG"
+    ];
 
-        if(!zeile || !zeile.length){
+    for (const zeile of this.daten) {
 
+        if (!zeile || zeile.length === 0) {
             continue;
-
         }
 
         const typ = String(zeile[0] || "")
-            .replace(/\s+/g," ")
+            .replace(/\s+/g, " ")
             .trim();
 
-        const gross = typ
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toUpperCase();
-        if (gross.includes("MENÜ II") || gross.includes("VEG")) {
-    console.log(JSON.stringify(zeile));
-}
-        console.log(gross);
+        const gross = typ.toUpperCase();
+
+        const gericht = String(zeile[1] || "").trim();
+        const allergene = String(zeile[2] || "").trim();
 
         /* Zeitraum */
 
-        const treffer = gross.match(
+        const treffer = gross.match(/(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/);
 
-            /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-
-        );
-
-        if(treffer){
-
+        if (treffer) {
             this.zeitraum.start = treffer[1];
-            this.zeitraum.ende  = treffer[2];
-
+            this.zeitraum.ende = treffer[2];
         }
 
         /* Wochentag */
 
-        if([
-
-            "MONTAG",
-            "DIENSTAG",
-            "MITTWOCH",
-            "DONNERSTAG",
-            "FREITAG",
-            "SAMSTAG",
-            "SONNTAG"
-
-        ].includes(gross)){
+        if (wochentage.includes(gross)) {
 
             tag = {
-
                 name: gross,
-
-                menue1:"",
-                menue2:"",
-                suppe:"",
-                dessert:"",
-
-                allergene1:"",
-                allergene2:"",
-                allergeneSuppe:"",
-                allergeneDessert:""
-
+                menue1: "",
+                menue2: "",
+                suppe: "",
+                dessert: "",
+                allergene1: "",
+                allergene2: "",
+                allergeneSuppe: "",
+                allergeneDessert: ""
             };
 
             this.tage.push(tag);
-
             continue;
-
         }
 
-        if(!tag){
-
+        if (!tag) {
             continue;
-
         }
 
-        const gericht = String(
-            zeile[1] || ""
-        ).trim();
-        console.log(zeile);
+        /* Menü I */
 
-        const allergene = String(
-            zeile[2] || ""
-        ).trim();
-        console.log("ZEILE:", zeile);
+        if (
+            gross.includes("MENÜ I") ||
+            gross.includes("MENU I")
+        ) {
 
-        if (gross.includes("MENU II")) {
+            tag.menue1 = gericht;
+            tag.allergene1 = allergene;
+            continue;
+        }
 
-    console.log("MENÜ II GEFUNDEN");
+        /* Menü II */
 
-    tag.menue2 = gericht;
-    tag.allergene2 = allergene;
+        if (
+            gross.includes("MENÜ II") ||
+            gross.includes("MENU II")
+        ) {
 
-    continue;
-}
+            tag.menue2 = gericht;
+            tag.allergene2 = allergene;
+            continue;
+        }
 
-        if(
-    gross.startsWith("MENÜ II") ||
-    gross.startsWith("MENU II")
-){
+        /* Suppe */
 
-    console.log(">>> MENÜ II GEFUNDEN <<<");
-
-    tag.menue2 = gericht;
-    tag.allergene2 = allergene;
-
-    continue;
-}
-
-        if(gross.includes("SUPPE")){
+        if (
+            gross.includes("SUPPE")
+        ) {
 
             tag.suppe = gericht;
             tag.allergeneSuppe = allergene;
-
             continue;
-
         }
 
-        if(gross.includes("DESSERT")){
+        /* Dessert */
+
+        if (
+            gross.includes("DESSERT")
+        ) {
 
             tag.dessert = gericht;
             tag.allergeneDessert = allergene;
-
+            continue;
         }
 
     }

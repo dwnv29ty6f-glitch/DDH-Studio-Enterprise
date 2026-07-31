@@ -284,10 +284,10 @@ if(this.dom.btnDialogSchliessen){
 
 }
 
-const cbAllergene = document.getElementById("cbAllergene");
-const cbZusatzstoffe = document.getElementById("cbZusatzstoffe");
-const cbDessert = document.getElementById("cbDessert");
-const cbSuppe = document.getElementById("cbSuppe");
+const cbAllergene = document.getElementById("chkAllergene");
+const cbZusatzstoffe = document.getElementById("chkZusatzstoffe");
+const cbDessert = document.getElementById("chkDessert");
+const cbSuppe = document.getElementById("chkSuppe");
 
 if (cbAllergene) {
 

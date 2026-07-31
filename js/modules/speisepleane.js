@@ -949,14 +949,19 @@ body{
     flex:1;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
 
-    padding:14px;
+    padding:22px;
 
-    border-bottom:1px solid #ececec;
+    border-bottom:1px solid #EDF4F6;
+
+    transition:all .25s ease;
 
 }
+
 .ddhGericht:last-child{
 
     border-bottom:none;

@@ -970,11 +970,29 @@ body{
 
 .ddhGerichtTitel{
 
-    font-weight:bold;
+    display:inline-block;
 
-    color:#0F4C81;
+    padding:6px 14px;
 
-    margin-bottom:6px;
+    margin-bottom:12px;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        90deg,
+        #00BCD4,
+        #0097A7
+    );
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
 
 }
 

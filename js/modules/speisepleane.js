@@ -957,6 +957,8 @@ body{
     padding:22px;
 
     border-bottom:1px solid #EDF4F6;
+    
+    border-left:8px solid #0097A7;
 
     transition:all .25s ease;
 

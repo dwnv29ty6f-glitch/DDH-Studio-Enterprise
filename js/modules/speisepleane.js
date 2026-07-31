@@ -920,17 +920,27 @@ body{
 
     margin:0;
 
-    padding:18px;
+    padding:22px;
 
-    background:#0F4C81;
+    background:
+    linear-gradient(
+        90deg,
+        #00BCD4,
+        #0097A7,
+        #006C84
+    );
 
-    color:#fff;
+    color:white;
 
     text-align:center;
 
-    font-size:28px;
+    font-size:30px;
 
-    letter-spacing:1px;
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
 
 }
 

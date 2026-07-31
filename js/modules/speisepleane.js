@@ -659,21 +659,14 @@ body{
 
 .ddhTag{
 
-    display:flex;
-
-    flex-direction:column;
-
-    min-height:430px;
-
-    background:#fff;
-
-    border-radius:14px;
-
+    background:white;
+    border-radius:12px;
     overflow:hidden;
+    border:1px solid #d7d7d7;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
 
-    border:1px solid #d9d9d9;
-
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    display:flex;
+    flex-direction:column;
 
 }
 
@@ -697,14 +690,17 @@ body{
 
 .ddhGericht{
 
-    padding:18px;
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    padding:14px;
 
     border-bottom:1px solid #ececec;
 
-    flex:1;
-
 }
-
 .ddhGericht:last-child{
 
     border-bottom:none;
@@ -1389,7 +1385,7 @@ Speiseplaene.kartenOptimieren = function(){
 
     ).forEach(tag=>{
 
-        tag.style.minHeight = "380px";
+        tag.style.height = "560px";
 
     });
 

@@ -650,24 +650,31 @@ body{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(auto-fit,minmax(420px,1fr));
+    grid-template-columns:repeat(2,1fr);
 
     gap:20px;
+
+    align-items:stretch;
 
 }
 
 .ddhTag{
 
-    background:white;
+    display:flex;
 
-    border-radius:12px;
+    flex-direction:column;
+
+    min-height:430px;
+
+    background:#fff;
+
+    border-radius:14px;
 
     overflow:hidden;
 
-    border:1px solid #d7d7d7;
+    border:1px solid #d9d9d9;
 
-    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 
 }
 
@@ -675,21 +682,27 @@ body{
 
     margin:0;
 
-    padding:16px;
+    padding:18px;
 
     background:#0F4C81;
 
-    color:white;
+    color:#fff;
 
-    font-size:22px;
+    text-align:center;
+
+    font-size:28px;
+
+    letter-spacing:1px;
 
 }
 
 .ddhGericht{
 
-    padding:16px;
+    padding:18px;
 
     border-bottom:1px solid #ececec;
+
+    flex:1;
 
 }
 
@@ -711,9 +724,11 @@ body{
 
 .ddhGerichtText{
 
-    font-size:18px;
+    font-size:20px;
 
-    line-height:1.4;
+    line-height:1.45;
+
+    color:#333;
 
 }
 

@@ -623,11 +623,10 @@ body{
 .ddhTitel{
 
     background:white;
-    border:3px solid #0F4C81;
+    border:2px solid #0F4C81;
     border-radius:12px;
-    padding:25px;
-    text-align:center;
-    margin-bottom:25px;
+    padding:12px 20px;
+    margin-bottom:15px;
 
 }
 
@@ -1271,19 +1270,17 @@ Speiseplaene.kopfDesign = function(){
 
 .ddhLogo{
 
-    font-size:32px;
-    font-weight:700;
+    font-size:20px;
+    font-weight:bold;
     color:#0F4C81;
-    letter-spacing:2px;
 
 }
 
 .ddhUntertitel{
 
-    margin-top:8px;
-    font-size:22px;
-    font-weight:600;
-    color:#444;
+    margin-top:2px;
+    font-size:14px;
+    color:#666;
 
 }
 .ddhRechts{
@@ -1294,7 +1291,7 @@ Speiseplaene.kopfDesign = function(){
 
 .ddhKW{
 
-    font-size:34px;
+    font-size:22px;
     font-weight:bold;
     color:#0F4C81;
 

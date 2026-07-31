@@ -311,12 +311,14 @@ Speiseplaene.analysieren = function () {
 
         /* Zeitraum */
 
-        const treffer = gross.match(/(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/);
+        const datumsTreffer = zeile.join(" ").match(
+    /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+);
 
-        if (treffer) {
-            this.zeitraum.start = treffer[1];
-            this.zeitraum.ende = treffer[2];
-        }
+if (datumsTreffer) {
+    this.zeitraum.start = datumsTreffer[1];
+    this.zeitraum.ende = datumsTreffer[2];
+}
 
         /* Wochentag */
 

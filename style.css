@@ -2857,3 +2857,26 @@ width:100%;
 box-sizing:border-box;
 
 }
+.gerichtMenue1{
+
+    border-left:8px solid #0F4C81;
+
+}
+
+.gerichtMenue2{
+
+    border-left:8px solid #4CAF50;
+
+}
+
+.gerichtSuppe{
+
+    border-left:8px solid #FF9800;
+
+}
+
+.gerichtDessert{
+
+    border-left:8px solid #E91E63;
+
+}

@@ -887,13 +887,22 @@ body{
 
 .ddhTag{
 
-    background:white;
-    border-radius:12px;
+    background:#ffffff;
+
+    border-radius:22px;
+
     overflow:hidden;
-    border:1px solid #d7d7d7;
-    box-shadow:0 4px 14px rgba(0,0,0,.08);
+
+    border:none;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.12);
+
+    transition:
+        all .30s ease;
 
     display:flex;
+
     flex-direction:column;
 
 }

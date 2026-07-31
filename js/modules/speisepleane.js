@@ -295,6 +295,7 @@ Speiseplaene.analysieren = function () {
     ];
 
     for (const zeile of this.daten) {
+        console.log(zeile.join(" | "));
 
         if (!zeile || zeile.length === 0) {
             continue;

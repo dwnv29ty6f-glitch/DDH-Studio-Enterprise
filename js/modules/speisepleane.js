@@ -892,6 +892,8 @@ Speiseplaene.renderKopf = function(){
 
 Speiseplaene.renderTag = function(tag){
 
+    console.log(tag);
+
     return `
 
 <section class="ddhTag">

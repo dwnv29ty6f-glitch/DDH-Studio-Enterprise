@@ -297,6 +297,7 @@ Speiseplaene.analysieren = function(){
             .trim();
 
         const gross = typ.toUpperCase();
+        console.log(gross);
 
         /* Zeitraum */
 

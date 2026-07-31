@@ -379,15 +379,18 @@ Speiseplaene.analysieren = function(){
 
         }
 
-        if(gross.includes("MENÜ II") ||
-           gross.includes("MENU II")){
+        if(
+    gross.startsWith("MENÜ II") ||
+    gross.startsWith("MENU II")
+){
 
-            tag.menue2 = gericht;
-            tag.allergene2 = allergene;
+    console.log(">>> MENÜ II GEFUNDEN <<<");
 
-            continue;
+    tag.menue2 = gericht;
+    tag.allergene2 = allergene;
 
-        }
+    continue;
+}
 
         if(gross.includes("SUPPE")){
 

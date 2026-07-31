@@ -1702,8 +1702,12 @@ Speiseplaene.kartenOptimieren = function(){
 
     ).forEach(tag=>{
 
+Speiseplaene.kartenOptimieren = function(){
+
+    document.querySelectorAll(".ddhTag").forEach(tag=>{
+
         tag.style.height = "auto";
-tag.style.minHeight = "560px";
+        tag.style.minHeight = "620px";
 
     });
 

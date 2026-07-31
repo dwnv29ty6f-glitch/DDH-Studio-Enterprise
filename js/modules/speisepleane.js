@@ -382,8 +382,6 @@ Speiseplaene.analysieren = function(){
     continue;
 }
 
-        }
-
         if(
     gross.startsWith("MENÜ II") ||
     gross.startsWith("MENU II")

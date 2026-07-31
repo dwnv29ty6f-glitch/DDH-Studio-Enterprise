@@ -284,6 +284,59 @@ if(this.dom.btnDialogSchliessen){
 
 }
 
+const cbAllergene = document.getElementById("cbAllergene");
+const cbZusatzstoffe = document.getElementById("cbZusatzstoffe");
+const cbDessert = document.getElementById("cbDessert");
+const cbSuppe = document.getElementById("cbSuppe");
+
+if (cbAllergene) {
+
+    cbAllergene.onchange = () => {
+
+        this.einstellungen.allergene = cbAllergene.checked;
+
+        this.layoutErzeugen();
+
+    };
+
+}
+
+if (cbZusatzstoffe) {
+
+    cbZusatzstoffe.onchange = () => {
+
+        this.einstellungen.zusatzstoffe = cbZusatzstoffe.checked;
+
+        this.layoutErzeugen();
+
+    };
+
+}
+
+if (cbDessert) {
+
+    cbDessert.onchange = () => {
+
+        this.einstellungen.dessert = cbDessert.checked;
+
+        this.layoutErzeugen();
+
+    };
+
+}
+
+if (cbSuppe) {
+
+    cbSuppe.onchange = () => {
+
+        this.einstellungen.suppe = cbSuppe.checked;
+
+        this.layoutErzeugen();
+
+    };
+
+}
+
 };
 
 /* ==========================================================

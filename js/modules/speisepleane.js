@@ -539,9 +539,35 @@ allergene
 
     }
 
+    let klasse = "gerichtStandard";
+
+    if(titel.includes("Menü I")){
+
+        klasse = "gerichtMenue1";
+
+    }
+
+    else if(titel.includes("Menü II")){
+
+        klasse = "gerichtMenue2";
+
+    }
+
+    else if(titel.includes("Suppe")){
+
+        klasse = "gerichtSuppe";
+
+    }
+
+    else if(titel.includes("Dessert")){
+
+        klasse = "gerichtDessert";
+
+    }
+
     return `
 
-<div class="ddhGericht">
+<div class="ddhGericht ${klasse}">
 
     <div class="ddhGerichtTitel">
 

@@ -730,7 +730,13 @@ if(
 }
 
     return `
-<div class="ddhGericht">
+    
+<div class="ddhGericht ${
+    titel.includes("Menü I") ? "ddhMenue1" :
+    titel.includes("Menü II") ? "ddhMenue2" :
+    titel.includes("Suppe") ? "ddhSuppe" :
+    "ddhDessert"
+}">
 
     <div class="ddhGerichtTitel">
         ${titel}

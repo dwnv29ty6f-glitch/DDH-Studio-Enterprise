@@ -729,33 +729,29 @@ if(
 }
 
     return `
-
-<div class="ddhGericht">
+<div class="ddhGericht ${titel.includes("Suppe") ? "ddhSuppe" : ""} ${titel.includes("Dessert") ? "ddhDessert" : ""}">
 
     <div class="ddhGerichtTitel">
-
         ${titel}
-
     </div>
 
-    <div class="ddhGerichtText">
-
+    <div class="ddhGerichtName">
         ${gericht}
-
     </div>
 
-    ${this.einstellungen.allergene ? `
+    ${allergene ? `
+        <div class="ddhAllergene">
+            ${allergene}
+        </div>
+    ` : ""}
 
-    <div class="ddhAllergene">
-
-        ${allergene}
-
-    </div>
-
+    ${zusatzstoffe ? `
+        <div class="ddhZusatzstoffe">
+            ${zusatzstoffe}
+        </div>
     ` : ""}
 
 </div>
-
 `;
 
 };

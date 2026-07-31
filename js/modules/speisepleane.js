@@ -789,7 +789,18 @@ Speiseplaene.designLaden = function(){
 
 body{
 
-    background:#f4f6f8;
+    background:
+    linear-gradient(
+        135deg,
+        #E8F8FB 0%,
+        #F7FCFD 50%,
+        #E3F4F7 100%
+    );
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
 }
 

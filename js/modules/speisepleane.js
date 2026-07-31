@@ -1010,6 +1010,30 @@ body{
 
 }
 
+.ddhMenue1{
+
+    border-left-color:#0097A7;
+
+}
+
+.ddhMenue2{
+
+    border-left-color:#43A047;
+
+}
+
+.ddhSuppe{
+
+    border-left-color:#FB8C00;
+
+}
+
+.ddhDessert{
+
+    border-left-color:#8E24AA;
+
+}
+
 .ddhAllergene{
 
     margin-top:8px;

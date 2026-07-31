@@ -1696,14 +1696,6 @@ Speiseplaene.layoutOptimieren = function(){
 
 Speiseplaene.kartenOptimieren = function(){
 
-    document.querySelectorAll(
-
-        ".ddhTag"
-
-    ).forEach(tag=>{
-
-Speiseplaene.kartenOptimieren = function(){
-
     document.querySelectorAll(".ddhTag").forEach(tag=>{
 
         tag.style.height = "auto";

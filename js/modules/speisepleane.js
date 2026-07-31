@@ -362,6 +362,7 @@ Speiseplaene.analysieren = function(){
         const allergene = String(
             zeile[2] || ""
         ).trim();
+        console.log("ZEILE:", zeile);
 
         if(gross.includes("MENÜ I") ||
            gross.includes("MENU I")){

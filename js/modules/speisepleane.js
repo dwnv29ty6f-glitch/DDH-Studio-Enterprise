@@ -410,15 +410,43 @@ Speiseplaene.layoutErzeugen = function(){
 
 <div class="ddhTitel">
 
-    <h1>WOCHENSPEISEPLAN</h1>
+    <div class="ddhKopf">
 
-    <p>
+        <div class="ddhLinks">
 
-        ${this.zeitraum.start}
-        ${this.zeitraum.start ? " – " : ""}
-        ${this.zeitraum.ende}
+            <div class="ddhLogo">
 
-    </p>
+                DDH SERVICE GMBH
+
+            </div>
+
+            <div class="ddhUntertitel">
+
+                WOCHENSPEISEPLAN
+
+            </div>
+
+        </div>
+
+        <div class="ddhRechts">
+
+            <div class="ddhKW">
+
+                KW ${this.kalenderwoche(this.zeitraum.start)}
+
+            </div>
+
+            <div class="ddhDatum">
+
+                ${this.zeitraum.start}
+                ${this.zeitraum.start ? " – " : ""}
+                ${this.zeitraum.ende}
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -1225,26 +1253,21 @@ Speiseplaene.kopfDesign = function(){
 
 .ddhLogo{
 
-    font-size:26px;
-
-    font-weight:bold;
-
+    font-size:32px;
+    font-weight:700;
     color:#0F4C81;
-
-    letter-spacing:1px;
+    letter-spacing:2px;
 
 }
 
 .ddhUntertitel{
 
-    margin-top:6px;
-
-    color:#666;
-
-    font-size:18px;
+    margin-top:8px;
+    font-size:22px;
+    font-weight:600;
+    color:#444;
 
 }
-
 .ddhRechts{
 
     text-align:right;
@@ -1253,10 +1276,8 @@ Speiseplaene.kopfDesign = function(){
 
 .ddhKW{
 
-    font-size:28px;
-
+    font-size:34px;
     font-weight:bold;
-
     color:#0F4C81;
 
 }

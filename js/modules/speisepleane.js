@@ -683,9 +683,10 @@ Speiseplaene.renderTag = function(tag){
 
 Speiseplaene.renderGericht = function(
 
-titel,
-gericht,
-allergene
+    titel,
+    gericht,
+    allergene,
+    zusatzstoffe
 
 ){
 

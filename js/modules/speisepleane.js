@@ -43,6 +43,15 @@ const Speiseplaene = {
         layout: false
 
     },
+    
+    einstellungen: {
+
+    allergene: true,
+    zusatzstoffe: true,
+    dessert: true,
+    suppe: true
+
+},
 
     init(){
 

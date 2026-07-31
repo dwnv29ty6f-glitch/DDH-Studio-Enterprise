@@ -670,35 +670,31 @@ allergene
 
     }
 
-    let klasse = "gerichtStandard";
+    if(
 
-    if(titel.includes("Menü I")){
+        titel.includes("Suppe") &&
+        !this.einstellungen.suppe
 
-        klasse = "gerichtMenue1";
+    ){
 
-    }
-
-    else if(titel.includes("Menü II")){
-
-        klasse = "gerichtMenue2";
+        return "";
 
     }
 
-    else if(titel.includes("Suppe")){
+    if(
 
-        klasse = "gerichtSuppe";
+        titel.includes("Dessert") &&
+        !this.einstellungen.dessert
 
-    }
+    ){
 
-    else if(titel.includes("Dessert")){
-
-        klasse = "gerichtDessert";
+        return "";
 
     }
 
     return `
 
-<div class="ddhGericht ${klasse}">
+<div class="ddhGericht">
 
     <div class="ddhGerichtTitel">
 
@@ -712,11 +708,15 @@ allergene
 
     </div>
 
+    ${this.einstellungen.allergene ? `
+
     <div class="ddhAllergene">
 
         ${allergene}
 
     </div>
+
+    ` : ""}
 
 </div>
 

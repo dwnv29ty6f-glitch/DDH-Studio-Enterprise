@@ -345,26 +345,24 @@ Speiseplaene.analysieren = function () {
         /* Menü I */
 
         if (
-            gross.includes("MENÜ I") ||
-            gross.includes("MENU I")
-        ) {
+    gross.includes("MENÜ II") ||
+    gross.includes("MENU II")
+) {
+    tag.menue2 = gericht;
+    tag.allergene2 = allergene;
+    continue;
+}
 
-            tag.menue1 = gericht;
-            tag.allergene1 = allergene;
-            continue;
-        }
-
-        /* Menü II */
-
-        if (
-            gross.includes("MENÜ II") ||
-            gross.includes("MENU II")
-        ) {
-
-            tag.menue2 = gericht;
-            tag.allergene2 = allergene;
-            continue;
-        }
+if (
+    gross.includes("MENÜ I (") ||
+    gross.includes("MENU I (") ||
+    gross === "MENÜ I" ||
+    gross === "MENU I"
+) {
+    tag.menue1 = gericht;
+    tag.allergene1 = allergene;
+    continue;
+}
 
         /* Suppe */
 

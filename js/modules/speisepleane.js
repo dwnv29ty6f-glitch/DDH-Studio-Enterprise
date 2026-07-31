@@ -760,8 +760,10 @@ Speiseplaene.pruefeGericht = function(tag, text, zeile){
     console.log("TYP =", JSON.stringify(zeile[0]));
 
     const typ = String(zeile[0] || "")
+    
         .trim()
         .toUpperCase();
+        console.log("NACH UPPER =", typ);
 
     const gericht = String(zeile[1] || "")
         .trim();
@@ -779,8 +781,8 @@ Speiseplaene.pruefeGericht = function(tag, text, zeile){
     }
 
     if (
-        typ.startsWith("MENÜ II") ||
-        typ.startsWith("MENU II")
+        if (typ.includes("MENÜ I")) {
+        if (typ.includes("MENÜ II")) {
     ) {
         tag.menue2 = gericht;
         tag.allergene2 = allergene;

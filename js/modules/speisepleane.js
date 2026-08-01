@@ -1042,49 +1042,88 @@ body{
 
 .ddhGericht{
 
+    position:relative;
+
     flex:1;
 
     display:flex;
 
     flex-direction:column;
 
-    justify-content:center;
+    gap:18px;
 
-    padding:22px;
+    padding:26px;
 
-    border-bottom:1px solid #EDF4F6;
-    
-    border-left:8px solid #0097A7;
+    margin:16px;
 
-    transition:all .25s ease;
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.96),
+            rgba(245,252,255,.95)
+        );
+
+    border:1px solid rgba(0,188,212,.12);
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.08);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 
 }
 
-.ddhGericht:last-child{
+.ddhGericht:hover{
 
-    border-bottom:none;
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 18px 38px rgba(0,188,212,.18);
+
+}
+
+.ddhGerichtKopf{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.ddhGerichtIcon{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:24px;
+
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        #00BCD4,
+        #1565C0
+    );
 
 }
 
 .ddhGerichtTitel{
 
-    display:inline-block;
-
-    padding:6px 14px;
-
-    margin-bottom:12px;
-
-    border-radius:20px;
-
-    background:linear-gradient(
-        90deg,
-        #00BCD4,
-        #0097A7
-    );
-
-    color:white;
-
-    font-size:15px;
+    font-size:18px;
 
     font-weight:700;
 
@@ -1092,41 +1131,77 @@ body{
 
     text-transform:uppercase;
 
+    color:#0F4C81;
+
 }
 
 .ddhGerichtText{
 
     font-size:24px;
 
+    line-height:1.55;
+
+    color:#2F3437;
+
     font-weight:500;
 
-    color:#2C2C2C;
+}
 
-    line-height:1.55;
+.ddhInfos{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:8px;
+
+}
+
+.ddhAllergene,
+
+.ddhZusatzstoffe{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:8px 14px;
+
+    border-radius:50px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    background:#EDF9FB;
+
+    color:#006C7A;
 
 }
 
 .ddhMenue1{
 
-    border-left-color:#0097A7;
+    border-left:8px solid #0097A7;
 
 }
 
 .ddhMenue2{
 
-    border-left-color:#43A047;
+    border-left:8px solid #43A047;
 
 }
 
 .ddhSuppe{
 
-    border-left-color:#FB8C00;
+    border-left:8px solid #FB8C00;
 
 }
 
 .ddhDessert{
 
-    border-left-color:#8E24AA;
+    border-left:8px solid #8E24AA;
 
 }
 

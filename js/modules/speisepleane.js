@@ -1014,6 +1014,66 @@ body{
 
 }
 
+.ddhTagKopf{
+
+    padding:22px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00BCD4,
+            #008FB3,
+            #1565C0
+        );
+
+    text-align:center;
+
+}
+
+.ddhTagKopf h2{
+
+    margin:0;
+
+    color:#ffffff;
+
+    font-size:34px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+}
+
+.ddhTagLinie{
+
+    width:90px;
+
+    height:4px;
+
+    margin:14px auto 0;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.75);
+
+}
+
+.ddhTagInhalt{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    gap:16px;
+
+    padding:16px;
+
+}
+
 .ddhTag h2{
 
     margin:0;

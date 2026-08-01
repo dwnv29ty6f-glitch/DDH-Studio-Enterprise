@@ -1909,83 +1909,150 @@ Speiseplaene.kopfDesign = function(){
 
 .ddhLinks{
 
+    display:flex;
+    flex-direction:column;
     flex:1;
-
-}
-
-.ddhRechts{
-
-    text-align:right;
-    min-width:220px;
 
 }
 
 .ddhLogo{
 
-    font-size:34px;
-    font-weight:800;
-    color:#fff;
-    text-shadow:0 3px 8px rgba(0,0,0,.20);
+    display:flex;
+    align-items:center;
+    gap:18px;
 
 }
 
 .ddhLogoIcon{
 
-    margin-right:10px;
+    width:68px;
+    height:68px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.30),
+            rgba(255,255,255,.12)
+        );
+
+    backdrop-filter:blur(10px);
+
+    font-size:34px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.18);
+
+}
+
+.ddhLogoText{
+
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:2px;
+
+    color:#ffffff;
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,.20);
 
 }
 
 .ddhUntertitel{
 
-    margin-top:8px;
+    margin-top:12px;
+
     font-size:20px;
-    color:rgba(255,255,255,.95);
-    letter-spacing:1px;
+
+    color:rgba(255,255,255,.96);
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
 
 }
 
 .ddhBeschreibung{
 
     margin-top:8px;
+
     font-size:15px;
-    color:rgba(255,255,255,.80);
+
+    color:rgba(255,255,255,.82);
+
+}
+
+.ddhRechts{
+
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:14px;
 
 }
 
 .ddhKW{
 
-    display:inline-block;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
     padding:12px 22px;
+
     border-radius:50px;
-    background:rgba(255,255,255,.18);
+
+    background:
+        rgba(255,255,255,.20);
+
     backdrop-filter:blur(10px);
-    color:#fff;
-    font-size:28px;
-    font-weight:bold;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.18);
+
+    color:#ffffff;
 
 }
 
 .ddhKW span{
 
-    display:block;
     font-size:14px;
-    opacity:.8;
+
+    text-transform:uppercase;
+
+    opacity:.85;
+
+}
+
+.ddhKW strong{
+
+    font-size:34px;
+
+    font-weight:800;
 
 }
 
 .ddhDatum{
 
-    margin-top:14px;
     font-size:18px;
-    color:#fff;
-    opacity:.95;
+
+    color:#ffffff;
+
+    font-weight:600;
+
+    letter-spacing:1px;
 
 }
 
 .ddhBis{
 
     margin:0 10px;
-    opacity:.7;
+
+    opacity:.75;
 
 }
 

@@ -1559,9 +1559,7 @@ Speiseplaene.drucken = function(){
 Speiseplaene.druckDesign = function(){
 
     if(document.getElementById("ddhPrintStyle")){
-
         return;
-
     }
 
     const style = document.createElement("style");
@@ -1571,212 +1569,93 @@ Speiseplaene.druckDesign = function(){
     style.textContent = `
 
 @page{
-
     size:A4 landscape;
-
     margin:10mm;
-
 }
 
 @media print{
 
 body{
-
-    background:white !important;
-
-}
-
-.ddhHeader,
-.ddhToolbar{
-
-    display:none !important;
-
-}
-
-.ddhWochenplan{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:10mm;
-
-}
-
-.ddhTag{
-
-    page-break-inside:avoid;
-
-    break-inside:avoid;
-
-    box-shadow:none;
-
-    border:1px solid #999;
-
-}
-
-.ddhGericht{
-
-    padding:10px;
-
-}
-
-.ddhGerichtTitel{
-
-    font-size:14px;
-
-}
-
-.ddhGerichtText{
-
-    font-size:14px;
-
-    line-height:1.3;
-
-}
-
-.ddhAllergene{
-
-    font-size:11px;
-
-    color:#555;
-
-}
-
-}
-
-`;
-
-@media print{
-
-body{
-
     background:#ffffff !important;
-
     margin:0;
-
     padding:0;
-
 }
 
 .ddhHeader,
 .ddhToolbar,
 .ddhDialog,
 .ddhStatus{
-
     display:none !important;
-
 }
 
 .ddhSpeiseplaene{
-
     width:100%;
-
     max-width:none;
-
     margin:0;
-
     padding:0;
-
 }
 
 .ddhTitel{
-
     margin-bottom:8mm;
-
     border-radius:0;
-
     box-shadow:none;
-
     border:2px solid #1565C0;
-
 }
 
 .ddhWochenplan{
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:8mm;
-
     align-items:stretch;
-
 }
 
 .ddhTag{
-
     break-inside:avoid;
-
     page-break-inside:avoid;
-
-    border:1px solid #9AA8B0;
-
     box-shadow:none;
-
+    border:1px solid #9AA8B0;
     border-radius:10px;
-
 }
 
 .ddhGericht{
-
     break-inside:avoid;
-
     page-break-inside:avoid;
-
     margin:6px;
-
     padding:12px;
-
     box-shadow:none;
-
 }
 
 .ddhGerichtTitel{
-
     font-size:13pt;
-
     font-weight:700;
-
 }
 
 .ddhGerichtText{
-
     font-size:12pt;
-
     line-height:1.35;
-
 }
 
 .ddhInfos{
-
     margin-top:8px;
-
 }
 
 .ddhAllergene,
 .ddhZusatzstoffe{
-
     font-size:9pt;
-
     padding:4px 8px;
-
 }
 
 .ddhFusszeile{
-
     margin-top:8mm;
-
     border-top:1px solid #999;
-
     padding-top:4mm;
-
     font-size:9pt;
-
     color:#666;
-
+}
 
 }
+
+`;
 
     document.head.appendChild(style);
 

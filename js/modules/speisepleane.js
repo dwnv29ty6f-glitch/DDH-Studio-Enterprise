@@ -1136,10 +1136,10 @@ body{
 .ddhGericht{
 
     background:#fff;
-    border-radius:14px;
-    border-left:6px solid var(--ddh-tuerkis);
-    padding:16px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    border-radius:10px;
+    border-left:4px solid var(--ddh-tuerkis);
+    padding:10px;
+    box-shadow:0 1px 4px rgba(0,0,0,.05);
 
 }
 

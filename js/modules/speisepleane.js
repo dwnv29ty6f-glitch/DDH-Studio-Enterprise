@@ -1575,26 +1575,24 @@ Speiseplaene.druckDesign = function(){
     margin:10mm;
 }
 
-@media print{
+@media print {
 
-body{
-    background:#ffffff !important;
-    margin:0;
-    padding:0;
+body *{
+    visibility:hidden;
 }
 
-.ddhHeader,
-.ddhToolbar,
-.ddhDialog,
-.ddhStatus{
-    display:none !important;
+.ddhSpeiseplaene,
+.ddhSpeiseplaene *{
+    visibility:visible;
 }
 
 .ddhSpeiseplaene{
+    position:absolute;
+    left:0;
+    top:0;
     width:100%;
-    max-width:none;
-    margin:0;
-    padding:0;
+}
+
 }
 
 .ddhTitel{

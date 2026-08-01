@@ -880,41 +880,33 @@ Speiseplaene.designLaden = function(){
 
     style.textContent = `
 
+:root{
+
+    --ddh-tuerkis:#00BCD4;
+    --ddh-blau:#1565C0;
+    --ddh-grau:#f5f7fa;
+
+}
+
 body{
 
-    background:
-    linear-gradient(
-        135deg,
-        #E8F8FB 0%,
-        #F7FCFD 50%,
-        #E3F4F7 100%
-    );
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
+    margin:0;
+    padding:30px;
+    background:#eef6f8;
+    font-family:"Segoe UI",Arial,sans-serif;
 
 }
 
 .ddhSpeiseplaene{
 
     max-width:1500px;
-    margin:30px auto;
-    font-family:Arial,Helvetica,sans-serif;
+    margin:0 auto;
 
 }
 
 .ddhHeader{
 
-    margin-bottom:25px;
-
-}
-
-.ddhHeader h1{
-
-    margin:0;
-    color:#0F4C81;
+    margin-bottom:20px;
 
 }
 
@@ -922,606 +914,193 @@ body{
 
     display:flex;
     gap:12px;
-    margin:20px 0;
+    margin-bottom:25px;
 
 }
 
 .ddhTitel{
 
-    background:linear-gradient(135deg,#00BCD4,#0097A7,#1565C0);
-
-    border:none;
-
-    border-radius:30px;
-
-    padding:30px;
-
-    margin-bottom:30px;
-
-    color:white;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.18);
-
-}
-
-    color:white;
-
-    border:none;
-
-    border-radius:24px;
-
+    background:linear-gradient(135deg,var(--ddh-tuerkis),var(--ddh-blau));
+    color:#fff;
+    border-radius:26px;
     padding:28px;
-
     margin-bottom:25px;
-
-    box-shadow:
-        0 18px 40px rgba(0,151,167,.30);
+    box-shadow:0 12px 35px rgba(0,0,0,.18);
 
 }
 
-.ddhTitel h1{
+.ddhKopf{
 
-    margin:0;
-    color:#0F4C81;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
 
 }
 
-.ddhTitel p{
+.ddhLinks{
+
+    flex:1;
+
+}
+
+.ddhLogo{
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-size:32px;
+    font-weight:700;
+
+}
+
+.ddhUntertitel{
+
+    margin-top:10px;
+    font-size:22px;
+
+}
+
+.ddhBeschreibung{
 
     margin-top:8px;
-    color:#666;
-    font-size:18px;
+    opacity:.9;
+
+}
+
+.ddhRechts{
+
+    text-align:right;
+
+}
+
+.ddhKW{
+
+    font-size:30px;
+    font-weight:bold;
+
+}
+
+.ddhDatum{
+
+    margin-top:10px;
 
 }
 
 .ddhWochenplan{
 
     display:grid;
-
     grid-template-columns:repeat(2,1fr);
-
     gap:20px;
-
-    align-items:stretch;
 
 }
 
 .ddhTag{
 
-    background:linear-gradient(180deg,#FFFFFF,#F8FDFF);
-
-    border-radius:28px;
-
+    background:#fff;
+    border-radius:22px;
     overflow:hidden;
-
-    border:2px solid rgba(0,188,212,.15);
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.12),
-        0 0 0 1px rgba(255,255,255,.7) inset;
-
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
     display:flex;
     flex-direction:column;
-
-    transition:.3s;
-
-}
-
-.ddhTag:hover{
-
-    transform:translateY(-8px) scale(1.01);
-
-    box-shadow:
-        0 25px 55px rgba(0,188,212,.35);
 
 }
 
 .ddhTagKopf{
 
-    padding:22px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #00BCD4,
-            #008FB3,
-            #1565C0
-        );
-
+    background:linear-gradient(90deg,var(--ddh-tuerkis),var(--ddh-blau));
+    color:#fff;
     text-align:center;
+    padding:18px;
 
 }
 
 .ddhTagKopf h2{
 
     margin:0;
-
-    color:#ffffff;
-
-    font-size:34px;
-
-    font-weight:800;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-}
-
-.ddhTagLinie{
-
-    width:90px;
-
-    height:4px;
-
-    margin:14px auto 0;
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.75);
+    font-size:28px;
 
 }
 
 .ddhTagInhalt{
 
-    display:flex;
-
-    flex-direction:column;
-
-    flex:1;
-
-    gap:16px;
-
     padding:16px;
-
-}
-
-.ddhTag h2{
-
-    margin:0;
-
-    padding:22px;
-
-    background:linear-gradient(90deg,#00BCD4,#008FB3,#1565C0);
-
-    color:white;
-
-    text-align:center;
-
-    font-size:34px;
-
-    font-weight:800;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-}
-
-    color:white;
-
-    text-align:center;
-
-    font-size:30px;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-}
-
-.ddhGericht{
-
-    position:relative;
-
-    flex:1;
-
     display:flex;
-
     flex-direction:column;
-
-    gap:18px;
-
-    padding:26px;
-
-    margin:16px;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.96),
-            rgba(245,252,255,.95)
-        );
-
-    border:1px solid rgba(0,188,212,.12);
-
-    box-shadow:
-        0 10px 28px rgba(0,0,0,.08);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-
-}
-
-.ddhGericht:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:
-        0 18px 38px rgba(0,188,212,.18);
-
-}
-
-.ddhGerichtKopf{
-
-    display:flex;
-
-    align-items:center;
-
     gap:14px;
 
 }
 
-.ddhGerichtIcon{
-
-    width:52px;
-
-    height:52px;
-
-    border-radius:16px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:24px;
-
-    color:white;
-
-    background:linear-gradient(
-        135deg,
-        #00BCD4,
-        #1565C0
-    );
-
-}
-
-.ddhGerichtTitel{
-
-    font-size:18px;
-
-    font-weight:700;
-
-    letter-spacing:1px;
-
-    text-transform:uppercase;
-
-    color:#0F4C81;
-
-}
-
-.ddhGerichtText{
-
-    font-size:24px;
-
-    line-height:1.55;
-
-    color:#2F3437;
-
-    font-weight:500;
-
-}
-
-.ddhInfos{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    margin-top:8px;
-
-}
-
-.ddhAllergene,
-
-.ddhZusatzstoffe{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    padding:8px 14px;
-
-    border-radius:50px;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    background:#EDF9FB;
-
-    color:#006C7A;
-
-}
-
-.ddhMenue1{
-
-    border-left:8px solid #0097A7;
-
-}
-
-.ddhMenue2{
-
-    border-left:8px solid #43A047;
-
-}
-
-.ddhSuppe{
-
-    border-left:8px solid #FB8C00;
-
-}
-
-.ddhDessert{
-
-    border-left:8px solid #8E24AA;
-
-}
-
-.ddhAllergene{
-
-    margin-top:8px;
-
-    color:#777;
-
-    font-size:13px;
-
-}
-
-.ddhLeer{
-
-    text-align:center;
-
-    padding:80px;
-
-    color:#888;
-
-}
-/* ==========================================================
-   DDH Studio Enterprise
-   Responsive Design
-========================================================== */
-
-@media screen and (max-width:900px){
-
-body{
-
-    padding:0;
-    margin:0;
-
-}
-
-.ddhSpeiseplaene{
-
-    max-width:100%;
-    margin:0;
-    padding:15px;
-
-}
-
-.ddhHeader h1{
-
-    font-size:42px;
-
-}
-
-.ddhHeader p{
-
-    font-size:22px;
-
-}
-
-.ddhToolbar{
-
-    flex-wrap:wrap;
-    justify-content:center;
-
-}
-
-.ddhToolbar button{
-
-    width:100%;
-    font-size:18px;
-    padding:16px;
-
-}
-
-.ddhTitel{
-
-    padding:22px;
-    border-radius:24px;
-    
-    width:100%;
-box-sizing:border-box;
-overflow:hidden;
-
-}
-
-.ddhKopf{
-
-    flex-direction:column;
-    align-items:flex-start;
-    gap:18px;
-
-}
-
-.ddhLinks{
-
-    width:100%;
-
-}
-
-.ddhLogo{
-
-    font-size:34px;
-    line-height:1.2;
-
-}
-
-.ddhUntertitel{
-
-    font-size:22px;
-
-}
-
-.ddhRechts{
-
-    width:100%;
-    text-align:left;
-
-}
-
-.ddhKW{
-
-    font-size:28px;
-
-}
-
-.ddhDatum{
-
-    font-size:20px;
-
-}
-
-.ddhWochenplan{
-
-    display:grid;
-    grid-template-columns:1fr;
-    gap:20px;
-
-}
-
-.ddhTag{
-
-    min-height:auto !important;
-    height:auto !important;
-    
-    width:100%;
-box-sizing:border-box;
-overflow:hidden;
-
-}
-
-.ddhTag h2{
-
-    font-size:36px;
-    padding:22px;
-
-}
-
 .ddhGericht{
 
-    padding:22px;
+    background:#fff;
+    border-radius:14px;
+    border-left:6px solid var(--ddh-tuerkis);
+    padding:16px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 
 }
 
 .ddhGerichtTitel{
 
-    font-size:22px;
+    font-weight:bold;
+    color:#1565C0;
+    margin-bottom:8px;
 
 }
 
 .ddhGerichtText{
 
-    font-size:30px;
-    line-height:1.35;
+    font-size:18px;
+    line-height:1.45;
 
 }
 
 .ddhInfos{
 
-    margin-top:12px;
-
-}
-
-.ddhAllergene,
-.ddhZusatzstoffe{
-
-    font-size:18px;
+    margin-top:10px;
+    font-size:13px;
+    color:#666;
 
 }
 
 .ddhDialog{
 
-    width:92%;
-    left:4%;
-    top:5%;
-    padding:25px;
+    display:none;
 
 }
 
-.ddhDialog h2{
+@media print{
 
-    font-size:30px;
+    body{
 
-}
-
-.ddhDialog label{
-
-    font-size:22px;
-
-}
-
-.ddhDialog button{
-
-    width:100%;
-    margin-top:20px;
-    padding:16px;
-    font-size:20px;
-
-}
-@media (max-width:768px){
-
-    .ddhKopf,
-    .ddhLinks,
-    .ddhRechts{
-
-        width:100%;
-        max-width:100%;
-        text-align:center;
+        background:#fff;
+        padding:0;
 
     }
 
-    .ddhKopf{
+    .ddhHeader,
+    .ddhToolbar,
+    .ddhDialog,
+    .ddhStatus{
 
-        display:flex;
-        flex-direction:column;
-        gap:18px;
+        display:none !important;
 
     }
 
     .ddhWochenplan{
 
-        grid-template-columns:1fr;
+        gap:10mm;
 
     }
 
     .ddhTag{
 
-        min-height:auto;
+        break-inside:avoid;
+        page-break-inside:avoid;
 
     }
 
-}
 }
 
 `;

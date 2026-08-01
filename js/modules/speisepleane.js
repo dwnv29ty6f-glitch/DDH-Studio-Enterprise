@@ -1074,6 +1074,193 @@ body{
     color:#888;
 
 }
+/* ==========================================================
+   DDH Studio Enterprise
+   Responsive Design
+========================================================== */
+
+@media screen and (max-width:900px){
+
+body{
+
+    padding:0;
+    margin:0;
+
+}
+
+.ddhSpeiseplaene{
+
+    max-width:100%;
+    margin:0;
+    padding:15px;
+
+}
+
+.ddhHeader h1{
+
+    font-size:42px;
+
+}
+
+.ddhHeader p{
+
+    font-size:22px;
+
+}
+
+.ddhToolbar{
+
+    flex-wrap:wrap;
+    justify-content:center;
+
+}
+
+.ddhToolbar button{
+
+    width:100%;
+    font-size:18px;
+    padding:16px;
+
+}
+
+.ddhTitel{
+
+    padding:22px;
+    border-radius:24px;
+
+}
+
+.ddhKopf{
+
+    flex-direction:column;
+    align-items:flex-start;
+    gap:18px;
+
+}
+
+.ddhLinks{
+
+    width:100%;
+
+}
+
+.ddhLogo{
+
+    font-size:34px;
+    line-height:1.2;
+
+}
+
+.ddhUntertitel{
+
+    font-size:22px;
+
+}
+
+.ddhRechts{
+
+    width:100%;
+    text-align:left;
+
+}
+
+.ddhKW{
+
+    font-size:28px;
+
+}
+
+.ddhDatum{
+
+    font-size:20px;
+
+}
+
+.ddhWochenplan{
+
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+
+}
+
+.ddhTag{
+
+    min-height:auto !important;
+    height:auto !important;
+
+}
+
+.ddhTag h2{
+
+    font-size:36px;
+    padding:22px;
+
+}
+
+.ddhGericht{
+
+    padding:22px;
+
+}
+
+.ddhGerichtTitel{
+
+    font-size:22px;
+
+}
+
+.ddhGerichtText{
+
+    font-size:30px;
+    line-height:1.35;
+
+}
+
+.ddhInfos{
+
+    margin-top:12px;
+
+}
+
+.ddhAllergene,
+.ddhZusatzstoffe{
+
+    font-size:18px;
+
+}
+
+.ddhDialog{
+
+    width:92%;
+    left:4%;
+    top:5%;
+    padding:25px;
+
+}
+
+.ddhDialog h2{
+
+    font-size:30px;
+
+}
+
+.ddhDialog label{
+
+    font-size:22px;
+
+}
+
+.ddhDialog button{
+
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+    font-size:20px;
+
+}
+
+}
 
 `;
 

@@ -282,7 +282,7 @@ ${document.head.innerHTML}
 </head>
 <body>
 
-${this.dom.inhalt.innerHTML}
+${document.body.innerHTML}
 
 </body>
 </html>

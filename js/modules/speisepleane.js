@@ -713,76 +713,134 @@ Speiseplaene.renderGericht = function(
     }
 
     if(
-
         titel.includes("Suppe") &&
         !this.einstellungen.suppe
-
     ){
-
         return "";
-
     }
 
     if(
-
         titel.includes("Dessert") &&
         !this.einstellungen.dessert
-
     ){
-
         return "";
+    }
+
+    if(
+        titel.includes("Menü II") &&
+        !this.einstellungen.menue2
+    ){
+        return "";
+    }
+
+    let klasse = "";
+    let icon = "";
+
+    if(titel.includes("Menü I")){
+
+        klasse = "ddhMenue1";
+        icon = "🍽️";
+
+    }else if(titel.includes("Menü II")){
+
+        klasse = "ddhMenue2";
+        icon = "🥗";
+
+    }else if(titel.includes("Suppe")){
+
+        klasse = "ddhSuppe";
+        icon = "🍲";
+
+    }else{
+
+        klasse = "ddhDessert";
+        icon = "🍮";
 
     }
 
-if(
-
-    titel.includes("Menü II") &&
-    !this.einstellungen.menue2
-
-){
-
-    return "";
-
-}
-
     return `
-    
-<div class="ddhGericht ${
-    titel.includes("Menü I") ? "ddhMenue1" :
-    titel.includes("Menü II") ? "ddhMenue2" :
-    titel.includes("Suppe") ? "ddhSuppe" :
-    "ddhDessert"
-}">
 
-    <div class="ddhGerichtTitel">
-        ${titel}
+<div class="ddhGericht ${klasse}">
+
+    <div class="ddhGerichtKopf">
+
+        <div class="ddhGerichtIcon">
+
+            ${icon}
+
+        </div>
+
+        <div class="ddhGerichtTitel">
+
+            ${titel}
+
+        </div>
+
     </div>
 
     <div class="ddhGerichtText">
+
         ${gericht}
+
     </div>
 
     ${
         (this.einstellungen.allergene && allergene)
-        || (this.einstellungen.zusatzstoffe && zusatzstoffe)
-        ? `
-        <div class="ddhInfos">
+        ||
+        (this.einstellungen.zusatzstoffe && zusatzstoffe)
 
-            ${
-                this.einstellungen.allergene && allergene
-                ? `<span class="ddhAllergene">${allergene}</span>`
-                : ""
-            }
+        ?
 
-            ${
-                this.einstellungen.zusatzstoffe && zusatzstoffe
-                ? `<span class="ddhZusatzstoffe">${zusatzstoffe}</span>`
-                : ""
-            }
-
-        </div>
         `
-        : ""
+
+<div class="ddhInfos">
+
+    ${
+        this.einstellungen.allergene && allergene
+
+        ?
+
+        `
+<span class="ddhAllergene">
+
+🧾 ${allergene}
+
+</span>
+`
+
+        :
+
+        ""
+
+    }
+
+    ${
+        this.einstellungen.zusatzstoffe && zusatzstoffe
+
+        ?
+
+        `
+<span class="ddhZusatzstoffe">
+
+➕ ${zusatzstoffe}
+
+</span>
+`
+
+        :
+
+        ""
+
+    }
+
+</div>
+
+`
+
+        :
+
+        ""
+
     }
 
 </div>
@@ -790,6 +848,7 @@ if(
 `;
 
 };
+
 /* ==========================================================
    Teil 5
    Design

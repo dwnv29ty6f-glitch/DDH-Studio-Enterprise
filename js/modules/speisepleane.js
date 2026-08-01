@@ -2210,7 +2210,7 @@ Speiseplaene.kartenOptimieren = function(){
     document.querySelectorAll(".ddhTag").forEach(tag=>{
 
         tag.style.height = "auto";
-        tag.style.minHeight = "620px";
+tag.style.minHeight = "0";
 
     });
 

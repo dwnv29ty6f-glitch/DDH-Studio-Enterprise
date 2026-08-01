@@ -1647,6 +1647,138 @@ body{
 
 `;
 
+@media print{
+
+body{
+
+    background:#ffffff !important;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+.ddhHeader,
+.ddhToolbar,
+.ddhDialog,
+.ddhStatus{
+
+    display:none !important;
+
+}
+
+.ddhSpeiseplaene{
+
+    width:100%;
+
+    max-width:none;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+.ddhTitel{
+
+    margin-bottom:8mm;
+
+    border-radius:0;
+
+    box-shadow:none;
+
+    border:2px solid #1565C0;
+
+}
+
+.ddhWochenplan{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8mm;
+
+    align-items:stretch;
+
+}
+
+.ddhTag{
+
+    break-inside:avoid;
+
+    page-break-inside:avoid;
+
+    border:1px solid #9AA8B0;
+
+    box-shadow:none;
+
+    border-radius:10px;
+
+}
+
+.ddhGericht{
+
+    break-inside:avoid;
+
+    page-break-inside:avoid;
+
+    margin:6px;
+
+    padding:12px;
+
+    box-shadow:none;
+
+}
+
+.ddhGerichtTitel{
+
+    font-size:13pt;
+
+    font-weight:700;
+
+}
+
+.ddhGerichtText{
+
+    font-size:12pt;
+
+    line-height:1.35;
+
+}
+
+.ddhInfos{
+
+    margin-top:8px;
+
+}
+
+.ddhAllergene,
+.ddhZusatzstoffe{
+
+    font-size:9pt;
+
+    padding:4px 8px;
+
+}
+
+.ddhFusszeile{
+
+    margin-top:8mm;
+
+    border-top:1px solid #999;
+
+    padding-top:4mm;
+
+    font-size:9pt;
+
+    color:#666;
+
+}
+
+}
+
     document.head.appendChild(style);
 
 };

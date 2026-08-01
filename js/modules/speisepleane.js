@@ -1719,23 +1719,13 @@ Speiseplaene.kalenderwoche = function(datum){
 
 Speiseplaene.kopfAktualisieren = function(){
 
-    const kopf =
-
-        document.querySelector(".ddhTitel");
+    const kopf = document.querySelector(".ddhTitel");
 
     if(!kopf){
 
         return;
 
     }
-
-    const kw =
-
-        this.kalenderwoche(
-
-            this.zeitraum.start
-
-        );
 
     kopf.innerHTML = `
 
@@ -1745,7 +1735,13 @@ Speiseplaene.kopfAktualisieren = function(){
 
         <div class="ddhLogo">
 
-            DDH SERVICE GMBH
+            <span class="ddhLogoIcon">🏥</span>
+
+            <span class="ddhLogoText">
+
+                DDH SERVICE GMBH
+
+            </span>
 
         </div>
 
@@ -1755,13 +1751,25 @@ Speiseplaene.kopfAktualisieren = function(){
 
         </div>
 
+        <div class="ddhBeschreibung">
+
+            Frisch gekocht • Ausgewogen • Täglich für Sie
+
+        </div>
+
     </div>
 
     <div class="ddhRechts">
 
         <div class="ddhKW">
 
-            KW ${kw}
+            <span>KW</span>
+
+            <strong>
+
+                ${this.kalenderwoche(this.zeitraum.start)}
+
+            </strong>
 
         </div>
 
@@ -1769,7 +1777,7 @@ Speiseplaene.kopfAktualisieren = function(){
 
             ${this.zeitraum.start}
 
-            -
+            <span class="ddhBis">–</span>
 
             ${this.zeitraum.ende}
 

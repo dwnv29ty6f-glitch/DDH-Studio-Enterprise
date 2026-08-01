@@ -661,31 +661,41 @@ Speiseplaene.renderTag = function(tag){
 
 <div class="ddhTag">
 
-    <h2>${tag.name}</h2>
+    <div class="ddhTagKopf">
 
-    ${this.renderGericht(
-        "🍽 Menü I",
-        tag.menue1,
-        tag.allergene1
-    )}
+        <h2>${tag.name}</h2>
 
-    ${this.renderGericht(
-        "🥗 Menü II",
-        tag.menue2,
-        tag.allergene2
-    )}
+        <div class="ddhTagLinie"></div>
 
-    ${this.renderGericht(
-        "🍲 Suppe",
-        tag.suppe,
-        tag.allergeneSuppe
-    )}
+    </div>
 
-    ${this.renderGericht(
-        "🍮 Dessert",
-        tag.dessert,
-        tag.allergeneDessert
-    )}
+    <div class="ddhTagInhalt">
+
+        ${this.renderGericht(
+            "🍽 Menü I",
+            tag.menue1,
+            tag.allergene1
+        )}
+
+        ${this.renderGericht(
+            "🥗 Menü II",
+            tag.menue2,
+            tag.allergene2
+        )}
+
+        ${this.renderGericht(
+            "🍲 Suppe",
+            tag.suppe,
+            tag.allergeneSuppe
+        )}
+
+        ${this.renderGericht(
+            "🍮 Dessert",
+            tag.dessert,
+            tag.allergeneDessert
+        )}
+
+    </div>
 
 </div>
 

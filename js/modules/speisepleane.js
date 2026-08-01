@@ -1550,9 +1550,120 @@ Speiseplaene.init = function(){
 
 Speiseplaene.drucken = function(){
 
-    window.print();
+    const plan =
+        document.querySelector(".ddhSpeiseplaene");
+
+    if(!plan){
+        return;
+    }
+
+    const druckFenster =
+        window.open("", "_blank");
+
+    if(!druckFenster){
+        alert("Popup wurde blockiert.");
+        return;
+    }
+
+    druckFenster.document.open();
+
+    druckFenster.document.write(`
+
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Speiseplan</title>
+
+<style>
+
+@page{
+
+    size:A4 landscape;
+
+    margin:10mm;
+
+}
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+html,
+body{
+
+    margin:0;
+
+    padding:0;
+
+    background:#ffffff;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+}
+
+body{
+
+    padding:10mm;
+
+}
+
+.ddhHeader,
+.ddhToolbar,
+.ddhDialog,
+.ddhStatus{
+
+    display:none !important;
+
+}
+
+.ddhSpeiseplaene{
+
+    width:100%;
+
+    max-width:none;
+
+    margin:0;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+${plan.outerHTML}
+
+</body>
+
+</html>
+
+`);
+
+    druckFenster.document.close();
+
+    druckFenster.focus();
+
+    setTimeout(()=>{
+
+        druckFenster.print();
+
+        druckFenster.close();
+
+    },300);
 
 };
+
 
 /* ==========================================================
    Druckdesign
@@ -1560,120 +1671,12 @@ Speiseplaene.drucken = function(){
 
 Speiseplaene.druckDesign = function(){
 
-    if(document.getElementById("ddhPrintStyle")){
-        return;
-    }
-
-    const style = document.createElement("style");
-
-    style.id = "ddhPrintStyle";
-
-    style.textContent = `
-
-@page{
-    size:A4 landscape;
-    margin:10mm;
-}
-
-@media print {
-
-body *{
-    visibility:hidden;
-}
-
-.ddhSpeiseplaene,
-.ddhSpeiseplaene *{
-    visibility:visible;
-}
-
-.ddhSpeiseplaene{
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-}
-
-}
-
-.ddhTitel{
-    margin-bottom:8mm;
-    border-radius:0;
-    box-shadow:none;
-    border:2px solid #1565C0;
-}
-
-.ddhWochenplan{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8mm;
-    align-items:stretch;
-}
-
-.ddhTag{
-    break-inside:avoid;
-    page-break-inside:avoid;
-    box-shadow:none;
-    border:1px solid #9AA8B0;
-    border-radius:10px;
-}
-
-.ddhGericht{
-    break-inside:avoid;
-    page-break-inside:avoid;
-    margin:6px;
-    padding:12px;
-    box-shadow:none;
-}
-
-.ddhGerichtTitel{
-    font-size:13pt;
-    font-weight:700;
-}
-
-.ddhGerichtText{
-    font-size:12pt;
-    line-height:1.35;
-}
-
-.ddhInfos{
-    margin-top:8px;
-}
-
-.ddhAllergene,
-.ddhZusatzstoffe{
-    font-size:9pt;
-    padding:4px 8px;
-}
-
-.ddhFusszeile{
-    margin-top:8mm;
-    border-top:1px solid #999;
-    padding-top:4mm;
-    font-size:9pt;
-    color:#666;
-}
-
-}
-
-`;
-
-    document.head.appendChild(style);
+    /* Druck erfolgt jetzt
+       vollständig im
+       separaten Druckfenster. */
 
 };
 
-/* ==========================================================
-   Druckdesign automatisch laden
-========================================================== */
-
-const _initTeil6 = Speiseplaene.init;
-
-Speiseplaene.init = function(){
-
-    this.druckDesign();
-
-    _initTeil6.call(this);
-
-};
 /* ==========================================================
    Teil 7
    Allergenseite

@@ -1898,6 +1898,96 @@ Speiseplaene.kopfDesign = function(){
     opacity:.95;
 
 }
+.ddhKopf{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+
+}
+
+.ddhLinks{
+
+    flex:1;
+
+}
+
+.ddhRechts{
+
+    text-align:right;
+    min-width:220px;
+
+}
+
+.ddhLogo{
+
+    font-size:34px;
+    font-weight:800;
+    color:#fff;
+    text-shadow:0 3px 8px rgba(0,0,0,.20);
+
+}
+
+.ddhLogoIcon{
+
+    margin-right:10px;
+
+}
+
+.ddhUntertitel{
+
+    margin-top:8px;
+    font-size:20px;
+    color:rgba(255,255,255,.95);
+    letter-spacing:1px;
+
+}
+
+.ddhBeschreibung{
+
+    margin-top:8px;
+    font-size:15px;
+    color:rgba(255,255,255,.80);
+
+}
+
+.ddhKW{
+
+    display:inline-block;
+    padding:12px 22px;
+    border-radius:50px;
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(10px);
+    color:#fff;
+    font-size:28px;
+    font-weight:bold;
+
+}
+
+.ddhKW span{
+
+    display:block;
+    font-size:14px;
+    opacity:.8;
+
+}
+
+.ddhDatum{
+
+    margin-top:14px;
+    font-size:18px;
+    color:#fff;
+    opacity:.95;
+
+}
+
+.ddhBis{
+
+    margin:0 10px;
+    opacity:.7;
+
+}
 
 `;
 

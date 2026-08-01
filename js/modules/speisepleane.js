@@ -272,7 +272,29 @@ Speiseplaene.events = function(){
 
     this.druckDesign();
 
-    window.print();
+    const druckFenster = window.open("", "_blank");
+
+druckFenster.document.write(`
+<html>
+<head>
+<title>Speiseplan</title>
+${document.head.innerHTML}
+</head>
+<body>
+
+${this.dom.inhalt.innerHTML}
+
+</body>
+</html>
+`);
+
+druckFenster.document.close();
+
+druckFenster.focus();
+
+druckFenster.print();
+
+druckFenster.close();
 
 };
 

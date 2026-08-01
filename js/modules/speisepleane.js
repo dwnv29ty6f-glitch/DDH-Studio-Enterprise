@@ -1550,20 +1550,29 @@ Speiseplaene.init = function(){
 
 Speiseplaene.drucken = function(){
 
-    const plan =
-        document.querySelector(".ddhSpeiseplaene");
+    const plan = document.querySelector(".ddhSpeiseplaene");
 
     if(!plan){
+
         return;
+
     }
 
-    const druckFenster =
-        window.open("", "_blank");
+    const druckFenster = window.open("", "_blank");
 
     if(!druckFenster){
+
         alert("Popup wurde blockiert.");
+
         return;
+
     }
+
+    const styles = Array.from(
+
+        document.querySelectorAll("style,link[rel='stylesheet']")
+
+    ).map(e=>e.outerHTML).join("");
 
     druckFenster.document.open();
 
@@ -1579,6 +1588,8 @@ Speiseplaene.drucken = function(){
 
 <title>Speiseplan</title>
 
+${styles}
+
 <style>
 
 @page{
@@ -1589,12 +1600,6 @@ Speiseplaene.drucken = function(){
 
 }
 
-*{
-
-    box-sizing:border-box;
-
-}
-
 html,
 body{
 
@@ -1602,18 +1607,7 @@ body{
 
     padding:0;
 
-    background:#ffffff;
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-}
-
-body{
-
-    padding:10mm;
+    background:#ffffff !important;
 
 }
 
@@ -1628,11 +1622,13 @@ body{
 
 .ddhSpeiseplaene{
 
-    width:100%;
+    width:100% !important;
 
-    max-width:none;
+    max-width:none !important;
 
-    margin:0;
+    margin:0 !important;
+
+    padding:0 !important;
 
 }
 
@@ -1660,10 +1656,9 @@ ${plan.outerHTML}
 
         druckFenster.close();
 
-    },300);
+    },500);
 
 };
-
 
 /* ==========================================================
    Druckdesign

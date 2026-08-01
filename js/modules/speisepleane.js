@@ -1127,6 +1127,10 @@ body{
 
     padding:22px;
     border-radius:24px;
+    
+    width:100%;
+box-sizing:border-box;
+overflow:hidden;
 
 }
 
@@ -1188,6 +1192,10 @@ body{
 
     min-height:auto !important;
     height:auto !important;
+    
+    width:100%;
+box-sizing:border-box;
+overflow:hidden;
 
 }
 
@@ -1259,7 +1267,39 @@ body{
     font-size:20px;
 
 }
+@media (max-width:768px){
 
+    .ddhKopf,
+    .ddhLinks,
+    .ddhRechts{
+
+        width:100%;
+        max-width:100%;
+        text-align:center;
+
+    }
+
+    .ddhKopf{
+
+        display:flex;
+        flex-direction:column;
+        gap:18px;
+
+    }
+
+    .ddhWochenplan{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .ddhTag{
+
+        min-height:auto;
+
+    }
+
+}
 }
 
 `;

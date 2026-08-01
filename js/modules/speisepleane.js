@@ -272,6 +272,7 @@ Speiseplaene.events = function(){
 
     this.druckDesign();
 
+    this.drucken();
 
 };
 

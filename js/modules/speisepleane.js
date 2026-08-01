@@ -901,23 +901,22 @@ body{
 
 .ddhTag{
 
-    background:#ffffff;
+    background:linear-gradient(180deg,#FFFFFF,#F8FDFF);
 
-    border-radius:22px;
+    border-radius:28px;
 
     overflow:hidden;
 
-    border:none;
+    border:2px solid rgba(0,188,212,.15);
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,.12);
-
-    transition:
-        all .30s ease;
+        0 12px 35px rgba(0,0,0,.12),
+        0 0 0 1px rgba(255,255,255,.7) inset;
 
     display:flex;
-
     flex-direction:column;
+
+    transition:.3s;
 
 }
 
@@ -936,13 +935,21 @@ body{
 
     padding:22px;
 
-    background:
-    linear-gradient(
-        90deg,
-        #00BCD4,
-        #0097A7,
-        #006C84
-    );
+    background:linear-gradient(90deg,#00BCD4,#008FB3,#1565C0);
+
+    color:white;
+
+    text-align:center;
+
+    font-size:34px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+}
 
     color:white;
 

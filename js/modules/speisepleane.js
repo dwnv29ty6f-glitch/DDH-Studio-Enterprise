@@ -1248,10 +1248,13 @@ Speiseplaene.druckDesign = function(){
     let style = document.getElementById("ddhPrintStyle");
 
     if(style){
+
         style.remove();
+
     }
 
     style = document.createElement("style");
+
     style.id = "ddhPrintStyle";
 
     style.textContent = `
@@ -1259,55 +1262,148 @@ Speiseplaene.druckDesign = function(){
 @media print{
 
     @page{
+
         size:A4 landscape;
-        margin:10mm;
+
+        margin:8mm;
+
     }
 
     html,
     body{
+
+        margin:0 !important;
+        padding:0 !important;
         background:#ffffff !important;
-        zoom:100%;
+
     }
 
     .ddhHeader,
     .ddhToolbar,
     .ddhDialog,
-    .ddhStatus{
+    .ddhStatus,
+    .ddhFusszeile{
+
         display:none !important;
+
     }
 
     .ddhSpeiseplaene{
+
         width:100% !important;
         max-width:none !important;
         margin:0 !important;
         padding:0 !important;
-    }
 
-    .ddhWochenplan{
-        display:grid !important;
-        grid-template-columns:repeat(2,1fr) !important;
-        gap:18px !important;
-    }
-
-    .ddhTag{
-        break-inside:avoid;
-        page-break-inside:avoid;
     }
 
     .ddhTitel{
-        transform:none !important;
+
+        padding:12mm !important;
+        margin-bottom:8mm !important;
+        border-radius:10mm !important;
+
     }
 
-    .ddhGerichtText{
-        font-size:22px !important;
+    .ddhLogoText{
+
+        font-size:24px !important;
+
     }
 
-    .ddhGerichtTitel{
+    .ddhUntertitel{
+
+        font-size:15px !important;
+        margin-top:4px !important;
+
+    }
+
+    .ddhBeschreibung{
+
+        font-size:11px !important;
+
+    }
+
+    .ddhKW{
+
         font-size:18px !important;
+        padding:6px 14px !important;
+
+    }
+
+    .ddhDatum{
+
+        font-size:12px !important;
+
+    }
+
+    .ddhWochenplan{
+
+        display:grid !important;
+        grid-template-columns:repeat(2,1fr) !important;
+        gap:6mm !important;
+
+    }
+
+    .ddhTag{
+
+        break-inside:avoid;
+        page-break-inside:avoid;
+        min-height:auto !important;
+
+    }
+
+    .ddhTagKopf{
+
+        padding:10px !important;
+
     }
 
     .ddhTagKopf h2{
-        font-size:30px !important;
+
+        font-size:22px !important;
+
+    }
+
+    .ddhTagInhalt{
+
+        padding:10px !important;
+        gap:8px !important;
+
+    }
+
+    .ddhGericht{
+
+        margin:0 !important;
+        padding:10px !important;
+
+    }
+
+    .ddhGerichtTitel{
+
+        font-size:14px !important;
+
+    }
+
+    .ddhGerichtText{
+
+        font-size:16px !important;
+        line-height:1.25 !important;
+
+    }
+
+    .ddhInfos{
+
+        margin-top:4px !important;
+
+    }
+
+    .ddhAllergene,
+    .ddhZusatzstoffe{
+
+        font-size:10px !important;
+        padding:2px 6px !important;
+
     }
 
 }

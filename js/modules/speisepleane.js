@@ -922,10 +922,10 @@ body{
 
 .ddhTag:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-8px) scale(1.01);
 
     box-shadow:
-        0 20px 45px rgba(0,151,167,.25);
+        0 25px 55px rgba(0,188,212,.35);
 
 }
 

@@ -2397,17 +2397,39 @@ Speiseplaene.leereGerichteEntfernen = function(){
 
 Speiseplaene.druckOptimieren = function(){
 
-    document.querySelectorAll(
-
-        ".ddhTag"
-
-    ).forEach(tag=>{
+    document.querySelectorAll(".ddhTag").forEach(tag=>{
 
         tag.style.breakInside = "avoid";
-
         tag.style.pageBreakInside = "avoid";
 
+        tag.style.display = "flex";
+        tag.style.flexDirection = "column";
+
+        tag.style.height = "100%";
+
     });
+
+    document.querySelectorAll(".ddhGericht").forEach(gericht=>{
+
+        gericht.style.breakInside = "avoid";
+
+        gericht.style.pageBreakInside = "avoid";
+
+    });
+
+    const plan = document.querySelector(".ddhWochenplan");
+
+    if(plan){
+
+        plan.style.display = "grid";
+
+        plan.style.gridTemplateColumns = "1fr 1fr";
+
+        plan.style.alignItems = "stretch";
+
+        plan.style.gap = "12mm";
+
+    }
 
 };
 

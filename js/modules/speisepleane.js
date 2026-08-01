@@ -1126,10 +1126,10 @@ body{
 
 .ddhTagInhalt{
 
-    padding:16px;
+    padding:8px;
     display:flex;
     flex-direction:column;
-    gap:14px;
+    gap:6px;
 
 }
 

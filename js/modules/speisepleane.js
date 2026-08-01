@@ -1245,9 +1245,75 @@ ${plan.outerHTML}
 
 Speiseplaene.druckDesign = function(){
 
-    /* Druck erfolgt jetzt
-       vollständig im
-       separaten Druckfenster. */
+    let style = document.getElementById("ddhPrintStyle");
+
+    if(style){
+        style.remove();
+    }
+
+    style = document.createElement("style");
+    style.id = "ddhPrintStyle";
+
+    style.textContent = `
+
+@media print{
+
+    @page{
+        size:A4 landscape;
+        margin:10mm;
+    }
+
+    html,
+    body{
+        background:#ffffff !important;
+        zoom:100%;
+    }
+
+    .ddhHeader,
+    .ddhToolbar,
+    .ddhDialog,
+    .ddhStatus{
+        display:none !important;
+    }
+
+    .ddhSpeiseplaene{
+        width:100% !important;
+        max-width:none !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    .ddhWochenplan{
+        display:grid !important;
+        grid-template-columns:repeat(2,1fr) !important;
+        gap:18px !important;
+    }
+
+    .ddhTag{
+        break-inside:avoid;
+        page-break-inside:avoid;
+    }
+
+    .ddhTitel{
+        transform:none !important;
+    }
+
+    .ddhGerichtText{
+        font-size:22px !important;
+    }
+
+    .ddhGerichtTitel{
+        font-size:18px !important;
+    }
+
+    .ddhTagKopf h2{
+        font-size:30px !important;
+    }
+
+}
+`;
+
+    document.head.appendChild(style);
 
 };
 

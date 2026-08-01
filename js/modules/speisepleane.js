@@ -270,9 +270,11 @@ Speiseplaene.events = function(){
 
         this.dom.btnDrucken.onclick = () => {
 
-            window.print();
+    this.druckDesign();
 
-        };
+    window.print();
+
+};
 
     }
     

@@ -1366,8 +1366,7 @@ Speiseplaene.druckDesign = function(){
     @page{
 
         size:A4 landscape;
-
-        margin:8mm;
+        margin:5mm;
 
     }
 
@@ -1376,7 +1375,7 @@ Speiseplaene.druckDesign = function(){
 
         margin:0 !important;
         padding:0 !important;
-        background:#ffffff !important;
+        background:#fff !important;
 
     }
 
@@ -1401,41 +1400,42 @@ Speiseplaene.druckDesign = function(){
 
     .ddhTitel{
 
-        padding:12mm !important;
-        margin-bottom:8mm !important;
-        border-radius:10mm !important;
+        margin:0 0 5mm 0 !important;
+        padding:8mm !important;
+        border-radius:5mm !important;
 
     }
 
     .ddhLogoText{
 
-        font-size:24px !important;
+        font-size:20px !important;
 
     }
 
     .ddhUntertitel{
 
-        font-size:15px !important;
-        margin-top:4px !important;
+        font-size:13px !important;
+        margin-top:2px !important;
 
     }
 
     .ddhBeschreibung{
 
-        font-size:11px !important;
+        display:none !important;
 
     }
 
     .ddhKW{
 
-        font-size:18px !important;
-        padding:6px 14px !important;
+        padding:4px 10px !important;
+        font-size:15px !important;
 
     }
 
     .ddhDatum{
 
-        font-size:12px !important;
+        font-size:11px !important;
+        margin-top:4px !important;
 
     }
 
@@ -1443,72 +1443,80 @@ Speiseplaene.druckDesign = function(){
 
         display:grid !important;
         grid-template-columns:repeat(2,1fr) !important;
-        gap:6mm !important;
+        gap:4mm !important;
 
     }
 
     .ddhTag{
 
+        min-height:auto !important;
+        margin:0 !important;
+        border-radius:4mm !important;
+        box-shadow:none !important;
         break-inside:avoid;
         page-break-inside:avoid;
-        min-height:auto !important;
 
     }
 
     .ddhTagKopf{
 
-        padding:10px !important;
+        padding:6px !important;
 
     }
 
     .ddhTagKopf h2{
 
-        font-size:22px !important;
+        font-size:18px !important;
 
     }
 
     .ddhTagInhalt{
 
-        padding:10px !important;
-        gap:8px !important;
+        padding:6px !important;
+        gap:4px !important;
 
     }
 
     .ddhGericht{
 
         margin:0 !important;
-        padding:10px !important;
+        padding:6px 8px !important;
+        border-radius:2mm !important;
+        box-shadow:none !important;
 
     }
 
     .ddhGerichtTitel{
 
-        font-size:14px !important;
+        font-size:12px !important;
+        margin-bottom:2px !important;
 
     }
 
     .ddhGerichtText{
 
-        font-size:16px !important;
-        line-height:1.25 !important;
+        font-size:13px !important;
+        line-height:1.15 !important;
 
     }
 
     .ddhInfos{
 
-        margin-top:4px !important;
+        margin-top:2px !important;
+        font-size:9px !important;
 
     }
 
     .ddhAllergene,
     .ddhZusatzstoffe{
 
-        font-size:10px !important;
-        padding:2px 6px !important;
+        padding:1px 4px !important;
+        font-size:8px !important;
 
     }
 
 }
+
 `;
 
     document.head.appendChild(style);

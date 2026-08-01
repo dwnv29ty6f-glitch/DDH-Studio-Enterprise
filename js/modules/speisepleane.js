@@ -575,13 +575,23 @@ Speiseplaene.layoutErzeugen = function(){
 
             <div class="ddhLogo">
 
-                DDH SERVICE GMBH
+                <span class="ddhLogoIcon">🏥</span>
+
+                <span class="ddhLogoText">
+                    DDH SERVICE GMBH
+                </span>
 
             </div>
 
             <div class="ddhUntertitel">
 
-                WOCHENSPEISEPLAN
+                Wochenspeiseplan
+
+            </div>
+
+            <div class="ddhBeschreibung">
+
+                Frisch gekocht • Ausgewogen • Täglich für Sie
 
             </div>
 
@@ -591,14 +601,20 @@ Speiseplaene.layoutErzeugen = function(){
 
             <div class="ddhKW">
 
-                KW ${this.kalenderwoche(this.zeitraum.start)}
+                <span>KW</span>
+
+                <strong>
+                    ${this.kalenderwoche(this.zeitraum.start)}
+                </strong>
 
             </div>
 
             <div class="ddhDatum">
 
                 ${this.zeitraum.start}
-                ${this.zeitraum.start ? " – " : ""}
+
+                <span class="ddhBis">–</span>
+
                 ${this.zeitraum.ende}
 
             </div>

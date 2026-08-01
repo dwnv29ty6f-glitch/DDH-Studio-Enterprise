@@ -841,13 +841,21 @@ body{
 
 .ddhTitel{
 
-    background:
-    linear-gradient(
-        135deg,
-        #00BCD4,
-        #0097A7,
-        #006C84
-    );
+    background:linear-gradient(135deg,#00BCD4,#0097A7,#1565C0);
+
+    border:none;
+
+    border-radius:30px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+
+    color:white;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+
+}
 
     color:white;
 

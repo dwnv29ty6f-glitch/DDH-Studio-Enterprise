@@ -992,9 +992,7 @@ Speiseplaene.renderGericht = function(
 Speiseplaene.designLaden = function(){
 
     if(document.getElementById("ddhSpeiseplanStyle")){
-
         return;
-
     }
 
     const style = document.createElement("style");
@@ -1005,11 +1003,12 @@ Speiseplaene.designLaden = function(){
 
 :root{
 
-    --ddh-tuerkis:#00B8C9;
-    --ddh-blau:#0B4E8A;
-    --ddh-grau:#F4F7F9;
-    --ddh-text:#24323F;
-    --ddh-linie:#D7E3EA;
+    --ddh1:#00BCD4;
+    --ddh2:#1565C0;
+    --hell:#ffffff;
+    --grau:#eef3f6;
+    --linie:#d9e3ea;
+    --text:#2f3740;
 
 }
 
@@ -1022,46 +1021,38 @@ Speiseplaene.designLaden = function(){
 body{
 
     margin:0;
-    padding:24px;
-    background:#EEF5F7;
+    padding:18px;
+    background:#eef4f6;
     font-family:"Segoe UI",Arial,sans-serif;
-    color:var(--ddh-text);
+    color:var(--text);
 
 }
 
 .ddhSpeiseplaene{
 
+    width:100%;
     max-width:1650px;
     margin:auto;
 
 }
 
-.ddhHeader,
-.ddhToolbar{
-
-    margin-bottom:18px;
-
-}
+/* ===========================
+   Kopf
+=========================== */
 
 .ddhTitel{
 
-    background:
-    linear-gradient(
-        135deg,
-        var(--ddh-blau),
-        var(--ddh-tuerkis)
-    );
+    background:linear-gradient(135deg,#0d4d8b,#00bcd4);
 
     color:white;
 
     border-radius:18px;
 
-    padding:22px 30px;
+    padding:18px 26px;
 
-    margin-bottom:18px;
+    margin-bottom:16px;
 
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.18);
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
 
 }
 
@@ -1077,7 +1068,7 @@ body{
 
 .ddhLogo{
 
-    font-size:30px;
+    font-size:34px;
 
     font-weight:800;
 
@@ -1087,27 +1078,33 @@ body{
 
 .ddhUntertitel{
 
-    margin-top:4px;
+    margin-top:2px;
 
-    font-size:16px;
+    font-size:15px;
 
-    opacity:.95;
+    opacity:.92;
 
 }
 
 .ddhBeschreibung{
 
-    margin-top:3px;
+    margin-top:2px;
 
-    font-size:13px;
+    font-size:11px;
 
-    opacity:.80;
+    opacity:.82;
+
+}
+
+.ddhRechts{
+
+    text-align:right;
 
 }
 
 .ddhKW{
 
-    font-size:30px;
+    font-size:28px;
 
     font-weight:800;
 
@@ -1115,21 +1112,37 @@ body{
 
 .ddhDatum{
 
-    margin-top:6px;
+    margin-top:4px;
 
-    font-size:15px;
+    font-size:13px;
 
 }
+
+/* ===========================
+   Wochenplan
+=========================== */
 
 .ddhWochenplan{
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,1fr);
 
-    gap:14px;
+    gap:12px;
 
 }
+
+/* Sonntag über beide Spalten */
+
+.ddhTag:last-child{
+
+    grid-column:1 / 3;
+
+}
+
+/* ===========================
+   Tageskarte
+=========================== */
 
 .ddhTag{
 
@@ -1139,34 +1152,27 @@ body{
 
     overflow:hidden;
 
-    border:1px solid var(--ddh-linie);
+    border:1px solid var(--linie);
 
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.08);
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
 
 }
 
 .ddhTagKopf{
 
-    background:
-
-    linear-gradient(
-        90deg,
-        var(--ddh-tuerkis),
-        var(--ddh-blau)
-    );
+    background:linear-gradient(90deg,#00BCD4,#1565C0);
 
     color:white;
 
-    padding:10px 16px;
+    padding:9px 16px;
 
 }
 
-.ddhTagKopf h2{
+.ddhTagName{
 
-    margin:0;
+    font-size:20px;
 
-    font-size:22px;
+    font-weight:800;
 
     letter-spacing:1px;
 
@@ -1184,9 +1190,9 @@ body{
 
     display:grid;
 
-    grid-template-columns:110px 1fr;
+    grid-template-columns:78px 1fr;
 
-    border-bottom:1px solid var(--ddh-linie);
+    border-bottom:1px solid var(--linie);
 
 }
 
@@ -1198,68 +1204,57 @@ body{
 
 .ddhLabel{
 
-    background:#F7FAFC;
+    background:#f7fafc;
 
-    padding:12px;
+    color:#1565C0;
 
-    font-size:13px;
+    font-size:11px;
 
     font-weight:700;
 
     text-transform:uppercase;
 
-    color:var(--ddh-blau);
+    display:flex;
 
-    border-right:1px solid var(--ddh-linie);
+    align-items:center;
+
+    justify-content:center;
+
+    border-right:1px solid var(--linie);
+
+    padding:10px 6px;
 
 }
 
 .ddhWert{
 
-    padding:12px 14px;
+    padding:9px 12px;
+
+}
+
+.ddhGerichtName{
 
     font-size:18px;
 
-    line-height:1.35;
+    line-height:1.25;
 
-    font-weight:500;
+    font-weight:600;
 
 }
 
 .ddhInfo{
 
-    margin-top:6px;
+    margin-top:5px;
 
-    font-size:11px;
+    font-size:10px;
 
-    color:#6B7785;
-
-}
-
-.ddhAllergenSeite{
-
-    page-break-before:always;
+    color:#7b8794;
 
 }
 
-.ddhAllergenTabelle{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-}
-
-.ddhAllergenTabelle th,
-.ddhAllergenTabelle td{
-
-    border:1px solid #D7E3EA;
-
-    padding:8px;
-
-    font-size:13px;
-
-}
+/* ===========================
+   Druck
+=========================== */
 
 @media print{
 
@@ -1291,7 +1286,7 @@ body{
 
     .ddhWochenplan{
 
-        gap:8mm;
+        gap:6mm;
 
     }
 

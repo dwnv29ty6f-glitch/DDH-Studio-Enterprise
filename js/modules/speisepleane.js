@@ -669,134 +669,139 @@ Speiseplaene.renderTag = function(tag){
 
     </div>
 
-    <div class="ddhTagInhalt">
+    <div class="ddhTagTabelle">
 
-        ${
-            tag.menue1
-            ?
-            `
-            <div class="ddhGericht ddhMenue1">
+        ${tag.menue1 ? `
 
-                <div class="ddhGerichtTitel">
+        <div class="ddhZeile">
 
-                    🍽 Menü I
+            <div class="ddhLabel">
 
-                </div>
+                Menü I
 
-                <div class="ddhGerichtText">
+            </div>
 
-                    ${tag.menue1}
+            <div class="ddhWert">
 
-                </div>
+                ${tag.menue1}
 
                 ${
                     this.einstellungen.allergene && tag.allergene1
+
                     ?
-                    `<div class="ddhInfos">${tag.allergene1}</div>`
+
+                    `<div class="ddhInfo">
+
+                        ${tag.allergene1}
+
+                    </div>`
+
                     :
+
                     ""
+
                 }
 
             </div>
-            `
-            :
-            ""
-        }
+
+        </div>
+
+        ` : ""}
 
         ${
             this.einstellungen.menue2 && tag.menue2
+
             ?
+
             `
-            <div class="ddhGericht ddhMenue2">
 
-                <div class="ddhGerichtTitel">
+        <div class="ddhZeile">
 
-                    🥗 Menü II
+            <div class="ddhLabel">
 
-                </div>
+                Menü II
 
-                <div class="ddhGerichtText">
+            </div>
 
-                    ${tag.menue2}
+            <div class="ddhWert">
 
-                </div>
+                ${tag.menue2}
 
                 ${
                     this.einstellungen.allergene && tag.allergene2
+
                     ?
-                    `<div class="ddhInfos">${tag.allergene2}</div>`
+
+                    `<div class="ddhInfo">
+
+                        ${tag.allergene2}
+
+                    </div>`
+
                     :
+
                     ""
+
                 }
 
             </div>
-            `
+
+        </div>
+
+`
+
             :
+
             ""
-        }
 
-        ${
-            this.einstellungen.suppe && tag.suppe
-            ?
-            `
-            <div class="ddhGericht ddhSuppe">
-
-                <div class="ddhGerichtTitel">
-
-                    🍲 Suppe
-
-                </div>
-
-                <div class="ddhGerichtText">
-
-                    ${tag.suppe}
-
-                </div>
-
-                ${
-                    this.einstellungen.allergene && tag.allergeneSuppe
-                    ?
-                    `<div class="ddhInfos">${tag.allergeneSuppe}</div>`
-                    :
-                    ""
-                }
-
-            </div>
-            `
-            :
-            ""
         }
 
         ${
             this.einstellungen.dessert && tag.dessert
+
             ?
+
             `
-            <div class="ddhGericht ddhDessert">
 
-                <div class="ddhGerichtTitel">
+        <div class="ddhZeile">
 
-                    🍮 Dessert
+            <div class="ddhLabel">
 
-                </div>
+                Dessert
 
-                <div class="ddhGerichtText">
+            </div>
 
-                    ${tag.dessert}
+            <div class="ddhWert">
 
-                </div>
+                ${tag.dessert}
 
                 ${
                     this.einstellungen.allergene && tag.allergeneDessert
+
                     ?
-                    `<div class="ddhInfos">${tag.allergeneDessert}</div>`
+
+                    `<div class="ddhInfo">
+
+                        ${tag.allergeneDessert}
+
+                    </div>`
+
                     :
+
                     ""
+
                 }
 
             </div>
-            `
+
+        </div>
+
+`
+
             :
+
             ""
+
         }
 
     </div>

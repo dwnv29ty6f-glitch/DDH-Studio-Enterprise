@@ -665,7 +665,11 @@ Speiseplaene.renderTag = function(tag){
 
     <div class="ddhTagKopf">
 
-        <h2>${tag.name}</h2>
+        <span class="ddhTagName">
+
+            ${tag.name}
+
+        </span>
 
     </div>
 
@@ -677,13 +681,17 @@ Speiseplaene.renderTag = function(tag){
 
             <div class="ddhLabel">
 
-                Menü I
+                MENÜ I
 
             </div>
 
             <div class="ddhWert">
 
-                ${tag.menue1}
+                <div class="ddhGerichtName">
+
+                    ${tag.menue1}
+
+                </div>
 
                 ${
                     this.einstellungen.allergene && tag.allergene1
@@ -692,7 +700,7 @@ Speiseplaene.renderTag = function(tag){
 
                     `<div class="ddhInfo">
 
-                        ${tag.allergene1}
+                        Allergene: ${tag.allergene1}
 
                     </div>`
 
@@ -719,13 +727,17 @@ Speiseplaene.renderTag = function(tag){
 
             <div class="ddhLabel">
 
-                Menü II
+                MENÜ II
 
             </div>
 
             <div class="ddhWert">
 
-                ${tag.menue2}
+                <div class="ddhGerichtName">
+
+                    ${tag.menue2}
+
+                </div>
 
                 ${
                     this.einstellungen.allergene && tag.allergene2
@@ -734,7 +746,7 @@ Speiseplaene.renderTag = function(tag){
 
                     `<div class="ddhInfo">
 
-                        ${tag.allergene2}
+                        Allergene: ${tag.allergene2}
 
                     </div>`
 
@@ -767,13 +779,17 @@ Speiseplaene.renderTag = function(tag){
 
             <div class="ddhLabel">
 
-                Dessert
+                DESSERT
 
             </div>
 
             <div class="ddhWert">
 
-                ${tag.dessert}
+                <div class="ddhGerichtName">
+
+                    ${tag.dessert}
+
+                </div>
 
                 ${
                     this.einstellungen.allergene && tag.allergeneDessert
@@ -782,7 +798,7 @@ Speiseplaene.renderTag = function(tag){
 
                     `<div class="ddhInfo">
 
-                        ${tag.allergeneDessert}
+                        Allergene: ${tag.allergeneDessert}
 
                     </div>`
 
